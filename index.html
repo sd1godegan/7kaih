@@ -114,14 +114,14 @@
         .chart-wrapper { position:relative; height:220px; }
 
         /* ===== TABEL ===== */
-        .table-responsive { overflow-x:auto; background:var(--surface); border-radius:var(--radius-sm); border:1px solid var(--border); box-shadow:var(--shadow-sm); margin-bottom:1.2rem; }
+        .table-responsive { overflow:auto; max-height:60vh; background:var(--surface); border-radius:var(--radius-sm); border:1px solid var(--border); box-shadow:var(--shadow-sm); margin-bottom:1.2rem; }
         table { width:100%; border-collapse:collapse; min-width:900px; }
-        th { background:var(--bg); color:var(--text-muted); font-size:0.72rem; text-transform:uppercase; padding:0.9rem 0.5rem; border-bottom:1px solid var(--border); white-space:nowrap; }
+        th { background:var(--bg); color:var(--text-muted); font-size:0.72rem; text-transform:uppercase; padding:0.9rem 0.5rem; border-bottom:1px solid var(--border); white-space:nowrap; position:sticky; top:0; z-index:2; }
         td { padding:0.75rem 0.5rem; border-bottom:1px solid var(--border); text-align:center; vertical-align:middle; font-size:0.85rem; }
         tr:last-child td { border-bottom:none; }
 
         .sticky-col { position:sticky; left:0; background:var(--surface); z-index:2; text-align:left; padding-left:1rem; box-shadow:2px 0 5px rgba(0,0,0,0.02); }
-        th.sticky-col { background:var(--bg); }
+        th.sticky-col { background:var(--bg); z-index:3; }
 
         .input-cell { width:45px; height:36px; text-align:center; border:2px solid var(--border); border-radius:6px; font-weight:bold; font-size:0.95rem; background:#f1f5f9; outline:none; transition:0.2s; }
         .input-cell:focus { border-color:var(--primary); background:var(--surface); }
@@ -227,6 +227,9 @@
             static async getMasterSiswa() { return await this.get('getMaster'); }
             static async getLogs(params) { return await this.get('getLogs', params); }
             static async simpanJurnal(rows) { return await this.post('simpan_jurnal', { rows }); }
+            static async generateRaporSiswa(params) { return await this.post('generate_rapor_siswa', params); }
+            static async generateLaporanKelas(params) { return await this.post('generate_laporan_kelas', params); }
+            static async generateLaporanSekolah(params) { return await this.post('generate_laporan_sekolah', params); }
         }
 
         // ==================== CLASS APLIKASI UTAMA ====================
@@ -478,8 +481,8 @@
                                         <td style="padding:4px 6px;">Tidak Pernah</td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align:left; padding:4px 6px; font-weight:600; color:var(--text);">Salat Wajib</td>
-                                        <td colspan="4" style="padding:4px 6px;">Ditulis dengan angka 0 - 35</td>
+                                        <td style="text-align:left; padding:4px 6px; font-weight:600; color:var(--text);">Salat Subuh, Dzuhur, Ashar, Maghrib, Isya</td>
+                                        <td colspan="4" style="padding:4px 6px;">Ditulis dengan angka 0 - 7 (jumlah hari terlaksana dalam seminggu, untuk masing-masing waktu salat)</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -492,7 +495,11 @@
                                 <tr>
                                     <th class="sticky-col" style="min-width:200px;">Nama Siswa</th>
                                     <th>Bangun</th>
-                                    <th style="color:var(--primary);">Salat</th>
+                                    <th style="color:var(--primary);">Subuh</th>
+                                    <th style="color:var(--primary);">Dzuhur</th>
+                                    <th style="color:var(--primary);">Ashar</th>
+                                    <th style="color:var(--primary);">Maghrib</th>
+                                    <th style="color:var(--primary);">Isya</th>
                                     <th style="color:var(--primary);">Sunah</th>
                                     <th>Olahraga</th>
                                     <th>Makan</th>
@@ -513,7 +520,11 @@
                                 <div style="font-size:0.7rem; color:var(--text-muted);">NIS: ${siswa.NIS}</div>
                             </td>
                             <td><input type="number" class="input-cell val-skala" data-key="Skor_Bangun"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat" data-key="Skor_Salat"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Subuh"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Dzuhur"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Ashar"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Maghrib"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Isya"></td>
                             <td><input type="number" class="input-cell val-skala" data-key="Skor_Mengaji"></td>
                             <td><input type="number" class="input-cell val-skala" data-key="Skor_Olahraga"></td>
                             <td><input type="number" class="input-cell val-skala" data-key="Skor_Makan"></td>
@@ -558,8 +569,8 @@
                             if(val > 4) e.target.value = 4;
                             if(val < 1) e.target.value = 1;
                         }
-                        if(e.target.classList.contains('val-salat')) {
-                            if(val > 35) e.target.value = 35;
+                        if(e.target.classList.contains('val-salat7')) {
+                            if(val > 7) e.target.value = 7;
                             if(val < 0) e.target.value = 0;
                         }
                     }
@@ -635,20 +646,24 @@
         // ==================== FUNGSI BERSAMA DASHBOARD ====================
 
         // Peta kategori: kunci data, label tampilan, skala maksimum masing-masing.
-        // Salat/Ibadah punya skala berbeda (0-35 per minggu) sehingga selalu
-        // dikonversi ke skala 1-4 (proporsional) sebelum dibandingkan/dirata-rata
-        // dengan kategori lain.
+        // 5 kategori salat memakai skala 0-7 (jumlah hari terlaksana dalam seminggu),
+        // sehingga selalu dikonversi ke skala 1-4 (proporsional) sebelum dibandingkan/
+        // dirata-rata dengan kategori lain.
         const KATEGORI_MAP = [
-            { key: 'Skor_Bangun',   label: 'Bangun Pagi',   maxScale: 4  },
-            { key: 'Skor_Salat',    label: 'Salat/Ibadah',  maxScale: 35 },
-            { key: 'Skor_Mengaji',  label: 'Sunah',         maxScale: 4  },
-            { key: 'Skor_Olahraga', label: 'Berolahraga',   maxScale: 4  },
-            { key: 'Skor_Makan',    label: 'Makan Sehat',   maxScale: 4  },
-            { key: 'Skor_Belajar',  label: 'Gemar Belajar', maxScale: 4  },
-            { key: 'Skor_Sosial',   label: 'Bermasyarakat', maxScale: 4  },
-            { key: 'Skor_Tidur',    label: 'Cepat Tidur',   maxScale: 4  }
+            { key: 'Skor_Bangun',   label: 'Bangun Pagi',   maxScale: 4 },
+            { key: 'Skor_Subuh',    label: 'Subuh',         maxScale: 7 },
+            { key: 'Skor_Dzuhur',   label: 'Dzuhur',        maxScale: 7 },
+            { key: 'Skor_Ashar',    label: 'Ashar',         maxScale: 7 },
+            { key: 'Skor_Maghrib',  label: 'Maghrib',       maxScale: 7 },
+            { key: 'Skor_Isya',     label: 'Isya',          maxScale: 7 },
+            { key: 'Skor_Mengaji',  label: 'Sunah',         maxScale: 4 },
+            { key: 'Skor_Olahraga', label: 'Berolahraga',   maxScale: 4 },
+            { key: 'Skor_Makan',    label: 'Makan Sehat',   maxScale: 4 },
+            { key: 'Skor_Belajar',  label: 'Gemar Belajar', maxScale: 4 },
+            { key: 'Skor_Sosial',   label: 'Bermasyarakat', maxScale: 4 },
+            { key: 'Skor_Tidur',    label: 'Cepat Tidur',   maxScale: 4 }
         ];
-        const WARNA_KATEGORI = ['#4F46E5', '#0EA5E9', '#06B6D4', '#10B981', '#F59E0B', '#A855F7', '#EC4899', '#64748B'];
+        const WARNA_KATEGORI = ['#4F46E5', '#0EA5E9', '#06B6D4', '#14B8A6', '#F59E0B', '#EA580C', '#A855F7', '#10B981', '#EAB308', '#EC4899', '#F43F5E', '#64748B'];
 
         function normalisasiSkor(value, maxScale) { return (Number(value) / maxScale) * 4; }
 
@@ -671,6 +686,29 @@
             const map = new Map();
             rows.forEach(row => map.set(`${row.NIS}_${row.Minggu_Ke}`, row));
             return Array.from(map.values());
+        }
+
+        const DAFTAR_BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+
+        function opsiBulanHTML() {
+            return DAFTAR_BULAN.map(b => `<option value="${b}">${b}</option>`).join('');
+        }
+
+        // Terima PDF berformat base64 dari backend lalu picu unduhan di browser
+        function unduhBase64SebagaiPDF(base64, filename) {
+            const byteChars = atob(base64);
+            const byteNumbers = new Array(byteChars.length);
+            for (let i = 0; i < byteChars.length; i++) byteNumbers[i] = byteChars.charCodeAt(i);
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         }
 
         // ==================== TAB DASHBOARD KELAS ====================
@@ -742,17 +780,43 @@
                                 <thead>
                                     <tr>
                                         <th class="sticky-col" style="min-width:180px;">Nama Siswa</th>
-                                        <th>Bangun</th><th style="color:var(--primary);">Salat</th><th style="color:var(--primary);">Sunah</th><th>Olahraga</th>
+                                        <th>Bangun</th>
+                                        <th style="color:var(--primary);">Subuh</th><th style="color:var(--primary);">Dzuhur</th><th style="color:var(--primary);">Ashar</th><th style="color:var(--primary);">Maghrib</th><th style="color:var(--primary);">Isya</th>
+                                        <th style="color:var(--primary);">Sunah</th><th>Olahraga</th>
                                         <th>Makan</th><th>Belajar</th><th>Masyarakat</th><th>Tidur</th><th>Rata-rata</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dkTableBody"></tbody>
                             </table>
                         </div>
+
+                        <div class="filter-card">
+                            <h3 class="section-title" style="font-size:0.95rem;"><span class="material-symbols-outlined" style="font-size:20px;">picture_as_pdf</span> Unduh Laporan (PDF)</h3>
+                            <div class="filter-grid" style="margin-bottom:1rem;">
+                                <div class="form-group">
+                                    <label>Bulan Awal</label>
+                                    <select id="dkLapBulanAwal" class="form-select">${opsiBulanHTML()}</select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bulan Akhir</label>
+                                    <select id="dkLapBulanAkhir" class="form-select">${opsiBulanHTML()}</select>
+                                </div>
+                                <button id="btnUnduhLaporanKelas" class="btn-modern" style="background:var(--positive);"><span class="material-symbols-outlined">download</span> Laporan Kelas</button>
+                            </div>
+                            <div class="filter-grid">
+                                <div class="form-group" style="grid-column:1 / -2;">
+                                    <label>Rapor Individu — Pilih Siswa</label>
+                                    <select id="dkLapSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select>
+                                </div>
+                                <button id="btnUnduhRaporSiswa" class="btn-modern"><span class="material-symbols-outlined">download</span> Rapor Individu</button>
+                            </div>
+                        </div>
                     </div>
                 `;
 
                 document.getElementById('btnLoadDashKelas').addEventListener('click', () => this.muatData());
+                document.getElementById('btnUnduhLaporanKelas').addEventListener('click', () => this.unduhLaporanKelas());
+                document.getElementById('btnUnduhRaporSiswa').addEventListener('click', () => this.unduhRaporSiswa());
             }
 
             async muatData() {
@@ -861,7 +925,7 @@
                     KATEGORI_MAP.forEach(kat => {
                         const val = s.rata[kat.key];
                         const ratio = val / kat.maxScale;
-                        const display = kat.key === 'Skor_Salat' ? val.toFixed(1) : val.toFixed(2);
+                        const display = kat.maxScale === 4 ? val.toFixed(2) : val.toFixed(1);
                         html += `<td class="${kelasWarnaSkor(ratio)}">${display}</td>`;
                     });
                     html += `<td style="font-weight:700; color:var(--primary);">${s.rataKeseluruhan.toFixed(2)}</td>`;
@@ -933,7 +997,9 @@
                                 <thead>
                                     <tr>
                                         <th class="sticky-col" style="min-width:110px;">Kelas</th>
-                                        <th>Jml Siswa</th><th>Bangun</th><th style="color:var(--primary);">Salat</th><th style="color:var(--primary);">Sunah</th>
+                                        <th>Jml Siswa</th><th>Bangun</th>
+                                        <th style="color:var(--primary);">Subuh</th><th style="color:var(--primary);">Dzuhur</th><th style="color:var(--primary);">Ashar</th><th style="color:var(--primary);">Maghrib</th><th style="color:var(--primary);">Isya</th>
+                                        <th style="color:var(--primary);">Sunah</th>
                                         <th>Olahraga</th><th>Makan</th><th>Belajar</th><th>Masyarakat</th><th>Tidur</th><th>Rata-rata</th>
                                     </tr>
                                 </thead>
@@ -1073,7 +1139,7 @@
                         KATEGORI_MAP.forEach(kat => {
                             const val = r.rata[kat.key];
                             const ratio = val / kat.maxScale;
-                            const display = kat.key === 'Skor_Salat' ? val.toFixed(1) : val.toFixed(2);
+                            const display = kat.maxScale === 4 ? val.toFixed(2) : val.toFixed(1);
                             html += `<td class="${kelasWarnaSkor(ratio)}">${display}</td>`;
                         });
                         html += `<td style="font-weight:700; color:var(--positive);">${r.rataKeseluruhan.toFixed(2)}</td>`;
