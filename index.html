@@ -932,6 +932,65 @@
                     tr.innerHTML = html;
                     tbody.appendChild(tr);
                 });
+
+                // Isi dropdown siswa untuk rapor individu + default periode laporan
+                const selSiswa = document.getElementById('dkLapSiswa');
+                selSiswa.innerHTML = '<option value="">-- Pilih Siswa --</option>' +
+                    dataSiswa.map(s => `<option value="${s.nis}">${s.nama}</option>`).join('');
+                const bulanAktif = document.getElementById('dkBulan').value;
+                document.getElementById('dkLapBulanAwal').value = bulanAktif;
+                document.getElementById('dkLapBulanAkhir').value = bulanAktif;
+            }
+
+            async unduhLaporanKelas() {
+                const btn = document.getElementById('btnUnduhLaporanKelas');
+                const ori = btn.innerHTML;
+                btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Membuat PDF...`;
+                btn.disabled = true;
+
+                try {
+                    const hasil = await ApiService.generateLaporanKelas({
+                        kelas: document.getElementById('dkKelas').value,
+                        tahun: document.getElementById('dkTahun').value,
+                        bulanAwal: document.getElementById('dkLapBulanAwal').value,
+                        bulanAkhir: document.getElementById('dkLapBulanAkhir').value
+                    });
+                    if (hasil.status !== 'success') throw new Error(hasil.message || 'Gagal membuat laporan.');
+                    unduhBase64SebagaiPDF(hasil.pdfBase64, hasil.filename);
+                    showToast('Laporan kelas berhasil diunduh.', 'success');
+                } catch (e) {
+                    if (e.message !== 'Unauthorized') showToast(e.message || 'Gagal membuat laporan.', 'error');
+                } finally {
+                    btn.innerHTML = ori;
+                    btn.disabled = false;
+                }
+            }
+
+            async unduhRaporSiswa() {
+                const nis = document.getElementById('dkLapSiswa').value;
+                if (!nis) return showToast('Pilih siswa terlebih dahulu.', 'error');
+
+                const btn = document.getElementById('btnUnduhRaporSiswa');
+                const ori = btn.innerHTML;
+                btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Membuat PDF...`;
+                btn.disabled = true;
+
+                try {
+                    const hasil = await ApiService.generateRaporSiswa({
+                        nis: nis,
+                        tahun: document.getElementById('dkTahun').value,
+                        bulanAwal: document.getElementById('dkLapBulanAwal').value,
+                        bulanAkhir: document.getElementById('dkLapBulanAkhir').value
+                    });
+                    if (hasil.status !== 'success') throw new Error(hasil.message || 'Gagal membuat rapor.');
+                    unduhBase64SebagaiPDF(hasil.pdfBase64, hasil.filename);
+                    showToast('Rapor individu berhasil diunduh.', 'success');
+                } catch (e) {
+                    if (e.message !== 'Unauthorized') showToast(e.message || 'Gagal membuat rapor.', 'error');
+                } finally {
+                    btn.innerHTML = ori;
+                    btn.disabled = false;
+                }
             }
         }
 
@@ -1006,10 +1065,26 @@
                                 <tbody id="dsTableBody"></tbody>
                             </table>
                         </div>
+
+                        <div class="filter-card">
+                            <h3 class="section-title" style="font-size:0.95rem;"><span class="material-symbols-outlined" style="font-size:20px;">picture_as_pdf</span> Unduh Laporan Sekolah (PDF)</h3>
+                            <div class="filter-grid">
+                                <div class="form-group">
+                                    <label>Bulan Awal</label>
+                                    <select id="dsLapBulanAwal" class="form-select">${opsiBulanHTML()}</select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Bulan Akhir</label>
+                                    <select id="dsLapBulanAkhir" class="form-select">${opsiBulanHTML()}</select>
+                                </div>
+                                <button id="btnUnduhLaporanSekolah" class="btn-modern" style="background:var(--positive);"><span class="material-symbols-outlined">download</span> Laporan Sekolah</button>
+                            </div>
+                        </div>
                     </div>
                 `;
 
                 document.getElementById('btnLoadDashSekolah').addEventListener('click', () => this.muatData());
+                document.getElementById('btnUnduhLaporanSekolah').addEventListener('click', () => this.unduhLaporanSekolah());
             }
 
             async muatData() {
@@ -1133,7 +1208,7 @@
                 rekapKelas.forEach(r => {
                     const tr = document.createElement('tr');
                     if (r.jumlahSiswa === 0) {
-                        tr.innerHTML = `<td class="sticky-col" style="font-weight:700;">${r.kelas}</td><td colspan="8" style="color:var(--text-muted); font-style:italic;">Belum ada data</td>`;
+                        tr.innerHTML = `<td class="sticky-col" style="font-weight:700;">${r.kelas}</td><td colspan="14" style="color:var(--text-muted); font-style:italic;">Belum ada data</td>`;
                     } else {
                         let html = `<td class="sticky-col" style="font-weight:700;">${r.kelas}</td><td>${r.jumlahSiswa}</td>`;
                         KATEGORI_MAP.forEach(kat => {
@@ -1147,6 +1222,34 @@
                     }
                     tbody.appendChild(tr);
                 });
+
+                // Default periode laporan mengikuti filter bulan yang sedang aktif
+                const bulanAktif = document.getElementById('dsBulan').value;
+                document.getElementById('dsLapBulanAwal').value = bulanAktif;
+                document.getElementById('dsLapBulanAkhir').value = bulanAktif;
+            }
+
+            async unduhLaporanSekolah() {
+                const btn = document.getElementById('btnUnduhLaporanSekolah');
+                const ori = btn.innerHTML;
+                btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Membuat PDF...`;
+                btn.disabled = true;
+
+                try {
+                    const hasil = await ApiService.generateLaporanSekolah({
+                        tahun: document.getElementById('dsTahun').value,
+                        bulanAwal: document.getElementById('dsLapBulanAwal').value,
+                        bulanAkhir: document.getElementById('dsLapBulanAkhir').value
+                    });
+                    if (hasil.status !== 'success') throw new Error(hasil.message || 'Gagal membuat laporan.');
+                    unduhBase64SebagaiPDF(hasil.pdfBase64, hasil.filename);
+                    showToast('Laporan sekolah berhasil diunduh.', 'success');
+                } catch (e) {
+                    if (e.message !== 'Unauthorized') showToast(e.message || 'Gagal membuat laporan.', 'error');
+                } finally {
+                    btn.innerHTML = ori;
+                    btn.disabled = false;
+                }
             }
         }
 
