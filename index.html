@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 
     <style>
-        /* ===== CSS VARIABLES & RESET (Gaya GEMBIRA) ===== */
+        /* ===== CSS VARIABLES & RESET ===== */
         :root {
             --primary: #4F46E5;
             --primary-dark: #4338CA;
@@ -175,9 +175,9 @@
             }, 3000);
         }
 
-        // ==================== API SERVICE (token disertakan otomatis) ====================
+        // ==================== API SERVICE ====================
         class ApiService {
-            static getToken() { return sessionStorage.getItem('token'); }
+            static getToken() { return localStorage.getItem('token'); }
 
             static async get(action, params = {}) {
                 const token = this.getToken();
@@ -203,15 +203,14 @@
 
             static _checkAuth(data) {
                 if (data && data.error === 'Unauthorized') {
-                    sessionStorage.removeItem('token');
-                    sessionStorage.removeItem('dataMasterSiswa');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('dataMasterSiswa');
                     showToast('Sesi berakhir, silakan masuk kembali.', 'error');
                     setTimeout(() => window.location.reload(), 800);
                     throw new Error('Unauthorized');
                 }
             }
 
-            // Verifikasi PIN saat login TIDAK memakai token tersimpan (belum ada) — kirim langsung
             static async verifyToken(token) {
                 try {
                     const res = await fetch(`${API_BASE}?action=verify_token`, {
@@ -236,17 +235,16 @@
         class App {
             constructor() {
                 this.container = document.getElementById('app');
-                this.token = sessionStorage.getItem('token');
+                this.token = localStorage.getItem('token');
             }
 
             init() {
                 if (this.token) {
                     this.renderMainApp();
-                    // Verifikasi ulang di latar belakang — kalau token sudah dinonaktifkan admin, otomatis logout
                     ApiService.verifyToken(this.token).then(valid => {
                         if (!valid) {
-                            sessionStorage.removeItem('token');
-                            sessionStorage.removeItem('dataMasterSiswa');
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('dataMasterSiswa');
                             window.location.reload();
                         }
                     });
@@ -288,7 +286,7 @@
 
                 const valid = await ApiService.verifyToken(pin);
                 if (valid) {
-                    sessionStorage.setItem('token', pin);
+                    localStorage.setItem('token', pin);
                     this.token = pin;
                     showToast('Berhasil masuk!', 'success');
                     this.renderMainApp();
@@ -319,7 +317,6 @@
                     </nav>
                 `;
 
-                // Setup Navigasi Bawah
                 document.querySelectorAll('.nav-item').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const tabName = e.currentTarget.dataset.tab;
@@ -332,31 +329,30 @@
                 });
 
                 document.getElementById('btnLogout').onclick = () => {
-                    sessionStorage.removeItem('token');
-                    sessionStorage.removeItem('dataMasterSiswa');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('dataMasterSiswa');
                     window.location.reload();
                 };
 
-                // Inisialisasi Tab
                 this.inputTab = new InputTab(document.getElementById('tabInput'));
                 this.dashKelasTab = new DashKelasTab(document.getElementById('tabDashKelas'));
                 this.dashSekolahTab = new DashSekolahTab(document.getElementById('tabDashSekolah'));
 
-                // Muat Data Master
                 await this.inputTab.fetchMasterData();
             }
         }
 
-        // ==================== TAB INPUT JURNAL (LAYER 1 & 2) ====================
+        // ==================== TAB INPUT JURNAL ====================
         class InputTab {
             constructor(container) {
                 this.container = container;
+                this.riwayatData = [];
             }
 
             async fetchMasterData() {
                 this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat database siswa...</p></div>`;
 
-                const cached = sessionStorage.getItem('dataMasterSiswa');
+                const cached = localStorage.getItem('dataMasterSiswa');
                 if (cached) {
                     dataMasterSiswa = JSON.parse(cached);
                     this.renderLayer1();
@@ -367,7 +363,7 @@
                     const result = await ApiService.getMasterSiswa();
                     if (result && result.error) throw new Error(result.error);
                     dataMasterSiswa = result;
-                    sessionStorage.setItem('dataMasterSiswa', JSON.stringify(result));
+                    localStorage.setItem('dataMasterSiswa', JSON.stringify(result));
                     this.renderLayer1();
                 } catch (e) {
                     this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">wifi_off</span><p>Koneksi gagal. Muat ulang halaman.</p></div>`;
@@ -420,7 +416,35 @@
                     document.getElementById('btnLanjut').disabled = false;
                 });
 
-                document.getElementById('btnLanjut').addEventListener('click', () => this.renderLayer2());
+                document.getElementById('btnLanjut').addEventListener('click', async (e) => {
+                    const btn = e.currentTarget;
+                    const oriText = btn.innerHTML;
+                    
+                    btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Memeriksa Riwayat...`;
+                    btn.disabled = true;
+
+                    const params = {
+                        tahun: document.getElementById('selTahun').value,
+                        bulan: document.getElementById('selBulan').value,
+                        minggu: document.getElementById('selMinggu').value,
+                        kelas: document.getElementById('selKelas').value
+                    };
+
+                    try {
+                        let riwayat = await ApiService.getLogs(params);
+                        if (riwayat && !riwayat.error) {
+                            this.riwayatData = dedupeLog(riwayat); 
+                        } else {
+                            this.riwayatData = [];
+                        }
+                    } catch (err) {
+                        this.riwayatData = [];
+                    }
+
+                    btn.innerHTML = oriText;
+                    btn.disabled = false;
+                    this.renderLayer2();
+                });
             }
 
             renderLayer2() {
@@ -513,24 +537,27 @@
                 `;
 
                 siswaKelas.forEach(siswa => {
+                    const dataLama = (this.riwayatData || []).find(r => String(r.NIS) === String(siswa.NIS));
+                    const getVal = (key) => (dataLama && dataLama[key] !== undefined && dataLama[key] !== "") ? dataLama[key] : "";
+
                     html += `
                         <tr data-nis="${siswa.NIS}">
                             <td class="sticky-col">
                                 <div style="font-weight:700; font-size:0.85rem;">${siswa.Nama_Siswa}</div>
                                 <div style="font-size:0.7rem; color:var(--text-muted);">NIS: ${siswa.NIS}</div>
                             </td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Bangun"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Subuh"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Dzuhur"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Ashar"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Maghrib"></td>
-                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Isya"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Mengaji"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Olahraga"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Makan"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Belajar"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Sosial"></td>
-                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Tidur"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Bangun" value="${getVal('Skor_Bangun')}"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Subuh" value="${getVal('Skor_Subuh')}"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Dzuhur" value="${getVal('Skor_Dzuhur')}"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Ashar" value="${getVal('Skor_Ashar')}"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Maghrib" value="${getVal('Skor_Maghrib')}"></td>
+                            <td><input type="number" class="input-cell input-salat val-salat7" data-key="Skor_Isya" value="${getVal('Skor_Isya')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Mengaji" value="${getVal('Skor_Mengaji')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Olahraga" value="${getVal('Skor_Olahraga')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Makan" value="${getVal('Skor_Makan')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Belajar" value="${getVal('Skor_Belajar')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Sosial" value="${getVal('Skor_Sosial')}"></td>
+                            <td><input type="number" class="input-cell val-skala" data-key="Skor_Tidur" value="${getVal('Skor_Tidur')}"></td>
                             <td>
                                 <button class="btn-icon btn-save-row" style="background:var(--primary-light); color:var(--primary);"><span class="material-symbols-outlined">save</span></button>
                             </td>
@@ -549,7 +576,6 @@
 
                 layer2.innerHTML = html;
 
-                // Event Listeners Table
                 document.getElementById('btnKembali').onclick = () => {
                     document.getElementById('layer2').style.display = 'none';
                     document.getElementById('layer1').style.display = 'block';
@@ -578,7 +604,6 @@
             }
 
             attachSaveEvents() {
-                // Simpan per baris
                 document.querySelectorAll('.btn-save-row').forEach(btn => {
                     btn.addEventListener('click', async (e) => {
                         const tr = e.currentTarget.closest('tr');
@@ -586,7 +611,6 @@
                     });
                 });
 
-                // Simpan Batch (Semua)
                 document.getElementById('btnSubmitBatch').addEventListener('click', async (e) => {
                     const rows = Array.from(document.querySelectorAll('#tableBody tr:not(.row-success)'));
                     if (rows.length === 0) return showToast('Semua data sudah tersimpan!', 'success');
@@ -644,11 +668,6 @@
         }
 
         // ==================== FUNGSI BERSAMA DASHBOARD ====================
-
-        // Peta kategori: kunci data, label tampilan, skala maksimum masing-masing.
-        // 5 kategori salat memakai skala 0-7 (jumlah hari terlaksana dalam seminggu),
-        // sehingga selalu dikonversi ke skala 1-4 (proporsional) sebelum dibandingkan/
-        // dirata-rata dengan kategori lain.
         const KATEGORI_MAP = [
             { key: 'Skor_Bangun',   label: 'Bangun Pagi',   maxScale: 4 },
             { key: 'Skor_Subuh',    label: 'Subuh',         maxScale: 7 },
@@ -680,8 +699,6 @@
             return '#F43F5E';
         }
 
-        // Jika satu siswa punya lebih dari satu baris untuk minggu yang sama
-        // (misal karena disimpan ulang), ambil entri paling akhir.
         function dedupeLog(rows) {
             const map = new Map();
             rows.forEach(row => map.set(`${row.NIS}_${row.Minggu_Ke}`, row));
@@ -694,7 +711,6 @@
             return DAFTAR_BULAN.map(b => `<option value="${b}">${b}</option>`).join('');
         }
 
-        // Terima PDF berformat base64 dari backend lalu picu unduhan di browser
         function unduhBase64SebagaiPDF(base64, filename) {
             const byteChars = atob(base64);
             const byteNumbers = new Array(byteChars.length);
@@ -860,7 +876,6 @@
             }
 
             tampilkan(rows) {
-                // Kelompokkan per siswa (jika "Semua Pekan", rata-ratakan seluruh pekan yang ada)
                 const perSiswa = new Map();
                 rows.forEach(row => {
                     if (!perSiswa.has(row.NIS)) perSiswa.set(row.NIS, { nama: row.Nama_Siswa, entries: [] });
@@ -933,7 +948,6 @@
                     tbody.appendChild(tr);
                 });
 
-                // Isi dropdown siswa untuk rapor individu + default periode laporan
                 const selSiswa = document.getElementById('dkLapSiswa');
                 selSiswa.innerHTML = '<option value="">-- Pilih Siswa --</option>' +
                     dataSiswa.map(s => `<option value="${s.nis}">${s.nama}</option>`).join('');
@@ -1136,8 +1150,6 @@
                         return;
                     }
 
-                    // Rata-ratakan per siswa dulu, baru per kelas, supaya siswa
-                    // yang mengisi lebih dari satu pekan tidak mendominasi rata-rata kelas.
                     const perSiswa = new Map();
                     rowsKelas.forEach(row => {
                         if (!perSiswa.has(row.NIS)) perSiswa.set(row.NIS, []);
@@ -1160,7 +1172,6 @@
                     rekapKelas.push({ kelas, jumlahSiswa: perSiswa.size, rata: rataPerKategori, rataNormalisasi, rataKeseluruhan });
                 });
 
-                // Chart 1: rata-rata keseluruhan per kelas
                 const ctx1 = document.getElementById('chartDsKelas').getContext('2d');
                 if (this.chartUtama) this.chartUtama.destroy();
                 this.chartUtama = new Chart(ctx1, {
@@ -1182,7 +1193,6 @@
                     }
                 });
 
-                // Chart 2: perbandingan per kategori antar kelas
                 const ctx2 = document.getElementById('chartDsKategori').getContext('2d');
                 if (this.chartKategori) this.chartKategori.destroy();
                 this.chartKategori = new Chart(ctx2, {
@@ -1202,7 +1212,6 @@
                     }
                 });
 
-                // Tabel rekapitulasi
                 const tbody = document.getElementById('dsTableBody');
                 tbody.innerHTML = '';
                 rekapKelas.forEach(r => {
@@ -1223,7 +1232,6 @@
                     tbody.appendChild(tr);
                 });
 
-                // Default periode laporan mengikuti filter bulan yang sedang aktif
                 const bulanAktif = document.getElementById('dsBulan').value;
                 document.getElementById('dsLapBulanAwal').value = bulanAktif;
                 document.getElementById('dsLapBulanAkhir').value = bulanAktif;
