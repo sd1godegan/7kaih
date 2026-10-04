@@ -1,0 +1,27 @@
+{
+  "name": "7 Kebiasaan Anak Hebat — SDN 1 Godegan",
+  "short_name": "7 Kebiasaan",
+  "description": "Sistem Penilaian Mingguan Kebiasaan Siswa SDN 1 Godegan",
+  "id": "/7kaih/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "theme_color": "#4F46E5",
+  "background_color": "#F9FAFB",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Input Jurnal", "short_name": "Input", "url": "./?tab=input", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Dash Kelas", "short_name": "Kelas", "url": "./?tab=dashkelas", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Dash Sekolah", "short_name": "Sekolah", "url": "./?tab=dashsekolah", "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
