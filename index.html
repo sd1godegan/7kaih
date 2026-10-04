@@ -271,7 +271,6 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 .cetak-catatan p{margin:0 0 5px}
 .cetak-catatan p:last-child{margin-bottom:0}
 
-/* TANDA TANGAN — sejajar karena spacer tanggal-kosong */
 .cetak-ttd{margin-top:26px}
 .cetak-ttd table{width:100%;border-collapse:collapse;table-layout:fixed}
 .cetak-ttd td{border:none;text-align:center;vertical-align:top;width:50%;padding:0 12px;font-size:10pt}
@@ -527,10 +526,10 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   }
   #grpBatch label { width: 100%; justify-content: flex-start; }
 
-  /* DASHBOARD CHARTS */
-  #dkResult .card > div[style*="height:260px"] { min-height: 340px !important; }
-  #dsResult .card > div[style*="height:240px"] { min-height: 320px !important; }
+  /* DASHBOARD CHARTS — tinggi diperbesar untuk 12 kategori */
+  #dkResult .card > div[style*="height:400px"] { min-height: 440px !important; }
   #dsResult .card > div[style*="height:300px"] { min-height: 340px !important; }
+  #dsResult .card > div[style*="height:380px"] { min-height: 420px !important; }
   .chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .chart-pair > .card { margin-bottom: 0; }
 
@@ -578,8 +577,9 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   #app { max-width: 1600px; }
   .main { padding: 1.8rem 2.5rem; }
   .app-header { padding: 1.1rem 2.2rem; }
-  #dkResult .card > div[style*="height:260px"] { min-height: 380px !important; }
-  #dsResult .card > div[style*="height:300px"] { min-height: 380px !important; }
+  #dkResult .card > div[style*="height:400px"] { min-height: 480px !important; }
+  #dsResult .card > div[style*="height:300px"] { min-height: 420px !important; }
+  #dsResult .card > div[style*="height:380px"] { min-height: 420px !important; }
   .stat .num { font-size: 2rem; }
 }
 
@@ -1108,10 +1108,6 @@ const PrintEngine = {
     return html ? `<div class="cetak-catatan">${html}</div>` : '';
   },
 
-  /**
-   * Tanda tangan 2 kolom — sejajar sempurna.
-   * Kolom kiri pakai spacer `tanggal-kosong` setinggi baris tanggal di kanan.
-   */
   ttd(opts) {
     const now = new Date();
     const tgl = `${now.getDate()} ${fmtBulan(now.getMonth())} ${now.getFullYear()}`;
@@ -1148,21 +1144,39 @@ const PrintEngine = {
     PrintEngine._charts.push(c);
   },
 
+  /* Chart horizontal per kategori — autoSkip: false supaya label tidak di-skip */
   async renderChartKategori(canvasId, norm, dpr = 2) {
     const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
     return PrintEngine._renderChart(canvasId, {
       type: 'bar',
       data: {
         labels: KATEGORI.map(k => k.label),
-        datasets: [{ data: norm.map(v => +v.toFixed(2)), backgroundColor: colors, borderRadius: 4, maxBarThickness: 22 }]
+        datasets: [{
+          data: norm.map(v => +v.toFixed(2)),
+          backgroundColor: colors,
+          borderRadius: 4,
+          maxBarThickness: 22
+        }]
       },
       options: {
         indexAxis: 'y',
         layout: { padding: { top: 4, right: 8, bottom: 4, left: 4 } },
         plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
-          x: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
-          y: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#1e293b' } }
+          x: {
+            beginAtZero: true,
+            max: 4,
+            ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' },
+            grid: { color: '#e2e8f0' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              font: { size: 11, weight: '600' },
+              color: '#1e293b',
+              autoSkip: false
+            }
+          }
         }
       }
     }, dpr);
@@ -1173,14 +1187,27 @@ const PrintEngine = {
       type: 'bar',
       data: {
         labels: points.map(p => p.label),
-        datasets: [{ data: points.map(p => +p.value.toFixed(2)), backgroundColor: color, borderRadius: 4, maxBarThickness: 60 }]
+        datasets: [{
+          data: points.map(p => +p.value.toFixed(2)),
+          backgroundColor: color,
+          borderRadius: 4,
+          maxBarThickness: 60
+        }]
       },
       options: {
         layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
         plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
-          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
-          x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b' } }
+          y: {
+            beginAtZero: true,
+            max: 4,
+            ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' },
+            grid: { color: '#e2e8f0' }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { font: { size: 10, weight: '600' }, color: '#1e293b', autoSkip: false }
+          }
         }
       }
     }, dpr);
@@ -1267,7 +1294,7 @@ const PrintEngine = {
       <h3 class="cetak-h3">Rata-rata Skor per Kebiasaan</h3>
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan</h3>
-      ${PrintEngine.chartWrap('c-kat-' + uid, 660, 230)}
+      ${PrintEngine.chartWrap('c-kat-' + uid, 660, 400)}
       ${logPeriode.length >= 2 ? `
         <h3 class="cetak-h3">Tren Mingguan</h3>
         ${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}
@@ -1321,7 +1348,7 @@ const PrintEngine = {
       <h3 class="cetak-h3">Rata-rata Skor Kelas per Kebiasaan</h3>
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan Kelas</h3>
-      ${PrintEngine.chartWrap('c-kls-kat', 660, 230)}
+      ${PrintEngine.chartWrap('c-kls-kat', 660, 400)}
       ${perlu.length > 0 ? `
         <h3 class="cetak-h3">Siswa yang Perlu Pendampingan</h3>
         <table class="cetak-tbl">
@@ -1882,7 +1909,7 @@ class InputTab extends BaseTab {
 
     $('#btnKembali').onclick = () => {
       layer2.innerHTML = '';
-      if (card) card.style.display = '';  // FIX: reset ke CSS default (grid di desktop)
+      if (card) card.style.display = '';
     };
 
     this._attachInput(tahun, bulan, minggu, kelas);
@@ -2162,7 +2189,7 @@ class DashKelasTab extends BaseTab {
       </div>
       <div class="card">
         <h3><span class="material-symbols-outlined">bar_chart</span> Rata-rata per Kebiasaan (Skala 1-4)</h3>
-        <div style="position:relative;height:260px"><canvas id="dkChart"></canvas></div>
+        <div style="position:relative;height:400px"><canvas id="dkChart"></canvas></div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1rem 0 .7rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Detail Nilai per Siswa</h3>
       <div class="table-wrap">
@@ -2204,11 +2231,26 @@ class DashKelasTab extends BaseTab {
           }]
         },
         options: {
-          responsive: true, maintainAspectRatio: false, animation: false,
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
           plugins: { legend: { display: false } },
           scales: {
-            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
-            x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 0 } }
+            x: {
+              beginAtZero: true,
+              max: 4,
+              ticks: { stepSize: 1, font: { size: 10 } },
+              grid: { color: '#e2e8f0' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: {
+                font: { size: 11, weight: '600' },
+                color: '#1e293b',
+                autoSkip: false
+              }
+            }
           }
         }
       }));
@@ -2351,7 +2393,7 @@ class DashSekolahTab extends BaseTab {
         </div>
         <div class="card">
           <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
-          <div style="position:relative;height:300px"><canvas id="dsChart2"></canvas></div>
+          <div style="position:relative;height:380px"><canvas id="dsChart2"></canvas></div>
         </div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1rem 0 .7rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Rekapitulasi Sekolah</h3>
