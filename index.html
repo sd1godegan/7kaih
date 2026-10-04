@@ -2,1003 +2,1413 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover" />
 <meta name="theme-color" content="#4F46E5" />
 <meta name="description" content="7 Kebiasaan Anak Hebat — SDN 1 Godegan" />
 <meta name="color-scheme" content="light" />
-<meta name="format-detection" content="telephone=no,email=no,address=no" />
-<title>7 Kebiasaan - SDN 1 Godegan</title>
+<title>7 Kebiasaan — SDN 1 Godegan</title>
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='52' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3E7K%3C/text%3E%3C/svg%3E" />
-<link rel="apple-touch-icon" href="./icons/icon-192.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
 <link rel="manifest" href="./manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="7 Kebiasaan" />
-<meta name="application-name" content="7 Kebiasaan" />
-<meta name="msapplication-TileColor" content="#4F46E5" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 
-<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" onerror="loadChartFallback()"></script>
-<script>
-  function loadChartFallback() {
-    var s = document.createElement('script');
-    s.src = 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js';
-    s.onerror = function() {
-      var s2 = document.createElement('script');
-      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js';
-      document.head.appendChild(s2);
-    };
-    document.head.appendChild(s);
-  }
-</script>
-
 <style>
+/* ==================== DESIGN TOKENS ==================== */
 :root{
-  --primary:#4F46E5; --primary-dark:#4338CA; --primary-light:#EEF2FF;
-  --positive:#10B981; --positive-dark:#059669; --positive-bg:#D1FAE5;
-  --negative:#F43F5E; --negative-dark:#BE123C; --negative-bg:#FFE4E6;
-  --warning:#D97706; --warning-bg:#FEF3C7;
-  --bg:#F9FAFB; --surface:#FFFFFF; --surface-alt:#F3F4F6;
-  --text:#111827; --text-muted:#6B7280; --border:#E5E7EB;
-  --shadow-sm:0 1px 2px rgba(0,0,0,.05);
-  --shadow-md:0 4px 6px -1px rgba(0,0,0,.1);
-  --shadow-lg:0 20px 25px -5px rgba(17,24,39,.12);
-  --radius:16px; --radius-sm:10px;
-  --transition:.18s cubic-bezier(.4,0,.2,1);
+  --primary:#4F46E5; --primary-d:#4338CA; --primary-l:#EEF2FF;
+  --positive:#10B981; --positive-d:#059669;
+  --negative:#F43F5E; --negative-d:#BE123C;
+  --warning:#D97706;
+  --bg:#F9FAFB; --surface:#FFF; --surface-2:#F3F4F6;
+  --text:#111827; --muted:#6B7280; --border:#E5E7EB;
+  --shadow-s:0 1px 2px rgba(0,0,0,.05);
+  --shadow-m:0 4px 6px -1px rgba(0,0,0,.1);
+  --shadow-l:0 20px 25px -5px rgba(17,24,39,.12);
+  --r:16px; --r-s:10px;
+  --t:.18s cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;position:fixed;inset:0;overscroll-behavior-y:contain}
-@supports not (height:100dvh){html,body{height:100vh}}
+html,body{height:100%;height:100dvh;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;position:fixed;inset:0}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 ::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:var(--primary)}
-*{scrollbar-width:thin}
 img{max-width:100%;display:block}
-button{font-family:inherit;cursor:pointer}
-input,textarea,select{font-family:inherit}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:16px}
 
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeInTab{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-@keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 
-#app{width:100%;height:100vh;height:100dvh;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-@supports not (height:100dvh){#app{height:100vh}}
-
-.tab-pane{display:none;animation:fadeInTab .25s ease-out}
-.tab-pane.active{display:block}
+/* ==================== APP SHELL ==================== */
+#app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 
 .spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 .spinner-dark{border-color:rgba(79,70,229,.2);border-top-color:var(--primary)}
 
 /* ==================== LOGIN ==================== */
-.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;padding-top:calc(1.5rem + env(safe-area-inset-top));padding-bottom:calc(1.5rem + env(safe-area-inset-bottom));background:var(--surface);text-align:center;overflow-y:auto;gap:.85rem;-webkit-overflow-scrolling:touch}
-.logo-box{position:relative;width:min(160px,45vw);aspect-ratio:1;max-width:180px;min-width:110px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0;box-shadow:0 10px 25px -5px rgba(79,70,229,.35)}
-.logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.25}
-.login-title{font-size:clamp(1.1rem,4vw,1.35rem);font-weight:800;color:var(--text)}
-.app-subtitle{font-size:clamp(.8rem,3vw,.95rem);color:var(--text-muted);margin-bottom:.4rem;line-height:1.35}
-.input-modern{width:100%;max-width:340px;padding:.9rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--bg);transition:var(--transition);outline:none;text-align:center;font-weight:600;letter-spacing:.15em}
-.input-modern:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-light)}
-.btn-modern{width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;transition:var(--transition);display:inline-flex;justify-content:center;align-items:center;gap:.5rem;min-height:44px;touch-action:manipulation}
-.btn-modern:hover:not(:disabled){background:var(--primary-dark)}
-.btn-modern:active:not(:disabled){transform:scale(.98)}
-.btn-modern:disabled{opacity:.7;cursor:not-allowed}
-.btn-modern.btn-loading{color:transparent!important;pointer-events:none;position:relative}
-.btn-modern.btn-loading .spinner{position:absolute;top:50%;left:50%;margin:-9px 0 0 -9px}
-.login-desc-box{margin-top:.8rem;padding:1rem;background:var(--primary-light);border:1px dashed #A5B4FC;border-radius:var(--radius-sm);text-align:left;width:100%;max-width:340px}
-.login-desc-box h3{font-size:.8rem;color:var(--primary-dark);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
-.login-desc-box p{font-size:.75rem;color:var(--text-muted);line-height:1.5}
-@media(max-width:480px){.login-wrapper{padding:1.2rem;padding-top:calc(1.2rem + env(safe-area-inset-top));padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));gap:.7rem}}
-@media(max-height:700px){.login-wrapper{gap:.5rem;padding:.9rem}.logo-box{width:min(100px,28vw)}}
+.login-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;gap:.85rem;background:var(--surface);overflow-y:auto;text-align:center}
+.logo-box{width:min(140px,40vw);aspect-ratio:1;max-width:160px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;box-shadow:0 10px 25px -5px rgba(79,70,229,.35)}
+.logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.3}
+.login-title{font-size:clamp(1.1rem,4vw,1.35rem);font-weight:800}
+.login-sub{font-size:clamp(.8rem,3vw,.95rem);color:var(--muted);margin-bottom:.4rem;line-height:1.35}
+.input-pin{width:100%;max-width:340px;padding:.9rem 1rem;border:2px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);transition:var(--t);outline:none;text-align:center;font-weight:600;letter-spacing:.15em}
+.input-pin:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-l)}
+.login-info{margin-top:.8rem;padding:1rem;background:var(--primary-l);border:1px dashed #A5B4FC;border-radius:var(--r-s);text-align:left;width:100%;max-width:340px}
+.login-info h3{font-size:.8rem;color:var(--primary-d);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
+.login-info p{font-size:.75rem;color:var(--muted);line-height:1.5}
 
 /* ==================== HEADER ==================== */
 .app-header{background:var(--surface);padding:.75rem 1.1rem;padding-top:calc(.75rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
 .app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem}
 .app-header h1 .material-symbols-outlined{font-size:24px}
-.btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0;min-width:44px;min-height:44px;touch-action:manipulation}
-.btn-icon:hover{background:var(--negative-bg);color:var(--negative)}
-@media(max-width:480px){.app-header{padding:.7rem .9rem;padding-top:calc(.7rem + env(safe-area-inset-top))}}
+.btn-icon{color:var(--muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--t);min-width:44px;min-height:44px}
+.btn-icon:hover{background:#FFE4E6;color:var(--negative)}
 
-.main-content{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-@media(max-width:480px){.main-content{padding:.85rem;padding-bottom:calc(85px + env(safe-area-inset-bottom))}}
-
-/* ==================== BOTTOM NAV ==================== */
+/* ==================== MAIN + NAV ==================== */
+.main{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.tab-pane{display:none;animation:fadeIn .25s ease-out}
+.tab-pane.active{display:block}
 .bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
-.nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--muted);font-size:.68rem;font-weight:500;transition:var(--t);padding:.25rem .6rem;min-width:56px;min-height:48px}
 .nav-item.active{color:var(--primary)}
-.nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
+.nav-item .material-symbols-outlined{font-size:22px;transition:var(--t)}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
 @media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
-/* ==================== CARDS ==================== */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:1.2rem;margin-bottom:1rem}
-.card-title{font-size:1.05rem;font-weight:800;color:var(--text);text-align:center;margin-bottom:1.2rem}
-.card h3{font-size:.95rem;font-weight:700;color:var(--text);margin:0 0 .8rem 0;display:flex;align-items:center;gap:.4rem}
-.card h3 .material-symbols-outlined{font-size:20px;color:var(--primary)}
-.section-title{font-size:1rem;font-weight:800;margin:0 0 1rem 0;display:flex;align-items:center;gap:.5rem}
+/* ==================== CARDS + FORMS ==================== */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-s);padding:1.2rem;margin-bottom:1rem}
+.card-title{font-size:1.05rem;font-weight:800;text-align:center;margin-bottom:1.2rem}
+.section-title{font-size:1rem;font-weight:800;margin:0 0 1rem;display:flex;align-items:center;gap:.5rem}
 .section-title .material-symbols-outlined{font-size:22px;color:var(--primary)}
+.card h3{font-size:.95rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+.card h3 .material-symbols-outlined{font-size:20px;color:var(--primary)}
 
-/* ==================== FORM ==================== */
 .form-group{margin-bottom:1rem;display:flex;flex-direction:column;gap:.4rem}
-.form-group label{font-size:.82rem;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.03em}
-.form-select, .form-input{width:100%;padding:.75rem .9rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--transition);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 2l1.4-1.4L6 5.2 10.6.6 12 2z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:12px;padding-right:2.4rem}
+.form-group label{font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.form-select,.form-input{width:100%;padding:.75rem .9rem;border:1.5px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--t);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 2l1.4-1.4L6 5.2 10.6.6 12 2z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:12px;padding-right:2.4rem}
 .form-input{background-image:none;padding-right:.9rem}
-.form-select:focus, .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light);background-color:var(--surface)}
+.form-select:focus,.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l);background-color:var(--surface)}
 .form-select.highlight{border-color:var(--primary);color:var(--primary);font-weight:700}
 
-/* ==================== LEGEND ==================== */
-.legend-box{background:var(--primary-light);padding:.9rem;border-radius:var(--radius-sm);border-left:4px solid var(--primary);font-size:.82rem;color:var(--primary-dark);margin-bottom:1rem}
-.legend-box strong{display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem;font-size:.85rem}
-.legend-table{width:100%;min-width:520px;border-collapse:collapse;font-size:.74rem}
-.legend-table th{text-align:left;padding:4px 6px;color:var(--primary-dark);border-bottom:1px solid #C7D2FE;background:transparent;font-size:.74rem;position:static}
-.legend-table td{padding:4px 6px;border:none;text-align:left;font-size:.74rem}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:.5rem;padding:.85rem 1rem;border-radius:var(--r-s);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;transition:var(--t);min-height:44px;width:100%}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover:not(:disabled){background:var(--primary-d)}
+.btn-success{background:var(--positive);color:#fff}
+.btn-success:hover:not(:disabled){background:var(--positive-d)}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{background:var(--surface-2)}
+.btn-sm{padding:.5rem .85rem;font-size:.82rem;min-height:36px;width:auto}
 
 /* ==================== STATS ==================== */
-.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-bottom:1rem}
-@media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
-.stat-card .stat-number{font-size:1.5rem;font-weight:800;color:var(--text);line-height:1.2;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.stat-card .stat-label{font-size:.68rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:.3rem}
-.stat-card.positif .stat-number{color:var(--positive)}
-.stat-card.negatif .stat-number{color:var(--negative)}
-@media(max-width:360px){.stat-card{padding:.75rem}.stat-card .stat-number{font-size:1.3rem}.stat-card .stat-label{font-size:.62rem}}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1rem}
+@media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-s);padding:1rem;box-shadow:var(--shadow-s)}
+.stat .num{font-size:1.5rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat .lbl{font-size:.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:.3rem}
+.stat.pos .num{color:var(--positive)}
+.stat.neg .num{color:var(--negative)}
 
-/* ==================== CHART ==================== */
-.chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1.1rem;border:1px solid var(--border);margin-bottom:1rem;box-shadow:var(--shadow-sm);overflow:hidden}
-.chart-container .chart-title{font-weight:600;font-size:.9rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.chart-wrapper{position:relative;height:200px;width:100%}
-@media(min-width:600px){.chart-wrapper{height:240px}}
-@media(max-width:360px){.chart-wrapper{height:170px}}
-
-/* ==================== TABLE ==================== */
-.table-responsive{overflow:auto;max-height:60vh;background:var(--surface);border-radius:var(--radius-sm);border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:1rem;-webkit-overflow-scrolling:touch}
-table.data-table{width:100%;border-collapse:collapse;min-width:900px}
-.data-table th{background:var(--bg);color:var(--text-muted);font-size:.7rem;text-transform:uppercase;padding:.8rem .5rem;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:2;letter-spacing:.03em}
-.data-table td{padding:.7rem .5rem;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;font-size:.82rem;font-variant-numeric:tabular-nums}
-.data-table tr:last-child td{border-bottom:none}
-.data-table .sticky-col{position:sticky;left:0;background:var(--surface);z-index:2;text-align:left;padding-left:.9rem;box-shadow:2px 0 5px rgba(0,0,0,.02);font-weight:600}
-.data-table th.sticky-col{background:var(--bg);z-index:3}
-
-/* Input cell — 16px cegah iOS zoom */
-.input-cell{width:48px;height:38px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:all .18s cubic-bezier(.4,0,.2,1);font-variant-numeric:tabular-nums;caret-color:var(--primary);-webkit-appearance:none;appearance:none;padding:0;line-height:1}
-.input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light);transform:scale(1.08);z-index:5;position:relative}
-.input-cell.input-salat{border-color:#bfdbfe;background:#eff6ff;color:var(--primary)}
-.input-cell.input-salat:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
-.input-cell.invalid{border-color:var(--negative)!important;background:var(--negative-bg)!important;animation:shakeInput .3s}
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-input[type=number]{-moz-appearance:textfield}
-.row-success{background:var(--positive-bg)!important}
-.row-success .sticky-col{background:var(--positive-bg)}
-.row-success .input-cell{background:#dcfce7;color:#166534;border-color:transparent;pointer-events:none}
-
+/* ==================== TABLES ==================== */
+.table-wrap{overflow:auto;max-height:60vh;background:var(--surface);border-radius:var(--r-s);border:1px solid var(--border);box-shadow:var(--shadow-s);margin-bottom:1rem}
+table.data{width:100%;border-collapse:collapse;min-width:900px}
+.data th{background:var(--bg);color:var(--muted);font-size:.7rem;text-transform:uppercase;padding:.8rem .5rem;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:2}
+.data td{padding:.7rem .5rem;border-bottom:1px solid var(--border);text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
+.data .sticky-l{position:sticky;left:0;background:var(--surface);z-index:2;text-align:left;padding-left:.9rem;font-weight:600;box-shadow:2px 0 5px rgba(0,0,0,.02)}
+.data th.sticky-l{background:var(--bg);z-index:3}
 .skor-baik{color:var(--positive);font-weight:700}
 .skor-cukup{color:var(--warning);font-weight:700}
 .skor-kurang{color:var(--negative);font-weight:700}
 
-/* ==================== BUTTONS ==================== */
-.btn-primary{background:var(--primary);color:#fff}
-.btn-success{background:var(--positive);color:#fff}
-.btn-success:hover:not(:disabled){background:var(--positive-dark)}
-.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{background:var(--surface-alt)}
-.btn-back{display:inline-flex;align-items:center;gap:.35rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem .9rem;font-size:.8rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:38px;color:var(--text)}
-.btn-back:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
-
-/* ==================== TOAST ==================== */
-.toast-container{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:.85rem;font-weight:500;box-shadow:var(--shadow-md);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
-.toast.success{background:var(--positive)}
-.toast.error{background:var(--negative)}
-.toast.hide{animation:slideUp .3s ease-in forwards}
-
-/* ==================== EMPTY STATE ==================== */
-.empty-state{text-align:center;padding:2.5rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
-.empty-state .material-symbols-outlined{font-size:52px;opacity:.4;color:var(--primary)}
-.empty-state p{max-width:320px;font-size:.85rem;line-height:1.5}
-
-/* ==================== SKELETON ==================== */
-.skeleton{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
-.skel-line{height:12px;border-radius:6px;margin-bottom:.5rem}
-.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem}
+.input-cell{width:48px;height:38px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0}
+.input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-l);transform:scale(1.08);z-index:5}
+.input-cell.salat{border-color:#bfdbfe;background:#eff6ff;color:var(--primary)}
+.input-cell.invalid{border-color:var(--negative)!important;background:#FFE4E6!important}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield}
+tr.row-saved{background:#D1FAE5!important}
+tr.row-saved .sticky-l{background:#D1FAE5}
+tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transparent;pointer-events:none}
 
 /* ==================== FILTER GRID ==================== */
 .filter-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;align-items:end}
 .filter-grid .form-group{margin-bottom:0}
-.filter-grid .full{grid-column:1 / -1}
-@media(min-width:600px){.filter-grid{grid-template-columns:repeat(3,1fr)}.filter-grid .btn-full{grid-column:span 3}}
+.filter-grid .full{grid-column:1/-1}
+@media(min-width:600px){.filter-grid{grid-template-columns:repeat(3,1fr)}.filter-grid .span-3{grid-column:span 3}}
 
-/* ==================== PRINT ==================== */
-@media print{
-  @page{margin:1.2cm;size:A4 portrait}
-  html,body{overflow:visible!important;height:auto!important;background:#fff!important;position:static!important}
-  body{display:block!important;padding:0!important}
-  #app{max-width:none!important;height:auto!important;overflow:visible!important;padding:0!important}
-  .app-header,.bottom-nav,.btn-icon,.toast-container,.no-print,.nav-item{display:none!important}
-  .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
-  .tab-pane{display:none!important}
-  .tab-pane.active{display:block!important}
-  .card,.chart-container,.table-responsive{border:none!important;box-shadow:none!important;padding:0!important;margin-bottom:1rem!important}
+/* ==================== LEGEND ==================== */
+.legend{background:var(--primary-l);padding:.9rem;border-radius:var(--r-s);border-left:4px solid var(--primary);font-size:.82rem;color:var(--primary-d);margin-bottom:1rem}
+.legend strong{display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem;font-size:.85rem}
+.legend table{width:100%;min-width:520px;border-collapse:collapse;font-size:.74rem}
+.legend th{text-align:left;padding:4px 6px;color:var(--primary-d);border-bottom:1px solid #C7D2FE}
+.legend td{padding:4px 6px;border:none;text-align:left}
+
+/* ==================== TOAST ==================== */
+.toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--r-s);color:#fff;font-size:.85rem;font-weight:500;box-shadow:var(--shadow-m);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275);pointer-events:auto}
+.toast.success{background:var(--positive)}
+.toast.error{background:var(--negative)}
+.toast.hide{animation:slideUp .3s ease-in forwards}
+
+/* ==================== EMPTY + SKELETON ==================== */
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.empty .material-symbols-outlined{font-size:52px;opacity:.4;color:var(--primary)}
+.empty p{max-width:320px;font-size:.85rem;line-height:1.5}
+.skel{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
+.skel-line{height:12px;border-radius:6px;margin-bottom:.5rem}
+.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem}
+
+/* ====================================================================
+ *                       PRINT PREVIEW (WYSIWYG)
+ * ==================================================================== */
+
+/* Modal overlay */
+.preview-shell{position:fixed;inset:0;background:#1e293b;z-index:9998;display:none;flex-direction:column}
+.preview-shell.show{display:flex}
+
+/* Toolbar */
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem;padding-top:calc(.75rem + env(safe-area-inset-top))}
+.preview-toolbar .title{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text);min-width:0}
+.preview-toolbar .title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-toolbar .actions{display:flex;gap:.5rem;flex-shrink:0}
+.preview-toolbar .btn{width:auto;min-width:auto;padding:.5rem .9rem;font-size:.85rem;min-height:38px}
+
+/* Preview scroll area */
+.preview-scroll{flex:1;overflow:auto;padding:20px 0;-webkit-overflow-scrolling:touch;background:#334155}
+
+/* Paper (A4) */
+.cetak-page{
+  width:210mm;
+  min-height:297mm;
+  padding:12mm 10mm;
+  background:#fff;
+  margin:0 auto 20px;
+  box-shadow:0 4px 24px rgba(0,0,0,.4);
+  box-sizing:border-box;
+  color:#1e293b;
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:10pt;
+  line-height:1.5;
+  position:relative;
 }
+.cetak-page:last-child{margin-bottom:20px}
 
-@supports(-webkit-touch-callout:none){input,textarea,select{font-size:16px!important}}
-input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-text-fill-color:var(--text);-webkit-box-shadow:0 0 0 1000px var(--surface) inset;transition:background-color 9999s ease-in-out 0s}
+/* ---------- Print template styles (dipakai untuk preview & print) ---------- */
+.cetak-kop{border-bottom:3px double #1e3a8a;padding-bottom:8px;margin-bottom:14px;text-align:center}
+.cetak-kop .dinas{font-size:9.5pt;font-weight:600;color:#334155;letter-spacing:.3px}
+.cetak-kop .dinas-sub{font-size:9pt;font-weight:500;color:#475569}
+.cetak-kop .sekolah{font-size:16pt;font-weight:800;color:#1e3a8a;margin:3px 0 1px;letter-spacing:1px}
+.cetak-kop .alamat{font-size:8.5pt;color:#64748b}
+.cetak-kop .meta{font-size:8pt;color:#94a3b8;margin-top:2px}
+
+.cetak-judul{font-size:13pt;text-align:center;font-weight:800;color:#0f172a;letter-spacing:.4px;margin:10px 0 3px}
+.cetak-sub{text-align:center;font-size:9.5pt;color:#64748b;margin-bottom:12px}
+
+.cetak-h3{font-size:10.5pt;font-weight:700;color:#1e293b;padding:5px 10px;background:#f1f5f9;border-left:4px solid #4F46E5;margin:12px 0 8px;page-break-after:avoid}
+
+.cetak-ident{width:100%;border-collapse:collapse;margin:6px 0 12px;background:#f8fafc;border:1px solid #e2e8f0}
+.cetak-ident td{padding:6px 10px;font-size:10pt;vertical-align:top}
+.cetak-ident td.label{width:130px;font-weight:600;color:#475569;background:#f1f5f9}
+
+.cetak-summary{width:100%;border-collapse:separate;border-spacing:6px 0;margin:0 0 12px}
+.cetak-summary td{background:#EEF2FF;border:1px solid #C7D2FE;border-radius:6px;padding:8px 6px;text-align:center;vertical-align:middle}
+.cetak-summary .lbl{font-size:7.5pt;color:#4338CA;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.cetak-summary .val{font-size:15pt;font-weight:800;color:#1e1b4b;line-height:1.1;margin-top:2px}
+.cetak-summary .val.sm{font-size:9.5pt}
+
+.cetak-tbl{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:9.5pt}
+.cetak-tbl thead th{background:#4F46E5;color:#fff;font-weight:600;padding:7px 6px;border:1px solid #4338CA;font-size:9pt;text-align:center}
+.cetak-tbl tbody td{padding:6px;border:1px solid #e2e8f0;text-align:center;vertical-align:middle}
+.cetak-tbl tbody tr:nth-child(even) td{background:#f8fafc}
+.cetak-tbl td.l{text-align:left;font-weight:600;color:#1e293b}
+.cetak-tbl td.c{text-align:center}
+
+.badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:8.5pt;font-weight:700}
+.badge-baik{background:#D1FAE5;color:#065f46}
+.badge-cukup{background:#FEF3C7;color:#92400e}
+.badge-kurang{background:#FFE4E6;color:#9f1239}
+
+.cetak-chart-wrap{margin:6px 0 12px;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;text-align:center;page-break-inside:avoid}
+.cetak-chart-wrap canvas{display:block;margin:0 auto}
+
+.cetak-catatan{background:#fefce8;border-left:4px solid #eab308;padding:10px 14px;margin:8px 0 12px;font-size:9.5pt;color:#422006;page-break-inside:avoid}
+.cetak-catatan p{margin:0 0 5px}
+.cetak-catatan p:last-child{margin-bottom:0}
+
+.cetak-ttd{margin-top:30px;page-break-inside:avoid}
+.cetak-ttd table{width:100%;border-collapse:collapse}
+.cetak-ttd td{border:none;text-align:center;vertical-align:top;width:50%;padding:0 12px;font-size:10pt}
+.cetak-ttd .tanggal{font-size:9.5pt;color:#475569;margin-bottom:4px;text-align:center}
+.cetak-ttd .jabatan{font-weight:600;color:#1e293b;margin-bottom:4px;line-height:1.35}
+.cetak-ttd .space{height:60px}
+.cetak-ttd .nama{font-weight:700;color:#1e293b;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block}
+.cetak-ttd .nama-kosong{font-weight:400;color:#94a3b8;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block}
+.cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px}
+
+/* ====================================================================
+ *                       PRINT MEDIA QUERY
+ * ==================================================================== */
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  html,body{position:static!important;overflow:visible!important;height:auto!important;background:#fff!important}
+  body > *:not(.preview-shell){display:none!important}
+  .preview-shell{display:flex!important;position:static!important;background:#fff!important}
+  .preview-toolbar,.no-print{display:none!important}
+  .preview-scroll{overflow:visible!important;padding:0!important;background:#fff!important;flex:none!important;height:auto!important}
+  .cetak-page{
+    width:210mm!important;
+    min-height:297mm!important;
+    margin:0!important;
+    padding:12mm 10mm!important;
+    box-shadow:none!important;
+    page-break-after:always;
+    break-after:page;
+  }
+  .cetak-page:last-child{page-break-after:auto;break-after:auto}
+  .cetak-h3,.cetak-chart-wrap,.cetak-catatan,.cetak-ttd{page-break-inside:avoid;break-inside:avoid}
+  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
 </style>
 </head>
 <body>
 <div id="app"></div>
-<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+<div id="previewShell" class="preview-shell" role="dialog" aria-modal="true" aria-hidden="true"></div>
+<div id="toastWrap" class="toast-wrap" aria-live="polite"></div>
 
 <script>
 'use strict';
-(function(){
+(() => {
 
-/* ==================== KONFIG ==================== */
-const API_BASE = 'https://script.google.com/macros/s/AKfycbzOsHTfGQlozVMr6X5nEfFlqYJqZhdevocMqdKKMp71QnK-sBLQb_fHM3YSgVqAytJyVA/exec';
-const CLIENT_CACHE_TTL = 60_000;
-const FETCH_TIMEOUT = 30_000;
-const RETRY_DELAYS = [500, 1500];
-const TOAST_DEDUP_MS = 3000;
-
-const SSKeys = {
-  TOKEN: 'kaih_token',
-  TOKEN_AT: 'kaih_token_at',
-  LEGACY: ['token','dataMasterSiswa']
+/* ====================================================================
+ *                              CONFIG
+ * ==================================================================== */
+const CFG = {
+  API: 'https://script.google.com/macros/s/AKfycbzOsHTfGQlozVMr6X5nEfFlqYJqZhdevocMqdKKMp71QnK-sBLQb_fHM3YSgVqAytJyVA/exec',
+  LS_TOKEN: 'k7_token',
+  LS_VER: 'k7_ver',
+  LS_BOOT: 'k7_boot',         // { v, identitas, waliKelas, master, ts }
+  LS_LOGS: 'k7_logs_',        // + filterKey → { v, logs, ts }
+  LS_SETUP: 'k7_setup',
+  BOOT_TTL: 6 * 60 * 60 * 1000,
+  LOGS_TTL: 5 * 60 * 1000,
+  FETCH_TIMEOUT: 30000,
+  CHART_CDN: 'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js',
+  CHART_FALLBACK: 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js'
 };
 
-const LSKeys = {
-  MASTER: 'kaih_master',
-  MASTER_TTL: 6 * 60 * 60 * 1000,
-  LAST_SETUP: 'kaih_last_setup'
-};
+const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const KELAS = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
+const TAHUN = ['2025','2026','2027','2028'];
 
-const KATEGORI_MAP = [
-  { key: 'Skor_Bangun',   label: 'Bangun Pagi',   maxScale: 4 },
-  { key: 'Skor_Subuh',    label: 'Subuh',         maxScale: 7 },
-  { key: 'Skor_Dzuhur',   label: 'Dzuhur',        maxScale: 7 },
-  { key: 'Skor_Ashar',    label: 'Ashar',         maxScale: 7 },
-  { key: 'Skor_Maghrib',  label: 'Maghrib',       maxScale: 7 },
-  { key: 'Skor_Isya',     label: 'Isya',          maxScale: 7 },
-  { key: 'Skor_Mengaji',  label: 'Sunah',         maxScale: 4 },
-  { key: 'Skor_Olahraga', label: 'Berolahraga',   maxScale: 4 },
-  { key: 'Skor_Makan',    label: 'Makan Sehat',   maxScale: 4 },
-  { key: 'Skor_Belajar',  label: 'Gemar Belajar', maxScale: 4 },
-  { key: 'Skor_Sosial',   label: 'Bermasyarakat', maxScale: 4 },
-  { key: 'Skor_Tidur',    label: 'Cepat Tidur',   maxScale: 4 }
+const KATEGORI = [
+  { key:'Skor_Bangun',   label:'Bangun Pagi',   max:4 },
+  { key:'Skor_Subuh',    label:'Subuh',         max:7 },
+  { key:'Skor_Dzuhur',   label:'Dzuhur',        max:7 },
+  { key:'Skor_Ashar',    label:'Ashar',         max:7 },
+  { key:'Skor_Maghrib',  label:'Maghrib',       max:7 },
+  { key:'Skor_Isya',     label:'Isya',          max:7 },
+  { key:'Skor_Mengaji',  label:'Sunah',         max:4 },
+  { key:'Skor_Olahraga', label:'Berolahraga',   max:4 },
+  { key:'Skor_Makan',    label:'Makan Sehat',   max:4 },
+  { key:'Skor_Belajar',  label:'Gemar Belajar', max:4 },
+  { key:'Skor_Sosial',   label:'Bermasyarakat', max:4 },
+  { key:'Skor_Tidur',    label:'Cepat Tidur',   max:4 }
 ];
 
-const WARNA_KATEGORI = ['#4F46E5','#0EA5E9','#06B6D4','#14B8A6','#F59E0B','#EA580C','#A855F7','#10B981','#EAB308','#EC4899','#F43F5E','#64748B'];
+const SARAN = {
+  Skor_Bangun:'Membiasakan jam tidur yang cukup dan alarm pagi dapat membantu ananda bangun lebih awal.',
+  Skor_Subuh:'Membiasakan bangun sebelum waktu Subuh dan pendampingan orang tua dapat membantu konsistensi salat Subuh ananda.',
+  Skor_Dzuhur:'Mengingatkan ananda untuk salat Dzuhur tepat waktu, misalnya di sela istirahat sekolah.',
+  Skor_Ashar:'Menjadwalkan waktu salat Ashar sebelum ananda mulai bermain sore.',
+  Skor_Maghrib:'Membiasakan salat Maghrib berjamaah di rumah dapat membantu konsistensi.',
+  Skor_Isya:'Mengingatkan ananda untuk salat Isya sebelum waktu tidur dapat membantu.',
+  Skor_Mengaji:'Menjadwalkan waktu khusus untuk membaca Al-Qur\'an atau amalan sunah setiap hari.',
+  Skor_Olahraga:'Mengajak ananda beraktivitas fisik ringan secara rutin, seperti jalan pagi.',
+  Skor_Makan:'Menyediakan menu makan bergizi seimbang secara rutin di rumah.',
+  Skor_Belajar:'Menyediakan waktu belajar terjadwal di rumah dapat membantu.',
+  Skor_Sosial:'Mendorong ananda untuk lebih aktif berinteraksi dan membantu di lingkungan sekitar.',
+  Skor_Tidur:'Membiasakan waktu tidur malam yang lebih awal dan konsisten.'
+};
 
-const DAFTAR_BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-const DAFTAR_KELAS = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
-const DAFTAR_TAHUN = ['2026','2027','2028'];
+const TH = { BAIK: 0.875, CUKUP: 0.625 }; // threshold status
 
-/* ==================== UTIL ==================== */
+/* ====================================================================
+ *                              UTIL
+ * ==================================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-const norm = (v, max) => (max ? (Number(v) / max) * 4 : 0);
+const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
+const str = v => v == null ? '' : String(v);
 
-function buatOpsiBulan(selected) {
-  return DAFTAR_BULAN.map(b => `<option value="${b}"${b === selected ? ' selected' : ''}>${b}</option>`).join('');
-}
-function buatOpsiTahun(selected) {
-  return DAFTAR_TAHUN.map(t => `<option value="${t}"${t === selected ? ' selected' : ''}>${t}</option>`).join('');
-}
+const fmtBulan = idx => BULAN[idx] || '';
+const todayM = () => new Date().getMonth();
 
-/* ==================== CHART LOADER ==================== */
-function ensureChart(timeout = 8000) {
-  if (typeof Chart !== 'undefined') return Promise.resolve(true);
-  return new Promise((resolve) => {
-    const start = Date.now();
-    const check = () => {
-      if (typeof Chart !== 'undefined') return resolve(true);
-      if (Date.now() - start > timeout) return resolve(false);
-      setTimeout(check, 100);
-    };
-    check();
-  });
-}
-
-async function safeCreateChart(canvasEl, config) {
-  if (!canvasEl) {
-    console.warn('[Chart] Canvas not found.');
-    return null;
-  }
-  const ok = await ensureChart();
-  if (!ok) {
-    showToast('Grafik tidak dapat dimuat. Periksa koneksi.', 'error');
-    return null;
-  }
-  const parent = canvasEl.parentElement;
-  if (!parent || parent.offsetHeight === 0) {
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-  }
-  try {
-    const ctx = canvasEl.getContext('2d');
-    return new Chart(ctx, config);
-  } catch (err) {
-    console.error('[Chart] Failed:', err);
-    showToast('Grafik gagal dibuat: ' + err.message, 'error');
-    return null;
-  }
-}
-
-/* ==================== TOAST ==================== */
-const _toastHistory = new Map();
-function showToast(msg, type = 'success') {
-  const key = type + ':' + msg;
+/* ====================================================================
+ *                              TOAST
+ * ==================================================================== */
+const _toastMap = new Map();
+const toast = (msg, type = 'success') => {
+  const k = type + ':' + msg;
   const now = Date.now();
-  if (_toastHistory.has(key) && (now - _toastHistory.get(key)) < TOAST_DEDUP_MS) return;
-  _toastHistory.set(key, now);
-  setTimeout(() => _toastHistory.delete(key), TOAST_DEDUP_MS);
+  if (_toastMap.has(k) && now - _toastMap.get(k) < 3000) return;
+  _toastMap.set(k, now);
+  setTimeout(() => _toastMap.delete(k), 3000);
 
-  const c = $('#toastContainer');
-  const t = document.createElement('div');
-  t.className = `toast ${type}`;
-  const icon = type === 'success' ? 'check_circle' : 'error';
-  t.innerHTML = `<span class="material-symbols-outlined">${icon}</span><span>${escapeHtml(msg)}</span>`;
-  c.appendChild(t);
-  setTimeout(() => { t.classList.add('hide'); setTimeout(() => t.remove(), 300); }, 3200);
-}
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'error'}</span><span>${esc(msg)}</span>`;
+  $('#toastWrap').appendChild(el);
+  setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); }, 3200);
+};
 
-/* ==================== SEQGUARD ==================== */
-class SeqGuard {
-  constructor() { this.seq = 0; this.ctrl = null; }
-  next() {
-    this.seq++;
-    if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} }
-    this.ctrl = new AbortController();
-    return { seq: this.seq, signal: this.ctrl.signal };
-  }
-  isCurrent(seq) { return seq === this.seq; }
-  abort() {
-    this.seq++;
-    if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} }
-    this.ctrl = null;
-  }
-}
+/* ====================================================================
+ *                        LOCAL STORAGE CACHE
+ * ==================================================================== */
+const LS = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} },
+  clearBoot() { LS.del(CFG.LS_BOOT); LS.del(CFG.LS_VER); }
+};
 
-/* ==================== CLIENT CACHE ==================== */
-const ClientCache = {
-  _store: new Map(),
-  _inflight: new Map(),
-  get(k) {
-    const e = this._store.get(k);
-    if (!e) return null;
-    if (Date.now() - e.t > CLIENT_CACHE_TTL) { this._store.delete(k); return null; }
-    return e.v;
+const BootCache = {
+  read() {
+    const b = LS.get(CFG.LS_BOOT);
+    if (!b || !b.ts) return null;
+    if (Date.now() - b.ts > CFG.BOOT_TTL) return null;
+    return b;
   },
-  set(k, v) {
-    if (Array.isArray(v) && v.length === 0) return;
-    this._store.set(k, { v, t: Date.now() });
+  write(data) {
+    LS.set(CFG.LS_BOOT, { ...data, ts: Date.now() });
+    LS.set(CFG.LS_VER, data.v);
   },
-  invalidateAll() { this._store.clear(); this._inflight.clear(); },
-  invalidateLogs() {
-    for (const k of Array.from(this._store.keys())) {
-      if (k.startsWith('api:getLogs') || k.startsWith('api:dashboard')) this._store.delete(k);
-    }
+  invalidate() { LS.clearBoot(); }
+};
+
+const LogsCache = {
+  key(f) { return `${f.tahun}|${f.bulanAwal}|${f.bulanAkhir}|${f.kelas||''}|${f.minggu||''}`; },
+  read(f) {
+    const k = CFG.LS_LOGS + LogsCache.key(f);
+    const c = LS.get(k);
+    if (!c || !c.ts) return null;
+    if (Date.now() - c.ts > CFG.LOGS_TTL) return null;
+    if (c.v !== LS.get(CFG.LS_VER)) return null;
+    return c.logs;
+  },
+  write(f, logs) {
+    const k = CFG.LS_LOGS + LogsCache.key(f);
+    LS.set(k, { v: LS.get(CFG.LS_VER), logs, ts: Date.now() });
+  },
+  invalidateAll() {
+    Object.keys(localStorage).filter(k => k.startsWith(CFG.LS_LOGS)).forEach(k => LS.del(k));
   }
 };
 
-/* ==================== MASTER CACHE ==================== */
-function loadMasterFromLS() {
-  try {
-    const raw = localStorage.getItem(LSKeys.MASTER);
-    if (!raw) return null;
-    const p = JSON.parse(raw);
-    if (Date.now() - (p.ts || 0) > LSKeys.MASTER_TTL) return null;
-    return Array.isArray(p.data) ? p.data : null;
-  } catch (_) { return null; }
-}
-function saveMasterToLS(data) {
-  if (!Array.isArray(data) || !data.length) return;
-  try { localStorage.setItem(LSKeys.MASTER, JSON.stringify({ data, ts: Date.now() })); } catch (_) {}
-}
-
-/* ==================== DOWNLOAD PDF (Direct, no share) ==================== */
-async function downloadPdf(base64, filename) {
-  if (!base64 || typeof base64 !== 'string') {
-    return { ok: false, method: 'none', message: 'Data PDF kosong.' };
-  }
-  if (!filename) filename = `Laporan_${Date.now()}.pdf`;
-
-  // Base64 → Blob
-  let blob;
-  try {
-    const byteChars = atob(base64);
-    const byteNumbers = new Uint8Array(byteChars.length);
-    for (let i = 0; i < byteChars.length; i++) byteNumbers[i] = byteChars.charCodeAt(i);
-    blob = new Blob([byteNumbers], { type: 'application/pdf' });
-  } catch (err) {
-    return { ok: false, method: 'none', message: 'Base64 PDF rusak.' };
-  }
-
-  // Strategi 1: <a download> — works di 95% browser
-  try {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.rel = 'noopener';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-      try { document.body.removeChild(a); } catch (_) {}
-      URL.revokeObjectURL(url);
-    }, 1500);
-    return { ok: true, method: 'anchor' };
-  } catch (err) {
-    // lanjut
-  }
-
-  // Strategi 2: window.open sebagai fallback (iOS Safari)
-  try {
-    const url = URL.createObjectURL(blob);
-    const win = window.open(url, '_blank');
-    if (win) {
-      setTimeout(() => URL.revokeObjectURL(url), 60000);
-      return { ok: true, method: 'window' };
-    }
-    URL.revokeObjectURL(url);
-  } catch (err) {
-    // gagal
-  }
-
-  return {
-    ok: false,
-    method: 'none',
-    message: 'Browser tidak mendukung unduhan. Coba dari Chrome/Edge.'
-  };
-}
-
-async function handleDownload(btn, apiCall, successMsg) {
-  const orig = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = `<span class="spinner"></span><span>Membuat PDF...</span>`;
-  try {
-    const hasil = await apiCall();
-    if (!hasil || hasil.status !== 'success') {
-      throw new Error(hasil?.message || 'Gagal membuat PDF dari server.');
-    }
-    if (!hasil.pdfBase64) throw new Error('Server tidak mengirim data PDF.');
-
-    btn.innerHTML = `<span class="spinner"></span><span>Menyimpan...</span>`;
-    const dl = await downloadPdf(hasil.pdfBase64, hasil.filename);
-
-    if (!dl.ok) {
-      showToast(dl.message || 'Gagal mengunduh PDF.', 'error');
-      return;
-    }
-
-    if (dl.method === 'window') {
-      showToast('PDF terbuka di tab baru. Simpan via menu browser.', 'success');
-    } else {
-      showToast(successMsg || 'PDF berhasil diunduh ke folder Downloads.', 'success');
-    }
-  } catch (err) {
-    if (err.message !== 'Unauthorized') showToast(err.message || 'Gagal membuat PDF.', 'error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = orig;
-  }
-}
-
-/* ==================== DEDUP LOG ==================== */
-function dedupeLog(rows) {
-  if (!Array.isArray(rows)) return [];
-  const map = new Map();
-  rows.forEach(r => map.set(`${r.NIS}_${r.Tahun}_${r.Bulan}_${r.Minggu_Ke}`, r));
-  return Array.from(map.values());
-}
-
-/* ==================== API SERVICE ==================== */
+/* ====================================================================
+ *                              API CLIENT
+ * ==================================================================== */
 const Api = {
-  _getToken() { return sessionStorage.getItem(SSKeys.TOKEN); },
+  _token: () => sessionStorage.getItem(CFG.LS_TOKEN),
 
-  async _fetch(url, options, signal) {
+  async _fetch(url, opts = {}) {
     const ctrl = new AbortController();
-    const onAbort = () => ctrl.abort();
-    if (signal) signal.addEventListener('abort', onAbort, { once: true });
-    const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+    const tid = setTimeout(() => ctrl.abort(), CFG.FETCH_TIMEOUT);
     try {
-      const res = await fetch(url, { ...options, signal: ctrl.signal });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const res = await fetch(url, { ...opts, signal: ctrl.signal });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       return await res.json();
-    } finally {
-      clearTimeout(timer);
-      if (signal) signal.removeEventListener('abort', onAbort);
-    }
+    } finally { clearTimeout(tid); }
   },
 
-  async get(action, params = {}, opts = {}) {
-    const useCache = opts.cache !== false;
-    const key = `api:${action}:${JSON.stringify(params)}`;
-    if (useCache) {
-      const hit = ClientCache.get(key);
-      if (hit) return hit;
-      if (ClientCache._inflight.has(key)) return ClientCache._inflight.get(key);
-    }
-
-    const token = this._getToken();
-    const query = new URLSearchParams({ action, token: token || '', ...params }).toString();
-    const signal = opts.signal;
-
-    const promise = (async () => {
-      let lastErr = null;
-      const retries = opts.retries ?? 1;
-      for (let attempt = 0; attempt <= retries; attempt++) {
-        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-        try {
-          const data = await this._fetch(`${API_BASE}?${query}`, { method: 'GET' }, signal);
-          this._checkAuth(data);
-          if (useCache && data && !data.error) ClientCache.set(key, data);
-          return data;
-        } catch (err) {
-          if (err.name === 'AbortError') throw err;
-          lastErr = err;
-          if (attempt < retries) { await sleep(RETRY_DELAYS[attempt] || 1000); continue; }
-        }
-      }
-      throw lastErr || new Error('Gagal terhubung ke server');
-    })();
-
-    if (useCache) ClientCache._inflight.set(key, promise);
-    return promise.finally(() => ClientCache._inflight.delete(key));
+  async get(action, params = {}) {
+    const token = Api._token();
+    const q = new URLSearchParams({ action, token: token || '', ...params }).toString();
+    const data = await Api._fetch(`${CFG.API}?${q}`);
+    Api._check(data);
+    return data;
   },
 
-  async post(action, body = {}, opts = {}) {
-    const token = this._getToken();
-    const signal = opts.signal;
-    const url = `${API_BASE}?action=${encodeURIComponent(action)}`;
-    let lastErr = null;
-    const retries = opts.retries ?? 0;
-    for (let attempt = 0; attempt <= retries; attempt++) {
-      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-      try {
-        const data = await this._fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ token, ...body })
-        }, signal);
-        this._checkAuth(data);
-        return data;
-      } catch (err) {
-        if (err.name === 'AbortError') throw err;
-        lastErr = err;
-        if (attempt < retries) { await sleep(RETRY_DELAYS[attempt] || 1000); continue; }
-      }
-    }
-    throw lastErr || new Error('Gagal terhubung ke server');
+  async post(action, body = {}) {
+    const token = Api._token();
+    const url = `${CFG.API}?action=${encodeURIComponent(action)}`;
+    const data = await Api._fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ token, ...body })
+    });
+    Api._check(data);
+    return data;
   },
 
-  _checkAuth(data) {
+  _check(data) {
     if (data && data.error === 'Unauthorized') {
-      sessionStorage.removeItem(SSKeys.TOKEN);
-      sessionStorage.removeItem(SSKeys.TOKEN_AT);
-      try { localStorage.removeItem(LSKeys.MASTER); } catch (_) {}
-      ClientCache.invalidateAll();
-      showToast('Sesi berakhir, silakan masuk kembali.', 'error');
+      sessionStorage.removeItem(CFG.LS_TOKEN);
+      BootCache.invalidate();
+      LogsCache.invalidateAll();
+      toast('Sesi berakhir, silakan masuk kembali.', 'error');
       setTimeout(() => location.reload(), 800);
       throw new Error('Unauthorized');
     }
   },
 
-  async verifyToken(token) {
-    try {
-      const res = await fetch(`${API_BASE}?action=verify_token`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ token })
-      });
-      const data = await res.json();
-      return data.valid === true;
-    } catch { return false; }
-  },
+  verify(token) { return Api._fetch(`${CFG.API}?action=verify_token`, {
+    method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ token })
+  }).then(d => d.valid === true).catch(() => false); },
 
-  getMasterSiswa(opts = {}) { return this.get('getMaster', {}, opts); },
-  getLogs(params, opts = {}) { return this.get('getLogs', params, opts); },
-  simpanJurnal(rows, opts = {}) { return this.post('simpan_jurnal', { rows }, opts); },
-  generateRaporSiswa(params, opts = {}) { return this.post('generate_rapor_siswa', params, opts); },
-  generateLaporanKelas(params, opts = {}) { return this.post('generate_laporan_kelas', params, opts); },
-  generateLaporanSekolah(params, opts = {}) { return this.post('generate_laporan_sekolah', params, opts); }
+  bootstrap(since) { return Api.get('bootstrap', since ? { since } : {}); },
+  logs(f) {
+    const p = { tahun: f.tahun };
+    if (f.bulanAwal) p.bulanAwal = f.bulanAwal;
+    if (f.bulanAkhir) p.bulanAkhir = f.bulanAkhir;
+    if (f.kelas) p.kelas = f.kelas;
+    if (f.minggu) p.minggu = f.minggu;
+    return Api.get('logs', p);
+  },
+  simpan(rows) { return Api.post('simpan_jurnal', { rows }); }
 };
 
-/* ==================== APP ==================== */
+/* ====================================================================
+ *                          CHART LOADER (lazy)
+ * ==================================================================== */
+let _chartReady = null;
+const ensureChart = () => {
+  if (typeof Chart !== 'undefined') return Promise.resolve(true);
+  if (_chartReady) return _chartReady;
+  _chartReady = new Promise(resolve => {
+    const s = document.createElement('script');
+    s.src = CFG.CHART_CDN;
+    s.onload = () => resolve(true);
+    s.onerror = () => {
+      const s2 = document.createElement('script');
+      s2.src = CFG.CHART_FALLBACK;
+      s2.onload = () => resolve(true);
+      s2.onerror = () => resolve(false);
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s);
+  });
+  return _chartReady;
+};
+
+/* ====================================================================
+ *                       CLIENT-SIDE STATS ENGINE
+ * ==================================================================== */
+const Stats = {
+  filter(rows, tahun, bulanAwal, bulanAkhir) {
+    const ia = BULAN.indexOf(bulanAwal), ib = BULAN.indexOf(bulanAkhir);
+    return rows.filter(r => String(r.Tahun) === String(tahun)
+      && BULAN.indexOf(r.Bulan) >= ia
+      && BULAN.indexOf(r.Bulan) <= ib);
+  },
+
+  dedup(rows) {
+    const m = new Map();
+    rows.forEach(r => m.set(`${r.NIS}_${r.Tahun}_${r.Bulan}_${r.Minggu_Ke}`, r));
+    return [...m.values()];
+  },
+
+  rataPerKategori(rows) {
+    const out = {};
+    KATEGORI.forEach(k => out[k.key] = 0);
+    if (!rows.length) return out;
+    rows.forEach(r => KATEGORI.forEach(k => out[k.key] += num(r[k.key])));
+    KATEGORI.forEach(k => out[k.key] /= rows.length);
+    return out;
+  },
+
+  norm(val, max) { return max ? (val / max) * 4 : 0; },
+
+  normArr(rataObj) {
+    return KATEGORI.map(k => Stats.norm(rataObj[k.key], k.max));
+  },
+
+  keseluruhan(normArr) {
+    return normArr.length ? normArr.reduce((a, b) => a + b, 0) / normArr.length : 0;
+  },
+
+  tren(rows) {
+    if (rows.length < 2) return null;
+    const m = Math.floor(rows.length / 2);
+    const a = Stats.rataPerKategori(rows.slice(0, m));
+    const b = Stats.rataPerKategori(rows.slice(-m));
+    const t = {};
+    KATEGORI.forEach(k => {
+      const na = Stats.norm(a[k.key], k.max);
+      const nb = Stats.norm(b[k.key], k.max);
+      t[k.key] = { delta: nb - na };
+    });
+    return t;
+  },
+
+  deltaTren(tren) {
+    if (!tren) return 0;
+    return KATEGORI.reduce((s, k) => s + tren[k.key].delta, 0) / KATEGORI.length;
+  },
+
+  status(ratio) {
+    if (ratio >= TH.BAIK) return { cls: 'baik', txt: 'Baik' };
+    if (ratio >= TH.CUKUP) return { cls: 'cukup', txt: 'Cukup' };
+    return { cls: 'kurang', txt: 'Perlu Perhatian' };
+  },
+
+  narasiIndividu(nama, normArr, tren) {
+    let best = 0, worst = 0;
+    normArr.forEach((v, i) => { if (v > normArr[best]) best = i; if (v < normArr[worst]) worst = i; });
+    let s = `${nama} menunjukkan kebiasaan paling konsisten pada aspek ${KATEGORI[best].label.toLowerCase()}, sementara aspek ${KATEGORI[worst].label.toLowerCase()} masih memerlukan pendampingan lebih lanjut. `;
+    const d = Stats.deltaTren(tren);
+    if (d > 0.15) s += 'Secara umum, kebiasaan ananda menunjukkan peningkatan.';
+    else if (d < -0.15) s += 'Secara umum, kebiasaan ananda mengalami penurunan dan perlu perhatian bersama.';
+    else s += 'Secara umum, kebiasaan ananda relatif stabil.';
+    return s;
+  },
+
+  narasiKelas(kelas, normArr, tren, jumlah) {
+    let best = 0, worst = 0;
+    normArr.forEach((v, i) => { if (v > normArr[best]) best = i; if (v < normArr[worst]) worst = i; });
+    let s = `Berdasarkan data ${jumlah} siswa, ${kelas} menunjukkan kebiasaan terbaik pada aspek ${KATEGORI[best].label.toLowerCase()}, sementara aspek ${KATEGORI[worst].label.toLowerCase()} masih memerlukan perhatian bersama. `;
+    const d = Stats.deltaTren(tren);
+    if (d > 0.15) s += 'Secara umum, kebiasaan siswa menunjukkan tren peningkatan.';
+    else if (d < -0.15) s += 'Secara umum, kebiasaan siswa menunjukkan tren penurunan.';
+    else s += 'Secara umum, kebiasaan siswa relatif stabil.';
+    return s;
+  },
+
+  narasiSekolah(rekap) {
+    const t = rekap.filter(r => r.rataKes !== null);
+    if (!t.length) return 'Belum ada data yang cukup untuk periode ini.';
+    const best = t.reduce((a, b) => b.rataKes > a.rataKes ? b : a);
+    const worst = t.reduce((a, b) => b.rataKes < a.rataKes ? b : a);
+    return `${best.kelas} mencatatkan rata-rata tertinggi, sementara ${worst.kelas} memerlukan perhatian tambahan. Kepala sekolah dan wali kelas disarankan berbagi praktik baik antar kelas.`;
+  },
+
+  saran(normArr) {
+    let worst = 0;
+    normArr.forEach((v, i) => { if (v < normArr[worst]) worst = i; });
+    return 'Saran: ' + (SARAN[KATEGORI[worst].key] || '');
+  },
+
+  rekapPerSiswa(rows) {
+    const map = new Map();
+    rows.forEach(r => {
+      if (!map.has(r.NIS)) map.set(r.NIS, { nama: r.Nama_Siswa, rows: [] });
+      map.get(r.NIS).rows.push(r);
+    });
+    return [...map.entries()].map(([nis, v]) => {
+      const rata = Stats.rataPerKategori(v.rows);
+      const norm = Stats.normArr(rata);
+      return { nis, nama: v.nama, rata, norm, rataKes: Stats.keseluruhan(norm), jumlah: v.rows.length };
+    });
+  }
+};
+
+/* ====================================================================
+ *                       PRINT ENGINE (WYSIWYG)
+ * ==================================================================== */
+const PrintEngine = {
+  _charts: [],
+
+  /* ---- HTML fragments ---- */
+  kop(ident) {
+    return `<div class="cetak-kop">
+      <div class="dinas">${esc(ident.dinas)}</div>
+      <div class="dinas-sub">${esc(ident.dinasSub)}</div>
+      <div class="sekolah">${esc(ident.nama)}</div>
+      <div class="alamat">${esc(ident.alamat)}</div>
+      <div class="meta">NPSN: ${esc(ident.npsn)} · Akreditasi ${esc(ident.akreditasi)} · ${esc(ident.website)}</div>
+    </div>`;
+  },
+
+  identTable(pairs) {
+    return `<table class="cetak-ident">${pairs.map(([l, v]) => `<tr><td class="label">${esc(l)}</td><td>: ${esc(v)}</td></tr>`).join('')}</table>`;
+  },
+
+  summary(items) {
+    return `<table class="cetak-summary"><tr>${items.map(it =>
+      `<td><div class="lbl">${esc(it.label)}</div><div class="val${it.small ? ' sm' : ''}">${esc(it.value)}</div></td>`
+    ).join('')}</tr></table>`;
+  },
+
+  skorTable(rata, norm) {
+    let rows = '';
+    KATEGORI.forEach((k, i) => {
+      const val = rata[k.key];
+      const disp = k.max === 4 ? val.toFixed(2) : val.toFixed(1);
+      const ratio = norm[i] / 4;
+      const st = Stats.status(ratio);
+      rows += `<tr>
+        <td class="l">${esc(k.label)}</td>
+        <td class="c">${disp}</td>
+        <td class="c"><span class="badge badge-${st.cls}">${st.txt}</span></td>
+      </tr>`;
+    });
+    return `<table class="cetak-tbl">
+      <thead><tr><th style="text-align:left">Kebiasaan</th><th>Rata-rata</th><th>Status</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  },
+
+  catatan(paras) {
+    const html = paras.filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
+    return html ? `<div class="cetak-catatan">${html}</div>` : '';
+  },
+
+  ttd(opts) {
+    const now = new Date();
+    const tgl = `${now.getDate()} ${fmtBulan(now.getMonth())} ${now.getFullYear()}`;
+    const cell = (label, nama, nip, withTgl) => `
+      ${withTgl ? `<div class="tanggal">Godegan, ${tgl}</div>` : ''}
+      ${label ? `<div class="jabatan">${label}</div>` : ''}
+      <div class="space"></div>
+      ${nama ? `<div class="nama">${esc(nama)}</div>` : `<div class="nama-kosong">(_____________________)</div>`}
+      ${nip ? `<div class="nip">NIP. ${esc(nip)}</div>` : ''}`;
+    return `<div class="cetak-ttd"><table><tr>
+      <td>${cell(opts.kiriLabel, opts.kiriNama, opts.kiriNip, false)}</td>
+      <td>${cell(opts.kananLabel, opts.kananNama, opts.kananNip, true)}</td>
+    </tr></table></div>`;
+  },
+
+  chartWrap(canvasId, width, height) {
+    return `<div class="cetak-chart-wrap">
+      <canvas id="${canvasId}" width="${width}" height="${height}"></canvas>
+    </div>`;
+  },
+
+  /* ---- Chart renderers ---- */
+  async renderChartKategori(canvasId, norm) {
+    await ensureChart();
+    const cv = document.getElementById(canvasId);
+    if (!cv || typeof Chart === 'undefined') return;
+    const labels = KATEGORI.map(k => k.label);
+    const data = norm.map(v => Number(v.toFixed(2)));
+    const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
+    const c = new Chart(cv, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Rata-rata',
+          data,
+          backgroundColor: colors,
+          borderRadius: 4,
+          maxBarThickness: 22,
+          datalabels: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: false,
+        animation: false,
+        devicePixelRatio: 3,
+        layout: { padding: { top: 4, right: 8, bottom: 4, left: 4 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }
+        },
+        scales: {
+          x: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#1e293b' } }
+        }
+      }
+    });
+    PrintEngine._charts.push(c);
+  },
+
+  async renderChartTren(canvasId, points) {
+    await ensureChart();
+    const cv = document.getElementById(canvasId);
+    if (!cv || typeof Chart === 'undefined') return;
+    const c = new Chart(cv, {
+      type: 'bar',
+      data: {
+        labels: points.map(p => p.label),
+        datasets: [{
+          label: 'Rata-rata',
+          data: points.map(p => Number(p.value.toFixed(2))),
+          backgroundColor: '#10B981',
+          borderRadius: 4,
+          maxBarThickness: 60
+        }]
+      },
+      options: {
+        responsive: false,
+        animation: false,
+        devicePixelRatio: 3,
+        layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b' } }
+        }
+      }
+    });
+    PrintEngine._charts.push(c);
+  },
+
+  async renderChartPerbandingan(canvasId, points) {
+    await ensureChart();
+    const cv = document.getElementById(canvasId);
+    if (!cv || typeof Chart === 'undefined') return;
+    const c = new Chart(cv, {
+      type: 'bar',
+      data: {
+        labels: points.map(p => p.label),
+        datasets: [{
+          label: 'Rata-rata',
+          data: points.map(p => Number(p.value.toFixed(2))),
+          backgroundColor: '#4F46E5',
+          borderRadius: 4,
+          maxBarThickness: 60
+        }]
+      },
+      options: {
+        responsive: false,
+        animation: false,
+        devicePixelRatio: 3,
+        layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b' } }
+        }
+      }
+    });
+    PrintEngine._charts.push(c);
+  },
+
+  /* ---- Page builders ---- */
+  buildRaporPage(siswa, logPeriode, opts) {
+    const rata = Stats.rataPerKategori(logPeriode);
+    const norm = Stats.normArr(rata);
+    const rataKes = Stats.keseluruhan(norm);
+    const tren = Stats.tren(logPeriode);
+    let best = 0, worst = 0;
+    norm.forEach((v, i) => { if (v > norm[best]) best = i; if (v < norm[worst]) worst = i; });
+
+    const wali = opts.waliKelas[siswa.Kelas] || { nama: '', nip: '' };
+    const periodeText = opts.bulanAwal === opts.bulanAkhir
+      ? `${opts.bulanAwal} ${opts.tahun}`
+      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
+
+    const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+
+    return `<div class="cetak-page">
+      ${PrintEngine.kop(opts.identitas)}
+      <h2 class="cetak-judul">LAPORAN KEBIASAAN ANAK</h2>
+      <p class="cetak-sub">Periode ${periodeText}</p>
+      ${PrintEngine.identTable([
+        ['Nama Siswa', siswa.Nama_Siswa],
+        ['Kelas', siswa.Kelas],
+        ['NIS', siswa.NIS],
+        ['Periode', periodeText]
+      ])}
+      ${PrintEngine.summary([
+        { label: 'Rata-rata', value: rataKes.toFixed(2) },
+        { label: 'Minggu Tercatat', value: logPeriode.length },
+        { label: 'Terbaik', value: KATEGORI[best].label, small: true },
+        { label: 'Perlu Perhatian', value: KATEGORI[worst].label, small: true }
+      ])}
+      <h3 class="cetak-h3">Rata-rata Skor per Kebiasaan</h3>
+      ${PrintEngine.skorTable(rata, norm)}
+      <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan</h3>
+      ${PrintEngine.chartWrap('c-kat-' + uid, 660, 230)}
+      ${logPeriode.length >= 2 ? `
+        <h3 class="cetak-h3">Tren Mingguan</h3>
+        ${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}
+      ` : ''}
+      <h3 class="cetak-h3">Catatan &amp; Saran</h3>
+      ${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}
+      ${PrintEngine.ttd({
+        kiriLabel: 'Orang Tua / Wali',
+        kananLabel: 'Wali Kelas',
+        kananNama: wali.nama,
+        kananNip: wali.nip
+      })}
+    </div>`;
+  },
+
+  buildKelasPage(kelas, logPeriode, opts) {
+    const perSiswa = Stats.rekapPerSiswa(logPeriode).sort((a, b) => b.rataKes - a.rataKes);
+    const rata = Stats.rataPerKategori(logPeriode);
+    const norm = Stats.normArr(rata);
+    const rataKes = Stats.keseluruhan(norm);
+    const tren = Stats.tren(logPeriode);
+    let best = 0, worst = 0;
+    norm.forEach((v, i) => { if (v > norm[best]) best = i; if (v < norm[worst]) worst = i; });
+    const perlu = perSiswa.filter(s => s.rataKes < 2.5);
+    const wali = opts.waliKelas[kelas] || { nama: '', nip: '' };
+    const periodeText = opts.bulanAwal === opts.bulanAkhir
+      ? `${opts.bulanAwal} ${opts.tahun}`
+      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
+
+    return `<div class="cetak-page">
+      ${PrintEngine.kop(opts.identitas)}
+      <h2 class="cetak-judul">LAPORAN KEBIASAAN KELAS</h2>
+      <p class="cetak-sub">Periode ${periodeText}</p>
+      ${PrintEngine.identTable([
+        ['Kelas', kelas],
+        ['Jumlah Siswa', `${perSiswa.length} siswa`],
+        ['Periode', periodeText]
+      ])}
+      ${PrintEngine.summary([
+        { label: 'Siswa Terdata', value: perSiswa.length },
+        { label: 'Rata-rata Kelas', value: rataKes.toFixed(2) },
+        { label: 'Terbaik', value: KATEGORI[best].label, small: true },
+        { label: 'Perlu Perhatian', value: KATEGORI[worst].label, small: true }
+      ])}
+      <h3 class="cetak-h3">Rata-rata Skor Kelas per Kebiasaan</h3>
+      ${PrintEngine.skorTable(rata, norm)}
+      <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan Kelas</h3>
+      ${PrintEngine.chartWrap('c-kls-kat', 660, 230)}
+      ${perlu.length > 0 ? `
+        <h3 class="cetak-h3">Siswa yang Perlu Pendampingan</h3>
+        <table class="cetak-tbl">
+          <thead><tr><th style="text-align:left">Nama Siswa</th><th>Rata-rata</th></tr></thead>
+          <tbody>${perlu.map(s => `<tr><td class="l">${esc(s.nama)}</td><td class="c">${s.rataKes.toFixed(2)}</td></tr>`).join('')}</tbody>
+        </table>
+      ` : ''}
+      ${logPeriode.length >= 4 ? `
+        <h3 class="cetak-h3">Tren Mingguan Kelas</h3>
+        ${PrintEngine.chartWrap('c-kls-tren', 660, 180)}
+      ` : ''}
+      <h3 class="cetak-h3">Catatan</h3>
+      ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perSiswa.length)])}
+      ${PrintEngine.ttd({
+        kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
+        kiriNama: opts.identitas.kepsek || '',
+        kiriNip: opts.identitas.kepsekNip || '',
+        kananLabel: 'Wali Kelas',
+        kananNama: wali.nama,
+        kananNip: wali.nip
+      })}
+    </div>`;
+  },
+
+  buildSekolahPage(logPeriode, opts) {
+    const rekap = KELAS.map(kelas => {
+      const r = logPeriode.filter(x => x.Kelas === kelas);
+      if (!r.length) return { kelas, jumlah: 0, rata: null, norm: null, rataKes: null };
+      const perS = Stats.rekapPerSiswa(r);
+      const rata = {};
+      KATEGORI.forEach(k => {
+        rata[k.key] = perS.reduce((s, x) => s + x.rata[k.key], 0) / perS.length;
+      });
+      const norm = Stats.normArr(rata);
+      return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm) };
+    });
+
+    const terisi = rekap.filter(r => r.rataKes !== null);
+    const rataSek = terisi.length ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length : 0;
+    const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
+    const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
+    const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
+
+    const periodeText = opts.bulanAwal === opts.bulanAkhir
+      ? `${opts.bulanAwal} ${opts.tahun}`
+      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
+
+    return `<div class="cetak-page">
+      ${PrintEngine.kop(opts.identitas)}
+      <h2 class="cetak-judul">LAPORAN KEBIASAAN SELURUH SEKOLAH</h2>
+      <p class="cetak-sub">Periode ${periodeText}</p>
+      ${PrintEngine.identTable([
+        ['Periode', periodeText],
+        ['Jumlah Kelas', `${terisi.length} dari 6 kelas`],
+        ['Total Siswa Tercatat', `${totalSiswa} siswa`]
+      ])}
+      ${PrintEngine.summary([
+        { label: 'Kelas Tercatat', value: terisi.length + '/6' },
+        { label: 'Rata-rata', value: rataSek.toFixed(2) },
+        { label: 'Kelas Terbaik', value: best ? best.kelas : '-', small: true },
+        { label: 'Perlu Perhatian', value: worst ? worst.kelas : '-', small: true }
+      ])}
+      <h3 class="cetak-h3">Rekapitulasi per Kelas</h3>
+      <table class="cetak-tbl">
+        <thead><tr><th style="text-align:left">Kelas</th><th>Jml Siswa</th><th>Rata-rata</th></tr></thead>
+        <tbody>${rekap.map(r => `<tr>
+          <td class="l">${esc(r.kelas)}</td>
+          <td class="c">${r.jumlah || '-'}</td>
+          <td class="c">${r.rataKes !== null ? r.rataKes.toFixed(2) : '<i style="color:#94a3b8">Belum ada</i>'}</td>
+        </tr>`).join('')}</tbody>
+      </table>
+      <h3 class="cetak-h3">Grafik Perbandingan Antar Kelas</h3>
+      ${PrintEngine.chartWrap('c-sek-perbandingan', 660, 230)}
+      ${logPeriode.length >= 4 ? `
+        <h3 class="cetak-h3">Tren Mingguan Sekolah</h3>
+        ${PrintEngine.chartWrap('c-sek-tren', 660, 180)}
+      ` : ''}
+      <h3 class="cetak-h3">Catatan</h3>
+      ${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}
+      ${PrintEngine.ttd({
+        kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
+        kiriNama: opts.identitas.kepsek || '',
+        kiriNip: opts.identitas.kepsekNip || '',
+        kananLabel: 'Guru Kelas',
+        kananNama: '',
+        kananNip: ''
+      })}
+    </div>`;
+  },
+
+  /* ---- Vertical bar points helpers ---- */
+  pointsTrendMingguan(logPeriode) {
+    const g = new Map();
+    logPeriode.forEach(r => {
+      const k = `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`;
+      if (!g.has(k)) g.set(k, { tahun: r.Tahun, bulan: r.Bulan, minggu: num(r.Minggu_Ke), rows: [] });
+      g.get(k).rows.push(r);
+    });
+    const pts = [...g.values()].map(x => {
+      let total = 0;
+      x.rows.forEach(r => {
+        let rowT = 0;
+        KATEGORI.forEach(k => rowT += Stats.norm(num(r[k.key]), k.max));
+        total += rowT / KATEGORI.length;
+      });
+      return {
+        label: x.bulan.substring(0, 3) + ' M' + x.minggu,
+        tahun: x.tahun, bulan: x.bulan, minggu: x.minggu,
+        value: total / x.rows.length
+      };
+    });
+    pts.sort((a, b) => {
+      if (a.tahun !== b.tahun) return num(a.tahun) - num(b.tahun);
+      const ia = BULAN.indexOf(a.bulan), ib = BULAN.indexOf(b.bulan);
+      if (ia !== ib) return ia - ib;
+      return a.minggu - b.minggu;
+    });
+    return pts.slice(-8);
+  },
+
+  pointsTrendIndividu(logPeriode) {
+    return logPeriode.map((r, i) => {
+      let t = 0;
+      KATEGORI.forEach(k => t += Stats.norm(num(r[k.key]), k.max));
+      return { label: 'M' + (i + 1), value: t / KATEGORI.length };
+    });
+  },
+
+  /* ---- Main entry: render all pages to #printArea ---- */
+  async render(pages, opts) {
+    const shell = $('#previewShell');
+    shell.innerHTML = `
+      <div class="preview-toolbar no-print">
+        <div class="title">
+          <span class="material-symbols-outlined" style="color:var(--primary)">visibility</span>
+          <span>Preview — ${esc(opts.title)}</span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost btn-sm" id="btnPreviewClose"><span class="material-symbols-outlined" style="font-size:18px">close</span> Tutup</button>
+          <button class="btn btn-primary btn-sm" id="btnPreviewPrint"><span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF</button>
+        </div>
+      </div>
+      <div class="preview-scroll">
+        <div id="printArea">${pages.join('')}</div>
+      </div>
+    `;
+    shell.classList.add('show');
+    shell.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Init charts
+    PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
+    PrintEngine._charts = [];
+
+    // Await chart load
+    await ensureChart();
+
+    // Render charts sequential (biar tidak blocking terlalu lama)
+    for (const task of opts.chartTasks) {
+      try { await task(); } catch (e) { console.warn('Chart fail', e); }
+    }
+
+    // Bind buttons
+    $('#btnPreviewClose').onclick = () => PrintEngine.close();
+    $('#btnPreviewPrint').onclick = () => {
+      // Pastikan font & chart siap
+      document.fonts && document.fonts.ready && document.fonts.ready.then(() => window.print());
+      setTimeout(() => window.print(), 50);
+    };
+  },
+
+  close() {
+    const shell = $('#previewShell');
+    shell.classList.remove('show');
+    shell.setAttribute('aria-hidden', 'true');
+    shell.innerHTML = '';
+    document.body.style.overflow = '';
+    PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
+    PrintEngine._charts = [];
+  }
+};
+
+/* ====================================================================
+ *                              APP
+ * ==================================================================== */
 class App {
   constructor() {
     this.root = $('#app');
-    this.token = sessionStorage.getItem(SSKeys.TOKEN);
+    this.token = sessionStorage.getItem(CFG.LS_TOKEN);
+    this.boot = null;       // { v, identitas, waliKelas, master }
     this.tabs = {};
-    this._currentTab = 'input';
+    this.current = 'input';
+    this._bootPromise = null;
   }
 
   async init() {
     if (this.token) {
-      this._renderShell();
-      this._verifySession();
+      this.renderShell();
+      this.verifySession();
+      this.loadBootstrap();
     } else {
-      this._renderLogin();
+      this.renderLogin();
     }
-    this._handleDeepLink();
   }
 
-  _handleDeepLink() {
-    let tab = null;
-    try { tab = new URLSearchParams(location.search).get('tab'); } catch (_) {}
-    if (!tab || !['input','dashkelas','dashsekolah'].includes(tab)) return;
-    let attempts = 0;
-    const tryClick = () => {
-      attempts++;
-      const btn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
-      if (btn) { btn.click(); return; }
-      if (attempts < 30) setTimeout(tryClick, 100);
-    };
-    setTimeout(tryClick, 120);
-  }
-
-  async _verifySession() {
-    const lastVerified = parseInt(sessionStorage.getItem(SSKeys.TOKEN_AT) || '0', 10);
-    if (Date.now() - lastVerified < 5 * 60 * 1000) return;
-    for (let attempt = 0; attempt < 2; attempt++) {
+  /* ---------- Bootstrap loader ---------- */
+  async loadBootstrap(force = false) {
+    if (this._bootPromise && !force) return this._bootPromise;
+    this._bootPromise = (async () => {
+      // Coba cache dulu
+      const cached = !force ? BootCache.read() : null;
+      if (cached && cached.master && cached.identitas) {
+        this.boot = cached;
+        this.onBootstrapReady();
+        // Background refresh
+        this._bgRefresh();
+        return;
+      }
+      // Fetch fresh
       try {
-        const ok = await Api.verifyToken(this.token);
-        if (ok) {
-          sessionStorage.setItem(SSKeys.TOKEN_AT, String(Date.now()));
-          return;
-        } else {
-          sessionStorage.removeItem(SSKeys.TOKEN);
-          sessionStorage.removeItem(SSKeys.TOKEN_AT);
-          location.reload();
-          return;
+        const res = await Api.bootstrap();
+        if (res.notModified && this.boot) return;
+        this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+        BootCache.write(this.boot);
+        this.onBootstrapReady();
+      } catch (e) {
+        if (e.message !== 'Unauthorized') {
+          toast('Gagal memuat data. Coba lagi.', 'error');
         }
-      } catch (_) {}
-      if (attempt === 0) await sleep(1200);
+      } finally {
+        this._bootPromise = null;
+      }
+    })();
+    return this._bootPromise;
+  }
+
+  async _bgRefresh() {
+    try {
+      const res = await Api.bootstrap(LS.get(CFG.LS_VER) || '');
+      if (res.notModified) return;
+      this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+      BootCache.write(this.boot);
+      LogsCache.invalidateAll();
+    } catch {}
+  }
+
+  onBootstrapReady() {
+    // Notify tabs yang butuh data
+    Object.values(this.tabs).forEach(t => t.onBootReady && t.onBootReady(this.boot));
+  }
+
+  /* ---------- Session verify ---------- */
+  async verifySession() {
+    const ok = await Api.verify(this.token);
+    if (!ok) {
+      sessionStorage.removeItem(CFG.LS_TOKEN);
+      BootCache.invalidate();
+      location.reload();
     }
   }
 
-  _renderLogin() {
-    const uid = 'k_' + Math.random().toString(36).slice(2, 10);
+  /* ---------- Login ---------- */
+  renderLogin() {
     this.root.innerHTML = `
-      <div class="login-wrapper">
+      <div class="login-wrap">
         <div class="logo-box"><span class="material-symbols-outlined">checklist</span></div>
         <h2 class="login-title">7 Kebiasaan Anak</h2>
-        <p class="app-subtitle">Sistem Penilaian Mingguan<br>SD Negeri 1 Godegan</p>
-        <input type="password"
-               id="pinInput"
-               class="input-modern"
-               name="${uid}_pin"
-               placeholder="PIN Akses Guru"
-               autocomplete="new-password"
-               autocorrect="off"
-               autocapitalize="off"
-               spellcheck="false"
-               inputmode="numeric"
-               data-form-type="other"
-               readonly>
-        <button class="btn-modern" id="btnLogin" type="button" style="max-width:340px">
+        <p class="login-sub">Sistem Penilaian Mingguan<br>SD Negeri 1 Godegan</p>
+        <input type="password" id="pinInput" class="input-pin" placeholder="PIN Akses Guru"
+          inputmode="numeric" autocomplete="new-password" readonly />
+        <button class="btn btn-primary" id="btnLogin" style="max-width:340px">
           <span>Masuk Aplikasi</span>
           <span class="material-symbols-outlined" style="font-size:18px">login</span>
         </button>
-        <div class="login-desc-box">
+        <div class="login-info">
           <h3><span class="material-symbols-outlined" style="font-size:16px">info</span> Tentang Aplikasi</h3>
-          <p>Sistem pencatatan kebiasaan mingguan siswa — meliputi bangun pagi, ibadah, olahraga, makan sehat, belajar, bersosialisasi, dan tidur.</p>
+          <p>Sistem pencatatan kebiasaan mingguan siswa — bangun pagi, ibadah, olahraga, makan sehat, belajar, bersosialisasi, dan tidur.</p>
         </div>
       </div>`;
 
     const inp = $('#pinInput');
-    const unlock = () => { if (inp.hasAttribute('readonly')) inp.removeAttribute('readonly'); };
     ['pointerdown','touchstart','mousedown','keydown'].forEach(ev =>
-      inp.addEventListener(ev, unlock, { once: true })
-    );
-    const clearIfAutofilled = () => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; };
-    setTimeout(clearIfAutofilled, 80);
-    setTimeout(clearIfAutofilled, 300);
-    setTimeout(clearIfAutofilled, 800);
+      inp.addEventListener(ev, () => inp.removeAttribute('readonly'), { once: true }));
+    setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 100);
+    setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 500);
 
-    $('#btnLogin').onclick = () => this._handleLogin();
-    inp.addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
+    $('#btnLogin').onclick = () => this.handleLogin();
+    inp.addEventListener('keypress', e => { if (e.key === 'Enter') this.handleLogin(); });
   }
 
-  async _handleLogin() {
+  async handleLogin() {
     const inp = $('#pinInput');
     const pin = inp.value.trim();
-    if (!pin) return showToast('PIN akses tidak boleh kosong.', 'error');
+    if (!pin) return toast('PIN tidak boleh kosong.', 'error');
     const btn = $('#btnLogin');
-    btn.classList.add('btn-loading');
     btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span><span>Memeriksa...</span>`;
-    const valid = await Api.verifyToken(pin);
-    btn.classList.remove('btn-loading');
+    btn.innerHTML = '<span class="spinner"></span><span>Memeriksa...</span>';
+    const ok = await Api.verify(pin);
     btn.disabled = false;
-    btn.innerHTML = `<span>Masuk Aplikasi</span><span class="material-symbols-outlined" style="font-size:18px">login</span>`;
-    if (valid) {
-      sessionStorage.setItem(SSKeys.TOKEN, pin);
-      sessionStorage.setItem(SSKeys.TOKEN_AT, String(Date.now()));
+    btn.innerHTML = '<span>Masuk Aplikasi</span><span class="material-symbols-outlined" style="font-size:18px">login</span>';
+    if (ok) {
+      sessionStorage.setItem(CFG.LS_TOKEN, pin);
       this.token = pin;
-      ClientCache.invalidateAll();
-      this._renderShell();
-      showToast('Berhasil masuk!', 'success');
+      BootCache.invalidate();
+      LogsCache.invalidateAll();
+      this.renderShell();
+      this.loadBootstrap();
+      toast('Berhasil masuk!', 'success');
     } else {
-      showToast('PIN salah atau tidak aktif.', 'error');
+      toast('PIN salah atau tidak aktif.', 'error');
       inp.value = '';
       inp.focus();
     }
   }
 
-  _renderShell() {
+  /* ---------- Shell ---------- */
+  renderShell() {
     this.root.innerHTML = `
       <header class="app-header">
         <h1><span class="material-symbols-outlined">school</span> 7 KEBIASAAN</h1>
-        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
-          <span class="material-symbols-outlined">logout</span>
-        </button>
+        <button class="btn-icon" id="btnLogout" title="Keluar"><span class="material-symbols-outlined">logout</span></button>
       </header>
-      <main class="main-content">
-        <div id="tabInput" class="tab-pane active"></div>
-        <div id="tabDashkelas" class="tab-pane"></div>
-        <div id="tabDashsekolah" class="tab-pane"></div>
+      <main class="main">
+        <div id="tab-input" class="tab-pane active"></div>
+        <div id="tab-dashkelas" class="tab-pane"></div>
+        <div id="tab-dashsekolah" class="tab-pane"></div>
+        <div id="tab-cetak" class="tab-pane"></div>
       </main>
       <nav class="bottom-nav">
         <button class="nav-item active" data-tab="input"><span class="material-symbols-outlined">edit_square</span><span>Input</span></button>
-        <button class="nav-item" data-tab="dashkelas"><span class="material-symbols-outlined">bar_chart</span><span>Dash Kelas</span></button>
-        <button class="nav-item" data-tab="dashsekolah"><span class="material-symbols-outlined">domain</span><span>Dash Sekolah</span></button>
+        <button class="nav-item" data-tab="dashkelas"><span class="material-symbols-outlined">bar_chart</span><span>Dash</span></button>
+        <button class="nav-item" data-tab="dashsekolah"><span class="material-symbols-outlined">domain</span><span>Sekolah</span></button>
+        <button class="nav-item" data-tab="cetak"><span class="material-symbols-outlined">print</span><span>Cetak</span></button>
       </nav>`;
 
     $$('.nav-item').forEach(btn => {
-      btn.onclick = () => {
-        const tab = btn.dataset.tab;
-        if (tab === this._currentTab) return;
-        const prev = this.tabs[this._currentTab];
-        if (prev?._dispose) prev._dispose();
-        $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
-        $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${tab[0].toUpperCase()+tab.slice(1)}`));
-        this._currentTab = tab;
-        if (tab === 'input') this.tabs.input?.init();
-        if (tab === 'dashkelas') this.tabs.dashKelas?.init();
-        if (tab === 'dashsekolah') this.tabs.dashSekolah?.init();
-      };
+      btn.onclick = () => this.switchTab(btn.dataset.tab, btn);
     });
-
     $('#btnLogout').onclick = () => {
-      sessionStorage.removeItem(SSKeys.TOKEN);
-      sessionStorage.removeItem(SSKeys.TOKEN_AT);
-      try { localStorage.removeItem(LSKeys.MASTER); } catch (_) {}
-      ClientCache.invalidateAll();
+      sessionStorage.removeItem(CFG.LS_TOKEN);
+      BootCache.invalidate();
+      LogsCache.invalidateAll();
       location.reload();
     };
 
-    this.tabs.input       = new InputTab($('#tabInput'));
-    this.tabs.dashKelas   = new DashKelasTab($('#tabDashkelas'));
-    this.tabs.dashSekolah = new DashSekolahTab($('#tabDashsekolah'));
+    this.tabs.input = new InputTab($('#tab-input'), this);
+    this.tabs.dashKelas = new DashKelasTab($('#tab-dashkelas'), this);
+    this.tabs.dashSekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
+    this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
     this.tabs.input.init();
+    if (this.boot) this.onBootstrapReady();
+  }
+
+  switchTab(name, btn) {
+    if (name === this.current) return;
+    this.current = name;
+    $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
+    $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+    const t = this.tabs[name];
+    if (t) t.init();
   }
 }
 
-/* ==================== INPUT TAB ==================== */
-class InputTab {
-  constructor(el) {
-    this.el = el;
-    this.master = [];
-    this.riwayatData = [];
+/* ====================================================================
+ *                        BASE TAB CLASS
+ * ==================================================================== */
+class BaseTab {
+  constructor(el, app) { this.el = el; this.app = app; this._init = false; }
+  init() { if (this._init) return; this._init = true; this.render(); }
+  onBootReady(boot) { /* override */ }
+  render() {}
+}
+
+/* ====================================================================
+ *                            INPUT TAB
+ * ==================================================================== */
+class InputTab extends BaseTab {
+  constructor(el, app) {
+    super(el, app);
+    this.riwayat = [];
+    this.setup = { tahun: '2026', bulan: fmtBulan(todayM()), minggu: 1, kelas: '' };
     this._saving = false;
-    this._init = false;
-    this._guard = new SeqGuard();
+    this._guard = null;
   }
 
-  async init() {
-    if (this._init) return;
-    this._init = true;
-    const cached = loadMasterFromLS();
-    if (cached) {
-      this.master = cached;
-      this._renderLayer1();
-      this._refreshMasterBg();
-    } else {
-      await this._fetchMaster();
+  onBootReady() {
+    if (this._init && this.el.querySelector('#selKelas')) {
+      // Master berubah — refresh kelas options
+      this._refreshKelasOptions();
     }
   }
 
-  _dispose() { this._guard.abort(); }
+  render() {
+    const lastSetup = LS.get(CFG.LS_SETUP) || {};
+    const s = { ...this.setup, ...lastSetup };
+    this.setup = s;
 
-  async _fetchMaster() {
-    this.el.innerHTML = `
-      <div class="skel-card">
-        <div class="skeleton skel-line" style="width:50%;height:20px;margin-bottom:1rem"></div>
-        <div class="skeleton skel-line" style="width:100%"></div>
-        <div class="skeleton skel-line" style="width:100%"></div>
-        <div class="skeleton skel-line" style="width:60%"></div>
-      </div>`;
-    try {
-      const res = await Api.getMasterSiswa({ retries: 1 });
-      if (Array.isArray(res)) {
-        this.master = res;
-        saveMasterToLS(res);
-        this._renderLayer1();
-      } else {
-        throw new Error(res?.error || 'Gagal memuat data siswa');
-      }
-    } catch (err) {
-      if (err.message === 'Unauthorized') return;
-      this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">cloud_off</span><p>Tidak dapat memuat data siswa. Periksa koneksi internet lalu coba lagi.</p><button class="btn-modern" id="btnRetryMaster" style="max-width:200px"><span class="material-symbols-outlined">refresh</span>Coba Lagi</button></div>`;
-      const btn = $('#btnRetryMaster');
-      if (btn) btn.onclick = () => { this._init = false; this.init(); };
-    }
-  }
-
-  async _refreshMasterBg() {
-    try {
-      const res = await Api.getMasterSiswa({ cache: false, retries: 0 });
-      if (Array.isArray(res) && res.length) {
-        this.master = res;
-        saveMasterToLS(res);
-      }
-    } catch (_) {}
-  }
-
-  _renderLayer1() {
-    const lastSetup = this._loadLastSetup();
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">edit_note</span> Input Jurnal Mingguan</h2>
-      <div class="card">
+      <div class="card" id="cardSetup">
         <div class="card-title">Pengaturan Jurnal</div>
         <div class="form-group">
-          <label>Tahun Penilaian</label>
-          <select id="selTahun" class="form-select">${buatOpsiTahun(lastSetup.tahun || '2026')}</select>
+          <label>Tahun</label>
+          <select id="selTahun" class="form-select">${TAHUN.map(t => `<option value="${t}"${t === s.tahun ? ' selected' : ''}>${t}</option>`).join('')}</select>
         </div>
         <div class="form-group">
           <label>Bulan</label>
-          <select id="selBulan" class="form-select">${buatOpsiBulan(lastSetup.bulan || DAFTAR_BULAN[new Date().getMonth()])}</select>
+          <select id="selBulan" class="form-select">${BULAN.map(b => `<option value="${b}"${b === s.bulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
         </div>
         <div class="form-group">
           <label>Minggu Ke-</label>
           <select id="selMinggu" class="form-select">
-            ${[1,2,3,4,5].map(n => `<option value="${n}"${String(lastSetup.minggu) === String(n) ? ' selected' : ''}>Minggu ${n}</option>`).join('')}
+            ${[1,2,3,4,5].map(n => `<option value="${n}"${String(s.minggu) === String(n) ? ' selected' : ''}>Minggu ${n}</option>`).join('')}
           </select>
         </div>
         <div class="form-group">
           <label style="color:var(--primary)">Pilih Kelas</label>
           <select id="selKelas" class="form-select highlight">
-            <option value="" disabled ${lastSetup.kelas ? '' : 'selected'}>-- Tentukan Kelas --</option>
-            ${DAFTAR_KELAS.map(k => `<option value="${k}"${lastSetup.kelas === k ? ' selected' : ''}>${k}</option>`).join('')}
+            <option value="" disabled ${s.kelas ? '' : 'selected'}>-- Tentukan Kelas --</option>
+            ${KELAS.map(k => `<option value="${k}"${s.kelas === k ? ' selected' : ''}>${k}</option>`).join('')}
           </select>
         </div>
-        <button id="btnLanjut" class="btn-modern" style="margin-top:1rem" ${lastSetup.kelas ? '' : 'disabled'}>
+        <button id="btnLanjut" class="btn btn-primary" style="margin-top:1rem" ${s.kelas ? '' : 'disabled'}>
           Buka Tabel Input <span class="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
       <div id="layer2"></div>`;
 
-    $('#selKelas').addEventListener('change', () => {
-      $('#btnLanjut').disabled = false;
-    });
-
-    $('#btnLanjut').addEventListener('click', (e) => this._handleLanjut(e.currentTarget));
+    $('#selKelas').addEventListener('change', () => { $('#btnLanjut').disabled = false; });
+    $('#btnLanjut').addEventListener('click', e => this._lanjut(e.currentTarget));
   }
 
-  _loadLastSetup() {
-    try { return JSON.parse(localStorage.getItem(LSKeys.LAST_SETUP) || '{}'); } catch (_) { return {}; }
-  }
-  _saveLastSetup(data) {
-    try { localStorage.setItem(LSKeys.LAST_SETUP, JSON.stringify(data)); } catch (_) {}
+  _refreshKelasOptions() {
+    // no-op: options statis
   }
 
-  async _handleLanjut(btn) {
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span><span>Memeriksa riwayat...</span>`;
-
+  async _lanjut(btn) {
     const tahun = $('#selTahun').value;
     const bulan = $('#selBulan').value;
     const minggu = $('#selMinggu').value;
     const kelas = $('#selKelas').value;
 
-    this._saveLastSetup({ tahun, bulan, minggu, kelas });
+    LS.set(CFG.LS_SETUP, { tahun, bulan, minggu, kelas });
 
-    this._guard.abort();
-    const { seq, signal } = this._guard.next();
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span><span>Memeriksa riwayat...</span>';
 
     try {
-      const riwayat = await Api.getLogs({ tahun, bulan, minggu, kelas }, { signal, retries: 1, cache: false });
-      if (!this._guard.isCurrent(seq)) return;
-      this.riwayatData = dedupeLog(riwayat || []);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      this.riwayatData = [];
+      const filter = { tahun, bulanAwal: bulan, bulanAkhir: bulan, kelas, minggu };
+      let logs = LogsCache.read(filter);
+      if (!logs) {
+        const res = await Api.logs(filter);
+        logs = res.logs || [];
+        LogsCache.write(filter, logs);
+      }
+      this.riwayat = Stats.dedup(logs);
+      this._renderTable({ tahun, bulan, minggu, kelas });
+    } catch (e) {
+      if (e.message !== 'Unauthorized') toast(e.message || 'Gagal memuat riwayat.', 'error');
+    } finally {
+      btn.innerHTML = orig;
+      btn.disabled = false;
     }
-    btn.innerHTML = orig;
-    btn.disabled = false;
-    this._renderLayer2({ tahun, bulan, minggu, kelas });
   }
 
-  _renderLayer2({ tahun, bulan, minggu, kelas }) {
-    const siswaKelas = this.master.filter(s => s.Kelas === kelas);
-    if (!siswaKelas.length) {
-      showToast(`Belum ada siswa terdaftar di ${kelas}.`, 'error');
-      return;
-    }
-    const layer1 = this.el.querySelector('.card');
-    if (layer1) layer1.style.display = 'none';
+  _renderTable({ tahun, bulan, minggu, kelas }) {
+    const master = this.app.boot?.master || [];
+    const siswaKelas = master.filter(s => s.Kelas === kelas);
+    if (!siswaKelas.length) return toast(`Belum ada siswa di ${kelas}.`, 'error');
 
-    const rowsHtml = siswaKelas.map(siswa => {
-      const lama = this.riwayatData.find(r => String(r.NIS) === String(siswa.NIS));
-      const getVal = (key) => (lama && lama[key] !== undefined && lama[key] !== '') ? lama[key] : '';
-      const cell = (key, cls = '') => `<td><input type="text" class="input-cell ${cls}" data-key="${key}" value="${getVal(key)}" inputmode="numeric" pattern="[0-9]*" maxlength="1" enterkeyhint="next" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></td>`;
-      return `<tr data-nis="${escapeHtml(siswa.NIS)}">
-        <td class="sticky-col">
-          <div style="font-weight:700;font-size:.85rem">${escapeHtml(siswa.Nama_Siswa)}</div>
-          <div style="font-size:.68rem;color:var(--text-muted)">NIS: ${escapeHtml(siswa.NIS)}</div>
+    const card = $('#cardSetup');
+    if (card) card.style.display = 'none';
+
+    const findExisting = nis => this.riwayat.find(r => str(r.NIS) === str(nis));
+    const cell = (key, cls = '') => {
+      const v = findExisting(nis).?.[key];
+      return `<td><input type="text" class="input-cell ${cls}" data-key="${key}" value="${v ?? ''}" inputmode="numeric" maxlength="1" enterkeyhint="next" autocomplete="off"></td>`;
+    };
+
+    // Gunakan function trick: evaluasi per baris
+    const rowHtml = siswa => {
+      const ex = findExisting(siswa.NIS) || {};
+      const cv = key => ex[key] ?? '';
+      return `<tr data-nis="${esc(siswa.NIS)}">
+        <td class="sticky-l">
+          <div style="font-weight:700;font-size:.85rem">${esc(siswa.Nama_Siswa)}</div>
+          <div style="font-size:.68rem;color:var(--muted)">NIS: ${esc(siswa.NIS)}</div>
         </td>
-        ${cell('Skor_Bangun', 'val-skala')}
-        ${cell('Skor_Subuh', 'input-salat val-salat')}
-        ${cell('Skor_Dzuhur', 'input-salat val-salat')}
-        ${cell('Skor_Ashar', 'input-salat val-salat')}
-        ${cell('Skor_Maghrib', 'input-salat val-salat')}
-        ${cell('Skor_Isya', 'input-salat val-salat')}
-        ${cell('Skor_Mengaji', 'val-skala')}
-        ${cell('Skor_Olahraga', 'val-skala')}
-        ${cell('Skor_Makan', 'val-skala')}
-        ${cell('Skor_Belajar', 'val-skala')}
-        ${cell('Skor_Sosial', 'val-skala')}
-        ${cell('Skor_Tidur', 'val-skala')}
-        <td><button class="btn-icon btn-save-row" style="background:var(--primary-light);color:var(--primary)" title="Simpan baris"><span class="material-symbols-outlined">save</span></button></td>
+        <td><input class="input-cell" data-key="Skor_Bangun" value="${cv('Skor_Bangun')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell salat" data-key="Skor_Subuh" value="${cv('Skor_Subuh')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell salat" data-key="Skor_Dzuhur" value="${cv('Skor_Dzuhur')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell salat" data-key="Skor_Ashar" value="${cv('Skor_Ashar')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell salat" data-key="Skor_Maghrib" value="${cv('Skor_Maghrib')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell salat" data-key="Skor_Isya" value="${cv('Skor_Isya')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Mengaji" value="${cv('Skor_Mengaji')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Olahraga" value="${cv('Skor_Olahraga')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Makan" value="${cv('Skor_Makan')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Belajar" value="${cv('Skor_Belajar')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Sosial" value="${cv('Skor_Sosial')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Tidur" value="${cv('Skor_Tidur')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><button class="btn-icon btn-save-row" style="background:var(--primary-l);color:var(--primary)"><span class="material-symbols-outlined">save</span></button></td>
       </tr>`;
-    }).join('');
+    };
 
     const layer2 = $('#layer2');
     layer2.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:.5rem">
-        <button class="btn-back" id="btnKembali"><span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> Kembali</button>
+        <button class="btn btn-ghost btn-sm" id="btnKembali"><span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> Kembali</button>
         <div style="text-align:right;min-width:0">
-          <div style="font-size:.95rem;font-weight:800;color:var(--primary);white-space:nowrap">${escapeHtml(kelas)}</div>
-          <div style="font-size:.72rem;color:var(--text-muted)">${escapeHtml(bulan)} ${escapeHtml(tahun)} • Pekan ${escapeHtml(minggu)}</div>
+          <div style="font-size:.95rem;font-weight:800;color:var(--primary);white-space:nowrap">${esc(kelas)}</div>
+          <div style="font-size:.72rem;color:var(--muted)">${esc(bulan)} ${esc(tahun)} • Pekan ${esc(minggu)}</div>
         </div>
       </div>
-
-      <div class="legend-box">
+      <div class="legend">
         <strong><span class="material-symbols-outlined" style="font-size:16px">info</span> Keterangan Skor</strong>
         <div style="overflow-x:auto">
-          <table class="legend-table">
-            <thead>
-              <tr>
-                <th>Aspek</th>
-                <th style="text-align:center">Skor 4</th>
-                <th style="text-align:center">Skor 3</th>
-                <th style="text-align:center">Skor 2</th>
-                <th style="text-align:center">Skor 1</th>
-              </tr>
-            </thead>
-            <tbody style="color:var(--text-muted)">
+          <table>
+            <thead><tr><th>Aspek</th><th style="text-align:center">4</th><th style="text-align:center">3</th><th style="text-align:center">2</th><th style="text-align:center">1</th></tr></thead>
+            <tbody style="color:var(--muted)">
               <tr><td style="font-weight:600;color:var(--text)">Bangun Pagi</td><td>Sebelum 05.00</td><td>05.00-05.30</td><td>05.30-06.00</td><td>Setelah 06.00</td></tr>
               <tr><td style="font-weight:600;color:var(--text)">Cepat Tidur</td><td>Sebelum 21.00</td><td>21.00-21.30</td><td>21.30-22.00</td><td>Setelah 22.00</td></tr>
-              <tr><td style="font-weight:600;color:var(--text)">Aktivitas Lainnya <span style="font-weight:400;font-size:.66rem">(Sunah, Olahraga, Makan, Belajar, Sosial)</span></td><td>Setiap Hari</td><td>4-6×/pekan</td><td>1-3×/pekan</td><td>Tidak Pernah</td></tr>
+              <tr><td style="font-weight:600;color:var(--text)">Aktivitas Lainnya</td><td>Setiap Hari</td><td>4-6×/pekan</td><td>1-3×/pekan</td><td>Tidak Pernah</td></tr>
               <tr><td style="font-weight:600;color:var(--text)">Salat 5 Waktu</td><td colspan="4" style="text-align:center">Angka 0-7 = jumlah hari terlaksana dalam seminggu</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-
-      <div class="table-responsive">
-        <table class="data-table">
+      <div class="table-wrap">
+        <table class="data">
           <thead>
             <tr>
-              <th class="sticky-col" style="min-width:180px">Nama Siswa</th>
+              <th class="sticky-l" style="min-width:180px">Nama Siswa</th>
               <th>Bangun</th>
               <th style="color:var(--primary)">Subuh</th>
               <th style="color:var(--primary)">Dzuhur</th>
@@ -1014,166 +1424,129 @@ class InputTab {
               <th>Aksi</th>
             </tr>
           </thead>
-          <tbody id="tableBody">${rowsHtml}</tbody>
+          <tbody>${siswaKelas.map(rowHtml).join('')}</tbody>
         </table>
       </div>
-
-      <button id="btnSubmitBatch" class="btn-modern btn-success" style="margin-top:.5rem">
+      <button id="btnSubmitBatch" class="btn btn-success" style="margin-top:.5rem">
         <span class="material-symbols-outlined">cloud_upload</span> SIMPAN SEMUA DATA
       </button>`;
 
     $('#btnKembali').onclick = () => {
       layer2.innerHTML = '';
-      if (layer1) layer1.style.display = 'block';
+      if (card) card.style.display = 'block';
     };
 
-    this._attachInputValidation();
-    this._attachSaveEvents();
+    this._attachInput(tahun, bulan, minggu, kelas);
   }
 
-  _attachInputValidation() {
-    const tbody = $('#tableBody');
+  _attachInput(tahun, bulan, minggu, kelas) {
+    const tbody = this.el.querySelector('#layer2 tbody');
     if (!tbody) return;
 
-    tbody.addEventListener('input', (e) => {
+    tbody.addEventListener('input', e => {
       const inp = e.target;
       if (!inp.classList.contains('input-cell')) return;
-
-      let val = String(inp.value).replace(/[^0-9]/g, '');
-      if (val.length > 1) val = val.slice(-1);
-      inp.value = val;
-
-      const prev = inp.dataset.prev || '';
-      const isNew = prev === '' && val !== '';
-      inp.dataset.prev = val;
-
-      if (val === '') { inp.classList.remove('invalid'); return; }
-
-      const isSalat = inp.classList.contains('val-salat');
-      const min = isSalat ? 0 : 1;
-      const max = isSalat ? 7 : 4;
-      const num = parseInt(val, 10);
-      if (num > max) { inp.value = String(max); inp.dataset.prev = String(max); }
-      else if (num < min) { inp.value = String(min); inp.dataset.prev = String(min); }
-
+      let v = str(inp.value).replace(/[^0-9]/g, '');
+      if (v.length > 1) v = v.slice(-1);
+      inp.value = v;
       inp.classList.remove('invalid');
 
-      if (isNew) {
-        clearTimeout(inp._advTimer);
-        inp._advTimer = setTimeout(() => this._focusNext(inp), 180);
+      if (v !== '') {
+        const isSalat = inp.classList.contains('salat');
+        const max = isSalat ? 7 : 4;
+        const min = isSalat ? 0 : 1;
+        const n = parseInt(v, 10);
+        if (n > max) { inp.value = String(max); }
+        else if (n < min && !isSalat) { inp.value = String(min); }
       }
     });
 
-    tbody.addEventListener('keydown', (e) => {
+    tbody.addEventListener('keydown', e => {
       const inp = e.target;
       if (!inp.classList.contains('input-cell')) return;
-      if (e.key === 'Backspace' && inp.value === '') {
-        e.preventDefault();
-        this._focusPrev(inp);
-        return;
-      }
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        this._focusNext(inp);
-        return;
-      }
+      if (e.key === 'Backspace' && inp.value === '') { e.preventDefault(); this._focusPrev(inp); }
+      else if (e.key === 'Enter') { e.preventDefault(); this._focusNext(inp); }
     });
 
-    tbody.addEventListener('focus', (e) => {
-      const inp = e.target;
-      if (inp.classList.contains('input-cell')) inp.dataset.prev = inp.value || '';
+    tbody.addEventListener('blur', e => {
+      if (e.target.classList.contains('input-cell') && e.target.value === '') {
+        e.target.classList.add('invalid');
+      }
     }, true);
 
-    tbody.addEventListener('blur', (e) => {
-      const inp = e.target;
-      if (inp.classList.contains('input-cell') && inp.value === '') inp.classList.add('invalid');
-    }, true);
+    $$('#layer2 .btn-save-row').forEach(btn => {
+      btn.onclick = e => {
+        const tr = e.currentTarget.closest('tr');
+        this._save([tr], e.currentTarget, false, { tahun, bulan, minggu, kelas });
+      };
+    });
+
+    $('#btnSubmitBatch').onclick = e => {
+      const rows = $$('#layer2 tbody tr:not(.row-saved)');
+      if (!rows.length) return toast('Semua data sudah tersimpan.', 'success');
+      this._save(rows, e.currentTarget, true, { tahun, bulan, minggu, kelas });
+    };
   }
 
   _focusNext(inp) {
-    const all = $$('#tableBody .input-cell').filter(el => !el.closest('tr').classList.contains('row-success'));
-    const idx = all.indexOf(inp);
-    if (idx < 0) return;
-    if (idx < all.length - 1) {
-      const next = all[idx + 1];
-      try { next.focus({ preventScroll: false }); if (next.select) next.select(); next.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' }); }
-      catch (_) { next.focus(); }
-    } else {
-      inp.blur();
-    }
+    const all = $$('#layer2 .input-cell').filter(el => !el.closest('tr').classList.contains('row-saved'));
+    const i = all.indexOf(inp);
+    if (i >= 0 && i < all.length - 1) {
+      const n = all[i + 1];
+      try { n.focus(); n.select?.(); n.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { n.focus(); }
+    } else inp.blur();
   }
 
   _focusPrev(inp) {
-    const all = $$('#tableBody .input-cell').filter(el => !el.closest('tr').classList.contains('row-success'));
-    const idx = all.indexOf(inp);
-    if (idx > 0) {
-      const prev = all[idx - 1];
-      try { prev.focus({ preventScroll: false }); if (prev.select) prev.select(); prev.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' }); }
-      catch (_) { prev.focus(); }
+    const all = $$('#layer2 .input-cell').filter(el => !el.closest('tr').classList.contains('row-saved'));
+    const i = all.indexOf(inp);
+    if (i > 0) {
+      const p = all[i - 1];
+      try { p.focus(); p.select?.(); p.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { p.focus(); }
     }
   }
 
-  _attachSaveEvents() {
-    $$('.btn-save-row').forEach(btn => {
-      btn.onclick = (e) => {
-        const tr = e.currentTarget.closest('tr');
-        this._simpan([tr], e.currentTarget, false);
-      };
-    });
-    $('#btnSubmitBatch').onclick = (e) => {
-      const rows = $$('#tableBody tr:not(.row-success)');
-      if (!rows.length) return showToast('Semua data sudah tersimpan.', 'success');
-      this._simpan(rows, e.currentTarget, true);
-    };
-  }
-
-  async _simpan(rowEls, btnEl, isBatch) {
+  async _save(rowEls, btnEl, isBatch, ctx) {
     if (this._saving) return;
-    const tahun = $('#selTahun')?.value;
-    const bulan = $('#selBulan')?.value;
-    const minggu = $('#selMinggu')?.value;
-    const kelas = $('#selKelas')?.value;
-    if (!tahun || !bulan || !minggu || !kelas) return showToast('Pengaturan jurnal tidak lengkap.', 'error');
-
+    this._saving = true;
+    const { tahun, bulan, minggu, kelas } = ctx;
+    const master = this.app.boot?.master || [];
     const payload = [];
     let valid = true;
+
     rowEls.forEach(tr => {
       const nis = tr.getAttribute('data-nis');
-      const siswa = this.master.find(s => s.NIS === nis);
+      const siswa = master.find(s => str(s.NIS) === str(nis));
       if (!siswa) { valid = false; return; }
       const row = { Tahun: tahun, Bulan: bulan, Minggu_Ke: minggu, Kelas: kelas, NIS: nis, Nama_Siswa: siswa.Nama_Siswa };
       tr.querySelectorAll('.input-cell').forEach(inp => {
-        const key = inp.dataset.key;
+        const k = inp.dataset.key;
         if (inp.value === '') { inp.classList.add('invalid'); valid = false; return; }
-        const val = parseInt(inp.value, 10);
-        if (isNaN(val)) { inp.classList.add('invalid'); valid = false; return; }
-        row[key] = val;
-        inp.classList.remove('invalid');
+        row[k] = parseInt(inp.value, 10);
       });
       payload.push(row);
     });
 
-    if (!valid) return showToast('Masih ada kolom kosong / tidak valid.', 'error');
+    if (!valid) {
+      this._saving = false;
+      return toast('Masih ada kolom kosong / tidak valid.', 'error');
+    }
 
-    this._saving = true;
     const orig = btnEl.innerHTML;
     btnEl.disabled = true;
-    btnEl.innerHTML = `<span class="spinner"></span>`;
+    btnEl.innerHTML = '<span class="spinner"></span>';
 
     try {
-      const res = await Api.simpanJurnal(payload, { retries: 0 });
-      if (res?.status !== 'success') throw new Error(res?.message || 'Gagal menyimpan');
-      rowEls.forEach(tr => tr.classList.add('row-success'));
-      ClientCache.invalidateLogs();
-      showToast(isBatch ? res.message || 'Semua data tersimpan.' : 'Data tersimpan.', 'success');
-      if (isBatch) {
-        setTimeout(() => $('#btnKembali')?.click(), 900);
-      } else {
-        btnEl.innerHTML = `<span class="material-symbols-outlined">check</span>`;
-        setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900);
-      }
-    } catch (err) {
-      if (err.message !== 'Unauthorized') showToast(err.message || 'Gagal menyimpan.', 'error');
+      const res = await Api.simpan(payload);
+      if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
+      rowEls.forEach(tr => tr.classList.add('row-saved'));
+      LogsCache.invalidateAll();
+      BootCache.invalidate();
+      toast(isBatch ? res.message : 'Data tersimpan.', 'success');
+      if (isBatch) setTimeout(() => $('#btnKembali')?.click(), 900);
+      else { btnEl.innerHTML = '<span class="material-symbols-outlined">check</span>'; setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900); }
+    } catch (e) {
+      if (e.message !== 'Unauthorized') toast(e.message || 'Gagal menyimpan.', 'error');
       btnEl.innerHTML = orig;
       btnEl.disabled = false;
     } finally {
@@ -1182,522 +1555,567 @@ class InputTab {
   }
 }
 
-/* ==================== DASH KELAS TAB ==================== */
-class DashKelasTab {
-  constructor(el) {
-    this.el = el;
-    this._init = false;
-    this._guard = new SeqGuard();
-    this._chartKategori = null;
-    this._lastRows = null;
-  }
+/* ====================================================================
+ *                       DASH KELAS TAB
+ * ==================================================================== */
+class DashKelasTab extends BaseTab {
+  constructor(el, app) { super(el, app); this._charts = []; this._lastRows = null; }
 
-  init() {
-    if (this._init) {
-      if (this._lastRows && this._lastRows.length) {
-        const canvas = $('#chartDkKategori');
-        if (canvas && !this._chartKategori) this._renderDashboard(this._lastRows);
-      }
-      return;
-    }
-    this._init = true;
-    this._render();
-  }
-
-  _dispose() {
-    // Hanya abort request, chart TIDAK di-destroy agar tetap tampil saat kembali
-    this._guard.abort();
-  }
-
-  _render() {
+  render() {
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">bar_chart</span> Dashboard Kelas</h2>
       <div class="card">
         <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
         <div class="filter-grid">
-          <div class="form-group">
-            <label>Tahun</label>
-            <select id="dkTahun" class="form-select">${buatOpsiTahun('2026')}</select>
+          <div class="form-group"><label>Tahun</label><select id="dkTahun" class="form-select">${TAHUN.map(t => `<option>${t}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Bulan</label><select id="dkBulan" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Pekan</label>
+            <select id="dkMinggu" class="form-select"><option value="Semua">Semua Pekan</option>${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}</select>
           </div>
-          <div class="form-group">
-            <label>Bulan</label>
-            <select id="dkBulan" class="form-select">${buatOpsiBulan(DAFTAR_BULAN[new Date().getMonth()])}</select>
+          <div class="form-group"><label style="color:var(--primary)">Kelas</label>
+            <select id="dkKelas" class="form-select highlight">${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
           </div>
-          <div class="form-group">
-            <label>Pekan</label>
-            <select id="dkMinggu" class="form-select">
-              <option value="Semua">Semua Pekan</option>
-              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-group">
-            <label style="color:var(--primary)">Kelas</label>
-            <select id="dkKelas" class="form-select highlight">
-              ${DAFTAR_KELAS.map(k => `<option value="${k}">${k}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>&nbsp;</label>
-            <button id="btnLoadDashKelas" class="btn-modern btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
+          <div class="form-group full"><label>&nbsp;</label>
+            <button id="btnLoadDk" class="btn btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
           </div>
         </div>
       </div>
-      <div id="dkResult">
-        <div class="empty-state">
-          <span class="material-symbols-outlined">insights</span>
-          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat analisis kelas.</p>
-        </div>
-      </div>`;
+      <div id="dkResult"></div>`;
 
-    $('#btnLoadDashKelas').onclick = () => this._load();
+    $('#btnLoadDk').onclick = () => this._load();
   }
 
   async _load() {
-    const btn = $('#btnLoadDashKelas');
+    const btn = $('#btnLoadDk');
     const orig = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span><span>Memuat...</span>`;
+    btn.innerHTML = '<span class="spinner"></span><span>Memuat...</span>';
 
-    const params = { kelas: $('#dkKelas').value, tahun: $('#dkTahun').value, bulan: $('#dkBulan').value };
-    const minggu = $('#dkMinggu').value;
-    if (minggu !== 'Semua') params.minggu = minggu;
+    const f = {
+      tahun: $('#dkTahun').value,
+      bulanAwal: $('#dkBulan').value,
+      bulanAkhir: $('#dkBulan').value,
+      kelas: $('#dkKelas').value
+    };
+    const m = $('#dkMinggu').value;
+    if (m !== 'Semua') f.minggu = m;
 
-    const { seq, signal } = this._guard.next();
     const resultEl = $('#dkResult');
-    resultEl.innerHTML = `<div class="skel-card"><div class="skeleton skel-line" style="width:50%"></div><div class="skeleton" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
+    resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
 
     try {
-      let rows = await Api.getLogs(params, { signal, retries: 1, cache: false });
-      if (!this._guard.isCurrent(seq)) return;
-      if (rows?.error) throw new Error(rows.error);
-      rows = dedupeLog(rows || []);
-      if (!rows.length) {
-        resultEl.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada data jurnal untuk filter yang dipilih.</p></div>`;
+      let logs = LogsCache.read(f);
+      if (!logs) {
+        const res = await Api.logs(f);
+        logs = res.logs || [];
+        LogsCache.write(f, logs);
+      }
+      logs = Stats.dedup(logs);
+      if (!logs.length) {
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data jurnal untuk filter yang dipilih.</p></div>`;
         return;
       }
-      this._renderDashboard(rows);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      if (err.message === 'Unauthorized') return;
-      resultEl.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">cloud_off</span><p>Gagal mengambil data: ${escapeHtml(err.message)}</p></div>`;
-      showToast('Gagal memuat data.', 'error');
+      this._render(logs);
+    } catch (e) {
+      if (e.message !== 'Unauthorized') {
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
+      }
     } finally {
       btn.innerHTML = orig;
       btn.disabled = false;
     }
   }
 
-  _renderDashboard(rows) {
+  async _render(rows) {
     this._lastRows = rows;
-    const perSiswa = new Map();
-    rows.forEach(r => {
-      if (!perSiswa.has(r.NIS)) perSiswa.set(r.NIS, { nama: r.Nama_Siswa, entries: [] });
-      perSiswa.get(r.NIS).entries.push(r);
-    });
-    const dataSiswa = [];
-    perSiswa.forEach((val, nis) => {
-      const rata = {};
-      KATEGORI_MAP.forEach(kat => {
-        const total = val.entries.reduce((s, r) => s + Number(r[kat.key] || 0), 0);
-        rata[kat.key] = total / val.entries.length;
-      });
-      const rataNorm = KATEGORI_MAP.map(kat => norm(rata[kat.key], kat.maxScale));
-      const rataKes = rataNorm.reduce((a, b) => a + b, 0) / rataNorm.length;
-      dataSiswa.push({ nis, nama: val.nama, rata, rataKes });
-    });
-    dataSiswa.sort((a, b) => b.rataKes - a.rataKes);
+    const perS = Stats.rekapPerSiswa(rows).sort((a, b) => b.rataKes - a.rataKes);
+    const rataKelas = Stats.rataPerKategori(rows);
+    const normKelas = Stats.normArr(rataKelas);
+    const rataKes = Stats.keseluruhan(normKelas);
 
-    const rataKelasPerKat = KATEGORI_MAP.map(kat => {
-      const total = dataSiswa.reduce((s, x) => s + x.rata[kat.key], 0);
-      return total / dataSiswa.length;
-    });
-    const rataKelasNorm = KATEGORI_MAP.map((kat, i) => norm(rataKelasPerKat[i], kat.maxScale));
-    const rataKeseluruhanKelas = rataKelasNorm.reduce((a, b) => a + b, 0) / rataKelasNorm.length;
-    const idxTerbaik = rataKelasNorm.indexOf(Math.max(...rataKelasNorm));
-    const idxTerlemah = rataKelasNorm.indexOf(Math.min(...rataKelasNorm));
+    let best = 0, worst = 0;
+    normKelas.forEach((v, i) => { if (v > normKelas[best]) best = i; if (v < normKelas[worst]) worst = i; });
 
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-number">${dataSiswa.length}</div><div class="stat-label">Siswa Terdata</div></div>
-        <div class="stat-card positif"><div class="stat-number">${rataKeseluruhanKelas.toFixed(2)}</div><div class="stat-label">Rata-rata Kelas</div></div>
-        <div class="stat-card"><div class="stat-number" style="font-size:.9rem;color:var(--positive);white-space:normal;line-height:1.2">${escapeHtml(KATEGORI_MAP[idxTerbaik].label)}</div><div class="stat-label">Kebiasaan Terbaik</div></div>
-        <div class="stat-card"><div class="stat-number" style="font-size:.9rem;color:var(--negative);white-space:normal;line-height:1.2">${escapeHtml(KATEGORI_MAP[idxTerlemah].label)}</div><div class="stat-label">Perlu Perhatian</div></div>
+        <div class="stat"><div class="num">${perS.length}</div><div class="lbl">Siswa Terdata</div></div>
+        <div class="stat pos"><div class="num">${rataKes.toFixed(2)}</div><div class="lbl">Rata-rata Kelas</div></div>
+        <div class="stat"><div class="num" style="font-size:.9rem;color:var(--positive);white-space:normal;line-height:1.2">${esc(KATEGORI[best].label)}</div><div class="lbl">Kebiasaan Terbaik</div></div>
+        <div class="stat"><div class="num" style="font-size:.9rem;color:var(--negative);white-space:normal;line-height:1.2">${esc(KATEGORI[worst].label)}</div><div class="lbl">Perlu Perhatian</div></div>
       </div>
-      <div class="chart-container">
-        <div class="chart-title"><span class="material-symbols-outlined" style="color:var(--primary);font-size:18px">bar_chart</span> Rata-rata per Kebiasaan (Skala 1-4)</div>
-        <div class="chart-wrapper"><canvas id="chartDkKategori"></canvas></div>
+      <div class="card">
+        <h3><span class="material-symbols-outlined">bar_chart</span> Rata-rata per Kebiasaan (Skala 1-4)</h3>
+        <div style="position:relative;height:220px"><canvas id="dkChart"></canvas></div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1.2rem 0 .8rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Detail Nilai per Siswa</h3>
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th class="sticky-col" style="min-width:160px">Nama Siswa</th>
-              ${KATEGORI_MAP.map(k => `<th>${escapeHtml(k.label)}</th>`).join('')}
-              <th>Rata-rata</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${dataSiswa.map(s => `
-              <tr>
-                <td class="sticky-col">${escapeHtml(s.nama)}</td>
-                ${KATEGORI_MAP.map(kat => {
-                  const v = s.rata[kat.key];
-                  const ratio = v / kat.maxScale;
-                  const cls = ratio >= 0.875 ? 'skor-baik' : (ratio >= 0.625 ? 'skor-cukup' : 'skor-kurang');
-                  const disp = kat.maxScale === 4 ? v.toFixed(2) : v.toFixed(1);
-                  return `<td class="${cls}">${disp}</td>`;
-                }).join('')}
-                <td style="font-weight:700;color:var(--primary)">${s.rataKes.toFixed(2)}</td>
-              </tr>`).join('')}
-          </tbody>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th class="sticky-l" style="min-width:160px">Nama Siswa</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata-rata</th></tr></thead>
+          <tbody>${perS.map(s => `<tr>
+            <td class="sticky-l">${esc(s.nama)}</td>
+            ${KATEGORI.map((k, i) => {
+              const v = s.rata[k.key];
+              const r = v / k.max;
+              const cls = r >= 0.875 ? 'skor-baik' : (r >= 0.625 ? 'skor-cukup' : 'skor-kurang');
+              const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
+              return `<td class="${cls}">${d}</td>`;
+            }).join('')}
+            <td style="font-weight:700;color:var(--primary)">${s.rataKes.toFixed(2)}</td>
+          </tr>`).join('')}</tbody>
         </table>
-      </div>
-      <div class="card no-print">
-        <h3><span class="material-symbols-outlined">picture_as_pdf</span> Unduh Laporan PDF</h3>
-        <div class="filter-grid" style="margin-bottom:1rem">
-          <div class="form-group">
-            <label>Bulan Awal</label>
-            <select id="dkLapBulanAwal" class="form-select">${buatOpsiBulan($('#dkBulan').value)}</select>
-          </div>
-          <div class="form-group">
-            <label>Bulan Akhir</label>
-            <select id="dkLapBulanAkhir" class="form-select">${buatOpsiBulan($('#dkBulan').value)}</select>
-          </div>
-          <div class="form-group full">
-            <label>&nbsp;</label>
-            <button id="btnUnduhLaporanKelas" class="btn-modern btn-success"><span class="material-symbols-outlined">download</span> Laporan Kelas</button>
-          </div>
-        </div>
-        <div class="filter-grid">
-          <div class="form-group full">
-            <label>Rapor Individu — Pilih Siswa</label>
-            <select id="dkLapSiswa" class="form-select">
-              <option value="">-- Pilih Siswa --</option>
-              ${dataSiswa.map(s => `<option value="${escapeHtml(s.nis)}">${escapeHtml(s.nama)}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>&nbsp;</label>
-            <button id="btnUnduhRaporSiswa" class="btn-modern btn-primary"><span class="material-symbols-outlined">download</span> Rapor Individu</button>
-          </div>
-        </div>
       </div>`;
 
-    if (this._chartKategori) { try { this._chartKategori.destroy(); } catch (_) {} this._chartKategori = null; }
-    safeCreateChart($('#chartDkKategori'), {
-      type: 'bar',
-      data: {
-        labels: KATEGORI_MAP.map(k => k.label),
-        datasets: [{
-          label: 'Rata-rata (Skala 1-4)',
-          data: rataKelasNorm.map(v => Number(v.toFixed(2))),
-          backgroundColor: rataKelasNorm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E')),
-          borderRadius: 6,
-          maxBarThickness: 50
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
-          x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    await ensureChart();
+    this._charts.forEach(c => { try { c.destroy(); } catch {} });
+    this._charts = [];
+    const cv = $('#dkChart');
+    if (cv && typeof Chart !== 'undefined') {
+      this._charts.push(new Chart(cv, {
+        type: 'bar',
+        data: {
+          labels: KATEGORI.map(k => k.label),
+          datasets: [{
+            data: normKelas.map(v => Number(v.toFixed(2))),
+            backgroundColor: normKelas.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E')),
+            borderRadius: 6,
+            maxBarThickness: 40
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
         }
-      }
-    }).then(chart => { if (chart) this._chartKategori = chart; });
-
-    $('#btnUnduhLaporanKelas').onclick = (e) => {
-      const btn = e.currentTarget;
-      const kelas = $('#dkKelas').value;
-      const tahun = $('#dkTahun').value;
-      const bulanAwal = $('#dkLapBulanAwal').value;
-      const bulanAkhir = $('#dkLapBulanAkhir').value;
-      handleDownload(
-        btn,
-        () => Api.generateLaporanKelas({ kelas, tahun, bulanAwal, bulanAkhir }, { retries: 0 }),
-        `Laporan ${kelas} berhasil diunduh.`
-      );
-    };
-
-    $('#btnUnduhRaporSiswa').onclick = (e) => {
-      const btn = e.currentTarget;
-      const nis = $('#dkLapSiswa').value;
-      if (!nis) return showToast('Pilih siswa terlebih dahulu.', 'error');
-      const tahun = $('#dkTahun').value;
-      const bulanAwal = $('#dkLapBulanAwal').value;
-      const bulanAkhir = $('#dkLapBulanAkhir').value;
-      handleDownload(
-        btn,
-        () => Api.generateRaporSiswa({ nis, tahun, bulanAwal, bulanAkhir }, { retries: 0 }),
-        'Rapor individu berhasil diunduh.'
-      );
-    };
+      }));
+    }
   }
 }
 
-/* ==================== DASH SEKOLAH TAB ==================== */
-class DashSekolahTab {
-  constructor(el) {
-    this.el = el;
-    this._init = false;
-    this._guard = new SeqGuard();
-    this._chartKelas = null;
-    this._chartKategori = null;
-    this._lastRows = null;
-  }
+/* ====================================================================
+ *                      DASH SEKOLAH TAB
+ * ==================================================================== */
+class DashSekolahTab extends BaseTab {
+  constructor(el, app) { super(el, app); this._charts = []; }
 
-  init() {
-    if (this._init) {
-      if (this._lastRows && this._lastRows.length) {
-        const canvas = $('#chartDsKelas');
-        if (canvas && !this._chartKelas) this._renderDashboard(this._lastRows);
-      }
-      return;
-    }
-    this._init = true;
-    this._render();
-  }
-
-  _dispose() {
-    this._guard.abort();
-    // Chart TIDAK di-destroy agar persisten saat kembali
-  }
-
-  _render() {
+  render() {
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">domain</span> Dashboard Sekolah</h2>
       <div class="card">
         <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
         <div class="filter-grid">
-          <div class="form-group">
-            <label>Tahun</label>
-            <select id="dsTahun" class="form-select">${buatOpsiTahun('2026')}</select>
+          <div class="form-group"><label>Tahun</label><select id="dsTahun" class="form-select">${TAHUN.map(t => `<option>${t}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Bulan</label><select id="dsBulan" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Pekan</label>
+            <select id="dsMinggu" class="form-select"><option value="Semua">Semua Pekan</option>${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}</select>
           </div>
-          <div class="form-group">
-            <label>Bulan</label>
-            <select id="dsBulan" class="form-select">${buatOpsiBulan(DAFTAR_BULAN[new Date().getMonth()])}</select>
-          </div>
-          <div class="form-group">
-            <label>Pekan</label>
-            <select id="dsMinggu" class="form-select">
-              <option value="Semua">Semua Pekan</option>
-              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>&nbsp;</label>
-            <button id="btnLoadDashSekolah" class="btn-modern btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
+          <div class="form-group full"><label>&nbsp;</label>
+            <button id="btnLoadDs" class="btn btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
           </div>
         </div>
       </div>
-      <div id="dsResult">
-        <div class="empty-state">
-          <span class="material-symbols-outlined">apartment</span>
-          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat rekapitulasi seluruh sekolah.</p>
-        </div>
-      </div>`;
-
-    $('#btnLoadDashSekolah').onclick = () => this._load();
+      <div id="dsResult"></div>`;
+    $('#btnLoadDs').onclick = () => this._load();
   }
 
   async _load() {
-    const btn = $('#btnLoadDashSekolah');
+    const btn = $('#btnLoadDs');
     const orig = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span><span>Memuat...</span>`;
+    btn.innerHTML = '<span class="spinner"></span><span>Memuat...</span>';
 
-    const params = { tahun: $('#dsTahun').value, bulan: $('#dsBulan').value };
-    const minggu = $('#dsMinggu').value;
-    if (minggu !== 'Semua') params.minggu = minggu;
+    const f = { tahun: $('#dsTahun').value, bulanAwal: $('#dsBulan').value, bulanAkhir: $('#dsBulan').value };
+    const m = $('#dsMinggu').value;
+    if (m !== 'Semua') f.minggu = m;
 
-    const { seq, signal } = this._guard.next();
     const resultEl = $('#dsResult');
-    resultEl.innerHTML = `<div class="skel-card"><div class="skeleton skel-line" style="width:50%"></div><div class="skeleton" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
+    resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
 
     try {
-      let rows = await Api.getLogs(params, { signal, retries: 1, cache: false });
-      if (!this._guard.isCurrent(seq)) return;
-      if (rows?.error) throw new Error(rows.error);
-      rows = dedupeLog(rows || []);
-      if (!rows.length) {
-        resultEl.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada data jurnal untuk filter yang dipilih.</p></div>`;
+      let logs = LogsCache.read(f);
+      if (!logs) {
+        const res = await Api.logs(f);
+        logs = res.logs || [];
+        LogsCache.write(f, logs);
+      }
+      logs = Stats.dedup(logs);
+      if (!logs.length) {
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data.</p></div>`;
         return;
       }
-      this._renderDashboard(rows);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      if (err.message === 'Unauthorized') return;
-      resultEl.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">cloud_off</span><p>Gagal mengambil data: ${escapeHtml(err.message)}</p></div>`;
-      showToast('Gagal memuat data.', 'error');
+      this._render(logs);
+    } catch (e) {
+      if (e.message !== 'Unauthorized') {
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
+      }
     } finally {
       btn.innerHTML = orig;
       btn.disabled = false;
     }
   }
 
-  _renderDashboard(rows) {
-    this._lastRows = rows;
-    const rekapKelas = DAFTAR_KELAS.map(kelas => {
-      const rowsKelas = rows.filter(r => r.Kelas === kelas);
-      if (!rowsKelas.length) return { kelas, jumlahSiswa: 0, rata: null, rataNorm: null, rataKes: null };
-      const perSiswa = new Map();
-      rowsKelas.forEach(r => {
-        if (!perSiswa.has(r.NIS)) perSiswa.set(r.NIS, []);
-        perSiswa.get(r.NIS).push(r);
-      });
-      const rataPerKat = {};
-      KATEGORI_MAP.forEach(kat => {
-        let total = 0;
-        perSiswa.forEach(entries => {
-          total += entries.reduce((s, r) => s + Number(r[kat.key] || 0), 0) / entries.length;
-        });
-        rataPerKat[kat.key] = total / perSiswa.size;
-      });
-      const rataNorm = KATEGORI_MAP.map(k => norm(rataPerKat[k.key], k.maxScale));
-      const rataKes = rataNorm.reduce((a, b) => a + b, 0) / rataNorm.length;
-      return { kelas, jumlahSiswa: perSiswa.size, rata: rataPerKat, rataNorm, rataKes };
+  async _render(rows) {
+    const rekap = KELAS.map(kelas => {
+      const r = rows.filter(x => x.Kelas === kelas);
+      if (!r.length) return { kelas, jumlah: 0, rata: null, norm: null, rataKes: null };
+      const perS = Stats.rekapPerSiswa(r);
+      const rata = {};
+      KATEGORI.forEach(k => rata[k.key] = perS.reduce((s, x) => s + x.rata[k.key], 0) / perS.length);
+      const norm = Stats.normArr(rata);
+      return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm) };
     });
 
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `
-      <div class="chart-container">
-        <div class="chart-title"><span class="material-symbols-outlined" style="color:var(--primary);font-size:18px">bar_chart</span> Perbandingan Rata-rata Antar Kelas</div>
-        <div class="chart-wrapper"><canvas id="chartDsKelas"></canvas></div>
+      <div class="card">
+        <h3><span class="material-symbols-outlined">bar_chart</span> Perbandingan Rata-rata Antar Kelas</h3>
+        <div style="position:relative;height:220px"><canvas id="dsChart1"></canvas></div>
       </div>
-      <div class="chart-container">
-        <div class="chart-title"><span class="material-symbols-outlined" style="color:var(--primary);font-size:18px">insights</span> Perbandingan per Kategori</div>
-        <div class="chart-wrapper" style="height:260px"><canvas id="chartDsKategori"></canvas></div>
+      <div class="card">
+        <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
+        <div style="position:relative;height:260px"><canvas id="dsChart2"></canvas></div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1.2rem 0 .8rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Rekapitulasi Sekolah</h3>
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th class="sticky-col" style="min-width:90px">Kelas</th>
-              <th>Jml</th>
-              ${KATEGORI_MAP.map(k => `<th>${escapeHtml(k.label)}</th>`).join('')}
-              <th>Rata-rata</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rekapKelas.map(r => {
-              if (!r.jumlahSiswa) {
-                return `<tr><td class="sticky-col">${escapeHtml(r.kelas)}</td><td colspan="${KATEGORI_MAP.length + 2}" style="color:var(--text-muted);font-style:italic">Belum ada data</td></tr>`;
-              }
-              const cells = KATEGORI_MAP.map(kat => {
-                const v = r.rata[kat.key];
-                const ratio = v / kat.maxScale;
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th class="sticky-l" style="min-width:90px">Kelas</th><th>Jml</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata-rata</th></tr></thead>
+          <tbody>${rekap.map(r => {
+            if (!r.jumlah) return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td colspan="${KATEGORI.length + 2}" style="color:var(--muted);font-style:italic">Belum ada data</td></tr>`;
+            return `<tr>
+              <td class="sticky-l">${esc(r.kelas)}</td>
+              <td>${r.jumlah}</td>
+              ${KATEGORI.map((k, i) => {
+                const v = r.rata[k.key];
+                const ratio = v / k.max;
                 const cls = ratio >= 0.875 ? 'skor-baik' : (ratio >= 0.625 ? 'skor-cukup' : 'skor-kurang');
-                const disp = kat.maxScale === 4 ? v.toFixed(2) : v.toFixed(1);
-                return `<td class="${cls}">${disp}</td>`;
-              }).join('');
-              return `<tr>
-                <td class="sticky-col">${escapeHtml(r.kelas)}</td>
-                <td>${r.jumlahSiswa}</td>
-                ${cells}
-                <td style="font-weight:700;color:var(--positive)">${r.rataKes.toFixed(2)}</td>
-              </tr>`;
-            }).join('')}
-          </tbody>
+                const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
+                return `<td class="${cls}">${d}</td>`;
+              }).join('')}
+              <td style="font-weight:700;color:var(--positive)">${r.rataKes.toFixed(2)}</td>
+            </tr>`;
+          }).join('')}</tbody>
         </table>
-      </div>
-      <div class="card no-print">
-        <h3><span class="material-symbols-outlined">picture_as_pdf</span> Unduh Laporan Sekolah (PDF)</h3>
-        <div class="filter-grid">
-          <div class="form-group">
-            <label>Bulan Awal</label>
-            <select id="dsLapBulanAwal" class="form-select">${buatOpsiBulan($('#dsBulan').value)}</select>
-          </div>
-          <div class="form-group">
-            <label>Bulan Akhir</label>
-            <select id="dsLapBulanAkhir" class="form-select">${buatOpsiBulan($('#dsBulan').value)}</select>
-          </div>
-          <div class="form-group full">
-            <label>&nbsp;</label>
-            <button id="btnUnduhLaporanSekolah" class="btn-modern btn-success"><span class="material-symbols-outlined">download</span> Laporan Sekolah</button>
-          </div>
-        </div>
       </div>`;
 
-    if (this._chartKelas) { try { this._chartKelas.destroy(); } catch (_) {} this._chartKelas = null; }
-    safeCreateChart($('#chartDsKelas'), {
-      type: 'bar',
-      data: {
-        labels: rekapKelas.map(r => r.kelas),
-        datasets: [{
-          label: 'Rata-rata',
-          data: rekapKelas.map(r => r.rataKes !== null ? Number(r.rataKes.toFixed(2)) : 0),
-          backgroundColor: rekapKelas.map(r => r.rataKes === null ? '#CBD5E1' : (r.rataKes >= 3.5 ? '#10B981' : (r.rataKes >= 2.5 ? '#F59E0B' : '#F43F5E'))),
-          borderRadius: 6,
-          maxBarThickness: 50
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
-      }
-    }).then(chart => { if (chart) this._chartKelas = chart; });
+    await ensureChart();
+    this._charts.forEach(c => { try { c.destroy(); } catch {} });
+    this._charts = [];
 
-    if (this._chartKategori) { try { this._chartKategori.destroy(); } catch (_) {} this._chartKategori = null; }
-    safeCreateChart($('#chartDsKategori'), {
-      type: 'bar',
-      data: {
-        labels: rekapKelas.map(r => r.kelas),
-        datasets: KATEGORI_MAP.map((kat, i) => ({
-          label: kat.label,
-          data: rekapKelas.map(r => r.rataNorm ? Number(r.rataNorm[i].toFixed(2)) : 0),
-          backgroundColor: WARNA_KATEGORI[i]
-        }))
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 10, font: { size: 9 } } } },
-        scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
-      }
-    }).then(chart => { if (chart) this._chartKategori = chart; });
+    const c1 = $('#dsChart1');
+    if (c1 && typeof Chart !== 'undefined') {
+      this._charts.push(new Chart(c1, {
+        type: 'bar',
+        data: {
+          labels: rekap.map(r => r.kelas),
+          datasets: [{
+            data: rekap.map(r => r.rataKes !== null ? Number(r.rataKes.toFixed(2)) : 0),
+            backgroundColor: rekap.map(r => r.rataKes === null ? '#CBD5E1' : (r.rataKes >= 3.5 ? '#10B981' : (r.rataKes >= 2.5 ? '#F59E0B' : '#F43F5E'))),
+            borderRadius: 6, maxBarThickness: 40
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+        }
+      }));
+    }
 
-    $('#btnUnduhLaporanSekolah').onclick = (e) => {
-      const btn = e.currentTarget;
-      const tahun = $('#dsTahun').value;
-      const bulanAwal = $('#dsLapBulanAwal').value;
-      const bulanAkhir = $('#dsLapBulanAkhir').value;
-      handleDownload(
-        btn,
-        () => Api.generateLaporanSekolah({ tahun, bulanAwal, bulanAkhir }, { retries: 0 }),
-        'Laporan sekolah berhasil diunduh.'
-      );
-    };
+    const c2 = $('#dsChart2');
+    if (c2 && typeof Chart !== 'undefined') {
+      this._charts.push(new Chart(c2, {
+        type: 'bar',
+        data: {
+          labels: rekap.map(r => r.kelas),
+          datasets: KATEGORI.map((k, i) => ({
+            label: k.label,
+            data: rekap.map(r => r.norm ? Number(r.norm[i].toFixed(2)) : 0),
+            backgroundColor: ['#4F46E5','#0EA5E9','#06B6D4','#14B8A6','#F59E0B','#EA580C','#A855F7','#10B981','#EAB308','#EC4899','#F43F5E','#64748B'][i]
+          }))
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } } },
+          scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+        }
+      }));
+    }
   }
 }
 
-/* ==================== BOOT ==================== */
+/* ====================================================================
+ *                            CETAK TAB  ★ NEW
+ * ==================================================================== */
+class CetakTab extends BaseTab {
+  constructor(el, app) { super(el, app); this.jenis = 'rapor'; }
+
+  onBootReady() { /* master ready */ }
+
+  render() {
+    this.el.innerHTML = `
+      <h2 class="section-title"><span class="material-symbols-outlined">print</span> Cetak & Preview Laporan</h2>
+      <div class="card">
+        <h3><span class="material-symbols-outlined">category</span> Jenis Cetak</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem">
+          <label class="jenis-btn" data-jenis="rapor" style="cursor:pointer">
+            <input type="radio" name="jenis" value="rapor" checked style="display:none">
+            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.7rem .4rem;height:100%">
+              <span class="material-symbols-outlined">person</span>
+              <span style="font-size:.78rem">Rapor Siswa</span>
+            </div>
+          </label>
+          <label class="jenis-btn" data-jenis="kelas" style="cursor:pointer">
+            <input type="radio" name="jenis" value="kelas" style="display:none">
+            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.7rem .4rem;height:100%">
+              <span class="material-symbols-outlined">groups</span>
+              <span style="font-size:.78rem">Laporan Kelas</span>
+            </div>
+          </label>
+          <label class="jenis-btn" data-jenis="sekolah" style="cursor:pointer">
+            <input type="radio" name="jenis" value="sekolah" style="display:none">
+            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.7rem .4rem;height:100%">
+              <span class="material-symbols-outlined">apartment</span>
+              <span style="font-size:.78rem">Laporan Sekolah</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="filter-grid">
+          <div class="form-group"><label>Tahun</label><select id="cTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Bulan Awal</label><select id="cBulanAwal" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Bulan Akhir</label><select id="cBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group" id="grpKelas"><label>Kelas</label><select id="cKelas" class="form-select">${KELAS.map(k => `<option>${k}</option>`).join('')}</select></div>
+          <div class="form-group" id="grpSiswa"><label>Siswa</label><select id="cSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select></div>
+          <div class="form-group full" id="grpBatch" style="display:none">
+            <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.9rem;cursor:pointer">
+              <input type="checkbox" id="cBatch" style="width:auto;accent-color:var(--primary);width:18px;height:18px">
+              <span>Cetak <b>semua siswa</b> dalam 1 kelas (batch, 1 file PDF)</span>
+            </label>
+          </div>
+          <div class="form-group full">
+            <label>&nbsp;</label>
+            <button id="btnPreview" class="btn btn-primary">
+              <span class="material-symbols-outlined">visibility</span> Tampilkan Preview
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="empty" style="padding:1.5rem">
+        <span class="material-symbols-outlined">info</span>
+        <p style="max-width:420px;font-size:.82rem">Pilih jenis cetak & filter, lalu ketuk <b>Tampilkan Preview</b>. Preview WYSIWYG — persis seperti hasil cetak. Simpan sebagai PDF via dialog cetak browser.</p>
+      </div>
+    `;
+    this._bind();
+  }
+
+  _bind() {
+    const upd = () => {
+      const j = this.jenis;
+      $('#grpKelas').style.display = j === 'sekolah' ? 'none' : '';
+      $('#grpSiswa').style.display = j === 'rapor' ? '' : 'none';
+      $('#grpBatch').style.display = j === 'rapor' ? '' : 'none';
+      if (j === 'rapor') this._fillSiswa();
+      else $('#grpBatch').style.display = 'none';
+    };
+
+    $$('.jenis-btn').forEach(btn => {
+      btn.onclick = () => {
+        this.jenis = btn.dataset.jenis;
+        $$('.jenis-btn .btn').forEach(b => b.classList.remove('btn-primary'));
+        $$('.jenis-btn .btn').forEach(b => b.classList.add('btn-ghost'));
+        btn.querySelector('.btn').classList.remove('btn-ghost');
+        btn.querySelector('.btn').classList.add('btn-primary');
+        upd();
+      };
+    });
+
+    $('#cKelas').onchange = () => { if (this.jenis === 'rapor') this._fillSiswa(); };
+    $('#cBatch').onchange = () => {
+      const dis = $('#cBatch').checked;
+      $('#cSiswa').disabled = dis;
+      if (dis) $('#cSiswa').value = '';
+    };
+
+    $('#btnPreview').onclick = () => this._preview();
+    upd();
+    // Mark first active
+    $$('.jenis-btn')[0].querySelector('.btn').classList.remove('btn-ghost');
+    $$('.jenis-btn')[0].querySelector('.btn').classList.add('btn-primary');
+  }
+
+  _fillSiswa() {
+    const master = this.app.boot?.master || [];
+    const kelas = $('#cKelas').value;
+    const siswa = master.filter(s => s.Kelas === kelas).sort((a, b) => a.Nama_Siswa.localeCompare(b.Nama_Siswa));
+    $('#cSiswa').innerHTML = '<option value="">-- Pilih Siswa --</option>' + siswa.map(s => `<option value="${esc(s.NIS)}">${esc(s.Nama_Siswa)}</option>`).join('');
+  }
+
+  async _preview() {
+    const boot = this.app.boot;
+    if (!boot || !boot.master || !boot.master.length) return toast('Data master belum siap. Coba lagi.', 'error');
+
+    const f = {
+      tahun: $('#cTahun').value,
+      bulanAwal: $('#cBulanAwal').value,
+      bulanAkhir: $('#cBulanAkhir').value
+    };
+    if (f.bulanAwal !== f.bulanAkhir) {
+      const ia = BULAN.indexOf(f.bulanAwal), ib = BULAN.indexOf(f.bulanAkhir);
+      if (ia > ib) return toast('Bulan akhir harus setelah bulan awal.', 'error');
+    }
+
+    const btn = $('#btnPreview');
+    const orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan preview...</span>';
+
+    try {
+      // Ambil logs sesuai filter
+      const query = { tahun: f.tahun, bulanAwal: f.bulanAwal, bulanAkhir: f.bulanAkhir };
+      if (this.jenis !== 'sekolah') query.kelas = $('#cKelas').value;
+
+      let logs = LogsCache.read(query);
+      if (!logs) {
+        const res = await Api.logs(query);
+        logs = res.logs || [];
+        LogsCache.write(query, logs);
+      }
+      logs = Stats.dedup(logs);
+      if (!logs.length) {
+        btn.disabled = false;
+        btn.innerHTML = orig;
+        return toast('Belum ada data untuk filter ini.', 'error');
+      }
+
+      const opts = {
+        identitas: boot.identitas,
+        waliKelas: boot.waliKelas,
+        tahun: f.tahun,
+        bulanAwal: f.bulanAwal,
+        bulanAkhir: f.bulanAkhir
+      };
+
+      const chartTasks = [];
+      const pages = [];
+
+      if (this.jenis === 'rapor') {
+        const isBatch = $('#cBatch').checked;
+        const kelas = $('#cKelas').value;
+        const siswaKelas = boot.master.filter(s => s.Kelas === kelas).sort((a, b) => a.Nama_Siswa.localeCompare(b.Nama_Siswa));
+
+        if (isBatch) {
+          if (siswaKelas.length > 50) {
+            btn.disabled = false; btn.innerHTML = orig;
+            return toast('Batch maksimal 50 siswa. Pilih filter lain.', 'error');
+          }
+          if (siswaKelas.length > 20) {
+            toast(`Menyiapkan ${siswaKelas.length} halaman. Mohon tunggu...`, 'success');
+          }
+          const periodeText = `${f.bulanAwal} – ${f.bulanAkhir} ${f.tahun}`;
+          for (const siswa of siswaKelas) {
+            const rows = logs.filter(r => str(r.NIS) === str(siswa.NIS));
+            if (!rows.length) continue;
+            pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
+            const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+            const norm = Stats.normArr(Stats.rataPerKategori(rows));
+            chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
+            if (rows.length >= 2) {
+              const pts = PrintEngine.pointsTrendIndividu(rows);
+              chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, pts));
+            }
+          }
+          if (!pages.length) {
+            btn.disabled = false; btn.innerHTML = orig;
+            return toast('Tidak ada siswa yang memiliki data pada periode ini.', 'error');
+          }
+          opts.title = `Rapor ${kelas} (${pages.length} siswa)`;
+        } else {
+          const nis = $('#cSiswa').value;
+          if (!nis) {
+            btn.disabled = false; btn.innerHTML = orig;
+            return toast('Pilih siswa terlebih dahulu.', 'error');
+          }
+          const siswa = boot.master.find(s => str(s.NIS) === str(nis));
+          if (!siswa) { btn.disabled = false; btn.innerHTML = orig; return toast('Siswa tidak ditemukan.', 'error'); }
+          const rows = logs.filter(r => str(r.NIS) === str(nis));
+          if (!rows.length) {
+            btn.disabled = false; btn.innerHTML = orig;
+            return toast('Siswa ini belum punya data pada periode ini.', 'error');
+          }
+          pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
+          const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+          const norm = Stats.normArr(Stats.rataPerKategori(rows));
+          chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
+          if (rows.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
+          opts.title = 'Rapor ' + siswa.Nama_Siswa;
+        }
+      }
+
+      else if (this.jenis === 'kelas') {
+        const kelas = $('#cKelas').value;
+        pages.push(PrintEngine.buildKelasPage(kelas, logs, opts));
+        const norm = Stats.normArr(Stats.rataPerKategori(logs));
+        chartTasks.push(() => PrintEngine.renderChartKategori('c-kls-kat', norm));
+        if (logs.length >= 4) {
+          const pts = PrintEngine.pointsTrendMingguan(logs);
+          if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-kls-tren', pts));
+        }
+        opts.title = 'Laporan ' + kelas;
+      }
+
+      else if (this.jenis === 'sekolah') {
+        pages.push(PrintEngine.buildSekolahPage(logs, opts));
+        // Chart perbandingan kelas
+        const rekap = KELAS.map(k => {
+          const r = logs.filter(x => x.Kelas === k);
+          if (!r.length) return null;
+          const perS = Stats.rekapPerSiswa(r);
+          const rata = {};
+          KATEGORI.forEach(kk => rata[kk.key] = perS.reduce((s, x) => s + x.rata[kk.key], 0) / perS.length);
+          const norm = Stats.normArr(rata);
+          return { label: k.replace('Kelas ', 'Kls '), value: Stats.keseluruhan(norm) };
+        }).filter(Boolean);
+        if (rekap.length >= 2) {
+          chartTasks.push(() => PrintEngine.renderChartPerbandingan('c-sek-perbandingan', rekap));
+        }
+        if (logs.length >= 4) {
+          const pts = PrintEngine.pointsTrendMingguan(logs);
+          if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-sek-tren', pts));
+        }
+        opts.title = 'Laporan Sekolah';
+      }
+
+      await PrintEngine.render(pages, { ...opts, chartTasks });
+
+    } catch (e) {
+      if (e.message !== 'Unauthorized') toast(e.message || 'Gagal membuat preview.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = orig;
+    }
+  }
+}
+
+/* ====================================================================
+ *                            BOOT
+ * ==================================================================== */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
-} else { new App().init(); }
+} else {
+  new App().init();
+}
 
-/* ==================== SERVICE WORKER ==================== */
-(function initSW() {
-  if (!('serviceWorker' in navigator)) return;
-  if (location.protocol === 'file:') return;
+/* ====================================================================
+ *                        SERVICE WORKER
+ * ==================================================================== */
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js', { scope: './' })
-      .then(reg => {
-        reg.addEventListener('updatefound', () => {
-          const newSW = reg.installing;
-          if (!newSW) return;
-          newSW.addEventListener('statechange', () => {
-            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-              showToast('Versi baru tersedia. Tutup & buka ulang aplikasi.', 'success');
-            }
-          });
-        });
-        setInterval(() => reg.update().catch(() => {}), 3600000);
-      }).catch(() => {});
+    navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
   });
-})();
+}
 
 })();
 </script>
