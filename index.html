@@ -1926,10 +1926,10 @@ class InputTab extends BaseTab {
         <span class="material-symbols-outlined">cloud_upload</span> SIMPAN SEMUA DATA
       </button>`;
 
-    $('#btnKembali').onclick = () => {
-      layer2.innerHTML = '';
-      if (card) card.style.display = 'block';
-    };
+$('#btnKembali').onclick = () => {
+  layer2.innerHTML = '';
+  if (card) card.style.display = '';   // ← reset ke CSS default (grid di desktop, block di mobile)
+};
 
     this._attachInput(tahun, bulan, minggu, kelas);
   }
