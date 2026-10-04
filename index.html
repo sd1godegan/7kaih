@@ -6,13 +6,20 @@
 <meta name="theme-color" content="#4F46E5" />
 <meta name="description" content="7 Kebiasaan Anak Hebat — SDN 1 Godegan" />
 <meta name="color-scheme" content="light" />
+<meta name="format-detection" content="telephone=no,email=no,address=no" />
 <title>7 Kebiasaan — SDN 1 Godegan</title>
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='52' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3E7K%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="./icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
 <link rel="manifest" href="./manifest.json" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="7 Kebiasaan" />
+<meta name="application-name" content="7 Kebiasaan" />
+<meta name="msapplication-TileColor" content="#4F46E5" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,12 +42,14 @@
   --shadow-l:0 20px 25px -5px rgba(17,24,39,.12);
   --r:16px; --r-s:10px;
   --t:.18s cubic-bezier(.4,0,.2,1);
+  --app-max-w:720px;
+  --nav-w:0px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;height:100dvh;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;position:fixed;inset:0}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
-::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:10px}
 ::-webkit-scrollbar-thumb:hover{background:var(--primary)}
 img{max-width:100%;display:block}
@@ -52,19 +61,19 @@ input,select,textarea{font-family:inherit;font-size:16px}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 
 /* ====================================================================
  *                        APP SHELL
  * ==================================================================== */
-#app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-
+#app{width:100%;height:100%;max-width:var(--app-max-w);background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 
 /* ====================================================================
  *                        LOGIN
  * ==================================================================== */
 .login-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;gap:.85rem;background:var(--surface);overflow-y:auto;text-align:center}
-.logo-box{width:min(140px,40vw);aspect-ratio:1;max-width:160px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;box-shadow:0 10px 25px -5px rgba(79,70,229,.35)}
+.logo-box{width:min(140px,40vw);aspect-ratio:1;max-width:160px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;box-shadow:0 10px 25px -5px rgba(79,70,229,.35);flex-shrink:0}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.3}
 .login-title{font-size:clamp(1.1rem,4vw,1.35rem);font-weight:800}
 .login-sub{font-size:clamp(.8rem,3vw,.95rem);color:var(--muted);margin-bottom:.4rem;line-height:1.35}
@@ -145,19 +154,16 @@ table.data{width:100%;border-collapse:collapse;min-width:900px}
 .skor-cukup{color:var(--warning);font-weight:700}
 .skor-kurang{color:var(--negative);font-weight:700}
 
-.input-cell{width:48px;height:38px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0}
-.input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-l);transform:scale(1.08);z-index:5}
+.input-cell{width:48px;height:38px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0;line-height:1}
+.input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-l);transform:scale(1.08);z-index:5;position:relative}
 .input-cell.salat{border-color:#bfdbfe;background:#eff6ff;color:var(--primary)}
 .input-cell.invalid{border-color:var(--negative)!important;background:#FFE4E6!important;animation:shakeInput .3s}
-@keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 input[type=number]{-moz-appearance:textfield}
 
-/* Row saved = visual only, tetap editable */
 tr.row-saved{background:#ecfdf5}
 tr.row-saved .sticky-l{background:#ecfdf5}
 tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
-tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
 
 /* ====================================================================
  *                        FILTER + LEGEND
@@ -225,7 +231,6 @@ tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
 }
 .cetak-page:last-child{margin-bottom:20px}
 
-/* ---------- PRINT TEMPLATE STYLES ---------- */
 .cetak-kop{border-bottom:3px double #1e3a8a;padding-bottom:8px;margin-bottom:14px;text-align:center}
 .cetak-kop .dinas{font-size:9.5pt;font-weight:600;color:#334155;letter-spacing:.3px}
 .cetak-kop .dinas-sub{font-size:9pt;font-weight:500;color:#475569}
@@ -235,7 +240,6 @@ tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
 
 .cetak-judul{font-size:13pt;text-align:center;font-weight:800;color:#0f172a;letter-spacing:.4px;margin:10px 0 3px}
 .cetak-sub{text-align:center;font-size:9.5pt;color:#64748b;margin-bottom:12px}
-
 .cetak-h3{font-size:10.5pt;font-weight:700;color:#1e293b;padding:5px 10px;background:#f1f5f9;border-left:4px solid #4F46E5;margin:14px 0 8px}
 
 .cetak-ident{width:100%;border-collapse:collapse;margin:6px 0 12px;background:#f8fafc;border:1px solid #e2e8f0}
@@ -278,9 +282,10 @@ tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
 .cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px}
 
 /* ====================================================================
- *                        PRINT — A4 NORMAL MARGIN + SMART BREAKS
+ *              PRINT — A4 NORMAL MARGIN + SMART BREAKS
  * ==================================================================== */
 @media print {
+  /* Margin normal A4: 15mm kiri/kanan, 15mm atas/bawah */
   @page {
     size: A4 portrait;
     margin: 15mm 12mm;
@@ -320,7 +325,7 @@ tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
 
   #printArea { display: block !important; }
 
-  /* A4 page container — reset untuk print, @page yang atur margin */
+  /* Page container — reset untuk print, @page yang atur margin */
   .cetak-page {
     width: auto !important;
     min-height: auto !important;
@@ -355,19 +360,175 @@ tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
   .cetak-catatan,
   .cetak-ttd { page-break-inside: avoid; break-inside: avoid; }
 
-  /* Table: header repeat, row intact, tapi table boleh break */
   .cetak-tbl { page-break-inside: auto; break-inside: auto; }
   .cetak-tbl thead { display: table-header-group; }
   .cetak-tbl tbody tr { page-break-inside: avoid; break-inside: avoid; }
   .cetak-tbl tbody { page-break-inside: auto; }
 
-  /* Force warna tetap tercetak */
+  /* Force warna tercetak */
   *,
   *::before,
   *::after {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
+  }
+}
+
+/* ====================================================================
+ *                        DESKTOP OPTIMIZATION (≥900px)
+ * ==================================================================== */
+@media (min-width: 900px) {
+  :root {
+    --app-max-w: 1400px;
+    --nav-w: 200px;
+  }
+
+  #app {
+    max-width: 1400px;
+    margin: 24px auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px -20px rgba(15,23,42,.15);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: var(--nav-w) 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "sidebar header"
+      "sidebar main";
+    height: calc(100vh - 48px);
+  }
+
+  .app-header {
+    grid-area: header;
+    padding: 1.1rem 1.8rem;
+    padding-top: 1.1rem;
+  }
+  .app-header h1 { font-size: 1.15rem; }
+
+  .main {
+    grid-area: main;
+    padding: 1.5rem 2rem;
+    padding-bottom: 2rem;
+    overflow-y: auto;
+  }
+
+  /* Bottom nav → sidebar */
+  .bottom-nav {
+    grid-area: sidebar;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.2rem .8rem;
+    padding-bottom: 1.2rem;
+    border-top: none;
+    border-right: 1px solid var(--border);
+    box-shadow: none;
+    gap: .35rem;
+    overflow-y: auto;
+  }
+  .bottom-nav::before {
+    content: 'MENU';
+    display: block;
+    font-size: .68rem;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: .1em;
+    padding: .3rem .8rem;
+    margin-bottom: .3rem;
+  }
+  .nav-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: .75rem;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 600;
+    min-height: 44px;
+    min-width: 0;
+    width: 100%;
+  }
+  .nav-item .material-symbols-outlined { font-size: 22px; flex-shrink: 0; }
+  .nav-item span:last-child { font-size: .88rem; }
+  .nav-item:hover { background: var(--surface-2); }
+  .nav-item.active { background: var(--primary-l); color: var(--primary); font-weight: 700; }
+
+  /* Stat cards 4 sejajar */
+  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .stat { padding: 1.2rem 1.3rem; }
+  .stat .num { font-size: 1.9rem; }
+
+  /* Filter 4 kolom */
+  .filter-grid { grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+  .filter-grid .full { grid-column: 1 / -1; display: flex; justify-content: flex-end; }
+  .filter-grid .full .btn, .filter-grid .full > .btn { width: auto; min-width: 200px; }
+
+  /* Chart lebih tinggi */
+  #dkResult .card > div[style*="height:260px"],
+  #dsResult .card > div[style*="height:240px"],
+  #dsResult .card > div[style*="height:300px"] {
+    min-height: 320px !important;
+  }
+
+  /* Tabel lega */
+  .table-wrap { max-height: 70vh; }
+  table.data { min-width: 0; font-size: .88rem; }
+  .data td { padding: .85rem .75rem; }
+  .data th { padding: .9rem .6rem; font-size: .72rem; }
+
+  .section-title { font-size: 1.15rem; margin-bottom: 1.2rem; }
+  .section-title .material-symbols-outlined { font-size: 26px; }
+
+  .card { padding: 1.5rem; border-radius: 18px; }
+  .card h3 { font-size: 1.05rem; margin-bottom: 1rem; }
+
+  /* Login desktop */
+  .login-wrap {
+    background: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px -20px rgba(15,23,42,.15);
+    padding: 3rem;
+    margin: 24px auto;
+    max-width: 460px;
+  }
+  .logo-box { width: 120px; max-width: 120px; }
+
+  /* Input cell */
+  .input-cell { width: 56px; height: 42px; font-size: 17px; }
+
+  /* Preview shell */
+  .preview-shell { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+  .preview-scroll { padding: 40px 24px; }
+  .cetak-page { box-shadow: 0 10px 40px rgba(0,0,0,.4); }
+
+  /* Chart pair 2 kolom */
+  .chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .chart-pair > .card { margin-bottom: 0; }
+}
+
+@media (min-width: 1400px) {
+  :root { --nav-w: 220px; }
+  #app { max-width: 1600px; }
+  .main { padding: 2rem 3rem; }
+  .app-header { padding: 1.3rem 2.2rem; }
+}
+
+/* Tablet medium */
+@media (min-width: 768px) and (max-width: 899px) {
+  :root { --app-max-w: 820px; }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .filter-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Override print untuk desktop */
+@media print {
+  #app {
+    display: block !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    height: auto !important;
   }
 }
 </style>
@@ -444,25 +605,17 @@ const THRESHOLD = Object.freeze({ BAIK: 0.875, CUKUP: 0.625 });
  * ==================================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const escAttr = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
+const escAttr = esc;
 const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
 const str = v => v == null ? '' : String(v);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const yieldTick = () => new Promise(r => setTimeout(r, 0));
-
 const fmtBulan = idx => BULAN[idx] || '';
 const todayM = () => new Date().getMonth();
 
-const debounce = (fn, ms) => {
-  let t;
-  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
-};
-
 /* ====================================================================
- *                            TOAST (max 3 stack)
+ *                            TOAST
  * ==================================================================== */
 const _toastMap = new Map();
 const toast = (msg, type = 'success') => {
@@ -473,10 +626,7 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => _toastMap.delete(k), 3000);
 
   const wrap = $('#toastWrap');
-  // Batasi stack max 3
-  while (wrap.children.length >= CFG.TOAST_MAX) {
-    wrap.removeChild(wrap.firstChild);
-  }
+  while (wrap.children.length >= CFG.TOAST_MAX) wrap.removeChild(wrap.firstChild);
 
   const el = document.createElement('div');
   el.className = `toast ${type}`;
@@ -486,7 +636,7 @@ const toast = (msg, type = 'success') => {
 };
 
 /* ====================================================================
- *                    LOCAL STORAGE (safe wrapper)
+ *                    LOCAL STORAGE (quota-safe)
  * ==================================================================== */
 const LS = {
   get(k) {
@@ -499,7 +649,7 @@ const LS = {
       return true;
     } catch (e) {
       if (e && e.name === 'QuotaExceededError') {
-        console.warn('[LS] quota exceeded, pruned');
+        console.warn('[LS] quota exceeded');
         return false;
       }
       return false;
@@ -517,7 +667,7 @@ const LS = {
 };
 
 /* ====================================================================
- *                    BOOT CACHE (master + identitas + wali)
+ *                    BOOT CACHE
  * ==================================================================== */
 const BootCache = {
   read() {
@@ -537,7 +687,7 @@ const BootCache = {
 };
 
 /* ====================================================================
- *                    LOGS CACHE (auto prune + quota safe)
+ *                    LOGS CACHE (auto prune)
  * ==================================================================== */
 const LogsCache = {
   key(f) {
@@ -550,7 +700,6 @@ const LogsCache = {
       'm=' + (f.minggu || '*')
     ].join('|');
   },
-
   read(f) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
     const c = LS.get(k);
@@ -559,11 +708,9 @@ const LogsCache = {
     if (c.v !== LS.get(CFG.LS_VER)) return null;
     return c.logs;
   },
-
   write(f, logs) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
     const payload = { v: LS.get(CFG.LS_VER), logs, ts: Date.now() };
-
     if (!LS.set(k, payload)) {
       LogsCache.prune(true);
       LS.set(k, payload);
@@ -571,11 +718,9 @@ const LogsCache = {
       LogsCache.prune(false);
     }
   },
-
   prune(force) {
     const keys = LS.keys(CFG.LS_LOGS);
     if (!force && keys.length < CFG.MAX_LOGS_KEYS) return;
-
     const entries = keys.map(k => {
       try {
         const v = JSON.parse(localStorage.getItem(k));
@@ -583,11 +728,9 @@ const LogsCache = {
       } catch { return { key: k, ts: 0 }; }
     });
     entries.sort((a, b) => a.ts - b.ts);
-
     const cut = force ? entries.length : Math.floor(entries.length * 0.3);
     for (let i = 0; i < cut; i++) LS.del(entries[i].key);
   },
-
   invalidateAll() {
     LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k));
   }
@@ -668,7 +811,7 @@ const Api = {
 };
 
 /* ====================================================================
- *                        CHART LOADER (lazy + fallback)
+ *                        CHART LOADER (lazy)
  * ==================================================================== */
 let _chartReady = null;
 const ensureChart = () => {
@@ -691,7 +834,7 @@ const ensureChart = () => {
 };
 
 /* ====================================================================
- *                        STATS ENGINE (client-side)
+ *                        STATS ENGINE
  * ==================================================================== */
 const Stats = {
   dedup(rows) {
@@ -711,7 +854,6 @@ const Stats = {
     return out;
   },
 
-  /* Rata-rata kelas yang benar: per-siswa dulu, baru rata-rata antar siswa */
   rataKelas(rows) {
     const perS = Stats.rekapPerSiswa(rows);
     const out = {};
@@ -836,7 +978,6 @@ const PrintEngine = {
   _charts: [],
   _renderSeq: 0,
 
-  /* ---------- HTML fragments ---------- */
   kop(ident) {
     return `<div class="cetak-kop">
       <div class="dinas">${esc(ident.dinas)}</div>
@@ -902,7 +1043,6 @@ const PrintEngine = {
     return `<div class="cetak-chart-wrap"><canvas id="${id}" width="${w}" height="${h}"></canvas></div>`;
   },
 
-  /* ---------- Chart renderers ---------- */
   async _renderChart(canvasId, config, dpr) {
     const cv = document.getElementById(canvasId);
     if (!cv || typeof Chart === 'undefined') return;
@@ -912,7 +1052,7 @@ const PrintEngine = {
         ...config.options,
         responsive: false,
         animation: false,
-        devicePixelRatio: dpr
+        devicePixelRatio: dpr || 2
       }
     });
     PrintEngine._charts.push(c);
@@ -960,7 +1100,6 @@ const PrintEngine = {
     return PrintEngine.renderChartTren(canvasId, points, '#4F46E5', dpr);
   },
 
-  /* ---------- Chart points helpers ---------- */
   pointsTrendMingguan(logs) {
     const g = new Map();
     for (const r of logs) {
@@ -1000,7 +1139,6 @@ const PrintEngine = {
     });
   },
 
-  /* ---------- Page builders ---------- */
   buildRaporPage(siswa, logPeriode, opts) {
     const rata = Stats.rataPerKategori(logPeriode);
     const norm = Stats.normArr(rata);
@@ -1131,12 +1269,8 @@ const PrintEngine = {
     const rataSek = terisi.length
       ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length
       : 0;
-    const best = terisi.length
-      ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a)
-      : null;
-    const worst = terisi.length
-      ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a)
-      : null;
+    const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
+    const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
     const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
 
     const periodeText = opts.bulanAwal === opts.bulanAkhir
@@ -1186,7 +1320,6 @@ const PrintEngine = {
     </div>`;
   },
 
-  /* ---------- Main render ---------- */
   async render(pages, opts) {
     const seq = ++PrintEngine._renderSeq;
     const shell = $('#previewShell');
@@ -1209,7 +1342,7 @@ const PrintEngine = {
       <div class="preview-scroll">
         <div class="preview-hint no-print">
           <span class="material-symbols-outlined">info</span>
-          <span>Untuk PDF terbaik: di dialog cetak, pilih <b>A4</b>, margin <b>Default</b>, dan matikan <b>Headers &amp; footers</b>.</span>
+          <span>Untuk PDF terbaik: di dialog cetak pilih <b>A4</b>, margin <b>Default</b>, dan matikan <b>Headers &amp; footers</b>.</span>
         </div>
         <div id="printArea">${pages.join('')}</div>
       </div>`;
@@ -1218,33 +1351,28 @@ const PrintEngine = {
     shell.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    // Reset chart refs
     PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
     PrintEngine._charts = [];
 
     await ensureChart();
 
-    // Render chart sequential dengan yield tiap 10
     let i = 0;
     for (const task of (opts.chartTasks || [])) {
-      if (PrintEngine._renderSeq !== seq) return; // cancelled
+      if (PrintEngine._renderSeq !== seq) return;
       try { await task(); } catch (e) { console.warn('Chart fail', e); }
       if (++i % 10 === 0) await yieldTick();
     }
 
     if (PrintEngine._renderSeq !== seq) return;
 
-    // Tunggu font ready
     if (document.fonts && document.fonts.ready) {
       try { await document.fonts.ready; } catch {}
     }
 
-    // 2 RAF tick untuk paint
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
     if (PrintEngine._renderSeq !== seq) return;
 
-    // Aktifkan tombol print
     const btnPrint = $('#btnPreviewPrint');
     btnPrint.disabled = false;
     btnPrint.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF';
@@ -1278,21 +1406,14 @@ class BaseTab {
     this._init = false;
     this._busy = false;
   }
-
-  init() {
-    if (this._init) return;
-    this._init = true;
-    this.render();
-  }
-
+  init() { if (this._init) return; this._init = true; this.render(); }
   async guarded(fn) {
     if (this._busy) return;
     this._busy = true;
     try { return await fn(); }
     finally { this._busy = false; }
   }
-
-  onBootReady(boot) {}
+  onBootReady() {}
   render() {}
 }
 
@@ -1312,7 +1433,6 @@ class App {
   async init() {
     if (this.token) {
       this.renderShell();
-      // Chain: verify → bootstrap
       this._verifyAndBoot();
     } else {
       this.renderLogin();
@@ -1341,16 +1461,13 @@ class App {
 
     this._bootPromise = (async () => {
       try {
-        // Coba cache dulu
         const cached = !force ? BootCache.read() : null;
         if (cached && cached.master && cached.identitas) {
           this.boot = cached;
           this.onBootstrapReady();
-          // Background refresh (silent)
           this._bgRefresh();
           return;
         }
-        // Fetch fresh
         const res = await Api.bootstrap();
         if (res.notModified && this.boot) return;
         this.boot = {
@@ -1393,7 +1510,6 @@ class App {
     Object.values(this.tabs).forEach(t => t.onBootReady && t.onBootReady(this.boot));
   }
 
-  /* ---------- Login ---------- */
   renderLogin() {
     this.root.innerHTML = `
       <div class="login-wrap">
@@ -1452,7 +1568,6 @@ class App {
     }
   }
 
-  /* ---------- Shell ---------- */
   renderShell() {
     this.root.innerHTML = `
       <header class="app-header">
@@ -1485,10 +1600,10 @@ class App {
       location.reload();
     };
 
-this.tabs.input = new InputTab($('#tab-input'), this);
-this.tabs.dashkelas = new DashKelasTab($('#tab-dashkelas'), this);
-this.tabs.dashsekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
-this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
+    this.tabs.input = new InputTab($('#tab-input'), this);
+    this.tabs.dashkelas = new DashKelasTab($('#tab-dashkelas'), this);
+    this.tabs.dashsekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
+    this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
 
     this.tabs.input.init();
     if (this.boot) this.onBootstrapReady();
@@ -1513,10 +1628,6 @@ class InputTab extends BaseTab {
     this.riwayat = [];
     this.setup = { tahun: '2026', bulan: fmtBulan(todayM()), minggu: 1, kelas: '' };
     this._saving = false;
-  }
-
-  onBootReady() {
-    // No-op, kelas options statis
   }
 
   render() {
@@ -1693,12 +1804,10 @@ class InputTab extends BaseTab {
     const tbody = $('#layer2 tbody');
     if (!tbody) return;
 
-    // Input handler: validate + auto advance
     tbody.addEventListener('input', e => {
       const inp = e.target;
       if (!inp.classList || !inp.classList.contains('input-cell')) return;
 
-      // User edit → remove row-saved visual
       const tr = inp.closest('tr');
       if (tr && tr.classList.contains('row-saved')) tr.classList.remove('row-saved');
 
@@ -1712,12 +1821,11 @@ class InputTab extends BaseTab {
         const max = isSalat ? 7 : 4;
         const min = isSalat ? 0 : 1;
         const n = parseInt(v, 10);
-        if (n > max) { inp.value = String(max); }
-        else if (n < min && !isSalat) { inp.value = String(min); }
+        if (n > max) inp.value = String(max);
+        else if (n < min && !isSalat) inp.value = String(min);
       }
     });
 
-    // Keyboard navigation
     tbody.addEventListener('keydown', e => {
       const inp = e.target;
       if (!inp.classList || !inp.classList.contains('input-cell')) return;
@@ -1725,14 +1833,12 @@ class InputTab extends BaseTab {
       else if (e.key === 'Enter') { e.preventDefault(); this._focusNext(inp); }
     });
 
-    // Blur: mark invalid if empty
     tbody.addEventListener('blur', e => {
       if (e.target.classList && e.target.classList.contains('input-cell') && e.target.value === '') {
         e.target.classList.add('invalid');
       }
     }, true);
 
-    // Save row buttons
     $$('#layer2 .btn-save-row').forEach(btn => {
       btn.onclick = e => {
         const tr = e.currentTarget.closest('tr');
@@ -1740,7 +1846,6 @@ class InputTab extends BaseTab {
       };
     });
 
-    // Batch save — selalu simpan semua baris (backend replace)
     $('#btnSubmitBatch').onclick = e => {
       const rows = $$('#layer2 tbody tr');
       if (!rows.length) return toast('Tidak ada data.', 'error');
@@ -1811,10 +1916,7 @@ class InputTab extends BaseTab {
         const res = await Api.simpan(payload);
         if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
 
-        // Visual feedback
         for (const tr of rowEls) tr.classList.add('row-saved');
-
-        // Invalidate caches
         LogsCache.invalidateAll();
         BootCache.invalidate();
 
@@ -2130,9 +2232,7 @@ class DashSekolahTab extends BaseTab {
     });
 
     const terisi = rekap.filter(r => r.rataKes !== null);
-    const rataSek = terisi.length
-      ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length
-      : 0;
+    const rataSek = terisi.length ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length : 0;
     const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
     const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
     const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
@@ -2156,13 +2256,15 @@ class DashSekolahTab extends BaseTab {
           <span>${esc(periodeText)} · ${totalMinggu} minggu · ${totalSiswa} siswa · ${terisi.length} kelas</span>
         </div>
       </div>
-      <div class="card">
-        <h3><span class="material-symbols-outlined">bar_chart</span> Perbandingan Rata-rata Antar Kelas</h3>
-        <div style="position:relative;height:240px"><canvas id="dsChart1"></canvas></div>
-      </div>
-      <div class="card">
-        <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
-        <div style="position:relative;height:300px"><canvas id="dsChart2"></canvas></div>
+      <div class="chart-pair">
+        <div class="card">
+          <h3><span class="material-symbols-outlined">bar_chart</span> Perbandingan Rata-rata Antar Kelas</h3>
+          <div style="position:relative;height:300px"><canvas id="dsChart1"></canvas></div>
+        </div>
+        <div class="card">
+          <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
+          <div style="position:relative;height:300px"><canvas id="dsChart2"></canvas></div>
+        </div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1.2rem 0 .8rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Rekapitulasi Sekolah</h3>
       <div class="table-wrap">
@@ -2234,9 +2336,7 @@ class DashSekolahTab extends BaseTab {
         },
         options: {
           responsive: true, maintainAspectRatio: false, animation: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } }
-          },
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } } },
           scales: {
             y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
             x: { grid: { display: false }, ticks: { font: { size: 10 } } }
@@ -2359,7 +2459,6 @@ class CetakTab extends BaseTab {
     };
 
     $('#btnPreview').onclick = () => this.guarded(() => this._preview());
-
     upd();
   }
 
@@ -2394,7 +2493,6 @@ class CetakTab extends BaseTab {
     btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan...</span>';
 
     try {
-      // Ambil logs
       const query = { tahun: f.tahun, bulanAwal: f.bulanAwal, bulanAkhir: f.bulanAkhir };
       if (this.jenis !== 'sekolah') query.kelas = $('#cKelas').value;
 
@@ -2445,8 +2543,7 @@ class CetakTab extends BaseTab {
             const norm = Stats.normArr(Stats.rataPerKategori(rows));
             chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
             if (rows.length >= 2) {
-              const pts = PrintEngine.pointsTrendIndividu(rows);
-              chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, pts));
+              chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
             }
           }
           if (!pages.length) {
@@ -2532,9 +2629,6 @@ if (document.readyState === 'loading') {
   new App().init();
 }
 
-/* ====================================================================
- *                          SERVICE WORKER
- * ==================================================================== */
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
