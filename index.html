@@ -271,15 +271,17 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 .cetak-catatan p{margin:0 0 5px}
 .cetak-catatan p:last-child{margin-bottom:0}
 
+/* TANDA TANGAN — sejajar karena spacer tanggal-kosong */
 .cetak-ttd{margin-top:26px}
-.cetak-ttd table{width:100%;border-collapse:collapse}
+.cetak-ttd table{width:100%;border-collapse:collapse;table-layout:fixed}
 .cetak-ttd td{border:none;text-align:center;vertical-align:top;width:50%;padding:0 12px;font-size:10pt}
-.cetak-ttd .tanggal{font-size:9.5pt;color:#475569;margin-bottom:4px;text-align:center}
-.cetak-ttd .jabatan{font-weight:600;color:#1e293b;margin-bottom:4px;line-height:1.35}
+.cetak-ttd .tanggal{font-size:9.5pt;color:#475569;margin-bottom:4px;text-align:center;line-height:1.5}
+.cetak-ttd .tanggal-kosong{visibility:hidden}
+.cetak-ttd .jabatan{font-weight:600;color:#1e293b;margin-bottom:4px;line-height:1.35;min-height:1.35em}
 .cetak-ttd .space{height:60px}
-.cetak-ttd .nama{font-weight:700;color:#1e293b;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block}
-.cetak-ttd .nama-kosong{font-weight:400;color:#94a3b8;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block}
-.cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px}
+.cetak-ttd .nama{font-weight:700;color:#1e293b;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block;line-height:1.35}
+.cetak-ttd .nama-kosong{font-weight:400;color:#94a3b8;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block;line-height:1.35}
+.cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px;line-height:1.35}
 
 /* ====================================================================
  *              PRINT — A4 NORMAL MARGIN + SMART BREAKS
@@ -364,9 +366,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 @media (min-width: 900px) {
   :root { --app-max-w: 1400px; --nav-w: 200px; }
 
-  /* ============================================
-   * LOGIN PAGE — centered card (bukan grid)
-   * ============================================ */
+  /* LOGIN PAGE — centered card */
   #app:has(.login-wrap) {
     display: block;
     max-width: 460px;
@@ -388,34 +388,15 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     gap: .7rem;
     overflow: visible;
   }
-  #app:has(.login-wrap) .logo-box {
-    width: 90px;
-    max-width: 90px;
-    margin-bottom: .3rem;
-  }
-  #app:has(.login-wrap) .logo-box .material-symbols-outlined {
-    font-size: 48px;
-  }
-  #app:has(.login-wrap) .login-title {
-    font-size: 1.4rem;
-  }
-  #app:has(.login-wrap) .login-sub {
-    font-size: .88rem;
-    margin-bottom: .5rem;
-  }
-  #app:has(.login-wrap) .input-pin {
-    padding: .85rem 1rem;
-  }
-  #app:has(.login-wrap) .btn-primary {
-    min-height: 46px;
-  }
-  #app:has(.login-wrap) .login-info {
-    margin-top: 1rem;
-  }
+  #app:has(.login-wrap) .logo-box { width: 90px; max-width: 90px; margin-bottom: .3rem; }
+  #app:has(.login-wrap) .logo-box .material-symbols-outlined { font-size: 48px; }
+  #app:has(.login-wrap) .login-title { font-size: 1.4rem; }
+  #app:has(.login-wrap) .login-sub { font-size: .88rem; margin-bottom: .5rem; }
+  #app:has(.login-wrap) .input-pin { padding: .85rem 1rem; }
+  #app:has(.login-wrap) .btn-primary { min-height: 46px; }
+  #app:has(.login-wrap) .login-info { margin-top: 1rem; }
 
-  /* ============================================
-   * APP SHELL — grid layout
-   * ============================================ */
+  /* APP SHELL — grid layout */
   #app:not(:has(.login-wrap)) {
     max-width: 1400px;
     margin: 24px auto;
@@ -433,12 +414,9 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 
   .app-header { grid-area: header; padding: 1rem 1.8rem; padding-top: 1rem; }
   .app-header h1 { font-size: 1.1rem; }
-
   .main { grid-area: main; padding: 1.4rem 1.8rem; padding-bottom: 1.4rem; overflow-y: auto; }
 
-  /* ============================================
-   * BOTTOM NAV → SIDEBAR
-   * ============================================ */
+  /* BOTTOM NAV → SIDEBAR */
   .bottom-nav {
     grid-area: sidebar;
     flex-direction: column;
@@ -478,27 +456,20 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   .nav-item:hover { background: var(--surface-2); }
   .nav-item.active { background: var(--primary-l); color: var(--primary); font-weight: 700; }
 
-  /* ============================================
-   * TYPOGRAPHY & CARDS
-   * ============================================ */
+  /* TYPOGRAPHY & CARDS */
   .section-title { font-size: 1.1rem; margin-bottom: .8rem; }
   .section-title .material-symbols-outlined { font-size: 24px; }
-
   .card { padding: 1.2rem 1.4rem; border-radius: 16px; margin-bottom: 1rem; }
   .card h3 { font-size: 1rem; margin-bottom: .8rem; }
   .card-title { font-size: 1rem; margin-bottom: .8rem; }
 
-  /* ============================================
-   * STATS 4 SEJAJAR
-   * ============================================ */
+  /* STATS 4 SEJAJAR */
   .stats-grid { grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1rem; }
   .stat { padding: 1rem 1.1rem; }
   .stat .num { font-size: 1.75rem; }
   .stat .lbl { font-size: .7rem; }
 
-  /* ============================================
-   * INPUT TAB — cardSetup grid 4 kolom
-   * ============================================ */
+  /* INPUT TAB — cardSetup grid 4 kolom */
   #cardSetup {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -512,13 +483,8 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     margin-bottom: .3rem;
     font-size: 1rem;
   }
-  #cardSetup .form-group {
-    margin-bottom: 0;
-    gap: .2rem;
-  }
-  #cardSetup .form-group label {
-    font-size: .72rem;
-  }
+  #cardSetup .form-group { margin-bottom: 0; gap: .2rem; }
+  #cardSetup .form-group label { font-size: .72rem; }
   #cardSetup #btnLanjut {
     grid-column: 1 / -1;
     justify-self: end;
@@ -529,9 +495,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding: .6rem 1.2rem;
   }
 
-  /* ============================================
-   * FILTER GRID — 4 kolom
-   * ============================================ */
+  /* FILTER GRID — 4 kolom */
   .filter-grid { grid-template-columns: repeat(4, 1fr) !important; gap: .5rem .9rem; }
   .filter-grid .form-group { gap: .2rem; }
   .filter-grid .form-group label { font-size: .72rem; }
@@ -552,7 +516,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding: .5rem 0;
   }
 
-  /* Cetak: jenis cetak filter layout */
+  /* Cetak: layout filter */
   #grpKelas, #grpSiswa { grid-column: span 2; }
   #grpBatch {
     grid-column: 1 / -1;
@@ -563,32 +527,24 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   }
   #grpBatch label { width: 100%; justify-content: flex-start; }
 
-  /* ============================================
-   * DASHBOARD CHARTS
-   * ============================================ */
+  /* DASHBOARD CHARTS */
   #dkResult .card > div[style*="height:260px"] { min-height: 340px !important; }
   #dsResult .card > div[style*="height:240px"] { min-height: 320px !important; }
   #dsResult .card > div[style*="height:300px"] { min-height: 340px !important; }
-
   .chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .chart-pair > .card { margin-bottom: 0; }
 
-  /* ============================================
-   * TABLES
-   * ============================================ */
+  /* TABLES */
   .table-wrap { max-height: 68vh; }
   table.data { min-width: 0; font-size: .85rem; }
   .data td { padding: .65rem .55rem; }
   .data th { padding: .75rem .5rem; font-size: .68rem; }
   .input-cell { width: 50px; height: 40px; font-size: 16px; }
   .input-cell:focus { transform: scale(1.05); }
-
   .legend { padding: .7rem .9rem; }
   .legend table { font-size: .76rem; }
 
-  /* ============================================
-   * INPUT LAYER 2 — sticky header
-   * ============================================ */
+  /* INPUT LAYER 2 — sticky header */
   #layer2 > div:first-child {
     position: sticky;
     top: -1.4rem;
@@ -603,7 +559,6 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding-right: 1.8rem;
   }
 
-  /* Tombol batch save — right aligned */
   #btnSubmitBatch {
     width: auto;
     min-width: 260px;
@@ -614,29 +569,21 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 
   #dkResult .stats-grid { margin-bottom: 1rem; }
   .jenis-btn .btn { padding: .6rem .8rem; }
-
-  /* Preview shell */
   .preview-scroll { padding: 32px 24px; }
 }
-  
-/* ====================================================================
- *                        LARGE DESKTOP (≥1400px)
- * ==================================================================== */
+
+/* LARGE DESKTOP */
 @media (min-width: 1400px) {
   :root { --nav-w: 220px; }
   #app { max-width: 1600px; }
   .main { padding: 1.8rem 2.5rem; }
   .app-header { padding: 1.1rem 2.2rem; }
-
   #dkResult .card > div[style*="height:260px"] { min-height: 380px !important; }
   #dsResult .card > div[style*="height:300px"] { min-height: 380px !important; }
-
   .stat .num { font-size: 2rem; }
 }
 
-/* ====================================================================
- *                        TABLET (768-899px)
- * ==================================================================== */
+/* TABLET */
 @media (min-width: 768px) and (max-width: 899px) {
   :root { --app-max-w: 820px; }
   .stats-grid { grid-template-columns: repeat(4, 1fr); }
@@ -1161,12 +1108,18 @@ const PrintEngine = {
     return html ? `<div class="cetak-catatan">${html}</div>` : '';
   },
 
+  /**
+   * Tanda tangan 2 kolom — sejajar sempurna.
+   * Kolom kiri pakai spacer `tanggal-kosong` setinggi baris tanggal di kanan.
+   */
   ttd(opts) {
     const now = new Date();
     const tgl = `${now.getDate()} ${fmtBulan(now.getMonth())} ${now.getFullYear()}`;
     const cell = (label, nama, nip, withTgl) => `
-      ${withTgl ? `<div class="tanggal">Godegan, ${tgl}</div>` : ''}
-      ${label ? `<div class="jabatan">${label}</div>` : ''}
+      ${withTgl
+        ? `<div class="tanggal">Godegan, ${tgl}</div>`
+        : `<div class="tanggal tanggal-kosong">&nbsp;</div>`}
+      ${label ? `<div class="jabatan">${label}</div>` : `<div class="jabatan">&nbsp;</div>`}
       <div class="space"></div>
       ${nama ? `<div class="nama">${esc(nama)}</div>` : `<div class="nama-kosong">(_____________________)</div>`}
       ${nip ? `<div class="nip">NIP. ${esc(nip)}</div>` : ''}`;
@@ -1323,6 +1276,7 @@ const PrintEngine = {
       ${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}
       ${PrintEngine.ttd({
         kiriLabel: 'Orang Tua / Wali',
+        kiriNama: siswa.Nama_Ortu || '',
         kananLabel: 'Wali Kelas',
         kananNama: wali.nama,
         kananNip: wali.nip
@@ -1926,10 +1880,10 @@ class InputTab extends BaseTab {
         <span class="material-symbols-outlined">cloud_upload</span> SIMPAN SEMUA DATA
       </button>`;
 
-$('#btnKembali').onclick = () => {
-  layer2.innerHTML = '';
-  if (card) card.style.display = '';   // ← reset ke CSS default (grid di desktop, block di mobile)
-};
+    $('#btnKembali').onclick = () => {
+      layer2.innerHTML = '';
+      if (card) card.style.display = '';  // FIX: reset ke CSS default (grid di desktop)
+    };
 
     this._attachInput(tahun, bulan, minggu, kelas);
   }
