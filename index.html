@@ -20,7 +20,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 
 <style>
-/* ==================== DESIGN TOKENS ==================== */
+/* ====================================================================
+ *                        DESIGN TOKENS
+ * ==================================================================== */
 :root{
   --primary:#4F46E5; --primary-d:#4338CA; --primary-l:#EEF2FF;
   --positive:#10B981; --positive-d:#059669;
@@ -51,13 +53,16 @@ input,select,textarea{font-family:inherit;font-size:16px}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ==================== APP SHELL ==================== */
+/* ====================================================================
+ *                        APP SHELL
+ * ==================================================================== */
 #app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 
 .spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
-.spinner-dark{border-color:rgba(79,70,229,.2);border-top-color:var(--primary)}
 
-/* ==================== LOGIN ==================== */
+/* ====================================================================
+ *                        LOGIN
+ * ==================================================================== */
 .login-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;gap:.85rem;background:var(--surface);overflow-y:auto;text-align:center}
 .logo-box{width:min(140px,40vw);aspect-ratio:1;max-width:160px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;box-shadow:0 10px 25px -5px rgba(79,70,229,.35)}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.3}
@@ -69,14 +74,15 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .login-info h3{font-size:.8rem;color:var(--primary-d);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-info p{font-size:.75rem;color:var(--muted);line-height:1.5}
 
-/* ==================== HEADER ==================== */
+/* ====================================================================
+ *                        HEADER + NAV
+ * ==================================================================== */
 .app-header{background:var(--surface);padding:.75rem 1.1rem;padding-top:calc(.75rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
 .app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem}
 .app-header h1 .material-symbols-outlined{font-size:24px}
 .btn-icon{color:var(--muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--t);min-width:44px;min-height:44px}
 .btn-icon:hover{background:#FFE4E6;color:var(--negative)}
 
-/* ==================== MAIN + NAV ==================== */
 .main{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
 .tab-pane{display:none;animation:fadeIn .25s ease-out}
 .tab-pane.active{display:block}
@@ -87,7 +93,9 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
 @media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
-/* ==================== CARDS + FORMS ==================== */
+/* ====================================================================
+ *                        CARDS + FORMS
+ * ==================================================================== */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-s);padding:1.2rem;margin-bottom:1rem}
 .card-title{font-size:1.05rem;font-weight:800;text-align:center;margin-bottom:1.2rem}
 .section-title{font-size:1rem;font-weight:800;margin:0 0 1rem;display:flex;align-items:center;gap:.5rem}
@@ -113,17 +121,21 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .btn-ghost:hover{background:var(--surface-2)}
 .btn-sm{padding:.5rem .85rem;font-size:.82rem;min-height:36px;width:auto}
 
-/* ==================== STATS ==================== */
+/* ====================================================================
+ *                        STATS
+ * ==================================================================== */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1rem}
 @media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-s);padding:1rem;box-shadow:var(--shadow-s)}
-.stat .num{font-size:1.5rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat .num{font-size:1.5rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
 .stat .lbl{font-size:.68rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:.3rem}
 .stat.pos .num{color:var(--positive)}
 .stat.neg .num{color:var(--negative)}
 
-/* ==================== TABLES ==================== */
-.table-wrap{overflow:auto;max-height:60vh;background:var(--surface);border-radius:var(--r-s);border:1px solid var(--border);box-shadow:var(--shadow-s);margin-bottom:1rem}
+/* ====================================================================
+ *                        TABLES
+ * ==================================================================== */
+.table-wrap{overflow:auto;max-height:60vh;background:var(--surface);border-radius:var(--r-s);border:1px solid var(--border);box-shadow:var(--shadow-s);margin-bottom:1rem;-webkit-overflow-scrolling:touch}
 table.data{width:100%;border-collapse:collapse;min-width:900px}
 .data th{background:var(--bg);color:var(--muted);font-size:.7rem;text-transform:uppercase;padding:.8rem .5rem;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:2}
 .data td{padding:.7rem .5rem;border-bottom:1px solid var(--border);text-align:center;font-size:.82rem;font-variant-numeric:tabular-nums}
@@ -136,34 +148,43 @@ table.data{width:100%;border-collapse:collapse;min-width:900px}
 .input-cell{width:48px;height:38px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0}
 .input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-l);transform:scale(1.08);z-index:5}
 .input-cell.salat{border-color:#bfdbfe;background:#eff6ff;color:var(--primary)}
-.input-cell.invalid{border-color:var(--negative)!important;background:#FFE4E6!important}
+.input-cell.invalid{border-color:var(--negative)!important;background:#FFE4E6!important;animation:shakeInput .3s}
+@keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
 input[type=number]{-moz-appearance:textfield}
-tr.row-saved{background:#D1FAE5!important}
-tr.row-saved .sticky-l{background:#D1FAE5}
-tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transparent;pointer-events:none}
 
-/* ==================== FILTER GRID ==================== */
+/* Row saved = visual only, tetap editable */
+tr.row-saved{background:#ecfdf5}
+tr.row-saved .sticky-l{background:#ecfdf5}
+tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
+tr.row-saved .input-cell:focus{background:#fff;border-color:var(--primary)}
+
+/* ====================================================================
+ *                        FILTER + LEGEND
+ * ==================================================================== */
 .filter-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;align-items:end}
 .filter-grid .form-group{margin-bottom:0}
 .filter-grid .full{grid-column:1/-1}
 @media(min-width:600px){.filter-grid{grid-template-columns:repeat(3,1fr)}.filter-grid .span-3{grid-column:span 3}}
 
-/* ==================== LEGEND ==================== */
 .legend{background:var(--primary-l);padding:.9rem;border-radius:var(--r-s);border-left:4px solid var(--primary);font-size:.82rem;color:var(--primary-d);margin-bottom:1rem}
 .legend strong{display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem;font-size:.85rem}
 .legend table{width:100%;min-width:520px;border-collapse:collapse;font-size:.74rem}
 .legend th{text-align:left;padding:4px 6px;color:var(--primary-d);border-bottom:1px solid #C7D2FE}
 .legend td{padding:4px 6px;border:none;text-align:left}
 
-/* ==================== TOAST ==================== */
-.toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+/* ====================================================================
+ *                        TOAST
+ * ==================================================================== */
+.toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--r-s);color:#fff;font-size:.85rem;font-weight:500;box-shadow:var(--shadow-m);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275);pointer-events:auto}
 .toast.success{background:var(--positive)}
 .toast.error{background:var(--negative)}
 .toast.hide{animation:slideUp .3s ease-in forwards}
 
-/* ==================== EMPTY + SKELETON ==================== */
+/* ====================================================================
+ *                        EMPTY + SKELETON
+ * ==================================================================== */
 .empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .empty .material-symbols-outlined{font-size:52px;opacity:.4;color:var(--primary)}
 .empty p{max-width:320px;font-size:.85rem;line-height:1.5}
@@ -172,31 +193,29 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 .skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem}
 
 /* ====================================================================
- *                       PRINT PREVIEW (WYSIWYG)
+ *                        PRINT PREVIEW SHELL
  * ==================================================================== */
-
-/* Modal overlay */
 .preview-shell{position:fixed;inset:0;background:#1e293b;z-index:9998;display:none;flex-direction:column}
 .preview-shell.show{display:flex}
-
-/* Toolbar */
-.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem;padding-top:calc(.75rem + env(safe-area-inset-top))}
-.preview-toolbar .title{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text);min-width:0}
-.preview-toolbar .title span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;padding-top:calc(.75rem + env(safe-area-inset-top));background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem}
+.preview-toolbar .title{font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:.5rem;color:var(--text);min-width:0;flex:1}
+.preview-toolbar .title span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .preview-toolbar .actions{display:flex;gap:.5rem;flex-shrink:0}
 .preview-toolbar .btn{width:auto;min-width:auto;padding:.5rem .9rem;font-size:.85rem;min-height:38px}
+.preview-scroll{flex:1;overflow:auto;padding:20px 12px;-webkit-overflow-scrolling:touch;background:#334155}
+.preview-hint{max-width:210mm;margin:0 auto 12px;background:#475569;color:#cbd5e1;font-size:.78rem;padding:.6rem .9rem;border-radius:6px;display:flex;align-items:center;gap:.5rem}
+.preview-hint .material-symbols-outlined{font-size:16px;color:#fbbf24}
 
-/* Preview scroll area */
-.preview-scroll{flex:1;overflow:auto;padding:20px 0;-webkit-overflow-scrolling:touch;background:#334155}
-
-/* Paper (A4) */
+/* ====================================================================
+ *                        A4 PAPER (SCREEN PREVIEW)
+ * ==================================================================== */
 .cetak-page{
   width:210mm;
   min-height:297mm;
-  padding:12mm 10mm;
+  padding:15mm 12mm;
   background:#fff;
   margin:0 auto 20px;
-  box-shadow:0 4px 24px rgba(0,0,0,.4);
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
   box-sizing:border-box;
   color:#1e293b;
   font-family:'Inter',system-ui,sans-serif;
@@ -206,7 +225,7 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 }
 .cetak-page:last-child{margin-bottom:20px}
 
-/* ---------- Print template styles (dipakai untuk preview & print) ---------- */
+/* ---------- PRINT TEMPLATE STYLES ---------- */
 .cetak-kop{border-bottom:3px double #1e3a8a;padding-bottom:8px;margin-bottom:14px;text-align:center}
 .cetak-kop .dinas{font-size:9.5pt;font-weight:600;color:#334155;letter-spacing:.3px}
 .cetak-kop .dinas-sub{font-size:9pt;font-weight:500;color:#475569}
@@ -217,7 +236,7 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 .cetak-judul{font-size:13pt;text-align:center;font-weight:800;color:#0f172a;letter-spacing:.4px;margin:10px 0 3px}
 .cetak-sub{text-align:center;font-size:9.5pt;color:#64748b;margin-bottom:12px}
 
-.cetak-h3{font-size:10.5pt;font-weight:700;color:#1e293b;padding:5px 10px;background:#f1f5f9;border-left:4px solid #4F46E5;margin:12px 0 8px;page-break-after:avoid}
+.cetak-h3{font-size:10.5pt;font-weight:700;color:#1e293b;padding:5px 10px;background:#f1f5f9;border-left:4px solid #4F46E5;margin:14px 0 8px}
 
 .cetak-ident{width:100%;border-collapse:collapse;margin:6px 0 12px;background:#f8fafc;border:1px solid #e2e8f0}
 .cetak-ident td{padding:6px 10px;font-size:10pt;vertical-align:top}
@@ -241,14 +260,14 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 .badge-cukup{background:#FEF3C7;color:#92400e}
 .badge-kurang{background:#FFE4E6;color:#9f1239}
 
-.cetak-chart-wrap{margin:6px 0 12px;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;text-align:center;page-break-inside:avoid}
+.cetak-chart-wrap{margin:6px 0 12px;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;text-align:center}
 .cetak-chart-wrap canvas{display:block;margin:0 auto}
 
-.cetak-catatan{background:#fefce8;border-left:4px solid #eab308;padding:10px 14px;margin:8px 0 12px;font-size:9.5pt;color:#422006;page-break-inside:avoid}
+.cetak-catatan{background:#fefce8;border-left:4px solid #eab308;padding:10px 14px;margin:8px 0 12px;font-size:9.5pt;color:#422006}
 .cetak-catatan p{margin:0 0 5px}
 .cetak-catatan p:last-child{margin-bottom:0}
 
-.cetak-ttd{margin-top:30px;page-break-inside:avoid}
+.cetak-ttd{margin-top:26px}
 .cetak-ttd table{width:100%;border-collapse:collapse}
 .cetak-ttd td{border:none;text-align:center;vertical-align:top;width:50%;padding:0 12px;font-size:10pt}
 .cetak-ttd .tanggal{font-size:9.5pt;color:#475569;margin-bottom:4px;text-align:center}
@@ -259,27 +278,97 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 .cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px}
 
 /* ====================================================================
- *                       PRINT MEDIA QUERY
+ *                        PRINT — A4 NORMAL MARGIN + SMART BREAKS
  * ==================================================================== */
 @media print {
-  @page { size: A4 portrait; margin: 0; }
-  html,body{position:static!important;overflow:visible!important;height:auto!important;background:#fff!important}
-  body > *:not(.preview-shell){display:none!important}
-  .preview-shell{display:flex!important;position:static!important;background:#fff!important}
-  .preview-toolbar,.no-print{display:none!important}
-  .preview-scroll{overflow:visible!important;padding:0!important;background:#fff!important;flex:none!important;height:auto!important}
-  .cetak-page{
-    width:210mm!important;
-    min-height:297mm!important;
-    margin:0!important;
-    padding:12mm 10mm!important;
-    box-shadow:none!important;
-    page-break-after:always;
-    break-after:page;
+  @page {
+    size: A4 portrait;
+    margin: 15mm 12mm;
   }
-  .cetak-page:last-child{page-break-after:auto;break-after:auto}
-  .cetak-h3,.cetak-chart-wrap,.cetak-catatan,.cetak-ttd{page-break-inside:avoid;break-inside:avoid}
-  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+
+  html, body {
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body > *:not(.preview-shell) { display: none !important; }
+
+  .preview-shell {
+    display: flex !important;
+    position: static !important;
+    background: #fff !important;
+    inset: auto !important;
+  }
+
+  .preview-toolbar,
+  .preview-hint,
+  .no-print { display: none !important; }
+
+  .preview-scroll {
+    overflow: visible !important;
+    padding: 0 !important;
+    background: #fff !important;
+    flex: none !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  #printArea { display: block !important; }
+
+  /* A4 page container — reset untuk print, @page yang atur margin */
+  .cetak-page {
+    width: auto !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+    page-break-after: always;
+    break-after: page;
+  }
+  .cetak-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Smart page breaks */
+  .cetak-kop,
+  .cetak-judul,
+  .cetak-sub,
+  .cetak-ident,
+  .cetak-summary { page-break-inside: avoid; break-inside: avoid; }
+
+  .cetak-h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .cetak-chart-wrap,
+  .cetak-catatan,
+  .cetak-ttd { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Table: header repeat, row intact, tapi table boleh break */
+  .cetak-tbl { page-break-inside: auto; break-inside: auto; }
+  .cetak-tbl thead { display: table-header-group; }
+  .cetak-tbl tbody tr { page-break-inside: avoid; break-inside: avoid; }
+  .cetak-tbl tbody { page-break-inside: auto; }
+
+  /* Force warna tetap tercetak */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
 }
 </style>
 </head>
@@ -293,27 +382,30 @@ tr.row-saved .input-cell{background:#dcfce7;color:#166534;border-color:transpare
 (() => {
 
 /* ====================================================================
- *                              CONFIG
+ *                            CONFIG
  * ==================================================================== */
-const CFG = {
+const CFG = Object.freeze({
   API: 'https://script.google.com/macros/s/AKfycbzOsHTfGQlozVMr6X5nEfFlqYJqZhdevocMqdKKMp71QnK-sBLQb_fHM3YSgVqAytJyVA/exec',
   LS_TOKEN: 'k7_token',
   LS_VER: 'k7_ver',
-  LS_BOOT: 'k7_boot',         // { v, identitas, waliKelas, master, ts }
-  LS_LOGS: 'k7_logs_',        // + filterKey → { v, logs, ts }
+  LS_BOOT: 'k7_boot',
+  LS_LOGS: 'k7_logs_',
   LS_SETUP: 'k7_setup',
   BOOT_TTL: 6 * 60 * 60 * 1000,
-  LOGS_TTL: 5 * 60 * 1000,
+  LOGS_TTL: 30 * 60 * 1000,
+  MAX_LOGS_KEYS: 40,
   FETCH_TIMEOUT: 30000,
   CHART_CDN: 'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js',
-  CHART_FALLBACK: 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js'
-};
+  CHART_FALLBACK: 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js',
+  TOAST_MAX: 3,
+  TOAST_DURATION: 3200
+});
 
-const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-const KELAS = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
-const TAHUN = ['2025','2026','2027','2028'];
+const BULAN = Object.freeze(['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']);
+const KELAS = Object.freeze(['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6']);
+const TAHUN = Object.freeze(['2025','2026','2027','2028']);
 
-const KATEGORI = [
+const KATEGORI = Object.freeze([
   { key:'Skor_Bangun',   label:'Bangun Pagi',   max:4 },
   { key:'Skor_Subuh',    label:'Subuh',         max:7 },
   { key:'Skor_Dzuhur',   label:'Dzuhur',        max:7 },
@@ -326,9 +418,11 @@ const KATEGORI = [
   { key:'Skor_Belajar',  label:'Gemar Belajar', max:4 },
   { key:'Skor_Sosial',   label:'Bermasyarakat', max:4 },
   { key:'Skor_Tidur',    label:'Cepat Tidur',   max:4 }
-];
+]);
 
-const SARAN = {
+const CHART_COLORS = Object.freeze(['#4F46E5','#0EA5E9','#06B6D4','#14B8A6','#F59E0B','#EA580C','#A855F7','#10B981','#EAB308','#EC4899','#F43F5E','#64748B']);
+
+const SARAN = Object.freeze({
   Skor_Bangun:'Membiasakan jam tidur yang cukup dan alarm pagi dapat membantu ananda bangun lebih awal.',
   Skor_Subuh:'Membiasakan bangun sebelum waktu Subuh dan pendampingan orang tua dapat membantu konsistensi salat Subuh ananda.',
   Skor_Dzuhur:'Mengingatkan ananda untuk salat Dzuhur tepat waktu, misalnya di sela istirahat sekolah.',
@@ -341,26 +435,34 @@ const SARAN = {
   Skor_Belajar:'Menyediakan waktu belajar terjadwal di rumah dapat membantu.',
   Skor_Sosial:'Mendorong ananda untuk lebih aktif berinteraksi dan membantu di lingkungan sekitar.',
   Skor_Tidur:'Membiasakan waktu tidur malam yang lebih awal dan konsisten.'
-};
+});
 
-const TH = { BAIK: 0.875, CUKUP: 0.625 }; // threshold status
+const THRESHOLD = Object.freeze({ BAIK: 0.875, CUKUP: 0.625 });
 
 /* ====================================================================
  *                              UTIL
  * ==================================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+const escAttr = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
 const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
 const str = v => v == null ? '' : String(v);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const yieldTick = () => new Promise(r => setTimeout(r, 0));
 
 const fmtBulan = idx => BULAN[idx] || '';
 const todayM = () => new Date().getMonth();
 
+const debounce = (fn, ms) => {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+};
+
 /* ====================================================================
- *                              TOAST
+ *                            TOAST (max 3 stack)
  * ==================================================================== */
 const _toastMap = new Map();
 const toast = (msg, type = 'success') => {
@@ -370,27 +472,57 @@ const toast = (msg, type = 'success') => {
   _toastMap.set(k, now);
   setTimeout(() => _toastMap.delete(k), 3000);
 
+  const wrap = $('#toastWrap');
+  // Batasi stack max 3
+  while (wrap.children.length >= CFG.TOAST_MAX) {
+    wrap.removeChild(wrap.firstChild);
+  }
+
   const el = document.createElement('div');
   el.className = `toast ${type}`;
   el.innerHTML = `<span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'error'}</span><span>${esc(msg)}</span>`;
-  $('#toastWrap').appendChild(el);
-  setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); }, 3200);
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); }, CFG.TOAST_DURATION);
 };
 
 /* ====================================================================
- *                        LOCAL STORAGE CACHE
+ *                    LOCAL STORAGE (safe wrapper)
  * ==================================================================== */
 const LS = {
-  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  get(k) {
+    try { return JSON.parse(localStorage.getItem(k)); }
+    catch { return null; }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem(k, JSON.stringify(v));
+      return true;
+    } catch (e) {
+      if (e && e.name === 'QuotaExceededError') {
+        console.warn('[LS] quota exceeded, pruned');
+        return false;
+      }
+      return false;
+    }
+  },
   del(k) { try { localStorage.removeItem(k); } catch {} },
-  clearBoot() { LS.del(CFG.LS_BOOT); LS.del(CFG.LS_VER); }
+  keys(prefix) {
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(prefix)) out.push(k);
+    }
+    return out;
+  }
 };
 
+/* ====================================================================
+ *                    BOOT CACHE (master + identitas + wali)
+ * ==================================================================== */
 const BootCache = {
   read() {
     const b = LS.get(CFG.LS_BOOT);
-    if (!b || !b.ts) return null;
+    if (!b || !b.ts || !b.master) return null;
     if (Date.now() - b.ts > CFG.BOOT_TTL) return null;
     return b;
   },
@@ -398,11 +530,27 @@ const BootCache = {
     LS.set(CFG.LS_BOOT, { ...data, ts: Date.now() });
     LS.set(CFG.LS_VER, data.v);
   },
-  invalidate() { LS.clearBoot(); }
+  invalidate() {
+    LS.del(CFG.LS_BOOT);
+    LS.del(CFG.LS_VER);
+  }
 };
 
+/* ====================================================================
+ *                    LOGS CACHE (auto prune + quota safe)
+ * ==================================================================== */
 const LogsCache = {
-  key(f) { return `${f.tahun}|${f.bulanAwal}|${f.bulanAkhir}|${f.kelas||''}|${f.minggu||''}`; },
+  key(f) {
+    f = f || {};
+    return [
+      't=' + (f.tahun || '*'),
+      'ba=' + (f.bulanAwal || '*'),
+      'bk=' + (f.bulanAkhir || f.bulanAwal || '*'),
+      'k=' + (f.kelas || '*'),
+      'm=' + (f.minggu || '*')
+    ].join('|');
+  },
+
   read(f) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
     const c = LS.get(k);
@@ -411,17 +559,42 @@ const LogsCache = {
     if (c.v !== LS.get(CFG.LS_VER)) return null;
     return c.logs;
   },
+
   write(f, logs) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
-    LS.set(k, { v: LS.get(CFG.LS_VER), logs, ts: Date.now() });
+    const payload = { v: LS.get(CFG.LS_VER), logs, ts: Date.now() };
+
+    if (!LS.set(k, payload)) {
+      LogsCache.prune(true);
+      LS.set(k, payload);
+    } else {
+      LogsCache.prune(false);
+    }
   },
+
+  prune(force) {
+    const keys = LS.keys(CFG.LS_LOGS);
+    if (!force && keys.length < CFG.MAX_LOGS_KEYS) return;
+
+    const entries = keys.map(k => {
+      try {
+        const v = JSON.parse(localStorage.getItem(k));
+        return { key: k, ts: (v && v.ts) || 0 };
+      } catch { return { key: k, ts: 0 }; }
+    });
+    entries.sort((a, b) => a.ts - b.ts);
+
+    const cut = force ? entries.length : Math.floor(entries.length * 0.3);
+    for (let i = 0; i < cut; i++) LS.del(entries[i].key);
+  },
+
   invalidateAll() {
-    Object.keys(localStorage).filter(k => k.startsWith(CFG.LS_LOGS)).forEach(k => LS.del(k));
+    LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k));
   }
 };
 
 /* ====================================================================
- *                              API CLIENT
+ *                            API CLIENT
  * ==================================================================== */
 const Api = {
   _token: () => sessionStorage.getItem(CFG.LS_TOKEN),
@@ -433,7 +606,9 @@ const Api = {
       const res = await fetch(url, { ...opts, signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return await res.json();
-    } finally { clearTimeout(tid); }
+    } finally {
+      clearTimeout(tid);
+    }
   },
 
   async get(action, params = {}) {
@@ -465,14 +640,21 @@ const Api = {
       setTimeout(() => location.reload(), 800);
       throw new Error('Unauthorized');
     }
+    if (data && data.error === 'server_error') {
+      throw new Error(data.message || 'Server error');
+    }
   },
 
-  verify(token) { return Api._fetch(`${CFG.API}?action=verify_token`, {
-    method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ token })
-  }).then(d => d.valid === true).catch(() => false); },
+  verify(token) {
+    return Api._fetch(`${CFG.API}?action=verify_token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ token })
+    }).then(d => d.valid === true).catch(() => false);
+  },
 
   bootstrap(since) { return Api.get('bootstrap', since ? { since } : {}); },
+
   logs(f) {
     const p = { tahun: f.tahun };
     if (f.bulanAwal) p.bulanAwal = f.bulanAwal;
@@ -481,11 +663,12 @@ const Api = {
     if (f.minggu) p.minggu = f.minggu;
     return Api.get('logs', p);
   },
+
   simpan(rows) { return Api.post('simpan_jurnal', { rows }); }
 };
 
 /* ====================================================================
- *                          CHART LOADER (lazy)
+ *                        CHART LOADER (lazy + fallback)
  * ==================================================================== */
 let _chartReady = null;
 const ensureChart = () => {
@@ -508,28 +691,36 @@ const ensureChart = () => {
 };
 
 /* ====================================================================
- *                       CLIENT-SIDE STATS ENGINE
+ *                        STATS ENGINE (client-side)
  * ==================================================================== */
 const Stats = {
-  filter(rows, tahun, bulanAwal, bulanAkhir) {
-    const ia = BULAN.indexOf(bulanAwal), ib = BULAN.indexOf(bulanAkhir);
-    return rows.filter(r => String(r.Tahun) === String(tahun)
-      && BULAN.indexOf(r.Bulan) >= ia
-      && BULAN.indexOf(r.Bulan) <= ib);
-  },
-
   dedup(rows) {
     const m = new Map();
-    rows.forEach(r => m.set(`${r.NIS}_${r.Tahun}_${r.Bulan}_${r.Minggu_Ke}`, r));
+    for (const r of rows) m.set(`${r.NIS}_${r.Tahun}_${r.Bulan}_${r.Minggu_Ke}`, r);
     return [...m.values()];
   },
 
   rataPerKategori(rows) {
     const out = {};
-    KATEGORI.forEach(k => out[k.key] = 0);
+    for (const k of KATEGORI) out[k.key] = 0;
     if (!rows.length) return out;
-    rows.forEach(r => KATEGORI.forEach(k => out[k.key] += num(r[k.key])));
-    KATEGORI.forEach(k => out[k.key] /= rows.length);
+    for (const r of rows) {
+      for (const k of KATEGORI) out[k.key] += num(r[k.key]);
+    }
+    for (const k of KATEGORI) out[k.key] /= rows.length;
+    return out;
+  },
+
+  /* Rata-rata kelas yang benar: per-siswa dulu, baru rata-rata antar siswa */
+  rataKelas(rows) {
+    const perS = Stats.rekapPerSiswa(rows);
+    const out = {};
+    for (const k of KATEGORI) out[k.key] = 0;
+    if (!perS.length) return out;
+    for (const s of perS) {
+      for (const k of KATEGORI) out[k.key] += s.rata[k.key];
+    }
+    for (const k of KATEGORI) out[k.key] /= perS.length;
     return out;
   },
 
@@ -540,7 +731,10 @@ const Stats = {
   },
 
   keseluruhan(normArr) {
-    return normArr.length ? normArr.reduce((a, b) => a + b, 0) / normArr.length : 0;
+    if (!normArr.length) return 0;
+    let s = 0;
+    for (const v of normArr) s += v;
+    return s / normArr.length;
   },
 
   tren(rows) {
@@ -549,28 +743,52 @@ const Stats = {
     const a = Stats.rataPerKategori(rows.slice(0, m));
     const b = Stats.rataPerKategori(rows.slice(-m));
     const t = {};
-    KATEGORI.forEach(k => {
+    for (const k of KATEGORI) {
       const na = Stats.norm(a[k.key], k.max);
       const nb = Stats.norm(b[k.key], k.max);
       t[k.key] = { delta: nb - na };
-    });
+    }
     return t;
   },
 
   deltaTren(tren) {
     if (!tren) return 0;
-    return KATEGORI.reduce((s, k) => s + tren[k.key].delta, 0) / KATEGORI.length;
+    let s = 0;
+    for (const k of KATEGORI) s += tren[k.key].delta;
+    return s / KATEGORI.length;
   },
 
   status(ratio) {
-    if (ratio >= TH.BAIK) return { cls: 'baik', txt: 'Baik' };
-    if (ratio >= TH.CUKUP) return { cls: 'cukup', txt: 'Cukup' };
+    if (ratio >= THRESHOLD.BAIK) return { cls: 'baik', txt: 'Baik' };
+    if (ratio >= THRESHOLD.CUKUP) return { cls: 'cukup', txt: 'Cukup' };
     return { cls: 'kurang', txt: 'Perlu Perhatian' };
+  },
+
+  rekapPerSiswa(rows) {
+    const map = new Map();
+    for (const r of rows) {
+      if (!map.has(r.NIS)) map.set(r.NIS, { nama: r.Nama_Siswa, rows: [] });
+      map.get(r.NIS).rows.push(r);
+    }
+    const out = [];
+    for (const [nis, v] of map) {
+      const rata = Stats.rataPerKategori(v.rows);
+      const norm = Stats.normArr(rata);
+      out.push({
+        nis, nama: v.nama, rata, norm,
+        rataKes: Stats.keseluruhan(norm),
+        jumlah: v.rows.length
+      });
+    }
+    return out;
   },
 
   narasiIndividu(nama, normArr, tren) {
     let best = 0, worst = 0;
-    normArr.forEach((v, i) => { if (v > normArr[best]) best = i; if (v < normArr[worst]) worst = i; });
+    for (let i = 0; i < normArr.length; i++) {
+      if (normArr[i] > normArr[best]) best = i;
+      if (normArr[i] < normArr[worst]) worst = i;
+    }
     let s = `${nama} menunjukkan kebiasaan paling konsisten pada aspek ${KATEGORI[best].label.toLowerCase()}, sementara aspek ${KATEGORI[worst].label.toLowerCase()} masih memerlukan pendampingan lebih lanjut. `;
     const d = Stats.deltaTren(tren);
     if (d > 0.15) s += 'Secara umum, kebiasaan ananda menunjukkan peningkatan.';
@@ -581,7 +799,10 @@ const Stats = {
 
   narasiKelas(kelas, normArr, tren, jumlah) {
     let best = 0, worst = 0;
-    normArr.forEach((v, i) => { if (v > normArr[best]) best = i; if (v < normArr[worst]) worst = i; });
+    for (let i = 0; i < normArr.length; i++) {
+      if (normArr[i] > normArr[best]) best = i;
+      if (normArr[i] < normArr[worst]) worst = i;
+    }
     let s = `Berdasarkan data ${jumlah} siswa, ${kelas} menunjukkan kebiasaan terbaik pada aspek ${KATEGORI[best].label.toLowerCase()}, sementara aspek ${KATEGORI[worst].label.toLowerCase()} masih memerlukan perhatian bersama. `;
     const d = Stats.deltaTren(tren);
     if (d > 0.15) s += 'Secara umum, kebiasaan siswa menunjukkan tren peningkatan.';
@@ -595,36 +816,27 @@ const Stats = {
     if (!t.length) return 'Belum ada data yang cukup untuk periode ini.';
     const best = t.reduce((a, b) => b.rataKes > a.rataKes ? b : a);
     const worst = t.reduce((a, b) => b.rataKes < a.rataKes ? b : a);
-    return `${best.kelas} mencatatkan rata-rata tertinggi, sementara ${worst.kelas} memerlukan perhatian tambahan. Kepala sekolah dan wali kelas disarankan berbagi praktik baik antar kelas.`;
+    return `${best.kelas} mencatatkan rata-rata tertinggi, sementara ${worst.kelas} memerlukan perhatian tambahan. ` +
+           `Kepala sekolah dan wali kelas disarankan berbagi praktik baik antar kelas.`;
   },
 
   saran(normArr) {
     let worst = 0;
-    normArr.forEach((v, i) => { if (v < normArr[worst]) worst = i; });
+    for (let i = 0; i < normArr.length; i++) {
+      if (normArr[i] < normArr[worst]) worst = i;
+    }
     return 'Saran: ' + (SARAN[KATEGORI[worst].key] || '');
-  },
-
-  rekapPerSiswa(rows) {
-    const map = new Map();
-    rows.forEach(r => {
-      if (!map.has(r.NIS)) map.set(r.NIS, { nama: r.Nama_Siswa, rows: [] });
-      map.get(r.NIS).rows.push(r);
-    });
-    return [...map.entries()].map(([nis, v]) => {
-      const rata = Stats.rataPerKategori(v.rows);
-      const norm = Stats.normArr(rata);
-      return { nis, nama: v.nama, rata, norm, rataKes: Stats.keseluruhan(norm), jumlah: v.rows.length };
-    });
   }
 };
 
 /* ====================================================================
- *                       PRINT ENGINE (WYSIWYG)
+ *                        PRINT ENGINE (WYSIWYG)
  * ==================================================================== */
 const PrintEngine = {
   _charts: [],
+  _renderSeq: 0,
 
-  /* ---- HTML fragments ---- */
+  /* ---------- HTML fragments ---------- */
   kop(ident) {
     return `<div class="cetak-kop">
       <div class="dinas">${esc(ident.dinas)}</div>
@@ -636,7 +848,9 @@ const PrintEngine = {
   },
 
   identTable(pairs) {
-    return `<table class="cetak-ident">${pairs.map(([l, v]) => `<tr><td class="label">${esc(l)}</td><td>: ${esc(v)}</td></tr>`).join('')}</table>`;
+    return `<table class="cetak-ident">${pairs.map(([l, v]) =>
+      `<tr><td class="label">${esc(l)}</td><td>: ${esc(v)}</td></tr>`
+    ).join('')}</table>`;
   },
 
   summary(items) {
@@ -647,17 +861,17 @@ const PrintEngine = {
 
   skorTable(rata, norm) {
     let rows = '';
-    KATEGORI.forEach((k, i) => {
+    for (let i = 0; i < KATEGORI.length; i++) {
+      const k = KATEGORI[i];
       const val = rata[k.key];
       const disp = k.max === 4 ? val.toFixed(2) : val.toFixed(1);
-      const ratio = norm[i] / 4;
-      const st = Stats.status(ratio);
+      const st = Stats.status(norm[i] / 4);
       rows += `<tr>
         <td class="l">${esc(k.label)}</td>
         <td class="c">${disp}</td>
         <td class="c"><span class="badge badge-${st.cls}">${st.txt}</span></td>
       </tr>`;
-    });
+    }
     return `<table class="cetak-tbl">
       <thead><tr><th style="text-align:left">Kebiasaan</th><th>Rata-rata</th><th>Status</th></tr></thead>
       <tbody>${rows}</tbody>
@@ -684,72 +898,54 @@ const PrintEngine = {
     </tr></table></div>`;
   },
 
-  chartWrap(canvasId, width, height) {
-    return `<div class="cetak-chart-wrap">
-      <canvas id="${canvasId}" width="${width}" height="${height}"></canvas>
-    </div>`;
+  chartWrap(id, w, h) {
+    return `<div class="cetak-chart-wrap"><canvas id="${id}" width="${w}" height="${h}"></canvas></div>`;
   },
 
-  /* ---- Chart renderers ---- */
-  async renderChartKategori(canvasId, norm) {
-    await ensureChart();
+  /* ---------- Chart renderers ---------- */
+  async _renderChart(canvasId, config, dpr) {
     const cv = document.getElementById(canvasId);
     if (!cv || typeof Chart === 'undefined') return;
-    const labels = KATEGORI.map(k => k.label);
-    const data = norm.map(v => Number(v.toFixed(2)));
-    const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
     const c = new Chart(cv, {
+      ...config,
+      options: {
+        ...config.options,
+        responsive: false,
+        animation: false,
+        devicePixelRatio: dpr
+      }
+    });
+    PrintEngine._charts.push(c);
+  },
+
+  async renderChartKategori(canvasId, norm, dpr = 2) {
+    const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
+    return PrintEngine._renderChart(canvasId, {
       type: 'bar',
       data: {
-        labels,
-        datasets: [{
-          label: 'Rata-rata',
-          data,
-          backgroundColor: colors,
-          borderRadius: 4,
-          maxBarThickness: 22,
-          datalabels: false
-        }]
+        labels: KATEGORI.map(k => k.label),
+        datasets: [{ data: norm.map(v => +v.toFixed(2)), backgroundColor: colors, borderRadius: 4, maxBarThickness: 22 }]
       },
       options: {
         indexAxis: 'y',
-        responsive: false,
-        animation: false,
-        devicePixelRatio: 3,
         layout: { padding: { top: 4, right: 8, bottom: 4, left: 4 } },
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: false }
-        },
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
           x: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
           y: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#1e293b' } }
         }
       }
-    });
-    PrintEngine._charts.push(c);
+    }, dpr);
   },
 
-  async renderChartTren(canvasId, points) {
-    await ensureChart();
-    const cv = document.getElementById(canvasId);
-    if (!cv || typeof Chart === 'undefined') return;
-    const c = new Chart(cv, {
+  async renderChartTren(canvasId, points, color = '#10B981', dpr = 2) {
+    return PrintEngine._renderChart(canvasId, {
       type: 'bar',
       data: {
         labels: points.map(p => p.label),
-        datasets: [{
-          label: 'Rata-rata',
-          data: points.map(p => Number(p.value.toFixed(2))),
-          backgroundColor: '#10B981',
-          borderRadius: 4,
-          maxBarThickness: 60
-        }]
+        datasets: [{ data: points.map(p => +p.value.toFixed(2)), backgroundColor: color, borderRadius: 4, maxBarThickness: 60 }]
       },
       options: {
-        responsive: false,
-        animation: false,
-        devicePixelRatio: 3,
         layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
         plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
@@ -757,56 +953,72 @@ const PrintEngine = {
           x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b' } }
         }
       }
-    });
-    PrintEngine._charts.push(c);
+    }, dpr);
   },
 
-  async renderChartPerbandingan(canvasId, points) {
-    await ensureChart();
-    const cv = document.getElementById(canvasId);
-    if (!cv || typeof Chart === 'undefined') return;
-    const c = new Chart(cv, {
-      type: 'bar',
-      data: {
-        labels: points.map(p => p.label),
-        datasets: [{
-          label: 'Rata-rata',
-          data: points.map(p => Number(p.value.toFixed(2))),
-          backgroundColor: '#4F46E5',
-          borderRadius: 4,
-          maxBarThickness: 60
-        }]
-      },
-      options: {
-        responsive: false,
-        animation: false,
-        devicePixelRatio: 3,
-        layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: {
-          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
-          x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b' } }
-        }
+  async renderChartPerbandingan(canvasId, points, dpr = 2) {
+    return PrintEngine.renderChartTren(canvasId, points, '#4F46E5', dpr);
+  },
+
+  /* ---------- Chart points helpers ---------- */
+  pointsTrendMingguan(logs) {
+    const g = new Map();
+    for (const r of logs) {
+      const k = `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`;
+      if (!g.has(k)) g.set(k, { tahun: r.Tahun, bulan: r.Bulan, minggu: num(r.Minggu_Ke), rows: [] });
+      g.get(k).rows.push(r);
+    }
+    const pts = [];
+    for (const x of g.values()) {
+      let total = 0;
+      for (const r of x.rows) {
+        let rowT = 0;
+        for (const k of KATEGORI) rowT += Stats.norm(num(r[k.key]), k.max);
+        total += rowT / KATEGORI.length;
       }
+      pts.push({
+        label: x.bulan.substring(0, 3) + ' M' + x.minggu,
+        tahun: x.tahun, bulan: x.bulan, minggu: x.minggu,
+        value: total / x.rows.length
+      });
+    }
+    pts.sort((a, b) => {
+      const ta = num(a.tahun), tb = num(b.tahun);
+      if (ta !== tb) return ta - tb;
+      const ia = BULAN.indexOf(a.bulan), ib = BULAN.indexOf(b.bulan);
+      if (ia !== ib) return ia - ib;
+      return a.minggu - b.minggu;
     });
-    PrintEngine._charts.push(c);
+    return pts.slice(-8);
   },
 
-  /* ---- Page builders ---- */
+  pointsTrendIndividu(logs) {
+    return logs.map((r, i) => {
+      let t = 0;
+      for (const k of KATEGORI) t += Stats.norm(num(r[k.key]), k.max);
+      return { label: 'M' + (i + 1), value: t / KATEGORI.length };
+    });
+  },
+
+  /* ---------- Page builders ---------- */
   buildRaporPage(siswa, logPeriode, opts) {
     const rata = Stats.rataPerKategori(logPeriode);
     const norm = Stats.normArr(rata);
     const rataKes = Stats.keseluruhan(norm);
     const tren = Stats.tren(logPeriode);
+
     let best = 0, worst = 0;
-    norm.forEach((v, i) => { if (v > norm[best]) best = i; if (v < norm[worst]) worst = i; });
+    for (let i = 0; i < norm.length; i++) {
+      if (norm[i] > norm[best]) best = i;
+      if (norm[i] < norm[worst]) worst = i;
+    }
 
     const wali = opts.waliKelas[siswa.Kelas] || { nama: '', nip: '' };
     const periodeText = opts.bulanAwal === opts.bulanAkhir
       ? `${opts.bulanAwal} ${opts.tahun}`
       : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
 
-    const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+    const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
 
     return `<div class="cetak-page">
       ${PrintEngine.kop(opts.identitas)}
@@ -844,14 +1056,19 @@ const PrintEngine = {
   },
 
   buildKelasPage(kelas, logPeriode, opts) {
-    const perSiswa = Stats.rekapPerSiswa(logPeriode).sort((a, b) => b.rataKes - a.rataKes);
-    const rata = Stats.rataPerKategori(logPeriode);
+    const perS = Stats.rekapPerSiswa(logPeriode).sort((a, b) => b.rataKes - a.rataKes);
+    const rata = Stats.rataKelas(logPeriode);
     const norm = Stats.normArr(rata);
     const rataKes = Stats.keseluruhan(norm);
     const tren = Stats.tren(logPeriode);
+
     let best = 0, worst = 0;
-    norm.forEach((v, i) => { if (v > norm[best]) best = i; if (v < norm[worst]) worst = i; });
-    const perlu = perSiswa.filter(s => s.rataKes < 2.5);
+    for (let i = 0; i < norm.length; i++) {
+      if (norm[i] > norm[best]) best = i;
+      if (norm[i] < norm[worst]) worst = i;
+    }
+
+    const perlu = perS.filter(s => s.rataKes < 2.5);
     const wali = opts.waliKelas[kelas] || { nama: '', nip: '' };
     const periodeText = opts.bulanAwal === opts.bulanAkhir
       ? `${opts.bulanAwal} ${opts.tahun}`
@@ -863,11 +1080,11 @@ const PrintEngine = {
       <p class="cetak-sub">Periode ${periodeText}</p>
       ${PrintEngine.identTable([
         ['Kelas', kelas],
-        ['Jumlah Siswa', `${perSiswa.length} siswa`],
+        ['Jumlah Siswa', `${perS.length} siswa`],
         ['Periode', periodeText]
       ])}
       ${PrintEngine.summary([
-        { label: 'Siswa Terdata', value: perSiswa.length },
+        { label: 'Siswa Terdata', value: perS.length },
         { label: 'Rata-rata Kelas', value: rataKes.toFixed(2) },
         { label: 'Terbaik', value: KATEGORI[best].label, small: true },
         { label: 'Perlu Perhatian', value: KATEGORI[worst].label, small: true }
@@ -888,7 +1105,7 @@ const PrintEngine = {
         ${PrintEngine.chartWrap('c-kls-tren', 660, 180)}
       ` : ''}
       <h3 class="cetak-h3">Catatan</h3>
-      ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perSiswa.length)])}
+      ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}
       ${PrintEngine.ttd({
         kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
         kiriNama: opts.identitas.kepsek || '',
@@ -905,18 +1122,21 @@ const PrintEngine = {
       const r = logPeriode.filter(x => x.Kelas === kelas);
       if (!r.length) return { kelas, jumlah: 0, rata: null, norm: null, rataKes: null };
       const perS = Stats.rekapPerSiswa(r);
-      const rata = {};
-      KATEGORI.forEach(k => {
-        rata[k.key] = perS.reduce((s, x) => s + x.rata[k.key], 0) / perS.length;
-      });
+      const rata = Stats.rataKelas(r);
       const norm = Stats.normArr(rata);
       return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm) };
     });
 
     const terisi = rekap.filter(r => r.rataKes !== null);
-    const rataSek = terisi.length ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length : 0;
-    const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
-    const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
+    const rataSek = terisi.length
+      ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length
+      : 0;
+    const best = terisi.length
+      ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a)
+      : null;
+    const worst = terisi.length
+      ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a)
+      : null;
     const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
 
     const periodeText = opts.bulanAwal === opts.bulanAkhir
@@ -966,47 +1186,11 @@ const PrintEngine = {
     </div>`;
   },
 
-  /* ---- Vertical bar points helpers ---- */
-  pointsTrendMingguan(logPeriode) {
-    const g = new Map();
-    logPeriode.forEach(r => {
-      const k = `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`;
-      if (!g.has(k)) g.set(k, { tahun: r.Tahun, bulan: r.Bulan, minggu: num(r.Minggu_Ke), rows: [] });
-      g.get(k).rows.push(r);
-    });
-    const pts = [...g.values()].map(x => {
-      let total = 0;
-      x.rows.forEach(r => {
-        let rowT = 0;
-        KATEGORI.forEach(k => rowT += Stats.norm(num(r[k.key]), k.max));
-        total += rowT / KATEGORI.length;
-      });
-      return {
-        label: x.bulan.substring(0, 3) + ' M' + x.minggu,
-        tahun: x.tahun, bulan: x.bulan, minggu: x.minggu,
-        value: total / x.rows.length
-      };
-    });
-    pts.sort((a, b) => {
-      if (a.tahun !== b.tahun) return num(a.tahun) - num(b.tahun);
-      const ia = BULAN.indexOf(a.bulan), ib = BULAN.indexOf(b.bulan);
-      if (ia !== ib) return ia - ib;
-      return a.minggu - b.minggu;
-    });
-    return pts.slice(-8);
-  },
-
-  pointsTrendIndividu(logPeriode) {
-    return logPeriode.map((r, i) => {
-      let t = 0;
-      KATEGORI.forEach(k => t += Stats.norm(num(r[k.key]), k.max));
-      return { label: 'M' + (i + 1), value: t / KATEGORI.length };
-    });
-  },
-
-  /* ---- Main entry: render all pages to #printArea ---- */
+  /* ---------- Main render ---------- */
   async render(pages, opts) {
+    const seq = ++PrintEngine._renderSeq;
     const shell = $('#previewShell');
+
     shell.innerHTML = `
       <div class="preview-toolbar no-print">
         <div class="title">
@@ -1014,41 +1198,67 @@ const PrintEngine = {
           <span>Preview — ${esc(opts.title)}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-ghost btn-sm" id="btnPreviewClose"><span class="material-symbols-outlined" style="font-size:18px">close</span> Tutup</button>
-          <button class="btn btn-primary btn-sm" id="btnPreviewPrint"><span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF</button>
+          <button class="btn btn-ghost btn-sm" id="btnPreviewClose">
+            <span class="material-symbols-outlined" style="font-size:18px">close</span> Tutup
+          </button>
+          <button class="btn btn-primary btn-sm" id="btnPreviewPrint" disabled>
+            <span class="spinner"></span><span>Menyiapkan...</span>
+          </button>
         </div>
       </div>
       <div class="preview-scroll">
+        <div class="preview-hint no-print">
+          <span class="material-symbols-outlined">info</span>
+          <span>Untuk PDF terbaik: di dialog cetak, pilih <b>A4</b>, margin <b>Default</b>, dan matikan <b>Headers &amp; footers</b>.</span>
+        </div>
         <div id="printArea">${pages.join('')}</div>
-      </div>
-    `;
+      </div>`;
+
     shell.classList.add('show');
     shell.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
-    // Init charts
+    // Reset chart refs
     PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
     PrintEngine._charts = [];
 
-    // Await chart load
     await ensureChart();
 
-    // Render charts sequential (biar tidak blocking terlalu lama)
-    for (const task of opts.chartTasks) {
+    // Render chart sequential dengan yield tiap 10
+    let i = 0;
+    for (const task of (opts.chartTasks || [])) {
+      if (PrintEngine._renderSeq !== seq) return; // cancelled
       try { await task(); } catch (e) { console.warn('Chart fail', e); }
+      if (++i % 10 === 0) await yieldTick();
     }
 
-    // Bind buttons
+    if (PrintEngine._renderSeq !== seq) return;
+
+    // Tunggu font ready
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch {}
+    }
+
+    // 2 RAF tick untuk paint
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+    if (PrintEngine._renderSeq !== seq) return;
+
+    // Aktifkan tombol print
+    const btnPrint = $('#btnPreviewPrint');
+    btnPrint.disabled = false;
+    btnPrint.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF';
+
     $('#btnPreviewClose').onclick = () => PrintEngine.close();
-    $('#btnPreviewPrint').onclick = () => {
-      // Pastikan font & chart siap
-      document.fonts && document.fonts.ready && document.fonts.ready.then(() => window.print());
-      setTimeout(() => window.print(), 50);
+    btnPrint.onclick = () => {
+      if (PrintEngine._renderSeq !== seq) return;
+      window.print();
     };
   },
 
   close() {
     const shell = $('#previewShell');
+    PrintEngine._renderSeq++;
     shell.classList.remove('show');
     shell.setAttribute('aria-hidden', 'true');
     shell.innerHTML = '';
@@ -1059,13 +1269,41 @@ const PrintEngine = {
 };
 
 /* ====================================================================
- *                              APP
+ *                            BASE TAB
+ * ==================================================================== */
+class BaseTab {
+  constructor(el, app) {
+    this.el = el;
+    this.app = app;
+    this._init = false;
+    this._busy = false;
+  }
+
+  init() {
+    if (this._init) return;
+    this._init = true;
+    this.render();
+  }
+
+  async guarded(fn) {
+    if (this._busy) return;
+    this._busy = true;
+    try { return await fn(); }
+    finally { this._busy = false; }
+  }
+
+  onBootReady(boot) {}
+  render() {}
+}
+
+/* ====================================================================
+ *                            APP
  * ==================================================================== */
 class App {
   constructor() {
     this.root = $('#app');
     this.token = sessionStorage.getItem(CFG.LS_TOKEN);
-    this.boot = null;       // { v, identitas, waliKelas, master }
+    this.boot = null;
     this.tabs = {};
     this.current = 'input';
     this._bootPromise = null;
@@ -1074,36 +1312,58 @@ class App {
   async init() {
     if (this.token) {
       this.renderShell();
-      this.verifySession();
-      this.loadBootstrap();
+      // Chain: verify → bootstrap
+      this._verifyAndBoot();
     } else {
       this.renderLogin();
     }
   }
 
-  /* ---------- Bootstrap loader ---------- */
-  async loadBootstrap(force = false) {
-    if (this._bootPromise && !force) return this._bootPromise;
-    this._bootPromise = (async () => {
-      // Coba cache dulu
-      const cached = !force ? BootCache.read() : null;
-      if (cached && cached.master && cached.identitas) {
-        this.boot = cached;
-        this.onBootstrapReady();
-        // Background refresh
-        this._bgRefresh();
+  async _verifyAndBoot() {
+    try {
+      const ok = await Api.verify(this.token);
+      if (!ok) {
+        sessionStorage.removeItem(CFG.LS_TOKEN);
+        BootCache.invalidate();
+        LogsCache.invalidateAll();
+        location.reload();
         return;
       }
-      // Fetch fresh
+      await this.loadBootstrap();
+    } catch (e) {
+      console.warn('Verify/boot error', e);
+    }
+  }
+
+  async loadBootstrap(force = false) {
+    if (this.boot && !force) return this.boot;
+    if (this._bootPromise && !force) return this._bootPromise;
+
+    this._bootPromise = (async () => {
       try {
+        // Coba cache dulu
+        const cached = !force ? BootCache.read() : null;
+        if (cached && cached.master && cached.identitas) {
+          this.boot = cached;
+          this.onBootstrapReady();
+          // Background refresh (silent)
+          this._bgRefresh();
+          return;
+        }
+        // Fetch fresh
         const res = await Api.bootstrap();
         if (res.notModified && this.boot) return;
-        this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+        this.boot = {
+          v: res.v,
+          identitas: res.identitas,
+          waliKelas: res.waliKelas,
+          master: res.master
+        };
         BootCache.write(this.boot);
         this.onBootstrapReady();
       } catch (e) {
         if (e.message !== 'Unauthorized') {
-          toast('Gagal memuat data. Coba lagi.', 'error');
+          toast('Gagal memuat data awal. Coba refresh.', 'error');
         }
       } finally {
         this._bootPromise = null;
@@ -1114,27 +1374,23 @@ class App {
 
   async _bgRefresh() {
     try {
-      const res = await Api.bootstrap(LS.get(CFG.LS_VER) || '');
+      const since = LS.get(CFG.LS_VER) || '';
+      const res = await Api.bootstrap(since);
       if (res.notModified) return;
-      this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+      this.boot = {
+        v: res.v,
+        identitas: res.identitas,
+        waliKelas: res.waliKelas,
+        master: res.master
+      };
       BootCache.write(this.boot);
       LogsCache.invalidateAll();
+      this.onBootstrapReady();
     } catch {}
   }
 
   onBootstrapReady() {
-    // Notify tabs yang butuh data
     Object.values(this.tabs).forEach(t => t.onBootReady && t.onBootReady(this.boot));
-  }
-
-  /* ---------- Session verify ---------- */
-  async verifySession() {
-    const ok = await Api.verify(this.token);
-    if (!ok) {
-      sessionStorage.removeItem(CFG.LS_TOKEN);
-      BootCache.invalidate();
-      location.reload();
-    }
   }
 
   /* ---------- Login ---------- */
@@ -1157,8 +1413,9 @@ class App {
       </div>`;
 
     const inp = $('#pinInput');
+    const unlock = () => inp.removeAttribute('readonly');
     ['pointerdown','touchstart','mousedown','keydown'].forEach(ev =>
-      inp.addEventListener(ev, () => inp.removeAttribute('readonly'), { once: true }));
+      inp.addEventListener(ev, unlock, { once: true }));
     setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 100);
     setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 500);
 
@@ -1170,19 +1427,23 @@ class App {
     const inp = $('#pinInput');
     const pin = inp.value.trim();
     if (!pin) return toast('PIN tidak boleh kosong.', 'error');
+
     const btn = $('#btnLogin');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Memeriksa...</span>';
+
     const ok = await Api.verify(pin);
+
     btn.disabled = false;
     btn.innerHTML = '<span>Masuk Aplikasi</span><span class="material-symbols-outlined" style="font-size:18px">login</span>';
+
     if (ok) {
       sessionStorage.setItem(CFG.LS_TOKEN, pin);
       this.token = pin;
       BootCache.invalidate();
       LogsCache.invalidateAll();
       this.renderShell();
-      this.loadBootstrap();
+      this.loadBootstrap(true);
       toast('Berhasil masuk!', 'success');
     } else {
       toast('PIN salah atau tidak aktif.', 'error');
@@ -1196,7 +1457,9 @@ class App {
     this.root.innerHTML = `
       <header class="app-header">
         <h1><span class="material-symbols-outlined">school</span> 7 KEBIASAAN</h1>
-        <button class="btn-icon" id="btnLogout" title="Keluar"><span class="material-symbols-outlined">logout</span></button>
+        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
       </header>
       <main class="main">
         <div id="tab-input" class="tab-pane active"></div>
@@ -1214,6 +1477,7 @@ class App {
     $$('.nav-item').forEach(btn => {
       btn.onclick = () => this.switchTab(btn.dataset.tab, btn);
     });
+
     $('#btnLogout').onclick = () => {
       sessionStorage.removeItem(CFG.LS_TOKEN);
       BootCache.invalidate();
@@ -1225,6 +1489,7 @@ class App {
     this.tabs.dashKelas = new DashKelasTab($('#tab-dashkelas'), this);
     this.tabs.dashSekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
     this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
+
     this.tabs.input.init();
     if (this.boot) this.onBootstrapReady();
   }
@@ -1240,16 +1505,6 @@ class App {
 }
 
 /* ====================================================================
- *                        BASE TAB CLASS
- * ==================================================================== */
-class BaseTab {
-  constructor(el, app) { this.el = el; this.app = app; this._init = false; }
-  init() { if (this._init) return; this._init = true; this.render(); }
-  onBootReady(boot) { /* override */ }
-  render() {}
-}
-
-/* ====================================================================
  *                            INPUT TAB
  * ==================================================================== */
 class InputTab extends BaseTab {
@@ -1258,14 +1513,10 @@ class InputTab extends BaseTab {
     this.riwayat = [];
     this.setup = { tahun: '2026', bulan: fmtBulan(todayM()), minggu: 1, kelas: '' };
     this._saving = false;
-    this._guard = null;
   }
 
   onBootReady() {
-    if (this._init && this.el.querySelector('#selKelas')) {
-      // Master berubah — refresh kelas options
-      this._refreshKelasOptions();
-    }
+    // No-op, kelas options statis
   }
 
   render() {
@@ -1305,11 +1556,9 @@ class InputTab extends BaseTab {
       <div id="layer2"></div>`;
 
     $('#selKelas').addEventListener('change', () => { $('#btnLanjut').disabled = false; });
-    $('#btnLanjut').addEventListener('click', e => this._lanjut(e.currentTarget));
-  }
-
-  _refreshKelasOptions() {
-    // no-op: options statis
+    $('#btnLanjut').addEventListener('click', e => {
+      this.guarded(() => this._lanjut(e.currentTarget));
+    });
   }
 
   async _lanjut(btn) {
@@ -1342,23 +1591,26 @@ class InputTab extends BaseTab {
     }
   }
 
-    _renderTable({ tahun, bulan, minggu, kelas }) {
-    const master = this.app.boot?.master || [];
+  _renderTable({ tahun, bulan, minggu, kelas }) {
+    const master = (this.app.boot && this.app.boot.master) || [];
     const siswaKelas = master.filter(s => s.Kelas === kelas);
     if (!siswaKelas.length) return toast(`Belum ada siswa di ${kelas}.`, 'error');
 
     const card = $('#cardSetup');
     if (card) card.style.display = 'none';
 
-    const findExisting = nis => this.riwayat.find(r => str(r.NIS) === str(nis));
+    // Precompute Map untuk lookup O(1)
+    const riwayatMap = new Map();
+    for (const r of this.riwayat) riwayatMap.set(String(r.NIS), r);
+    const findExisting = nis => riwayatMap.get(String(nis));
 
     const rowHtml = siswa => {
       const ex = findExisting(siswa.NIS) || {};
       const cv = key => {
         const v = ex[key];
-        return (v === undefined || v === null || v === '') ? '' : String(v);
+        return (v === undefined || v === null || v === '') ? '' : escAttr(String(v));
       };
-      return `<tr data-nis="${esc(siswa.NIS)}">
+      return `<tr data-nis="${escAttr(siswa.NIS)}">
         <td class="sticky-l">
           <div style="font-weight:700;font-size:.85rem">${esc(siswa.Nama_Siswa)}</div>
           <div style="font-size:.68rem;color:var(--muted)">NIS: ${esc(siswa.NIS)}</div>
@@ -1375,7 +1627,7 @@ class InputTab extends BaseTab {
         <td><input class="input-cell" data-key="Skor_Belajar" value="${cv('Skor_Belajar')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
         <td><input class="input-cell" data-key="Skor_Sosial" value="${cv('Skor_Sosial')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
         <td><input class="input-cell" data-key="Skor_Tidur" value="${cv('Skor_Tidur')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
-        <td><button class="btn-icon btn-save-row" style="background:var(--primary-l);color:var(--primary)"><span class="material-symbols-outlined">save</span></button></td>
+        <td><button class="btn-icon btn-save-row" style="background:var(--primary-l);color:var(--primary)" title="Simpan baris"><span class="material-symbols-outlined">save</span></button></td>
       </tr>`;
     };
 
@@ -1436,15 +1688,21 @@ class InputTab extends BaseTab {
 
     this._attachInput(tahun, bulan, minggu, kelas);
   }
-  
+
   _attachInput(tahun, bulan, minggu, kelas) {
-    const tbody = this.el.querySelector('#layer2 tbody');
+    const tbody = $('#layer2 tbody');
     if (!tbody) return;
 
+    // Input handler: validate + auto advance
     tbody.addEventListener('input', e => {
       const inp = e.target;
-      if (!inp.classList.contains('input-cell')) return;
-      let v = str(inp.value).replace(/[^0-9]/g, '');
+      if (!inp.classList || !inp.classList.contains('input-cell')) return;
+
+      // User edit → remove row-saved visual
+      const tr = inp.closest('tr');
+      if (tr && tr.classList.contains('row-saved')) tr.classList.remove('row-saved');
+
+      let v = String(inp.value).replace(/[^0-9]/g, '');
       if (v.length > 1) v = v.slice(-1);
       inp.value = v;
       inp.classList.remove('invalid');
@@ -1459,19 +1717,22 @@ class InputTab extends BaseTab {
       }
     });
 
+    // Keyboard navigation
     tbody.addEventListener('keydown', e => {
       const inp = e.target;
-      if (!inp.classList.contains('input-cell')) return;
+      if (!inp.classList || !inp.classList.contains('input-cell')) return;
       if (e.key === 'Backspace' && inp.value === '') { e.preventDefault(); this._focusPrev(inp); }
       else if (e.key === 'Enter') { e.preventDefault(); this._focusNext(inp); }
     });
 
+    // Blur: mark invalid if empty
     tbody.addEventListener('blur', e => {
-      if (e.target.classList.contains('input-cell') && e.target.value === '') {
+      if (e.target.classList && e.target.classList.contains('input-cell') && e.target.value === '') {
         e.target.classList.add('invalid');
       }
     }, true);
 
+    // Save row buttons
     $$('#layer2 .btn-save-row').forEach(btn => {
       btn.onclick = e => {
         const tr = e.currentTarget.closest('tr');
@@ -1479,74 +1740,103 @@ class InputTab extends BaseTab {
       };
     });
 
+    // Batch save — selalu simpan semua baris (backend replace)
     $('#btnSubmitBatch').onclick = e => {
-      const rows = $$('#layer2 tbody tr:not(.row-saved)');
-      if (!rows.length) return toast('Semua data sudah tersimpan.', 'success');
+      const rows = $$('#layer2 tbody tr');
+      if (!rows.length) return toast('Tidak ada data.', 'error');
+      if (rows.length > 5 && !confirm(`Simpan data ${rows.length} siswa?\n\nData dengan kelas & minggu yang sama akan diperbarui.`)) return;
       this._save(rows, e.currentTarget, true, { tahun, bulan, minggu, kelas });
     };
   }
 
   _focusNext(inp) {
-    const all = $$('#layer2 .input-cell').filter(el => !el.closest('tr').classList.contains('row-saved'));
+    const all = $$('#layer2 .input-cell');
     const i = all.indexOf(inp);
     if (i >= 0 && i < all.length - 1) {
       const n = all[i + 1];
-      try { n.focus(); n.select?.(); n.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { n.focus(); }
+      try { n.focus(); if (n.select) n.select(); n.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { n.focus(); }
     } else inp.blur();
   }
 
   _focusPrev(inp) {
-    const all = $$('#layer2 .input-cell').filter(el => !el.closest('tr').classList.contains('row-saved'));
+    const all = $$('#layer2 .input-cell');
     const i = all.indexOf(inp);
     if (i > 0) {
       const p = all[i - 1];
-      try { p.focus(); p.select?.(); p.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { p.focus(); }
+      try { p.focus(); if (p.select) p.select(); p.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { p.focus(); }
     }
   }
 
   async _save(rowEls, btnEl, isBatch, ctx) {
     if (this._saving) return;
     this._saving = true;
-    const { tahun, bulan, minggu, kelas } = ctx;
-    const master = this.app.boot?.master || [];
-    const payload = [];
-    let valid = true;
-
-    rowEls.forEach(tr => {
-      const nis = tr.getAttribute('data-nis');
-      const siswa = master.find(s => str(s.NIS) === str(nis));
-      if (!siswa) { valid = false; return; }
-      const row = { Tahun: tahun, Bulan: bulan, Minggu_Ke: minggu, Kelas: kelas, NIS: nis, Nama_Siswa: siswa.Nama_Siswa };
-      tr.querySelectorAll('.input-cell').forEach(inp => {
-        const k = inp.dataset.key;
-        if (inp.value === '') { inp.classList.add('invalid'); valid = false; return; }
-        row[k] = parseInt(inp.value, 10);
-      });
-      payload.push(row);
-    });
-
-    if (!valid) {
-      this._saving = false;
-      return toast('Masih ada kolom kosong / tidak valid.', 'error');
-    }
-
-    const orig = btnEl.innerHTML;
-    btnEl.disabled = true;
-    btnEl.innerHTML = '<span class="spinner"></span>';
 
     try {
-      const res = await Api.simpan(payload);
-      if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
-      rowEls.forEach(tr => tr.classList.add('row-saved'));
-      LogsCache.invalidateAll();
-      BootCache.invalidate();
-      toast(isBatch ? res.message : 'Data tersimpan.', 'success');
-      if (isBatch) setTimeout(() => $('#btnKembali')?.click(), 900);
-      else { btnEl.innerHTML = '<span class="material-symbols-outlined">check</span>'; setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900); }
-    } catch (e) {
-      if (e.message !== 'Unauthorized') toast(e.message || 'Gagal menyimpan.', 'error');
-      btnEl.innerHTML = orig;
-      btnEl.disabled = false;
+      const { tahun, bulan, minggu, kelas } = ctx;
+      const master = (this.app.boot && this.app.boot.master) || [];
+      const masterMap = new Map();
+      for (const s of master) masterMap.set(String(s.NIS), s);
+
+      const payload = [];
+      let valid = true;
+
+      for (const tr of rowEls) {
+        const nis = tr.getAttribute('data-nis');
+        const siswa = masterMap.get(String(nis));
+        if (!siswa) { valid = false; continue; }
+
+        const row = {
+          Tahun: tahun, Bulan: bulan, Minggu_Ke: minggu, Kelas: kelas,
+          NIS: nis, Nama_Siswa: siswa.Nama_Siswa
+        };
+        const inputs = tr.querySelectorAll('.input-cell');
+        for (const inp of inputs) {
+          const k = inp.dataset.key;
+          if (inp.value === '') { inp.classList.add('invalid'); valid = false; continue; }
+          row[k] = parseInt(inp.value, 10);
+        }
+        payload.push(row);
+      }
+
+      if (!valid) {
+        this._saving = false;
+        return toast('Masih ada kolom kosong / tidak valid.', 'error');
+      }
+
+      const orig = btnEl.innerHTML;
+      btnEl.disabled = true;
+      btnEl.innerHTML = '<span class="spinner"></span>';
+
+      try {
+        const res = await Api.simpan(payload);
+        if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
+
+        // Visual feedback
+        for (const tr of rowEls) tr.classList.add('row-saved');
+
+        // Invalidate caches
+        LogsCache.invalidateAll();
+        BootCache.invalidate();
+
+        toast(isBatch ? res.message : 'Data tersimpan.', 'success');
+
+        if (isBatch) {
+          setTimeout(() => {
+            const bk = $('#btnKembali');
+            if (bk) bk.click();
+          }, 900);
+        } else {
+          btnEl.innerHTML = '<span class="material-symbols-outlined">check</span>';
+          setTimeout(() => {
+            btnEl.innerHTML = orig;
+            btnEl.disabled = false;
+          }, 900);
+        }
+      } catch (e) {
+        if (e.message !== 'Unauthorized') toast(e.message || 'Gagal menyimpan.', 'error');
+        btnEl.innerHTML = orig;
+        btnEl.disabled = false;
+      }
     } finally {
       this._saving = false;
     }
@@ -1554,21 +1844,35 @@ class InputTab extends BaseTab {
 }
 
 /* ====================================================================
- *                       DASH KELAS TAB
+ *                        DASH KELAS TAB
  * ==================================================================== */
 class DashKelasTab extends BaseTab {
-  constructor(el, app) { super(el, app); this._charts = []; this._lastRows = null; }
+  constructor(el, app) {
+    super(el, app);
+    this._charts = [];
+  }
 
   render() {
+    const defaultBulan = fmtBulan(todayM());
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">bar_chart</span> Dashboard Kelas</h2>
       <div class="card">
         <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
         <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label><select id="dkTahun" class="form-select">${TAHUN.map(t => `<option>${t}</option>`).join('')}</select></div>
-          <div class="form-group"><label>Bulan</label><select id="dkBulan" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Tahun</label>
+            <select id="dkTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Awal</label>
+            <select id="dkBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Akhir</label>
+            <select id="dkBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
           <div class="form-group"><label>Pekan</label>
-            <select id="dkMinggu" class="form-select"><option value="Semua">Semua Pekan</option>${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}</select>
+            <select id="dkMinggu" class="form-select">
+              <option value="Semua">Semua Pekan</option>
+              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
+            </select>
           </div>
           <div class="form-group"><label style="color:var(--primary)">Kelas</label>
             <select id="dkKelas" class="form-select highlight">${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
@@ -1578,9 +1882,14 @@ class DashKelasTab extends BaseTab {
           </div>
         </div>
       </div>
-      <div id="dkResult"></div>`;
+      <div id="dkResult">
+        <div class="empty">
+          <span class="material-symbols-outlined">insights</span>
+          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat analisis kelas.</p>
+        </div>
+      </div>`;
 
-    $('#btnLoadDk').onclick = () => this._load();
+    $('#btnLoadDk').onclick = () => this.guarded(() => this._load());
   }
 
   async _load() {
@@ -1591,12 +1900,18 @@ class DashKelasTab extends BaseTab {
 
     const f = {
       tahun: $('#dkTahun').value,
-      bulanAwal: $('#dkBulan').value,
-      bulanAkhir: $('#dkBulan').value,
+      bulanAwal: $('#dkBulanAwal').value,
+      bulanAkhir: $('#dkBulanAkhir').value,
       kelas: $('#dkKelas').value
     };
     const m = $('#dkMinggu').value;
     if (m !== 'Semua') f.minggu = m;
+
+    if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
+      btn.disabled = false;
+      btn.innerHTML = orig;
+      return toast('Bulan akhir harus setelah bulan awal.', 'error');
+    }
 
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
@@ -1613,7 +1928,7 @@ class DashKelasTab extends BaseTab {
         resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data jurnal untuk filter yang dipilih.</p></div>`;
         return;
       }
-      this._render(logs);
+      await this._render(logs, f);
     } catch (e) {
       if (e.message !== 'Unauthorized') {
         resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
@@ -1624,15 +1939,22 @@ class DashKelasTab extends BaseTab {
     }
   }
 
-  async _render(rows) {
-    this._lastRows = rows;
+  async _render(rows, filter) {
     const perS = Stats.rekapPerSiswa(rows).sort((a, b) => b.rataKes - a.rataKes);
-    const rataKelas = Stats.rataPerKategori(rows);
+    const rataKelas = Stats.rataKelas(rows);
     const normKelas = Stats.normArr(rataKelas);
     const rataKes = Stats.keseluruhan(normKelas);
+    const jumlahMinggu = new Set(rows.map(r => `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`)).size;
 
     let best = 0, worst = 0;
-    normKelas.forEach((v, i) => { if (v > normKelas[best]) best = i; if (v < normKelas[worst]) worst = i; });
+    for (let i = 0; i < normKelas.length; i++) {
+      if (normKelas[i] > normKelas[best]) best = i;
+      if (normKelas[i] < normKelas[worst]) worst = i;
+    }
+
+    const periodeText = filter.bulanAwal === filter.bulanAkhir
+      ? `${filter.bulanAwal} ${filter.tahun}`
+      : `${filter.bulanAwal} – ${filter.bulanAkhir} ${filter.tahun}`;
 
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `
@@ -1642,20 +1964,30 @@ class DashKelasTab extends BaseTab {
         <div class="stat"><div class="num" style="font-size:.9rem;color:var(--positive);white-space:normal;line-height:1.2">${esc(KATEGORI[best].label)}</div><div class="lbl">Kebiasaan Terbaik</div></div>
         <div class="stat"><div class="num" style="font-size:.9rem;color:var(--negative);white-space:normal;line-height:1.2">${esc(KATEGORI[worst].label)}</div><div class="lbl">Perlu Perhatian</div></div>
       </div>
+      <div class="card" style="padding:.8rem 1rem;background:var(--primary-l);border-color:#C7D2FE">
+        <div style="font-size:.78rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+          <span class="material-symbols-outlined" style="font-size:16px">info</span>
+          <span>${esc(filter.kelas)} · ${esc(periodeText)} · ${jumlahMinggu} minggu tercatat · ${perS.length} siswa</span>
+        </div>
+      </div>
       <div class="card">
         <h3><span class="material-symbols-outlined">bar_chart</span> Rata-rata per Kebiasaan (Skala 1-4)</h3>
-        <div style="position:relative;height:220px"><canvas id="dkChart"></canvas></div>
+        <div style="position:relative;height:260px"><canvas id="dkChart"></canvas></div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1.2rem 0 .8rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Detail Nilai per Siswa</h3>
       <div class="table-wrap">
         <table class="data">
-          <thead><tr><th class="sticky-l" style="min-width:160px">Nama Siswa</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata-rata</th></tr></thead>
+          <thead><tr>
+            <th class="sticky-l" style="min-width:160px">Nama Siswa</th>
+            ${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}
+            <th>Rata-rata</th>
+          </tr></thead>
           <tbody>${perS.map(s => `<tr>
             <td class="sticky-l">${esc(s.nama)}</td>
             ${KATEGORI.map((k, i) => {
               const v = s.rata[k.key];
               const r = v / k.max;
-              const cls = r >= 0.875 ? 'skor-baik' : (r >= 0.625 ? 'skor-cukup' : 'skor-kurang');
+              const cls = r >= THRESHOLD.BAIK ? 'skor-baik' : (r >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang');
               const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
               return `<td class="${cls}">${d}</td>`;
             }).join('')}
@@ -1667,6 +1999,7 @@ class DashKelasTab extends BaseTab {
     await ensureChart();
     this._charts.forEach(c => { try { c.destroy(); } catch {} });
     this._charts = [];
+
     const cv = $('#dkChart');
     if (cv && typeof Chart !== 'undefined') {
       this._charts.push(new Chart(cv, {
@@ -1685,7 +2018,7 @@ class DashKelasTab extends BaseTab {
           plugins: { legend: { display: false } },
           scales: {
             y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
-            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+            x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 45, minRotation: 0 } }
           }
         }
       }));
@@ -1694,29 +2027,49 @@ class DashKelasTab extends BaseTab {
 }
 
 /* ====================================================================
- *                      DASH SEKOLAH TAB
+ *                        DASH SEKOLAH TAB
  * ==================================================================== */
 class DashSekolahTab extends BaseTab {
-  constructor(el, app) { super(el, app); this._charts = []; }
+  constructor(el, app) {
+    super(el, app);
+    this._charts = [];
+  }
 
   render() {
+    const defaultBulan = fmtBulan(todayM());
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">domain</span> Dashboard Sekolah</h2>
       <div class="card">
         <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
         <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label><select id="dsTahun" class="form-select">${TAHUN.map(t => `<option>${t}</option>`).join('')}</select></div>
-          <div class="form-group"><label>Bulan</label><select id="dsBulan" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
+          <div class="form-group"><label>Tahun</label>
+            <select id="dsTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Awal</label>
+            <select id="dsBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Akhir</label>
+            <select id="dsBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
           <div class="form-group"><label>Pekan</label>
-            <select id="dsMinggu" class="form-select"><option value="Semua">Semua Pekan</option>${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}</select>
+            <select id="dsMinggu" class="form-select">
+              <option value="Semua">Semua Pekan</option>
+              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
+            </select>
           </div>
           <div class="form-group full"><label>&nbsp;</label>
             <button id="btnLoadDs" class="btn btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
           </div>
         </div>
       </div>
-      <div id="dsResult"></div>`;
-    $('#btnLoadDs').onclick = () => this._load();
+      <div id="dsResult">
+        <div class="empty">
+          <span class="material-symbols-outlined">apartment</span>
+          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat rekapitulasi seluruh sekolah.</p>
+        </div>
+      </div>`;
+
+    $('#btnLoadDs').onclick = () => this.guarded(() => this._load());
   }
 
   async _load() {
@@ -1725,9 +2078,19 @@ class DashSekolahTab extends BaseTab {
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Memuat...</span>';
 
-    const f = { tahun: $('#dsTahun').value, bulanAwal: $('#dsBulan').value, bulanAkhir: $('#dsBulan').value };
+    const f = {
+      tahun: $('#dsTahun').value,
+      bulanAwal: $('#dsBulanAwal').value,
+      bulanAkhir: $('#dsBulanAkhir').value
+    };
     const m = $('#dsMinggu').value;
     if (m !== 'Semua') f.minggu = m;
+
+    if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
+      btn.disabled = false;
+      btn.innerHTML = orig;
+      return toast('Bulan akhir harus setelah bulan awal.', 'error');
+    }
 
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
@@ -1741,10 +2104,10 @@ class DashSekolahTab extends BaseTab {
       }
       logs = Stats.dedup(logs);
       if (!logs.length) {
-        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data.</p></div>`;
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data untuk filter ini.</p></div>`;
         return;
       }
-      this._render(logs);
+      await this._render(logs, f);
     } catch (e) {
       if (e.message !== 'Unauthorized') {
         resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
@@ -1755,40 +2118,72 @@ class DashSekolahTab extends BaseTab {
     }
   }
 
-  async _render(rows) {
+  async _render(rows, filter) {
     const rekap = KELAS.map(kelas => {
       const r = rows.filter(x => x.Kelas === kelas);
-      if (!r.length) return { kelas, jumlah: 0, rata: null, norm: null, rataKes: null };
+      if (!r.length) return { kelas, jumlah: 0, rata: null, norm: null, rataKes: null, minggu: 0 };
       const perS = Stats.rekapPerSiswa(r);
-      const rata = {};
-      KATEGORI.forEach(k => rata[k.key] = perS.reduce((s, x) => s + x.rata[k.key], 0) / perS.length);
+      const rata = Stats.rataKelas(r);
       const norm = Stats.normArr(rata);
-      return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm) };
+      const minggu = new Set(r.map(x => `${x.Tahun}|${x.Bulan}|${x.Minggu_Ke}`)).size;
+      return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm), minggu };
     });
+
+    const terisi = rekap.filter(r => r.rataKes !== null);
+    const rataSek = terisi.length
+      ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length
+      : 0;
+    const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
+    const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
+    const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
+    const totalMinggu = new Set(rows.map(r => `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`)).size;
+
+    const periodeText = filter.bulanAwal === filter.bulanAkhir
+      ? `${filter.bulanAwal} ${filter.tahun}`
+      : `${filter.bulanAwal} – ${filter.bulanAkhir} ${filter.tahun}`;
 
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat"><div class="num">${terisi.length}/6</div><div class="lbl">Kelas Tercatat</div></div>
+        <div class="stat pos"><div class="num">${rataSek.toFixed(2)}</div><div class="lbl">Rata-rata Sekolah</div></div>
+        <div class="stat"><div class="num" style="font-size:.9rem;color:var(--positive);white-space:normal;line-height:1.2">${esc(best ? best.kelas : '-')}</div><div class="lbl">Kelas Terbaik</div></div>
+        <div class="stat"><div class="num" style="font-size:.9rem;color:var(--negative);white-space:normal;line-height:1.2">${esc(worst ? worst.kelas : '-')}</div><div class="lbl">Perlu Perhatian</div></div>
+      </div>
+      <div class="card" style="padding:.8rem 1rem;background:var(--primary-l);border-color:#C7D2FE">
+        <div style="font-size:.78rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+          <span class="material-symbols-outlined" style="font-size:16px">info</span>
+          <span>${esc(periodeText)} · ${totalMinggu} minggu · ${totalSiswa} siswa · ${terisi.length} kelas</span>
+        </div>
+      </div>
       <div class="card">
         <h3><span class="material-symbols-outlined">bar_chart</span> Perbandingan Rata-rata Antar Kelas</h3>
-        <div style="position:relative;height:220px"><canvas id="dsChart1"></canvas></div>
+        <div style="position:relative;height:240px"><canvas id="dsChart1"></canvas></div>
       </div>
       <div class="card">
         <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
-        <div style="position:relative;height:260px"><canvas id="dsChart2"></canvas></div>
+        <div style="position:relative;height:300px"><canvas id="dsChart2"></canvas></div>
       </div>
       <h3 class="section-title" style="font-size:.9rem;margin:1.2rem 0 .8rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Rekapitulasi Sekolah</h3>
       <div class="table-wrap">
         <table class="data">
-          <thead><tr><th class="sticky-l" style="min-width:90px">Kelas</th><th>Jml</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata-rata</th></tr></thead>
+          <thead><tr>
+            <th class="sticky-l" style="min-width:90px">Kelas</th>
+            <th>Jml</th>
+            <th>Mgg</th>
+            ${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}
+            <th>Rata-rata</th>
+          </tr></thead>
           <tbody>${rekap.map(r => {
-            if (!r.jumlah) return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td colspan="${KATEGORI.length + 2}" style="color:var(--muted);font-style:italic">Belum ada data</td></tr>`;
+            if (!r.jumlah) return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td colspan="${KATEGORI.length + 3}" style="color:var(--muted);font-style:italic">Belum ada data</td></tr>`;
             return `<tr>
               <td class="sticky-l">${esc(r.kelas)}</td>
               <td>${r.jumlah}</td>
-              ${KATEGORI.map((k, i) => {
+              <td>${r.minggu}</td>
+              ${KATEGORI.map(k => {
                 const v = r.rata[k.key];
                 const ratio = v / k.max;
-                const cls = ratio >= 0.875 ? 'skor-baik' : (ratio >= 0.625 ? 'skor-cukup' : 'skor-kurang');
+                const cls = ratio >= THRESHOLD.BAIK ? 'skor-baik' : (ratio >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang');
                 const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
                 return `<td class="${cls}">${d}</td>`;
               }).join('')}
@@ -1817,7 +2212,10 @@ class DashSekolahTab extends BaseTab {
         options: {
           responsive: true, maintainAspectRatio: false, animation: false,
           plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+          scales: {
+            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
         }
       }));
     }
@@ -1831,13 +2229,18 @@ class DashSekolahTab extends BaseTab {
           datasets: KATEGORI.map((k, i) => ({
             label: k.label,
             data: rekap.map(r => r.norm ? Number(r.norm[i].toFixed(2)) : 0),
-            backgroundColor: ['#4F46E5','#0EA5E9','#06B6D4','#14B8A6','#F59E0B','#EA580C','#A855F7','#10B981','#EAB308','#EC4899','#F43F5E','#64748B'][i]
+            backgroundColor: CHART_COLORS[i]
           }))
         },
         options: {
           responsive: true, maintainAspectRatio: false, animation: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } } },
-          scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } }
+          },
+          scales: {
+            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
         }
       }));
     }
@@ -1845,14 +2248,16 @@ class DashSekolahTab extends BaseTab {
 }
 
 /* ====================================================================
- *                            CETAK TAB  ★ NEW
+ *                            CETAK TAB
  * ==================================================================== */
 class CetakTab extends BaseTab {
-  constructor(el, app) { super(el, app); this.jenis = 'rapor'; }
-
-  onBootReady() { /* master ready */ }
+  constructor(el, app) {
+    super(el, app);
+    this.jenis = 'rapor';
+  }
 
   render() {
+    const defaultBulan = fmtBulan(todayM());
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">print</span> Cetak & Preview Laporan</h2>
       <div class="card">
@@ -1860,7 +2265,7 @@ class CetakTab extends BaseTab {
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem">
           <label class="jenis-btn" data-jenis="rapor" style="cursor:pointer">
             <input type="radio" name="jenis" value="rapor" checked style="display:none">
-            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.7rem .4rem;height:100%">
+            <div class="btn btn-primary" style="flex-direction:column;gap:.2rem;padding:.7rem .4rem;height:100%">
               <span class="material-symbols-outlined">person</span>
               <span style="font-size:.78rem">Rapor Siswa</span>
             </div>
@@ -1882,11 +2287,21 @@ class CetakTab extends BaseTab {
         </div>
 
         <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label><select id="cTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select></div>
-          <div class="form-group"><label>Bulan Awal</label><select id="cBulanAwal" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
-          <div class="form-group"><label>Bulan Akhir</label><select id="cBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === fmtBulan(todayM()) ? ' selected' : ''}>${b}</option>`).join('')}</select></div>
-          <div class="form-group" id="grpKelas"><label>Kelas</label><select id="cKelas" class="form-select">${KELAS.map(k => `<option>${k}</option>`).join('')}</select></div>
-          <div class="form-group" id="grpSiswa"><label>Siswa</label><select id="cSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select></div>
+          <div class="form-group"><label>Tahun</label>
+            <select id="cTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Awal</label>
+            <select id="cBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
+          <div class="form-group"><label>Bulan Akhir</label>
+            <select id="cBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          </div>
+          <div class="form-group" id="grpKelas"><label>Kelas</label>
+            <select id="cKelas" class="form-select">${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
+          </div>
+          <div class="form-group" id="grpSiswa"><label>Siswa</label>
+            <select id="cSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select>
+          </div>
           <div class="form-group full" id="grpBatch" style="display:none">
             <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.9rem;cursor:pointer">
               <input type="checkbox" id="cBatch" style="width:auto;accent-color:var(--primary);width:18px;height:18px">
@@ -1904,8 +2319,8 @@ class CetakTab extends BaseTab {
       <div class="empty" style="padding:1.5rem">
         <span class="material-symbols-outlined">info</span>
         <p style="max-width:420px;font-size:.82rem">Pilih jenis cetak & filter, lalu ketuk <b>Tampilkan Preview</b>. Preview WYSIWYG — persis seperti hasil cetak. Simpan sebagai PDF via dialog cetak browser.</p>
-      </div>
-    `;
+      </div>`;
+
     this._bind();
   }
 
@@ -1916,16 +2331,22 @@ class CetakTab extends BaseTab {
       $('#grpSiswa').style.display = j === 'rapor' ? '' : 'none';
       $('#grpBatch').style.display = j === 'rapor' ? '' : 'none';
       if (j === 'rapor') this._fillSiswa();
-      else $('#grpBatch').style.display = 'none';
+      else {
+        $('#cBatch').checked = false;
+        $('#cSiswa').disabled = false;
+      }
     };
 
     $$('.jenis-btn').forEach(btn => {
       btn.onclick = () => {
         this.jenis = btn.dataset.jenis;
-        $$('.jenis-btn .btn').forEach(b => b.classList.remove('btn-primary'));
-        $$('.jenis-btn .btn').forEach(b => b.classList.add('btn-ghost'));
-        btn.querySelector('.btn').classList.remove('btn-ghost');
-        btn.querySelector('.btn').classList.add('btn-primary');
+        $$('.jenis-btn .btn').forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-ghost');
+        });
+        const inner = btn.querySelector('.btn');
+        inner.classList.remove('btn-ghost');
+        inner.classList.add('btn-primary');
         upd();
       };
     });
@@ -1937,41 +2358,43 @@ class CetakTab extends BaseTab {
       if (dis) $('#cSiswa').value = '';
     };
 
-    $('#btnPreview').onclick = () => this._preview();
+    $('#btnPreview').onclick = () => this.guarded(() => this._preview());
+
     upd();
-    // Mark first active
-    $$('.jenis-btn')[0].querySelector('.btn').classList.remove('btn-ghost');
-    $$('.jenis-btn')[0].querySelector('.btn').classList.add('btn-primary');
   }
 
   _fillSiswa() {
-    const master = this.app.boot?.master || [];
+    const master = (this.app.boot && this.app.boot.master) || [];
     const kelas = $('#cKelas').value;
-    const siswa = master.filter(s => s.Kelas === kelas).sort((a, b) => a.Nama_Siswa.localeCompare(b.Nama_Siswa));
-    $('#cSiswa').innerHTML = '<option value="">-- Pilih Siswa --</option>' + siswa.map(s => `<option value="${esc(s.NIS)}">${esc(s.Nama_Siswa)}</option>`).join('');
+    const siswa = master
+      .filter(s => s.Kelas === kelas)
+      .sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
+    $('#cSiswa').innerHTML = '<option value="">-- Pilih Siswa --</option>' +
+      siswa.map(s => `<option value="${escAttr(s.NIS)}">${esc(s.Nama_Siswa)}</option>`).join('');
   }
 
   async _preview() {
     const boot = this.app.boot;
-    if (!boot || !boot.master || !boot.master.length) return toast('Data master belum siap. Coba lagi.', 'error');
+    if (!boot || !boot.master || !boot.master.length) {
+      return toast('Data master belum siap. Tunggu sebentar lalu coba lagi.', 'error');
+    }
 
     const f = {
       tahun: $('#cTahun').value,
       bulanAwal: $('#cBulanAwal').value,
       bulanAkhir: $('#cBulanAkhir').value
     };
-    if (f.bulanAwal !== f.bulanAkhir) {
-      const ia = BULAN.indexOf(f.bulanAwal), ib = BULAN.indexOf(f.bulanAkhir);
-      if (ia > ib) return toast('Bulan akhir harus setelah bulan awal.', 'error');
+    if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
+      return toast('Bulan akhir harus setelah bulan awal.', 'error');
     }
 
     const btn = $('#btnPreview');
     const orig = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan preview...</span>';
+    btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan...</span>';
 
     try {
-      // Ambil logs sesuai filter
+      // Ambil logs
       const query = { tahun: f.tahun, bulanAwal: f.bulanAwal, bulanAkhir: f.bulanAkhir };
       if (this.jenis !== 'sekolah') query.kelas = $('#cKelas').value;
 
@@ -2002,22 +2425,23 @@ class CetakTab extends BaseTab {
       if (this.jenis === 'rapor') {
         const isBatch = $('#cBatch').checked;
         const kelas = $('#cKelas').value;
-        const siswaKelas = boot.master.filter(s => s.Kelas === kelas).sort((a, b) => a.Nama_Siswa.localeCompare(b.Nama_Siswa));
+        const siswaKelas = boot.master
+          .filter(s => s.Kelas === kelas)
+          .sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
 
         if (isBatch) {
           if (siswaKelas.length > 50) {
             btn.disabled = false; btn.innerHTML = orig;
             return toast('Batch maksimal 50 siswa. Pilih filter lain.', 'error');
           }
-          if (siswaKelas.length > 20) {
+          if (siswaKelas.length > 15) {
             toast(`Menyiapkan ${siswaKelas.length} halaman. Mohon tunggu...`, 'success');
           }
-          const periodeText = `${f.bulanAwal} – ${f.bulanAkhir} ${f.tahun}`;
           for (const siswa of siswaKelas) {
-            const rows = logs.filter(r => str(r.NIS) === str(siswa.NIS));
+            const rows = logs.filter(r => String(r.NIS) === String(siswa.NIS));
             if (!rows.length) continue;
             pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
-            const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+            const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
             const norm = Stats.normArr(Stats.rataPerKategori(rows));
             chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
             if (rows.length >= 2) {
@@ -2027,7 +2451,7 @@ class CetakTab extends BaseTab {
           }
           if (!pages.length) {
             btn.disabled = false; btn.innerHTML = orig;
-            return toast('Tidak ada siswa yang memiliki data pada periode ini.', 'error');
+            return toast('Tidak ada siswa dengan data pada periode ini.', 'error');
           }
           opts.title = `Rapor ${kelas} (${pages.length} siswa)`;
         } else {
@@ -2036,18 +2460,23 @@ class CetakTab extends BaseTab {
             btn.disabled = false; btn.innerHTML = orig;
             return toast('Pilih siswa terlebih dahulu.', 'error');
           }
-          const siswa = boot.master.find(s => str(s.NIS) === str(nis));
-          if (!siswa) { btn.disabled = false; btn.innerHTML = orig; return toast('Siswa tidak ditemukan.', 'error'); }
-          const rows = logs.filter(r => str(r.NIS) === str(nis));
+          const siswa = boot.master.find(s => String(s.NIS) === String(nis));
+          if (!siswa) {
+            btn.disabled = false; btn.innerHTML = orig;
+            return toast('Siswa tidak ditemukan.', 'error');
+          }
+          const rows = logs.filter(r => String(r.NIS) === String(nis));
           if (!rows.length) {
             btn.disabled = false; btn.innerHTML = orig;
             return toast('Siswa ini belum punya data pada periode ini.', 'error');
           }
           pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
-          const uid = 'r' + siswa.NIS.replace(/[^a-z0-9]/gi, '');
+          const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
           const norm = Stats.normArr(Stats.rataPerKategori(rows));
           chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
-          if (rows.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
+          if (rows.length >= 2) {
+            chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
+          }
           opts.title = 'Rapor ' + siswa.Nama_Siswa;
         }
       }
@@ -2055,7 +2484,7 @@ class CetakTab extends BaseTab {
       else if (this.jenis === 'kelas') {
         const kelas = $('#cKelas').value;
         pages.push(PrintEngine.buildKelasPage(kelas, logs, opts));
-        const norm = Stats.normArr(Stats.rataPerKategori(logs));
+        const norm = Stats.normArr(Stats.rataKelas(logs));
         chartTasks.push(() => PrintEngine.renderChartKategori('c-kls-kat', norm));
         if (logs.length >= 4) {
           const pts = PrintEngine.pointsTrendMingguan(logs);
@@ -2066,13 +2495,10 @@ class CetakTab extends BaseTab {
 
       else if (this.jenis === 'sekolah') {
         pages.push(PrintEngine.buildSekolahPage(logs, opts));
-        // Chart perbandingan kelas
         const rekap = KELAS.map(k => {
           const r = logs.filter(x => x.Kelas === k);
           if (!r.length) return null;
-          const perS = Stats.rekapPerSiswa(r);
-          const rata = {};
-          KATEGORI.forEach(kk => rata[kk.key] = perS.reduce((s, x) => s + x.rata[kk.key], 0) / perS.length);
+          const rata = Stats.rataKelas(r);
           const norm = Stats.normArr(rata);
           return { label: k.replace('Kelas ', 'Kls '), value: Stats.keseluruhan(norm) };
         }).filter(Boolean);
@@ -2098,7 +2524,7 @@ class CetakTab extends BaseTab {
 }
 
 /* ====================================================================
- *                            BOOT
+ *                              BOOT
  * ==================================================================== */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
@@ -2107,7 +2533,7 @@ if (document.readyState === 'loading') {
 }
 
 /* ====================================================================
- *                        SERVICE WORKER
+ *                          SERVICE WORKER
  * ==================================================================== */
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
