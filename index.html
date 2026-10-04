@@ -1485,10 +1485,10 @@ class App {
       location.reload();
     };
 
-    this.tabs.input = new InputTab($('#tab-input'), this);
-    this.tabs.dashKelas = new DashKelasTab($('#tab-dashkelas'), this);
-    this.tabs.dashSekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
-    this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
+this.tabs.input = new InputTab($('#tab-input'), this);
+this.tabs.dashkelas = new DashKelasTab($('#tab-dashkelas'), this);
+this.tabs.dashsekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
+this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
 
     this.tabs.input.init();
     if (this.boot) this.onBootstrapReady();
