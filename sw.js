@@ -1,5 +1,5 @@
-const CACHE_VERSION = 'kaih-v8';
-const RUNTIME_CACHE = 'kaih-runtime-v8';
+const CACHE_VERSION = 'kaih-v9';
+const RUNTIME_CACHE = 'kaih-runtime-v9';
 const APP_SHELL = [
   './','./index.html','./manifest.json',
   './icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable-512.png'
