@@ -7,6 +7,7 @@
 <meta name="description" content="7 Kebiasaan Anak Hebat — SDN 1 Godegan" />
 <meta name="color-scheme" content="light" />
 <meta name="format-detection" content="telephone=no,email=no,address=no" />
+<meta name="google" content="notranslate" />
 <title>7 Kebiasaan — SDN 1 Godegan</title>
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='52' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3E7K%3C/text%3E%3C/svg%3E" />
@@ -25,7 +26,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 
 <style>
-/* ========== TOKENS ========== */
+/* ====================================================================
+ * DESIGN TOKENS
+ * ==================================================================== */
 :root{
   --primary:#4F46E5; --primary-d:#4338CA; --primary-l:#EEF2FF;
   --positive:#10B981; --positive-d:#059669; --positive-l:#D1FAE5;
@@ -59,7 +62,6 @@ input,select,textarea{font-family:inherit;font-size:16px}
 @keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 @keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 
-/* ========== APP SHELL ========== */
 #app{width:100%;height:100%;max-width:var(--app-max-w);background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 
@@ -69,14 +71,14 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.3}
 .login-title{font-size:clamp(1.1rem,4vw,1.35rem);font-weight:800}
 .login-sub{font-size:clamp(.8rem,3vw,.95rem);color:var(--muted);margin-bottom:.4rem;line-height:1.35}
-.input-pin{width:100%;max-width:340px;padding:.9rem 1rem;border:2px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);transition:var(--t);outline:none;text-align:center;font-weight:600;letter-spacing:.15em}
+.input-pin{width:100%;max-width:340px;padding:.9rem 1rem;border:2px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);transition:var(--t);outline:none;text-align:center;font-weight:600;letter-spacing:.15em;-webkit-text-security:disc;text-security:disc}
 .input-pin:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-l)}
 .login-info{margin-top:.8rem;padding:1rem;background:var(--primary-l);border:1px dashed #A5B4FC;border-radius:var(--r-s);text-align:left;width:100%;max-width:340px}
 .login-info h3{font-size:.8rem;color:var(--primary-d);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-info p{font-size:.75rem;color:var(--muted);line-height:1.5}
 
 /* ========== PROFILE MODAL ========== */
-.profile-modal{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);z-index:10001;display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.profile-modal{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:10001;display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;pointer-events:none;transition:opacity .2s}
 .profile-modal.show{opacity:1;pointer-events:auto}
 .profile-card{background:var(--surface);border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);padding:1.8rem 1.5rem;width:100%;max-width:420px;animation:popIn .25s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
 .profile-icon{width:64px;height:64px;margin:0 auto .8rem;background:var(--primary-l);border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--primary)}
@@ -90,6 +92,38 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .kelas-pick .material-symbols-outlined{font-size:22px;color:var(--primary)}
 .profile-actions{display:flex;gap:.5rem;margin-top:.5rem}
 .profile-cancel{background:var(--surface);border:1px solid var(--border);color:var(--text);flex:1;padding:.7rem;border-radius:10px;font-weight:600;font-size:.88rem;min-height:42px}
+
+/* ========== CUSTOM SELECT ========== */
+.cs-wrap{position:relative;width:100%}
+.cs-native{position:absolute!important;inset:0!important;opacity:0!important;pointer-events:none!important;width:100%!important;height:100%!important}
+.cs-trigger{display:flex;align-items:center;justify-content:space-between;gap:.5rem;width:100%;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:var(--r-s);background:var(--bg);color:var(--text);font-size:16px;font-weight:500;text-align:left;transition:var(--t);min-height:42px;cursor:pointer}
+.cs-trigger:hover{border-color:#CBD5E1}
+.cs-wrap.open .cs-trigger,.cs-trigger:focus-visible{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l);background:var(--surface)}
+.cs-trigger .cs-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cs-trigger .cs-arrow{font-size:20px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.cs-wrap.open .cs-arrow{transform:rotate(180deg);color:var(--primary)}
+.cs-popup{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-s);box-shadow:0 12px 32px -8px rgba(15,23,42,.22),0 4px 8px -2px rgba(15,23,42,.08);z-index:100;max-height:240px;overflow-y:auto;padding:4px;opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;transition:opacity .15s,transform .15s;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.cs-wrap.open .cs-popup{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.cs-item{display:flex;align-items:center;width:100%;padding:.55rem .7rem;border-radius:6px;font-size:.9rem;font-weight:500;color:var(--text);background:transparent;text-align:left;transition:background .12s;cursor:pointer;min-height:38px}
+.cs-item:hover{background:var(--surface-2)}
+.cs-item.active{background:var(--primary-l);color:var(--primary-d);font-weight:700}
+.cs-item.active::after{content:'check';font-family:'Material Symbols Outlined';font-size:18px;margin-left:auto;color:var(--primary)}
+
+/* ========== CONFIRM MODAL ========== */
+.confirm-modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:10003;display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;transition:opacity .2s}
+.confirm-modal.show{opacity:1}
+.confirm-card{background:var(--surface);border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,.28);padding:1.6rem 1.4rem 1.2rem;width:100%;max-width:380px;text-align:center;animation:popIn .22s cubic-bezier(.4,0,.2,1)}
+.confirm-icon{width:56px;height:56px;margin:0 auto .9rem;border-radius:16px;background:var(--primary-l);color:var(--primary);display:flex;align-items:center;justify-content:center}
+.confirm-icon .material-symbols-outlined{font-size:30px}
+.confirm-title{font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:.5rem}
+.confirm-msg{font-size:.86rem;color:var(--muted);line-height:1.55;margin-bottom:1.3rem;white-space:pre-line}
+.confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.confirm-btn{padding:.75rem 1rem;border-radius:var(--r-s);font-size:.9rem;font-weight:700;transition:var(--t);min-height:44px;cursor:pointer}
+.confirm-btn:active{transform:scale(.97)}
+.confirm-btn.cancel{background:var(--surface);border:1.5px solid var(--border);color:var(--text)}
+.confirm-btn.cancel:hover{background:var(--surface-2)}
+.confirm-btn.ok{background:var(--primary);color:#fff;border:none}
+.confirm-btn.ok:hover{background:var(--primary-d)}
 
 /* ========== HEADER ========== */
 .app-header{background:var(--surface);padding:.7rem 1rem;padding-top:calc(.7rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
@@ -116,7 +150,7 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
 @media(max-width:360px){.nav-item{min-width:46px;padding:.2rem .3rem;font-size:.6rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
-/* ========== CARDS ========== */
+/* ========== CARDS + FORM ========== */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-s);padding:1rem;margin-bottom:.75rem}
 .card-title{font-size:1rem;font-weight:800;text-align:left;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
 .card-title .material-symbols-outlined{font-size:20px;color:var(--primary)}
@@ -126,7 +160,6 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .section-title .material-symbols-outlined{font-size:22px;color:var(--primary)}
 .card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.4rem;display:block}
 
-/* ========== BUTTONS ========== */
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:.45rem;padding:.7rem 1rem;border-radius:var(--r-s);font-size:.92rem;font-weight:600;transition:var(--t);min-height:42px;width:100%}
 .btn:active:not(:disabled){transform:scale(.98)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
@@ -139,24 +172,21 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .btn-ghost:hover{background:var(--surface-2)}
 .btn-sm{padding:.4rem .75rem;font-size:.78rem;min-height:34px;width:auto}
 
-/* ========== FORM ========== */
 .form-group{margin-bottom:.6rem;display:flex;flex-direction:column;gap:.2rem}
 .form-group label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.form-select,.form-input{width:100%;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--t);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 2l1.4-1.4L6 5.2 10.6.6 12 2z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;background-size:12px;padding-right:2.2rem}
-.form-input{background-image:none;padding-right:.8rem}
+.form-select,.form-input{width:100%;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--t);appearance:none}
+.form-input{background-image:none}
 .form-select:focus,.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l);background-color:var(--surface)}
 
-/* ========== CHIP BULAN GRID (12 bulan) ========== */
+/* ========== CHIP BULAN + PEKAN ========== */
 .chip-bulan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
 @media(min-width:500px){.chip-bulan-grid{grid-template-columns:repeat(6,1fr)}}
-.chip-bulan{padding:.55rem .3rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.82rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:center}
+.chip-bulan{padding:.55rem .3rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.82rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:center;position:relative}
 .chip-bulan:hover{border-color:var(--primary);color:var(--primary-d)}
 .chip-bulan.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .chip-bulan.today-marker::after{content:'';position:absolute;width:4px;height:4px;background:var(--primary);border-radius:50%;bottom:4px;left:50%;transform:translateX(-50%)}
-.chip-bulan.today-marker{position:relative;padding-bottom:.75rem}
+.chip-bulan.today-marker{padding-bottom:.75rem}
 .chip-bulan.active.today-marker::after{background:#fff}
-
-/* ========== CHIP PEKAN ========== */
 .chip-pekan-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
 .chip-pekan{padding:.55rem .3rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.8rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;gap:1px}
 .chip-pekan .lbl-now{font-size:.55rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.03em}
@@ -165,11 +195,10 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .chip-pekan.active .lbl-now{color:#fff}
 .chip-pekan.is-current:not(.active){border-style:dashed;border-color:var(--primary);background:#F5F3FF}
 
-/* ========== INPUT LAYOUT (2-col desktop) ========== */
+/* ========== LAYOUT ========== */
 .input-layout{display:grid;gap:.75rem}
 @media(min-width:900px){.input-layout{grid-template-columns:1fr 320px;align-items:start}}
 
-/* ========== STATUS PANEL ========== */
 .status-panel{display:flex;flex-direction:column;gap:.55rem}
 .status-panel .card{padding:.85rem .9rem;margin-bottom:0}
 .status-item{display:flex;align-items:center;gap:.55rem;font-size:.82rem;line-height:1.35}
@@ -197,7 +226,6 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .stat.pos .num{color:var(--positive)}
 .stat.neg .num{color:var(--negative)}
 
-/* ========== INFO BAR ========== */
 .info-bar{background:var(--primary-l);border:1px solid #C7D2FE;border-radius:10px;padding:.6rem .85rem;margin-bottom:.75rem;font-size:.75rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;line-height:1.4}
 .info-bar .material-symbols-outlined{font-size:15px;flex-shrink:0}
 
@@ -223,7 +251,7 @@ tr.row-saved{background:#ecfdf5}
 tr.row-saved .sticky-l{background:#ecfdf5}
 tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 
-/* ========== LEGEND ========== */
+/* ========== LEGEND + COLLAPSE ========== */
 details.legend{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:10px;margin-bottom:.7rem;padding:0}
 details.legend > summary{list-style:none;cursor:pointer;padding:.7rem .85rem;font-size:.82rem;font-weight:700;color:var(--primary-d);display:flex;align-items:center;gap:.4rem;user-select:none}
 details.legend > summary::-webkit-details-marker{display:none}
@@ -236,7 +264,6 @@ details.legend[open] .legend-body{padding:0 .85rem .75rem}
 .legend-body td{padding:4px 5px;border:none;text-align:left;color:var(--muted)}
 .legend-body td:first-child{font-weight:600;color:var(--text)}
 
-/* ========== COLLAPSE ========== */
 details.collapse{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem;padding:0;box-shadow:var(--shadow-s)}
 details.collapse > summary{list-style:none;cursor:pointer;padding:.85rem 1rem;font-size:.9rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem;user-select:none}
 details.collapse > summary::-webkit-details-marker{display:none}
@@ -246,7 +273,7 @@ details.collapse > summary .material-symbols-outlined{font-size:20px;color:var(-
 details.collapse[open] > summary{border-bottom:1px solid var(--border);margin-bottom:.75rem}
 details.collapse .collapse-body{padding:0 1rem 1rem}
 
-/* ========== SEGMENTED CONTROL ========== */
+/* ========== SEGMENTED + PRESET ========== */
 .seg-control{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--surface-2);border-radius:10px;padding:3px;margin-bottom:.85rem}
 .seg-btn{display:flex;align-items:center;justify-content:center;gap:.3rem;padding:.55rem .3rem;font-size:.76rem;font-weight:700;color:var(--muted);border-radius:8px;transition:var(--t);min-width:0;background:transparent;line-height:1.15;min-height:44px;flex-direction:column}
 .seg-btn .material-symbols-outlined{font-size:18px;display:block}
@@ -254,7 +281,6 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 .seg-btn.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
 @media(min-width:500px){.seg-btn{flex-direction:row;min-height:40px}.seg-btn .material-symbols-outlined{font-size:20px}}
 
-/* ========== PERIODE PRESET (Cetak) ========== */
 .preset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin-bottom:.6rem}
 @media(min-width:500px){.preset-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:700px){.preset-grid{grid-template-columns:repeat(5,1fr)}}
@@ -264,10 +290,14 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 .preset-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .preset-info{font-size:.72rem;color:var(--primary-d);background:var(--primary-l);border:1px solid #C7D2FE;border-radius:8px;padding:.5rem .75rem;font-weight:600;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
 .preset-info .material-symbols-outlined{font-size:14px}
-
 .custom-periode{background:var(--surface-2);border-radius:10px;padding:.7rem;margin-bottom:.7rem;display:grid;gap:.5rem}
 .custom-periode .row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
 .custom-periode label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:.2rem;display:block}
+
+/* ========== DRAFT BANNER ========== */
+.draft-banner{background:var(--warning-l);border:1px solid #FDE68A;border-radius:10px;padding:.7rem .85rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.55rem;font-size:.8rem;color:#92400e;font-weight:600}
+.draft-banner .material-symbols-outlined{font-size:20px;flex-shrink:0}
+.draft-banner button{margin-left:auto;background:var(--warning);color:#fff;padding:.4rem .75rem;border-radius:8px;font-size:.75rem;font-weight:700;flex-shrink:0}
 
 /* ========== TOAST ========== */
 .toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:10002;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
@@ -284,7 +314,7 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 .skel-line{height:12px;border-radius:6px;margin-bottom:.5rem}
 .skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem}
 
-/* ========== PREVIEW SHELL ========== */
+/* ========== PREVIEW ========== */
 .preview-shell{position:fixed;inset:0;background:#1e293b;z-index:9998;display:none;flex-direction:column}
 .preview-shell.show{display:flex}
 .preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;padding-top:calc(.65rem + env(safe-area-inset-top));background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem}
@@ -297,7 +327,7 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 .preview-hint .material-symbols-outlined{font-size:15px;color:#fbbf24}
 
 /* ========== A4 PAPER ========== */
-.cetak-page{width:210mm;min-height:297mm;padding:15mm 12mm;background:#fff;margin:0 auto 20px;box-shadow:0 4px 24px rgba(0,0,0,.35);box-sizing:border-box;color:#1e293b;font-family:'Inter',system-ui,sans-serif;font-size:10pt;line-height:1.5;position:relative}
+.cetak-page{width:210mm;min-height:297mm;padding:25.4mm;background:#fff;margin:0 auto 20px;box-shadow:0 4px 24px rgba(0,0,0,.35);box-sizing:border-box;color:#1e293b;font-family:'Inter',system-ui,sans-serif;font-size:10pt;line-height:1.5;position:relative}
 .cetak-page:last-child{margin-bottom:20px}
 .cetak-kop{border-bottom:3px double #1e3a8a;padding-bottom:8px;margin-bottom:14px;text-align:center}
 .cetak-kop .dinas{font-size:9.5pt;font-weight:600;color:#334155;letter-spacing:.3px}
@@ -327,7 +357,7 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 .badge-cukup{background:#FEF3C7;color:#92400e}
 .badge-kurang{background:#FFE4E6;color:#9f1239}
 .cetak-chart-wrap{margin:6px 0 12px;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;text-align:center}
-.cetak-chart-wrap canvas{display:block;margin:0 auto}
+.cetak-chart-wrap canvas{display:block;margin:0 auto;max-width:100%;height:auto}
 .cetak-catatan{background:#fefce8;border-left:4px solid #eab308;padding:10px 14px;margin:8px 0 12px;font-size:9.5pt;color:#422006}
 .cetak-catatan p{margin:0 0 5px}
 .cetak-catatan p:last-child{margin-bottom:0}
@@ -347,14 +377,14 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 
 /* ========== PRINT ========== */
 @media print {
-  @page { size: A4 portrait; margin: 15mm 12mm; }
+  @page { size: A4 portrait; margin: 25.4mm; }
   html, body { position: static !important; overflow: visible !important; height: auto !important; width: auto !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
   body > *:not(.preview-shell) { display: none !important; }
   .preview-shell { display: flex !important; position: static !important; background: #fff !important; inset: auto !important; }
   .preview-toolbar, .preview-hint, .no-print { display: none !important; }
   .preview-scroll { overflow: visible !important; padding: 0 !important; background: #fff !important; flex: none !important; height: auto !important; display: block !important; }
   #printArea { display: block !important; }
-  .cetak-page { width: auto !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; border: none !important; background: #fff !important; page-break-after: always; break-after: page; transform: none !important; }
+  .cetak-page { width: auto !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; border: none !important; background: #fff !important; page-break-after: always; break-after: page; zoom: 1 !important; }
   .cetak-page:last-child { page-break-after: auto; break-after: auto; }
   .cetak-kop, .cetak-judul, .cetak-sub, .cetak-ident, .cetak-summary { page-break-inside: avoid; break-inside: avoid; }
   .cetak-h3 { page-break-after: avoid; break-after: avoid; page-break-inside: avoid; break-inside: avoid; }
@@ -367,17 +397,10 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
 }
 
-/* ========== MOBILE PREVIEW A4 ========== */
-@media (max-width: 800px) {
-  .preview-scroll { padding: 16px 0; display: flex; flex-direction: column; align-items: center; }
-  .cetak-page {
-    transform: scale(calc((100vw - 24px) / 794));
-    transform-origin: top center;
-    margin-bottom: calc(-297mm * (1 - (100vw - 24px) / 794) + 16px);
-    flex-shrink: 0;
-    pointer-events: none;
-  }
-  .preview-hint { font-size: .72rem; padding: .5rem .7rem; max-width: calc(100vw - 24px); }
+@media (max-width: 820px) {
+  .preview-scroll { padding: 12px 8px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+  .preview-hint { font-size: .72rem; padding: .5rem .7rem; max-width: calc(100vw - 16px); }
+  .cetak-page { margin: 0 auto 12px; box-shadow: 0 4px 12px rgba(0,0,0,.3); pointer-events: none; }
 }
 
 /* ========== DESKTOP ========== */
@@ -418,7 +441,6 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
   .input-cell { width: 50px; height: 40px; font-size: 16px; }
   #btnSubmitBatch { width: auto; min-width: 260px; margin-left: auto !important; margin-right: 0 !important; display: flex; }
   .preview-scroll { padding: 32px 24px; }
-  .cetak-page { transform: none !important; margin-bottom: 20px !important; pointer-events: auto; }
   .chip-bulan-grid { grid-template-columns: repeat(6, 1fr); }
 }
 @media (min-width: 1400px) {
@@ -430,6 +452,15 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 }
 @media print {
   #app { display: block !important; max-width: none !important; margin: 0 !important; box-shadow: none !important; border-radius: 0 !important; height: auto !important; }
+}
+
+/* ========== AUTOFILL OVERRIDE ========== */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 </style>
 </head>
@@ -443,13 +474,20 @@ details.collapse .collapse-body{padding:0 1rem 1rem}
 'use strict';
 (() => {
 
-/* ========== CONFIG ========== */
+/* ====================================================================
+ *                              CONFIG
+ * ==================================================================== */
 const CFG = Object.freeze({
   API: 'https://script.google.com/macros/s/AKfycbzOsHTfGQlozVMr6X5nEfFlqYJqZhdevocMqdKKMp71QnK-sBLQb_fHM3YSgVqAytJyVA/exec',
   LS_TOKEN: 'k7_token', LS_VER: 'k7_ver', LS_BOOT: 'k7_boot',
-  LS_LOGS: 'k7_logs_', LS_SETUP: 'k7_setup', LS_PROFILE: 'k7_profile',
-  BOOT_TTL: 6 * 60 * 60 * 1000, LOGS_TTL: 30 * 60 * 1000,
-  MAX_LOGS_KEYS: 40, FETCH_TIMEOUT: 30000,
+  LS_LOGS: 'k7_logs_', LS_IDX: 'k7_logs_idx', LS_DRAFT: 'k7_draft_',
+  LS_PROFILE: 'k7_profile',
+  BOOT_TTL: 6 * 60 * 60 * 1000,
+  LOGS_TTL: 30 * 60 * 1000,
+  BG_REFRESH_MIN: 30 * 60 * 1000,
+  MAX_LOGS_KEYS: 30,
+  MAX_ENTRY_BYTES: 500 * 1024,
+  FETCH_TIMEOUT: 30000,
   CHART_CDN: 'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js',
   CHART_FALLBACK: 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js',
   TOAST_MAX: 3, TOAST_DURATION: 3200
@@ -491,30 +529,59 @@ const SARAN = Object.freeze({
 });
 const THRESHOLD = Object.freeze({ BAIK: 0.875, CUKUP: 0.625 });
 
-/* ========== UTIL ========== */
+/* ====================================================================
+ *                              UTIL
+ * ==================================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const escAttr = esc;
 const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
-const str = v => v == null ? '' : String(v);
 const yieldTick = () => new Promise(r => setTimeout(r, 0));
 const fmtBulan = idx => BULAN[idx] || '';
 const fmtBulanPendek = idx => BULAN_PENDEK[idx] || '';
 const todayM = () => new Date().getMonth();
 const todayY = () => new Date().getFullYear();
-
 const detectMinggu = (d = new Date()) => Math.min(5, Math.floor((d.getDate() - 1) / 7) + 1);
-
-/* Tahun ajaran: bulan >= Juli (6) = tahun/tahun+1, bulan < Juli = tahun-1/tahun */
 const getTahunAjaran = (bulanIdx, tahun) => {
   const y = Number(tahun) || todayY();
   const b = Number(bulanIdx);
   if (b >= 6) return { start: y, end: y + 1, label: `${y}/${y + 1}` };
   return { start: y - 1, end: y, label: `${y - 1}/${y}` };
 };
+const safeFilename = s => String(s || '').replace(/[^a-z0-9]+/gi, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').slice(0, 80);
 
-/* ========== PROFILE ========== */
+class SeqGuard {
+  constructor() { this.seq = 0; }
+  next() { return ++this.seq; }
+  isCurrent(seq) { return seq === this.seq; }
+}
+
+/* ====================================================================
+ *                              LS
+ * ==================================================================== */
+const LS = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) {
+      if (e && e.name === 'QuotaExceededError') console.warn('[LS] quota exceeded');
+      return false;
+    }
+  },
+  raw(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  setRaw(k, v) { try { localStorage.setItem(k, v); return true; } catch { return false; } },
+  del(k) { try { localStorage.removeItem(k); } catch {} },
+  keys(prefix) {
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith(prefix)) out.push(k);
+    }
+    return out;
+  }
+};
+
 const Profile = {
   read() {
     try {
@@ -528,7 +595,9 @@ const Profile = {
   }
 };
 
-/* ========== TOAST ========== */
+/* ====================================================================
+ *                              TOAST
+ * ==================================================================== */
 const _toastMap = new Map();
 const toast = (msg, type = 'success') => {
   const k = type + ':' + msg;
@@ -545,24 +614,173 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); }, CFG.TOAST_DURATION);
 };
 
-/* ========== LS ========== */
-const LS = {
-  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
-  set(k, v) {
-    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
-    catch (e) { if (e && e.name === 'QuotaExceededError') return false; return false; }
-  },
-  del(k) { try { localStorage.removeItem(k); } catch {} },
-  keys(prefix) {
-    const out = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k && k.startsWith(prefix)) out.push(k);
-    }
-    return out;
-  }
-};
+/* ====================================================================
+ *                    CUSTOM SELECT
+ * ==================================================================== */
+function enhanceSelect(sel) {
+  if (!sel || sel.dataset.enhanced) return;
+  sel.dataset.enhanced = '1';
 
+  const wrap = document.createElement('div');
+  wrap.className = 'cs-wrap';
+  sel.parentNode.insertBefore(wrap, sel);
+  wrap.appendChild(sel);
+  sel.classList.add('cs-native');
+  sel.setAttribute('tabindex', '-1');
+  sel.setAttribute('aria-hidden', 'true');
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'cs-trigger';
+  btn.innerHTML = `<span class="cs-text"></span><span class="material-symbols-outlined cs-arrow">expand_more</span>`;
+  wrap.appendChild(btn);
+
+  const popup = document.createElement('div');
+  popup.className = 'cs-popup';
+  popup.setAttribute('role', 'listbox');
+  wrap.appendChild(popup);
+
+  const close = () => wrap.classList.remove('open');
+
+  const sync = () => {
+    const opt = sel.options[sel.selectedIndex];
+    btn.querySelector('.cs-text').textContent = opt ? opt.textContent : '';
+    popup.innerHTML = '';
+    Array.from(sel.options).forEach((o, i) => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'cs-item' + (i === sel.selectedIndex ? ' active' : '');
+      item.textContent = o.textContent;
+      item.setAttribute('role', 'option');
+      item.onclick = (e) => {
+        e.stopPropagation();
+        if (i !== sel.selectedIndex) {
+          sel.selectedIndex = i;
+          sel.dispatchEvent(new Event('change', { bubbles: true }));
+          sync();
+        }
+        close();
+      };
+      popup.appendChild(item);
+    });
+  };
+
+  const open = () => {
+    document.querySelectorAll('.cs-wrap.open').forEach(w => { if (w !== wrap) w.classList.remove('open'); });
+    sync();
+    wrap.classList.add('open');
+    const active = popup.querySelector('.cs-item.active');
+    if (active) active.scrollIntoView({ block: 'nearest' });
+  };
+
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    if (wrap.classList.contains('open')) close();
+    else open();
+  };
+
+  sel.addEventListener('change', sync);
+  sel._csSync = sync;
+  document.addEventListener('click', (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && wrap.classList.contains('open')) close();
+  });
+
+  sync();
+}
+
+function enhanceAllSelects() {
+  document.querySelectorAll('select.form-select:not([data-enhanced])').forEach(enhanceSelect);
+}
+
+/* ====================================================================
+ *                    CUSTOM CONFIRM
+ * ==================================================================== */
+function showConfirm(message, opts = {}) {
+  const { title = 'Konfirmasi', okText = 'Ya', cancelText = 'Batal', icon = 'help' } = opts;
+  return new Promise(resolve => {
+    const el = document.createElement('div');
+    el.className = 'confirm-modal';
+    el.innerHTML = `
+      <div class="confirm-card" role="dialog" aria-modal="true">
+        <div class="confirm-icon"><span class="material-symbols-outlined">${esc(icon)}</span></div>
+        <h3 class="confirm-title">${esc(title)}</h3>
+        <p class="confirm-msg">${esc(message)}</p>
+        <div class="confirm-actions">
+          <button class="confirm-btn cancel" type="button">${esc(cancelText)}</button>
+          <button class="confirm-btn ok" type="button">${esc(okText)}</button>
+        </div>
+      </div>`;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('show'));
+
+    const cleanup = (val) => {
+      el.classList.remove('show');
+      setTimeout(() => { try { el.remove(); } catch {} }, 220);
+      document.removeEventListener('keydown', onKey);
+      resolve(val);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') cleanup(false);
+      else if (e.key === 'Enter') cleanup(true);
+    };
+    document.addEventListener('keydown', onKey);
+    el.querySelector('.confirm-btn.ok').onclick = () => cleanup(true);
+    el.querySelector('.confirm-btn.cancel').onclick = () => cleanup(false);
+    el.addEventListener('click', (e) => { if (e.target === el) cleanup(false); });
+    setTimeout(() => el.querySelector('.confirm-btn.ok')?.focus(), 100);
+  });
+}
+
+/* ====================================================================
+ *                    INPUT HARDENING
+ * ==================================================================== */
+function hardenInput(inp) {
+  if (!inp || inp.dataset.hardened) return;
+  inp.dataset.hardened = '1';
+  inp.setAttribute('autocomplete', 'off');
+  inp.setAttribute('autocorrect', 'off');
+  inp.setAttribute('autocapitalize', 'off');
+  inp.setAttribute('spellcheck', 'false');
+  inp.setAttribute('translate', 'no');
+  inp.setAttribute('data-form-type', 'other');
+  inp.addEventListener('invalid', (e) => e.preventDefault());
+  inp.addEventListener('input', () => {
+    inp.setCustomValidity('');
+    inp.classList.remove('invalid');
+  });
+}
+
+function hardenAllInputs() {
+  document.querySelectorAll('input:not([data-hardened])').forEach(hardenInput);
+}
+
+function runEnhancers() {
+  enhanceAllSelects();
+  hardenAllInputs();
+}
+
+(function setupObserver() {
+  let scheduled = false;
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      runEnhancers();
+    });
+  };
+  const obs = new MutationObserver(schedule);
+  const start = () => obs.observe(document.body, { childList: true, subtree: true });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+})();
+
+/* ====================================================================
+ *                              CACHE
+ * ==================================================================== */
 const BootCache = {
   read() {
     const b = LS.get(CFG.LS_BOOT);
@@ -572,6 +790,15 @@ const BootCache = {
   },
   write(data) { LS.set(CFG.LS_BOOT, { ...data, ts: Date.now() }); LS.set(CFG.LS_VER, data.v); },
   invalidate() { LS.del(CFG.LS_BOOT); LS.del(CFG.LS_VER); }
+};
+
+const LogsIndex = {
+  read() { try { return JSON.parse(localStorage.getItem(CFG.LS_IDX)) || {}; } catch { return {}; } },
+  write(idx) { LS.setRaw(CFG.LS_IDX, JSON.stringify(idx)); },
+  add(k, ts) { const idx = LogsIndex.read(); idx[k] = ts; LogsIndex.write(idx); },
+  remove(k) { const idx = LogsIndex.read(); delete idx[k]; LogsIndex.write(idx); },
+  entries() { return Object.entries(LogsIndex.read()).map(([key, ts]) => ({ key, ts })); },
+  clear() { LS.del(CFG.LS_IDX); }
 };
 
 const LogsCache = {
@@ -585,29 +812,78 @@ const LogsCache = {
     if (!c || !c.ts) return null;
     if (Date.now() - c.ts > CFG.LOGS_TTL) return null;
     if (c.v !== LS.get(CFG.LS_VER)) return null;
+    if (f && f.kelas) {
+      const profile = Profile.read();
+      if (!profile || profile.kelas !== f.kelas) return null;
+    }
     return c.logs;
   },
   write(f, logs) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
     const payload = { v: LS.get(CFG.LS_VER), logs, ts: Date.now() };
-    if (!LS.set(k, payload)) { LogsCache.prune(true); LS.set(k, payload); }
-    else { LogsCache.prune(false); }
+    const size = JSON.stringify(payload).length;
+    if (size > CFG.MAX_ENTRY_BYTES) return;
+    if (!LS.set(k, payload)) {
+      LogsCache.prune(true);
+      if (!LS.set(k, payload)) return;
+    }
+    LogsIndex.add(k, payload.ts);
+    LogsCache.prune(false);
   },
   prune(force) {
-    const keys = LS.keys(CFG.LS_LOGS);
-    if (!force && keys.length < CFG.MAX_LOGS_KEYS) return;
-    const entries = keys.map(k => {
-      try { const v = JSON.parse(localStorage.getItem(k)); return { key: k, ts: (v && v.ts) || 0 }; }
-      catch { return { key: k, ts: 0 }; }
-    });
+    const entries = LogsIndex.entries();
+    if (!force && entries.length < CFG.MAX_LOGS_KEYS) return;
     entries.sort((a, b) => a.ts - b.ts);
-    const cut = force ? entries.length : Math.floor(entries.length * 0.3);
-    for (let i = 0; i < cut; i++) LS.del(entries[i].key);
+    const cut = force ? Math.ceil(entries.length / 2) : Math.floor(entries.length * 0.3);
+    for (let i = 0; i < cut; i++) {
+      LS.del(entries[i].key);
+      LogsIndex.remove(entries[i].key);
+    }
   },
-  invalidateAll() { LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k)); }
+  invalidateByFilter(f) {
+    if (!f) return;
+    const exact = CFG.LS_LOGS + LogsCache.key(f);
+    if (LS.raw(exact)) { LS.del(exact); LogsIndex.remove(exact); }
+    const superKey = CFG.LS_LOGS + ['ta=' + f.tahunAwal, 'tk=' + (f.tahunAkhir || f.tahunAwal), 'ba=' + f.bulanAwal, 'bk=' + (f.bulanAkhir || f.bulanAwal), 'k=' + f.kelas, 'm=*'].join('|');
+    if (LS.raw(superKey)) { LS.del(superKey); LogsIndex.remove(superKey); }
+  },
+  invalidateAll() {
+    LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k));
+    LogsIndex.clear();
+  }
 };
 
-/* ========== API ========== */
+const Draft = {
+  save(payload, ctx) {
+    try {
+      const key = CFG.LS_DRAFT + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+      LS.setRaw(key, JSON.stringify({ payload, ctx, ts: Date.now() }));
+      return key;
+    } catch { return null; }
+  },
+  remove(key) { if (key) LS.del(key); },
+  list() {
+    const out = [];
+    for (const k of LS.keys(CFG.LS_DRAFT)) {
+      try {
+        const d = JSON.parse(localStorage.getItem(k));
+        if (d && d.payload && d.ts) out.push({ key: k, ...d });
+      } catch {}
+    }
+    out.sort((a, b) => b.ts - a.ts);
+    return out;
+  },
+  cleanupOld() {
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    for (const d of Draft.list()) {
+      if (Date.now() - d.ts > oneDayMs) Draft.remove(d.key);
+    }
+  }
+};
+
+/* ====================================================================
+ *                              API
+ * ==================================================================== */
 const Api = {
   _token: () => sessionStorage.getItem(CFG.LS_TOKEN),
   async _fetch(url, opts = {}) {
@@ -619,23 +895,45 @@ const Api = {
       return await res.json();
     } finally { clearTimeout(tid); }
   },
-  async get(action, params = {}) {
+  async get(action, params = {}, opts = {}) {
     const token = Api._token();
     const q = new URLSearchParams({ action, token: token || '', ...params }).toString();
-    const data = await Api._fetch(`${CFG.API}?${q}`);
-    Api._check(data);
-    return data;
+    const retries = opts.retries ?? 1;
+    let lastErr = null;
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      try {
+        const data = await Api._fetch(`${CFG.API}?${q}`);
+        Api._check(data);
+        return data;
+      } catch (e) {
+        lastErr = e;
+        if (e.message === 'Unauthorized') throw e;
+        if (attempt < retries) await new Promise(r => setTimeout(r, 500));
+      }
+    }
+    throw lastErr;
   },
-  async post(action, body = {}) {
+  async post(action, body = {}, opts = {}) {
     const token = Api._token();
     const url = `${CFG.API}?action=${encodeURIComponent(action)}`;
-    const data = await Api._fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ token, ...body })
-    });
-    Api._check(data);
-    return data;
+    const retries = opts.retries ?? 1;
+    let lastErr = null;
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      try {
+        const data = await Api._fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ token, ...body })
+        });
+        Api._check(data);
+        return data;
+      } catch (e) {
+        lastErr = e;
+        if (e.message === 'Unauthorized') throw e;
+        if (attempt < retries) await new Promise(r => setTimeout(r, 800));
+      }
+    }
+    throw lastErr;
   },
   _check(data) {
     if (data && data.error === 'Unauthorized') {
@@ -654,7 +952,7 @@ const Api = {
       body: JSON.stringify({ token })
     }).then(d => d.valid === true).catch(() => false);
   },
-  bootstrap(since) { return Api.get('bootstrap', since ? { since } : {}); },
+  bootstrap(since) { return Api.get('bootstrap', since ? { since } : {}, { retries: 1 }); },
   logs(f) {
     const p = {};
     if (f.tahunAwal) p.tahunAwal = f.tahunAwal;
@@ -663,12 +961,14 @@ const Api = {
     if (f.bulanAkhir) p.bulanAkhir = f.bulanAkhir;
     if (f.kelas) p.kelas = f.kelas;
     if (f.minggu) p.minggu = f.minggu;
-    return Api.get('logs', p);
+    return Api.get('logs', p, { retries: 1 });
   },
-  simpan(rows) { return Api.post('simpan_jurnal', { rows }); }
+  simpan(rows) { return Api.post('simpan_jurnal', { rows }, { retries: 1 }); }
 };
 
-/* ========== CHART LOADER ========== */
+/* ====================================================================
+ *                          CHART LOADER
+ * ==================================================================== */
 let _chartReady = null;
 const ensureChart = () => {
   if (typeof Chart !== 'undefined') return Promise.resolve(true);
@@ -689,7 +989,9 @@ const ensureChart = () => {
   return _chartReady;
 };
 
-/* ========== STATS ========== */
+/* ====================================================================
+ *                              STATS
+ * ==================================================================== */
 const Stats = {
   dedup(rows) {
     const m = new Map();
@@ -794,9 +1096,13 @@ const Stats = {
   }
 };
 
-/* ========== PRINT ENGINE ========== */
+/* ====================================================================
+ *                          PRINT ENGINE
+ * ==================================================================== */
 const PrintEngine = {
-  _charts: [], _renderSeq: 0,
+  _charts: [],
+  _renderSeq: 0,
+
   kop(ident) {
     return `<div class="cetak-kop">
       <div class="dinas">${esc(ident.dinas)}</div>
@@ -893,7 +1199,6 @@ const PrintEngine = {
     }, dpr);
   },
   async renderChartPerbandingan(canvasId, points, dpr = 2) { return PrintEngine.renderChartTren(canvasId, points, '#4F46E5', dpr); },
-
   pointsTrendMingguan(logs) {
     const g = new Map();
     for (const r of logs) {
@@ -927,7 +1232,18 @@ const PrintEngine = {
       return { label: 'M' + (i + 1), value: t / KATEGORI.length };
     });
   },
-
+  applyScale() {
+    const pages = document.querySelectorAll('#previewShell .cetak-page');
+    if (!pages.length) return;
+    const w = window.innerWidth;
+    if (w > 820) { pages.forEach(p => { p.style.zoom = ''; }); return; }
+    const avail = w - 16;
+    const scale = Math.max(0.25, Math.min(1, avail / 794));
+    pages.forEach(p => { p.style.zoom = String(scale); });
+  },
+  resetScale() {
+    document.querySelectorAll('#previewShell .cetak-page').forEach(p => { p.style.zoom = ''; });
+  },
   buildRaporPage(siswa, logPeriode, opts) {
     const rata = Stats.rataPerKategori(logPeriode);
     const norm = Stats.normArr(rata);
@@ -955,8 +1271,8 @@ const PrintEngine = {
       <h3 class="cetak-h3">Rata-rata Skor per Kebiasaan</h3>
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan</h3>
-      ${PrintEngine.chartWrap('c-kat-' + uid, 660, 400)}
-      ${logPeriode.length >= 2 ? `<h3 class="cetak-h3">Tren Mingguan</h3>${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}` : ''}
+      ${PrintEngine.chartWrap('c-kat-' + uid, 600, 400)}
+      ${logPeriode.length >= 2 ? `<h3 class="cetak-h3">Tren Mingguan</h3>${PrintEngine.chartWrap('c-tren-' + uid, 600, 180)}` : ''}
       ${PrintEngine.footer(
         `<h3 class="cetak-h3">Catatan &amp; Saran</h3>${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}`,
         { kiriLabel: 'Orang Tua / Wali', kiriNama: siswa.Nama_Ortu || '', kananLabel: 'Wali Kelas', kananNama: wali.nama, kananNip: wali.nip }
@@ -991,11 +1307,11 @@ const PrintEngine = {
       <h3 class="cetak-h3">Rata-rata Skor Kelas per Kebiasaan</h3>
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan Kelas</h3>
-      ${PrintEngine.chartWrap('c-kls-kat', 660, 400)}
+      ${PrintEngine.chartWrap('c-kls-kat', 600, 400)}
       ${perlu.length > 0 ? `<h3 class="cetak-h3">Siswa yang Perlu Pendampingan</h3>
         <table class="cetak-tbl"><thead><tr><th style="text-align:left">Nama Siswa</th><th>Rata-rata</th></tr></thead>
         <tbody>${perlu.map(s => `<tr><td class="l">${esc(s.nama)}</td><td class="c">${s.rataKes.toFixed(2)}</td></tr>`).join('')}</tbody></table>` : ''}
-      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Kelas</h3>${PrintEngine.chartWrap('c-kls-tren', 660, 180)}` : ''}
+      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Kelas</h3>${PrintEngine.chartWrap('c-kls-tren', 600, 180)}` : ''}
       ${PrintEngine.footer(
         `<h3 class="cetak-h3">Catatan</h3>${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}`,
         { kiriLabel: 'Mengetahui,<br>Kepala Sekolah', kiriNama: opts.identitas.kepsek || '', kiriNip: opts.identitas.kepsekNip || '', kananLabel: 'Wali Kelas', kananNama: wali.nama, kananNip: wali.nip, kiriPakaiSpacer: false }
@@ -1034,8 +1350,8 @@ const PrintEngine = {
         <tbody>${rekap.map(r => `<tr><td class="l">${esc(r.kelas)}</td><td class="c">${r.jumlah || '-'}</td><td class="c">${r.rataKes !== null ? r.rataKes.toFixed(2) : '<i style="color:#94a3b8">Belum ada</i>'}</td></tr>`).join('')}</tbody>
       </table>
       <h3 class="cetak-h3">Grafik Perbandingan Antar Kelas</h3>
-      ${PrintEngine.chartWrap('c-sek-perbandingan', 660, 230)}
-      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Sekolah</h3>${PrintEngine.chartWrap('c-sek-tren', 660, 180)}` : ''}
+      ${PrintEngine.chartWrap('c-sek-perbandingan', 600, 230)}
+      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Sekolah</h3>${PrintEngine.chartWrap('c-sek-tren', 600, 180)}` : ''}
       ${PrintEngine.footer(
         `<h3 class="cetak-h3">Catatan</h3>${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}`,
         { single: true, label: 'Mengetahui,<br>Kepala Sekolah', nama: opts.identitas.kepsek || '', nip: opts.identitas.kepsekNip || '' }
@@ -1044,6 +1360,7 @@ const PrintEngine = {
   },
   async render(pages, opts) {
     const seq = ++PrintEngine._renderSeq;
+    if (!opts.filename) opts.filename = opts.title || 'Laporan';
     const shell = $('#previewShell');
     shell.innerHTML = `
       <div class="preview-toolbar no-print">
@@ -1066,24 +1383,44 @@ const PrintEngine = {
     shell.classList.add('show');
     shell.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    PrintEngine.applyScale();
     PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
     PrintEngine._charts = [];
     await ensureChart();
-    let i = 0;
-    for (const task of (opts.chartTasks || [])) {
+    const tasks = opts.chartTasks || [];
+    const BATCH = 3;
+    for (let i = 0; i < tasks.length; i += BATCH) {
       if (PrintEngine._renderSeq !== seq) return;
-      try { await task(); } catch (e) { console.warn('Chart fail', e); }
-      if (++i % 10 === 0) await yieldTick();
+      await Promise.all(tasks.slice(i, i + BATCH).map(t => t().catch(e => console.warn('Chart fail', e))));
+      await yieldTick();
     }
     if (PrintEngine._renderSeq !== seq) return;
     if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch {} }
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     if (PrintEngine._renderSeq !== seq) return;
+    PrintEngine.applyScale();
     const btnPrint = $('#btnPreviewPrint');
     btnPrint.disabled = false;
     btnPrint.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF';
     $('#btnPreviewClose').onclick = () => PrintEngine.close();
-    btnPrint.onclick = () => { if (PrintEngine._renderSeq !== seq) return; window.print(); };
+    btnPrint.onclick = () => {
+      if (PrintEngine._renderSeq !== seq) return;
+      _isPrinting = true;
+      PrintEngine.resetScale();
+
+      // Set title → default filename di dialog "Save as PDF"
+      const originalTitle = document.title;
+      if (opts.filename) document.title = opts.filename;
+
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+          document.title = originalTitle;
+          _isPrinting = false;
+          PrintEngine.applyScale();
+        }, 500);
+      }, 50);
+    };
   },
   close() {
     const shell = $('#previewShell');
@@ -1097,7 +1434,9 @@ const PrintEngine = {
   }
 };
 
-/* ========== BASE TAB ========== */
+/* ====================================================================
+ *                            BASE TAB
+ * ==================================================================== */
 class BaseTab {
   constructor(el, app) { this.el = el; this.app = app; this._init = false; this._busy = false; }
   init() { if (this._init) { this.onShow && this.onShow(); return; } this._init = true; this.render(); }
@@ -1113,7 +1452,9 @@ class BaseTab {
   render() {}
 }
 
-/* ========== APP ========== */
+/* ====================================================================
+ *                            APP
+ * ==================================================================== */
 class App {
   constructor() {
     this.root = $('#app');
@@ -1125,6 +1466,7 @@ class App {
     this._bootPromise = null;
   }
   async init() {
+    Draft.cleanupOld();
     if (this.token) {
       this.profile = Profile.read();
       this.renderShell();
@@ -1164,6 +1506,9 @@ class App {
   }
   async _bgRefresh() {
     try {
+      const boot = BootCache.read();
+      if (!boot || !boot.ts) return;
+      if (Date.now() - boot.ts < CFG.BG_REFRESH_MIN) return;
       const since = LS.get(CFG.LS_VER) || '';
       const res = await Api.bootstrap(since);
       if (res.notModified) return;
@@ -1207,14 +1552,17 @@ class App {
     if (!badge) return;
     badge.innerHTML = `<span class="material-symbols-outlined">school</span><span>${esc(this.profile ? this.profile.kelas : 'Pilih Kelas')}</span>`;
   }
-
   renderLogin() {
+    const uid = 'k7_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     this.root.innerHTML = `
       <div class="login-wrap">
         <div class="logo-box"><span class="material-symbols-outlined">checklist</span></div>
         <h2 class="login-title">7 Kebiasaan Anak</h2>
         <p class="login-sub">Sistem Penilaian Mingguan<br>SD Negeri 1 Godegan</p>
-        <input type="password" id="pinInput" class="input-pin" placeholder="PIN Akses Guru" inputmode="numeric" autocomplete="new-password" readonly />
+        <input type="text" id="pinInput" class="input-pin" placeholder="PIN Akses Guru"
+          inputmode="numeric" pattern="[0-9]*" maxlength="20"
+          name="${uid}" data-form-type="other"
+          autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" translate="no" />
         <button class="btn btn-primary" id="btnLogin" style="max-width:340px">
           <span>Masuk Aplikasi</span>
           <span class="material-symbols-outlined" style="font-size:18px">login</span>
@@ -1225,11 +1573,8 @@ class App {
         </div>
       </div>`;
     const inp = $('#pinInput');
-    const unlock = () => inp.removeAttribute('readonly');
-    ['pointerdown','touchstart','mousedown','keydown'].forEach(ev => inp.addEventListener(ev, unlock, { once: true }));
-    setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 100);
-    setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 500);
     inp.addEventListener('focus', () => setTimeout(() => inp.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300));
+    inp.addEventListener('input', () => { inp.value = inp.value.replace(/[^0-9]/g, '').slice(0, 20); });
     $('#btnLogin').onclick = () => this.handleLogin();
     inp.addEventListener('keypress', e => { if (e.key === 'Enter') this.handleLogin(); });
   }
@@ -1257,7 +1602,6 @@ class App {
       inp.value = ''; inp.focus();
     }
   }
-
   renderShell() {
     this.root.innerHTML = `
       <header class="app-header">
@@ -1295,7 +1639,8 @@ class App {
     $('#hdrKelasBadge').onclick = () => this.showProfileModal(true);
     $('#btnLogout').onclick = () => {
       sessionStorage.removeItem(CFG.LS_TOKEN);
-      BootCache.invalidate(); LogsCache.invalidateAll();
+      BootCache.invalidate();
+      LogsCache.invalidateAll();
       location.reload();
     };
     this.tabs.input = new InputTab($('#tab-input'), this);
@@ -1315,7 +1660,9 @@ class App {
   }
 }
 
-/* ========== INPUT TAB ========== */
+/* ====================================================================
+ *                            INPUT TAB
+ * ==================================================================== */
 class InputTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
@@ -1324,9 +1671,15 @@ class InputTab extends BaseTab {
     this.selTahun = todayY();
     this.selMinggu = detectMinggu();
     this._saving = false;
-    this._statusData = null;
+    this._guard = new SeqGuard();
+    this._cellList = null;
   }
-
+  onProfileChange() { this._init = false; this.init(); }
+  onBootReady(boot) {
+    if (!this._init) return;
+    if (!this.el.querySelector('#statStatusCard')) return;
+    this._refreshStatus();
+  }
   render() {
     const profile = this.app.profile;
     if (!profile) {
@@ -1340,40 +1693,37 @@ class InputTab extends BaseTab {
       return;
     }
     const autoW = detectMinggu();
+    const drafts = Draft.list();
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">edit_note</span> Input Jurnal — ${esc(profile.kelas)}</h2>
+      ${drafts.length ? `
+        <div class="draft-banner">
+          <span class="material-symbols-outlined">cloud_off</span>
+          <span>${drafts.length} draft belum tersimpan</span>
+          <button id="btnRestoreDraft">Pulihkan</button>
+        </div>` : ''}
       <div class="input-layout">
         <div class="input-main">
           <div class="card">
             <label class="card-label">Pilih Bulan</label>
             <div class="chip-bulan-grid" id="chipBulanGrid">
-              ${BULAN.map((b, i) => `
-                <button class="chip-bulan${i === this.selBulan ? ' active' : ''}${i === todayM() ? ' today-marker' : ''}" data-bulan="${i}">
-                  ${esc(fmtBulanPendek(i))}
-                </button>`).join('')}
+              ${BULAN.map((b, i) => `<button class="chip-bulan${i === this.selBulan ? ' active' : ''}${i === todayM() ? ' today-marker' : ''}" data-bulan="${i}">${esc(fmtBulanPendek(i))}</button>`).join('')}
             </div>
-
             <label class="card-label" style="margin-top:1rem">Pekan</label>
             <div class="chip-pekan-row" id="chipPekanRow">
-              ${[1,2,3,4,5].map(n => `
-                <button class="chip-pekan${n === this.selMinggu ? ' active' : ''}${n === autoW ? ' is-current' : ''}" data-minggu="${n}">
-                  <span>M${n}</span>
-                  ${n === autoW ? '<span class="lbl-now">Minggu ini</span>' : ''}
-                </button>`).join('')}
+              ${[1,2,3,4,5].map(n => `<button class="chip-pekan${n === this.selMinggu ? ' active' : ''}${n === autoW ? ' is-current' : ''}" data-minggu="${n}"><span>M${n}</span>${n === autoW ? '<span class="lbl-now">Minggu ini</span>' : ''}</button>`).join('')}
             </div>
-
             <button id="btnBukaInput" class="btn btn-primary" style="margin-top:1rem">
-              <span class="material-symbols-outlined">edit_square</span> Buka Tabel Input
+              <span class="material-symbols-outlined">edit_square</span> Mulai Input
             </button>
           </div>
         </div>
-
         <aside class="input-side status-panel" id="statusPanel">
           <div class="card">
             <div class="status-item">
               <div class="status-icon info"><span class="material-symbols-outlined">groups</span></div>
               <div class="txt">
-                <strong id="statJumlahSiswa">— siswa</strong>
+                <strong id="statJumlahSiswa">Memuat…</strong>
                 <small>Terdaftar di ${esc(profile.kelas)}</small>
               </div>
             </div>
@@ -1381,23 +1731,18 @@ class InputTab extends BaseTab {
           <div class="card" id="statStatusCard">
             <div class="status-item">
               <div class="status-icon empty"><span class="material-symbols-outlined">hourglass_empty</span></div>
-              <div class="txt">
-                <strong>Memuat status…</strong>
-                <small>Bulan ${esc(fmtBulan(this.selBulan))}</small>
-              </div>
+              <div class="txt"><strong>Memuat status…</strong><small>Bulan ${esc(fmtBulan(this.selBulan))}</small></div>
             </div>
           </div>
         </aside>
       </div>
       <div id="layer2"></div>`;
-
     this._bindChips();
     $('#btnBukaInput').onclick = e => this.guarded(() => this._buka(e.currentTarget));
-
-    // Auto-load status
+    const btnRestore = $('#btnRestoreDraft');
+    if (btnRestore) btnRestore.onclick = () => this._restoreLatestDraft();
     this._refreshStatus();
   }
-
   _bindChips() {
     $$('#chipBulanGrid .chip-bulan').forEach(btn => {
       btn.onclick = () => {
@@ -1414,16 +1759,16 @@ class InputTab extends BaseTab {
       };
     });
   }
-
   async _refreshStatus() {
     const profile = this.app.profile;
     if (!profile) return;
-    const master = (this.app.boot && this.app.boot.master) || [];
+    const seq = this._guard.next();
+    const bootLoaded = !!(this.app.boot && Array.isArray(this.app.boot.master) && this.app.boot.master.length);
+    const master = bootLoaded ? this.app.boot.master : [];
     const totalSiswa = master.filter(s => s.Kelas === profile.kelas).length;
     const statJ = $('#statJumlahSiswa');
-    if (statJ) statJ.textContent = `${totalSiswa} siswa`;
-
-    // Skeleton
+    if (statJ) statJ.textContent = bootLoaded ? `${totalSiswa} siswa` : 'Memuat…';
+    if (!bootLoaded) return;
     const card = $('#statStatusCard');
     if (card) {
       card.innerHTML = `
@@ -1432,10 +1777,10 @@ class InputTab extends BaseTab {
           <div class="txt"><strong>Memuat status…</strong><small>Bulan ${esc(fmtBulan(this.selBulan))}</small></div>
         </div>`;
     }
-
     try {
       const filter = {
         tahunAwal: String(this.selTahun),
+        tahunAkhir: String(this.selTahun),
         bulanAwal: fmtBulan(this.selBulan),
         bulanAkhir: fmtBulan(this.selBulan),
         kelas: profile.kelas
@@ -1443,29 +1788,28 @@ class InputTab extends BaseTab {
       let logs = LogsCache.read(filter);
       if (!logs) {
         const res = await Api.logs(filter);
+        if (!this._guard.isCurrent(seq)) return;
         logs = res.logs || [];
         LogsCache.write(filter, logs);
       }
+      if (!this._guard.isCurrent(seq)) return;
       logs = Stats.dedup(logs);
       this._renderStatus(logs, totalSiswa);
     } catch (e) {
+      if (!this._guard.isCurrent(seq)) return;
       if (e.message !== 'Unauthorized') {
         const c = $('#statStatusCard');
         if (c) c.innerHTML = `<div class="status-item"><div class="status-icon empty"><span class="material-symbols-outlined">cloud_off</span></div><div class="txt"><strong>Gagal memuat</strong><small>Coba ganti bulan atau refresh</small></div></div>`;
       }
     }
   }
-
   _renderStatus(logs, totalSiswa) {
     const card = $('#statStatusCard');
     if (!card) return;
     const nisUnik = new Set(logs.map(r => String(r.NIS)));
     const terisi = nisUnik.size;
     const pct = totalSiswa > 0 ? Math.round((terisi / totalSiswa) * 100) : 0;
-
-    let iconCls = 'empty', iconName = 'event_busy', title = 'Belum ada data', sub = 'Bulan belum diisi';
-    let fillCls = '', showProgress = true;
-
+    let iconCls = 'empty', iconName = 'event_busy', title = 'Belum ada data', sub = 'Bulan belum diisi', fillCls = '';
     if (terisi === 0) {
       iconCls = 'warn'; iconName = 'hourglass_empty';
       title = 'Belum diisi'; sub = `0 dari ${totalSiswa} siswa`;
@@ -1478,20 +1822,17 @@ class InputTab extends BaseTab {
       title = 'Sebagian terisi'; sub = `${terisi} dari ${totalSiswa} siswa`;
       fillCls = 'warn';
     }
-
-    // Cek minggu ini apakah ada data
     const mingguIni = this.selMinggu;
     const mingguData = logs.filter(r => String(r.Minggu_Ke) === String(mingguIni));
     const nisMingguIni = new Set(mingguData.map(r => String(r.NIS)));
     const mingguTerisi = nisMingguIni.size;
     const mingguLengkap = totalSiswa > 0 && mingguTerisi >= totalSiswa;
-
     card.innerHTML = `
       <div class="status-item" style="margin-bottom:.5rem">
         <div class="status-icon ${iconCls}"><span class="material-symbols-outlined">${iconName}</span></div>
         <div class="txt"><strong>${title}</strong><small>${sub}</small></div>
       </div>
-      ${showProgress ? `<div class="progress-bar"><div class="fill ${fillCls}" style="width:${pct}%"></div></div>` : ''}
+      <div class="progress-bar"><div class="fill ${fillCls}" style="width:${pct}%"></div></div>
       <div class="status-item" style="margin-top:.7rem">
         <div class="status-icon ${mingguLengkap ? 'ok' : 'info'}"><span class="material-symbols-outlined">${mingguLengkap ? 'check_circle' : 'calendar_today'}</span></div>
         <div class="txt">
@@ -1499,11 +1840,8 @@ class InputTab extends BaseTab {
           <small>${mingguLengkap ? 'Sudah lengkap' : `${mingguTerisi} dari ${totalSiswa} siswa`}</small>
         </div>
       </div>`;
-
-    // Update tombol state
     this._updateButtonState(terisi, totalSiswa);
   }
-
   _updateButtonState(terisi, totalSiswa) {
     const btn = $('#btnBukaInput');
     if (!btn) return;
@@ -1521,12 +1859,41 @@ class InputTab extends BaseTab {
       btn.style = 'margin-top:1rem';
     }
   }
-
+  async _restoreLatestDraft() {
+    const drafts = Draft.list();
+    if (!drafts.length) return;
+    const d = drafts[0];
+    const ctx = d.ctx || {};
+    if (ctx.tahun) this.selTahun = parseInt(ctx.tahun, 10) || todayY();
+    if (ctx.bulan) {
+      const idx = BULAN.indexOf(ctx.bulan);
+      if (idx >= 0) this.selBulan = idx;
+    }
+    if (ctx.minggu) this.selMinggu = parseInt(ctx.minggu, 10) || detectMinggu();
+    this.riwayat = d.payload.map(r => ({ ...r }));
+    this._renderTable({ tahun: String(this.selTahun), bulan: fmtBulan(this.selBulan), minggu: String(this.selMinggu), kelas: this.app.profile.kelas });
+    requestAnimationFrame(() => {
+      const tbody = this.el.querySelector('.table-wrap tbody');
+      if (!tbody) return;
+      d.payload.forEach(r => {
+        const tr = tbody.querySelector(`tr[data-nis="${escAttr(r.NIS)}"]`);
+        if (!tr) return;
+        Object.entries(r).forEach(([k, v]) => {
+          if (k.startsWith('Skor_')) {
+            const inp = tr.querySelector(`.input-cell[data-key="${k}"]`);
+            if (inp) inp.value = String(v);
+          }
+        });
+      });
+    });
+    toast('Draft dipulihkan. Silakan simpan ulang.', 'success');
+  }
   async _buka(btn) {
     const profile = this.app.profile;
     if (!profile) return toast('Pilih kelas dulu.', 'error');
     const filter = {
       tahunAwal: String(this.selTahun),
+      tahunAkhir: String(this.selTahun),
       bulanAwal: fmtBulan(this.selBulan),
       bulanAkhir: fmtBulan(this.selBulan),
       kelas: profile.kelas,
@@ -1535,6 +1902,7 @@ class InputTab extends BaseTab {
     const orig = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Memeriksa riwayat...</span>';
+    let rendered = false;
     try {
       let logs = LogsCache.read(filter);
       if (!logs) {
@@ -1547,22 +1915,23 @@ class InputTab extends BaseTab {
         tahun: String(this.selTahun), bulan: fmtBulan(this.selBulan),
         minggu: String(this.selMinggu), kelas: profile.kelas
       });
+      rendered = true;
     } catch (e) {
       if (e.message !== 'Unauthorized') toast(e.message || 'Gagal memuat riwayat.', 'error');
     } finally {
-      btn.innerHTML = orig; btn.disabled = false;
+      if (!rendered && document.contains(btn)) {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }
     }
   }
-
   _renderTable({ tahun, bulan, minggu, kelas }) {
     const master = (this.app.boot && this.app.boot.master) || [];
     const siswaKelas = master.filter(s => s.Kelas === kelas);
     if (!siswaKelas.length) return toast(`Belum ada siswa di ${kelas}.`, 'error');
-
     const riwayatMap = new Map();
     for (const r of this.riwayat) riwayatMap.set(String(r.NIS), r);
     const findExisting = nis => riwayatMap.get(String(nis));
-
     const rowHtml = siswa => {
       const ex = findExisting(siswa.NIS) || {};
       const cv = key => {
@@ -1589,7 +1958,6 @@ class InputTab extends BaseTab {
         <td><button class="btn-icon btn-save-row" style="background:var(--primary-l);color:var(--primary)" title="Simpan baris"><span class="material-symbols-outlined">save</span></button></td>
       </tr>`;
     };
-
     this.el.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.4rem">
         <button class="btn btn-ghost btn-sm" id="btnKembali"><span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> Kembali</button>
@@ -1640,13 +2008,12 @@ class InputTab extends BaseTab {
       <button id="btnSubmitBatch" class="btn btn-success" style="margin-top:.5rem">
         <span class="material-symbols-outlined">cloud_upload</span> SIMPAN SEMUA DATA
       </button>`;
-
+    this._cellList = Array.from(this.el.querySelectorAll('.table-wrap .input-cell'));
     $('#btnKembali').onclick = () => { this._init = false; this.init(); };
     this._attachInput(tahun, bulan, minggu, kelas);
   }
-
   _attachInput(tahun, bulan, minggu, kelas) {
-    const tbody = this.el.querySelector('tbody');
+    const tbody = this.el.querySelector('.table-wrap tbody');
     if (!tbody) return;
     tbody.addEventListener('input', e => {
       const inp = e.target;
@@ -1655,15 +2022,23 @@ class InputTab extends BaseTab {
       if (tr && tr.classList.contains('row-saved')) tr.classList.remove('row-saved');
       let v = String(inp.value).replace(/[^0-9]/g, '');
       if (v.length > 1) v = v.slice(-1);
+      const prev = inp.dataset.prev || '';
+      const wasEmpty = prev === '';
+      const isNewDigit = wasEmpty && v !== '';
       inp.value = v;
+      inp.dataset.prev = v;
       inp.classList.remove('invalid');
       if (v !== '') {
         const isSalat = inp.classList.contains('salat');
         const max = isSalat ? 7 : 4;
         const min = isSalat ? 0 : 1;
         const n = parseInt(v, 10);
-        if (n > max) inp.value = String(max);
-        else if (n < min && !isSalat) inp.value = String(min);
+        if (n > max) { inp.value = String(max); inp.dataset.prev = String(max); }
+        else if (n < min && !isSalat) { inp.value = String(min); inp.dataset.prev = String(min); }
+      }
+      if (isNewDigit) {
+        clearTimeout(inp._advTimer);
+        inp._advTimer = setTimeout(() => this._focusNext(inp), 200);
       }
     });
     tbody.addEventListener('keydown', e => {
@@ -1672,27 +2047,36 @@ class InputTab extends BaseTab {
       if (e.key === 'Backspace' && inp.value === '') { e.preventDefault(); this._focusPrev(inp); }
       else if (e.key === 'Enter') { e.preventDefault(); this._focusNext(inp); }
     });
+    tbody.addEventListener('focus', e => {
+      const inp = e.target;
+      if (inp.classList && inp.classList.contains('input-cell')) inp.dataset.prev = inp.value || '';
+    }, true);
     tbody.addEventListener('blur', e => {
       if (e.target.classList && e.target.classList.contains('input-cell') && e.target.value === '') {
         e.target.classList.add('invalid');
       }
     }, true);
-    $$('.btn-save-row', this.el).forEach(btn => {
+    this.el.querySelectorAll('.btn-save-row').forEach(btn => {
       btn.onclick = e => {
         const tr = e.currentTarget.closest('tr');
         this._save([tr], e.currentTarget, false, { tahun, bulan, minggu, kelas });
       };
     });
-    $('#btnSubmitBatch').onclick = e => {
-      const rows = $$('tbody tr', this.el);
+    $('#btnSubmitBatch').onclick = async e => {
+      const rows = Array.from(this.el.querySelectorAll('.table-wrap tbody tr'));
       if (!rows.length) return toast('Tidak ada data.', 'error');
-      if (rows.length > 5 && !confirm(`Simpan data ${rows.length} siswa?\n\nData dengan kelas & minggu yang sama akan diperbarui.`)) return;
+      if (rows.length > 5) {
+        const ok = await showConfirm(
+          `Simpan data ${rows.length} siswa?\n\nData dengan kelas & minggu yang sama akan diperbarui.`,
+          { title: 'Konfirmasi Simpan', okText: 'Simpan', cancelText: 'Batal', icon: 'cloud_upload' }
+        );
+        if (!ok) return;
+      }
       this._save(rows, e.currentTarget, true, { tahun, bulan, minggu, kelas });
     };
   }
-
   _focusNext(inp) {
-    const all = $$('.input-cell', this.el);
+    const all = this._cellList || Array.from(this.el.querySelectorAll('.table-wrap .input-cell'));
     const i = all.indexOf(inp);
     if (i >= 0 && i < all.length - 1) {
       const n = all[i + 1];
@@ -1700,17 +2084,17 @@ class InputTab extends BaseTab {
     } else inp.blur();
   }
   _focusPrev(inp) {
-    const all = $$('.input-cell', this.el);
+    const all = this._cellList || Array.from(this.el.querySelectorAll('.table-wrap .input-cell'));
     const i = all.indexOf(inp);
     if (i > 0) {
       const p = all[i - 1];
       try { p.focus(); if (p.select) p.select(); p.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { p.focus(); }
     }
   }
-
   async _save(rowEls, btnEl, isBatch, ctx) {
     if (this._saving) return;
     this._saving = true;
+    let draftKey = null;
     try {
       const { tahun, bulan, minggu, kelas } = ctx;
       const master = (this.app.boot && this.app.boot.master) || [];
@@ -1732,6 +2116,7 @@ class InputTab extends BaseTab {
         payload.push(row);
       }
       if (!valid) { this._saving = false; return toast('Masih ada kolom kosong / tidak valid.', 'error'); }
+      draftKey = Draft.save(payload, { tahun, bulan, minggu, kelas });
       const orig = btnEl.innerHTML;
       btnEl.disabled = true;
       btnEl.innerHTML = '<span class="spinner"></span>';
@@ -1739,8 +2124,13 @@ class InputTab extends BaseTab {
         const res = await Api.simpan(payload);
         if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
         for (const tr of rowEls) tr.classList.add('row-saved');
-        LogsCache.invalidateAll();
-        BootCache.invalidate();
+        LogsCache.invalidateByFilter({
+          tahunAwal: tahun, tahunAkhir: tahun,
+          bulanAwal: bulan, bulanAkhir: bulan,
+          kelas: kelas
+        });
+        Draft.remove(draftKey);
+        draftKey = null;
         toast(isBatch ? res.message : 'Data tersimpan.', 'success');
         if (isBatch) { setTimeout(() => { const bk = $('#btnKembali'); if (bk) bk.click(); }, 900); }
         else {
@@ -1748,14 +2138,16 @@ class InputTab extends BaseTab {
           setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900);
         }
       } catch (e) {
-        if (e.message !== 'Unauthorized') toast(e.message || 'Gagal menyimpan.', 'error');
+        if (e.message !== 'Unauthorized') toast('Gagal menyimpan. Draft disimpan untuk dikirim ulang.', 'error');
         btnEl.innerHTML = orig; btnEl.disabled = false;
       }
     } finally { this._saving = false; }
   }
 }
 
-/* ========== DASH KELAS TAB ========== */
+/* ====================================================================
+ *                          DASH KELAS TAB
+ * ==================================================================== */
 class DashKelasTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
@@ -1763,7 +2155,9 @@ class DashKelasTab extends BaseTab {
     this.selBulan = todayM();
     this.selMinggu = 'Semua';
     this._hasData = false;
+    this._guard = new SeqGuard();
   }
+  onProfileChange() { this._init = false; this.init(); }
   render() {
     const profile = this.app.profile;
     if (!profile) {
@@ -1771,7 +2165,6 @@ class DashKelasTab extends BaseTab {
       $('#btnPickKelas').onclick = () => this.app.showProfileModal(true);
       return;
     }
-    const tahunAjaran = getTahunAjaran(this.selBulan, todayY());
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">bar_chart</span> Dashboard — ${esc(profile.kelas)}</h2>
       <div class="card" style="padding:.85rem">
@@ -1807,6 +2200,7 @@ class DashKelasTab extends BaseTab {
     this.selMinggu = minggu;
     const f = {
       tahunAwal: String(todayY()),
+      tahunAkhir: String(todayY()),
       bulanAwal: fmtBulan(bulan),
       bulanAkhir: fmtBulan(bulan),
       kelas: profile.kelas
@@ -1814,13 +2208,16 @@ class DashKelasTab extends BaseTab {
     if (minggu !== 'Semua') f.minggu = minggu;
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
+    const seq = this._guard.next();
     try {
       let logs = LogsCache.read(f);
       if (!logs) {
         const res = await Api.logs(f);
+        if (!this._guard.isCurrent(seq)) return;
         logs = res.logs || [];
         LogsCache.write(f, logs);
       }
+      if (!this._guard.isCurrent(seq)) return;
       logs = Stats.dedup(logs);
       if (!logs.length) {
         this._hasData = false;
@@ -1830,6 +2227,7 @@ class DashKelasTab extends BaseTab {
       this._hasData = true;
       await this._render(logs, f);
     } catch (e) {
+      if (!this._guard.isCurrent(seq)) return;
       if (e.message !== 'Unauthorized') resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
     } finally {
       if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">search</span>'; }
@@ -1850,7 +2248,6 @@ class DashKelasTab extends BaseTab {
     const top3 = kategoriRank.slice().sort((a, b) => b.norm - a.norm).slice(0, 3);
     const bot3 = kategoriRank.slice().sort((a, b) => a.norm - b.norm).slice(0, 3);
     const periodeText = `${filter.bulanAwal} ${filter.tahunAwal}`;
-
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `
       <div class="stats-grid">
@@ -1921,9 +2318,11 @@ class DashKelasTab extends BaseTab {
   }
 }
 
-/* ========== DASH SEKOLAH TAB ========== */
+/* ====================================================================
+ *                          DASH SEKOLAH TAB
+ * ==================================================================== */
 class DashSekolahTab extends BaseTab {
-  constructor(el, app) { super(el, app); this._charts = []; }
+  constructor(el, app) { super(el, app); this._charts = []; this._guard = new SeqGuard(); }
   render() {
     const defaultBulan = fmtBulan(todayM());
     this.el.innerHTML = `
@@ -1960,13 +2359,16 @@ class DashSekolahTab extends BaseTab {
     }
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
+    const seq = this._guard.next();
     try {
       let logs = LogsCache.read(f);
       if (!logs) {
         const res = await Api.logs(f);
+        if (!this._guard.isCurrent(seq)) return;
         logs = res.logs || [];
         LogsCache.write(f, logs);
       }
+      if (!this._guard.isCurrent(seq)) return;
       logs = Stats.dedup(logs);
       if (!logs.length) {
         resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data untuk filter ini.</p></div>`;
@@ -1974,6 +2376,7 @@ class DashSekolahTab extends BaseTab {
       }
       await this._render(logs, f);
     } catch (e) {
+      if (!this._guard.isCurrent(seq)) return;
       if (e.message !== 'Unauthorized') resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
     } finally {
       if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">search</span>'; }
@@ -2048,18 +2451,25 @@ class DashSekolahTab extends BaseTab {
   }
 }
 
-/* ========== CETAK TAB ========== */
+/* ====================================================================
+ *                            CETAK TAB
+ * ==================================================================== */
 class CetakTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
     this.jenis = 'rapor';
-    this.preset = 'bulan'; // bulan | sem1 | sem2 | tahun | custom
+    this.preset = 'bulan';
     this.customAwalBulan = todayM();
     this.customAwalTahun = todayY();
     this.customAkhirBulan = todayM();
     this.customAkhirTahun = todayY();
+    this._guard = new SeqGuard();
   }
-
+  onProfileChange() { this._init = false; this.init(); }
+  onBootReady(boot) {
+    if (!this._init) return;
+    if (this.jenis === 'rapor' && $('#cSiswa')) this._fillSiswa();
+  }
   render() {
     const profile = this.app.profile;
     this.el.innerHTML = `
@@ -2070,10 +2480,8 @@ class CetakTab extends BaseTab {
           <button class="seg-btn${this.jenis === 'kelas' ? ' active' : ''}" data-jenis="kelas"><span class="material-symbols-outlined">groups</span><span>Kelas</span></button>
           <button class="seg-btn${this.jenis === 'sekolah' ? ' active' : ''}" data-jenis="sekolah"><span class="material-symbols-outlined">apartment</span><span>Sekolah</span></button>
         </div>
-
         ${profile ? `<div class="info-bar" id="infoKelas" style="margin-bottom:.6rem"><span class="material-symbols-outlined">school</span><span>${esc(profile.kelas)}</span></div>` :
         `<button class="btn btn-ghost" id="btnPickKelas" style="margin-bottom:.6rem"><span class="material-symbols-outlined">school</span> Pilih Kelas Dulu</button>`}
-
         <label class="card-label">Periode</label>
         <div class="preset-grid" id="presetGrid">
           <button class="preset-btn${this.preset === 'bulan' ? ' active' : ''}" data-preset="bulan"><span class="material-symbols-outlined">calendar_today</span>Bln Ini</button>
@@ -2082,14 +2490,11 @@ class CetakTab extends BaseTab {
           <button class="preset-btn${this.preset === 'tahun' ? ' active' : ''}" data-preset="tahun">1 Tahun</button>
           <button class="preset-btn${this.preset === 'custom' ? ' active' : ''}" data-preset="custom"><span class="material-symbols-outlined">tune</span>Custom</button>
         </div>
-
         <div class="preset-info" id="presetInfo">
           <span class="material-symbols-outlined">event</span>
           <span id="presetInfoText"></span>
         </div>
-
         <div id="customPeriode"></div>
-
         <div id="grpRapor" style="margin-top:.2rem">
           <div class="form-group" style="margin-bottom:.5rem">
             <label>Siswa</label>
@@ -2100,7 +2505,6 @@ class CetakTab extends BaseTab {
             <span>Cetak semua siswa (batch, 1 PDF)</span>
           </label>
         </div>
-
         <button id="btnPreview" class="btn btn-primary" style="margin-top:.7rem">
           <span class="material-symbols-outlined">visibility</span> Tampilkan Preview
         </button>
@@ -2108,14 +2512,11 @@ class CetakTab extends BaseTab {
       <div class="empty" style="padding:1rem">
         <p style="font-size:.78rem;max-width:420px">Preview WYSIWYG — persis seperti hasil cetak. Setelah preview muncul, klik <b>Cetak / PDF</b>.</p>
       </div>`;
-
     this._bind();
   }
-
   _bind() {
     const pickBtn = $('#btnPickKelas');
     if (pickBtn) pickBtn.onclick = () => this.app.showProfileModal(true);
-
     $$('.seg-btn', this.el).forEach(btn => {
       btn.onclick = () => {
         this.jenis = btn.dataset.jenis;
@@ -2123,7 +2524,6 @@ class CetakTab extends BaseTab {
         this._updJenis();
       };
     });
-
     $$('.preset-btn', this.el).forEach(btn => {
       btn.onclick = () => {
         this.preset = btn.dataset.preset;
@@ -2131,20 +2531,16 @@ class CetakTab extends BaseTab {
         this._updPreset();
       };
     });
-
     $('#cSiswa').onchange = () => { if ($('#cSiswa').value) $('#cBatch').checked = false; };
     $('#cBatch').onchange = () => {
       const dis = $('#cBatch').checked;
       $('#cSiswa').disabled = dis;
       if (dis) $('#cSiswa').value = '';
     };
-
     $('#btnPreview').onclick = () => this.guarded(() => this._preview());
-
     this._updJenis();
     this._updPreset();
   }
-
   _updJenis() {
     const j = this.jenis;
     const infoKelas = $('#infoKelas');
@@ -2155,50 +2551,23 @@ class CetakTab extends BaseTab {
     if (grpRapor) grpRapor.style.display = j === 'rapor' ? '' : 'none';
     if (j === 'rapor') this._fillSiswa();
   }
-
   _getPeriode() {
     const today = new Date();
     const bNow = today.getMonth();
     const yNow = today.getFullYear();
     const ta = getTahunAjaran(bNow, yNow);
-
     if (this.preset === 'bulan') {
-      return {
-        bulanAwal: fmtBulan(bNow),
-        bulanAkhir: fmtBulan(bNow),
-        tahunAwal: yNow,
-        tahunAkhir: yNow,
-        label: `${fmtBulan(bNow)} ${yNow}`
-      };
+      return { bulanAwal: fmtBulan(bNow), bulanAkhir: fmtBulan(bNow), tahunAwal: yNow, tahunAkhir: yNow, label: `${fmtBulan(bNow)} ${yNow}` };
     }
     if (this.preset === 'sem1') {
-      return {
-        bulanAwal: 'Juli',
-        bulanAkhir: 'Desember',
-        tahunAwal: ta.start,
-        tahunAkhir: ta.start,
-        label: `Semester 1 · ${ta.label}`
-      };
+      return { bulanAwal: 'Juli', bulanAkhir: 'Desember', tahunAwal: ta.start, tahunAkhir: ta.start, label: `Semester 1 · ${ta.label}` };
     }
     if (this.preset === 'sem2') {
-      return {
-        bulanAwal: 'Januari',
-        bulanAkhir: 'Juni',
-        tahunAwal: ta.end,
-        tahunAkhir: ta.end,
-        label: `Semester 2 · ${ta.label}`
-      };
+      return { bulanAwal: 'Januari', bulanAkhir: 'Juni', tahunAwal: ta.end, tahunAkhir: ta.end, label: `Semester 2 · ${ta.label}` };
     }
     if (this.preset === 'tahun') {
-      return {
-        bulanAwal: 'Juli',
-        bulanAkhir: 'Juni',
-        tahunAwal: ta.start,
-        tahunAkhir: ta.end,
-        label: `Tahun Ajaran ${ta.label}`
-      };
+      return { bulanAwal: 'Juli', bulanAkhir: 'Juni', tahunAwal: ta.start, tahunAkhir: ta.end, label: `Tahun Ajaran ${ta.label}` };
     }
-    // custom
     return {
       bulanAwal: fmtBulan(this.customAwalBulan),
       bulanAkhir: fmtBulan(this.customAkhirBulan),
@@ -2207,7 +2576,6 @@ class CetakTab extends BaseTab {
       label: `${fmtBulan(this.customAwalBulan)} ${this.customAwalTahun} – ${fmtBulan(this.customAkhirBulan)} ${this.customAkhirTahun}`
     };
   }
-
   _updPreset() {
     const info = $('#presetInfoText');
     const custom = $('#customPeriode');
@@ -2218,25 +2586,13 @@ class CetakTab extends BaseTab {
           <div class="custom-periode">
             <div style="font-size:.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.03em">Dari</div>
             <div class="row">
-              <div>
-                <label>Bulan</label>
-                <select id="custAwalB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAwalBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
-              </div>
-              <div>
-                <label>Tahun</label>
-                <select id="custAwalT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAwalTahun ? ' selected' : ''}>${y}</option>`).join('')}</select>
-              </div>
+              <div><label>Bulan</label><select id="custAwalB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAwalBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select></div>
+              <div><label>Tahun</label><select id="custAwalT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAwalTahun ? ' selected' : ''}>${y}</option>`).join('')}</select></div>
             </div>
             <div style="font-size:.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:.3rem">Sampai</div>
             <div class="row">
-              <div>
-                <label>Bulan</label>
-                <select id="custAkhirB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAkhirBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
-              </div>
-              <div>
-                <label>Tahun</label>
-                <select id="custAkhirT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAkhirTahun ? ' selected' : ''}>${y}</option>`).join('')}</select>
-              </div>
+              <div><label>Bulan</label><select id="custAkhirB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAkhirBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select></div>
+              <div><label>Tahun</label><select id="custAkhirT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAkhirTahun ? ' selected' : ''}>${y}</option>`).join('')}</select></div>
             </div>
           </div>`;
         const upd = () => {
@@ -2258,7 +2614,6 @@ class CetakTab extends BaseTab {
       if (custom) custom.innerHTML = '';
     }
   }
-
   _fillSiswa() {
     const master = (this.app.boot && this.app.boot.master) || [];
     const profile = this.app.profile;
@@ -2268,14 +2623,13 @@ class CetakTab extends BaseTab {
     if (!sel) return;
     const cur = sel.value;
     sel.innerHTML = '<option value="">-- Pilih Siswa --</option>' + siswa.map(s => `<option value="${escAttr(s.NIS)}"${String(s.NIS) === String(cur) ? ' selected' : ''}>${esc(s.Nama_Siswa)}</option>`).join('');
+    if (sel._csSync) sel._csSync();
   }
-
   async _preview() {
     const boot = this.app.boot;
     if (!boot || !boot.master || !boot.master.length) return toast('Data master belum siap.', 'error');
     const profile = this.app.profile;
     if (this.jenis !== 'sekolah' && !profile) return toast('Pilih kelas dulu.', 'error');
-
     const periode = this._getPeriode();
     const f = {
       tahunAwal: String(periode.tahunAwal),
@@ -2283,45 +2637,39 @@ class CetakTab extends BaseTab {
       bulanAwal: periode.bulanAwal,
       bulanAkhir: periode.bulanAkhir
     };
-    // Validate range
     const idxA = BULAN.indexOf(periode.bulanAwal), idxB = BULAN.indexOf(periode.bulanAkhir);
     const urutA = periode.tahunAwal * 100 + idxA;
     const urutB = periode.tahunAkhir * 100 + idxB;
     if (urutA > urutB) return toast('Bulan awal harus sebelum bulan akhir.', 'error');
-
     const btn = $('#btnPreview');
     const orig = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan...</span>';
-
+    const seq = this._guard.next();
     try {
       const query = { ...f };
       if (this.jenis !== 'sekolah') query.kelas = profile.kelas;
       let logs = LogsCache.read(query);
       if (!logs) {
         const res = await Api.logs(query);
+        if (!this._guard.isCurrent(seq)) { btn.disabled = false; btn.innerHTML = orig; return; }
         logs = res.logs || [];
         LogsCache.write(query, logs);
       }
+      if (!this._guard.isCurrent(seq)) { btn.disabled = false; btn.innerHTML = orig; return; }
       logs = Stats.dedup(logs);
       if (!logs.length) {
-        btn.disabled = false;
-        btn.innerHTML = orig;
+        btn.disabled = false; btn.innerHTML = orig;
         return toast('Belum ada data untuk periode ini.', 'error');
       }
-
       const opts = {
-        identitas: boot.identitas,
-        waliKelas: boot.waliKelas,
-        tahunAwal: periode.tahunAwal,
-        tahunAkhir: periode.tahunAkhir,
-        bulanAwal: periode.bulanAwal,
-        bulanAkhir: periode.bulanAkhir,
+        identitas: boot.identitas, waliKelas: boot.waliKelas,
+        tahunAwal: periode.tahunAwal, tahunAkhir: periode.tahunAkhir,
+        bulanAwal: periode.bulanAwal, bulanAkhir: periode.bulanAkhir,
         periodeLabel: periode.label
       };
       const chartTasks = [];
       const pages = [];
-
       if (this.jenis === 'rapor') {
         const isBatch = $('#cBatch').checked;
         const kelas = profile.kelas;
@@ -2339,6 +2687,7 @@ class CetakTab extends BaseTab {
           }
           if (!pages.length) { btn.disabled = false; btn.innerHTML = orig; return toast('Tidak ada siswa dengan data.', 'error'); }
           opts.title = `Rapor ${kelas} (${pages.length})`;
+          opts.filename = `Rapor_${safeFilename(kelas)}_${safeFilename(periode.bulanAwal)}-${safeFilename(periode.bulanAkhir)}_${periode.tahunAwal}`;
         } else {
           const nis = $('#cSiswa').value;
           if (!nis) { btn.disabled = false; btn.innerHTML = orig; return toast('Pilih siswa dulu.', 'error'); }
@@ -2351,6 +2700,7 @@ class CetakTab extends BaseTab {
           chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, Stats.normArr(Stats.rataPerKategori(rows))));
           if (rows.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
           opts.title = 'Rapor ' + siswa.Nama_Siswa;
+          opts.filename = `Rapor_${safeFilename(siswa.Nama_Siswa)}_${safeFilename(periode.bulanAwal)}-${safeFilename(periode.bulanAkhir)}_${periode.tahunAwal}`;
         }
       } else if (this.jenis === 'kelas') {
         const kelas = profile.kelas;
@@ -2361,6 +2711,7 @@ class CetakTab extends BaseTab {
           if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-kls-tren', pts));
         }
         opts.title = 'Laporan ' + kelas;
+        opts.filename = `Laporan_${safeFilename(kelas)}_${safeFilename(periode.bulanAwal)}-${safeFilename(periode.bulanAkhir)}_${periode.tahunAwal}`;
       } else if (this.jenis === 'sekolah') {
         pages.push(PrintEngine.buildSekolahPage(logs, opts));
         const rekap = KELAS.map(k => {
@@ -2375,6 +2726,7 @@ class CetakTab extends BaseTab {
           if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-sek-tren', pts));
         }
         opts.title = 'Laporan Sekolah';
+        opts.filename = `Laporan_Sekolah_${safeFilename(periode.bulanAwal)}-${safeFilename(periode.bulanAkhir)}_${periode.tahunAwal}`;
       }
       await PrintEngine.render(pages, { ...opts, chartTasks });
     } catch (e) {
@@ -2386,17 +2738,40 @@ class CetakTab extends BaseTab {
   }
 }
 
-/* ========== BOOT ========== */
+/* ====================================================================
+ *                              BOOT
+ * ==================================================================== */
+let _isPrinting = false;
+let _resizeTimer;
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
+  document.addEventListener('DOMContentLoaded', () => {
+    new App().init();
+    runEnhancers();
+  }, { once: true });
 } else {
   new App().init();
+  runEnhancers();
 }
+
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
   });
 }
+
+window.addEventListener('resize', () => {
+  if (_isPrinting) return;
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => {
+    if (document.querySelector('#previewShell.show')) PrintEngine.applyScale();
+  }, 150);
+});
+
+window.addEventListener('orientationchange', () => {
+  if (_isPrinting) return;
+  setTimeout(() => PrintEngine.applyScale(), 300);
+});
 
 })();
 </script>
