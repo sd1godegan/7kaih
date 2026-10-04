@@ -1342,7 +1342,7 @@ class InputTab extends BaseTab {
     }
   }
 
-  _renderTable({ tahun, bulan, minggu, kelas }) {
+    _renderTable({ tahun, bulan, minggu, kelas }) {
     const master = this.app.boot?.master || [];
     const siswaKelas = master.filter(s => s.Kelas === kelas);
     if (!siswaKelas.length) return toast(`Belum ada siswa di ${kelas}.`, 'error');
@@ -1351,32 +1351,30 @@ class InputTab extends BaseTab {
     if (card) card.style.display = 'none';
 
     const findExisting = nis => this.riwayat.find(r => str(r.NIS) === str(nis));
-    const cell = (key, cls = '') => {
-      const v = findExisting(nis).?.[key];
-      return `<td><input type="text" class="input-cell ${cls}" data-key="${key}" value="${v ?? ''}" inputmode="numeric" maxlength="1" enterkeyhint="next" autocomplete="off"></td>`;
-    };
 
-    // Gunakan function trick: evaluasi per baris
     const rowHtml = siswa => {
       const ex = findExisting(siswa.NIS) || {};
-      const cv = key => ex[key] ?? '';
+      const cv = key => {
+        const v = ex[key];
+        return (v === undefined || v === null || v === '') ? '' : String(v);
+      };
       return `<tr data-nis="${esc(siswa.NIS)}">
         <td class="sticky-l">
           <div style="font-weight:700;font-size:.85rem">${esc(siswa.Nama_Siswa)}</div>
           <div style="font-size:.68rem;color:var(--muted)">NIS: ${esc(siswa.NIS)}</div>
         </td>
-        <td><input class="input-cell" data-key="Skor_Bangun" value="${cv('Skor_Bangun')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell salat" data-key="Skor_Subuh" value="${cv('Skor_Subuh')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell salat" data-key="Skor_Dzuhur" value="${cv('Skor_Dzuhur')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell salat" data-key="Skor_Ashar" value="${cv('Skor_Ashar')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell salat" data-key="Skor_Maghrib" value="${cv('Skor_Maghrib')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell salat" data-key="Skor_Isya" value="${cv('Skor_Isya')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Mengaji" value="${cv('Skor_Mengaji')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Olahraga" value="${cv('Skor_Olahraga')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Makan" value="${cv('Skor_Makan')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Belajar" value="${cv('Skor_Belajar')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Sosial" value="${cv('Skor_Sosial')}" type="text" inputmode="numeric" maxlength="1"></td>
-        <td><input class="input-cell" data-key="Skor_Tidur" value="${cv('Skor_Tidur')}" type="text" inputmode="numeric" maxlength="1"></td>
+        <td><input class="input-cell" data-key="Skor_Bangun" value="${cv('Skor_Bangun')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell salat" data-key="Skor_Subuh" value="${cv('Skor_Subuh')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell salat" data-key="Skor_Dzuhur" value="${cv('Skor_Dzuhur')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell salat" data-key="Skor_Ashar" value="${cv('Skor_Ashar')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell salat" data-key="Skor_Maghrib" value="${cv('Skor_Maghrib')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell salat" data-key="Skor_Isya" value="${cv('Skor_Isya')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Mengaji" value="${cv('Skor_Mengaji')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Olahraga" value="${cv('Skor_Olahraga')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Makan" value="${cv('Skor_Makan')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Belajar" value="${cv('Skor_Belajar')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Sosial" value="${cv('Skor_Sosial')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
+        <td><input class="input-cell" data-key="Skor_Tidur" value="${cv('Skor_Tidur')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
         <td><button class="btn-icon btn-save-row" style="background:var(--primary-l);color:var(--primary)"><span class="material-symbols-outlined">save</span></button></td>
       </tr>`;
     };
@@ -1438,7 +1436,7 @@ class InputTab extends BaseTab {
 
     this._attachInput(tahun, bulan, minggu, kelas);
   }
-
+  
   _attachInput(tahun, bulan, minggu, kelas) {
     const tbody = this.el.querySelector('#layer2 tbody');
     if (!tbody) return;
