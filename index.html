@@ -364,7 +364,59 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 @media (min-width: 900px) {
   :root { --app-max-w: 1400px; --nav-w: 200px; }
 
-  #app {
+  /* ============================================
+   * LOGIN PAGE — centered card (bukan grid)
+   * ============================================ */
+  #app:has(.login-wrap) {
+    display: block;
+    max-width: 460px;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin: 0;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px -20px rgba(15,23,42,.2);
+    background: var(--surface);
+    overflow: visible;
+  }
+  #app:has(.login-wrap) .login-wrap {
+    flex: none;
+    padding: 2.5rem 2rem;
+    background: transparent;
+    border-radius: 24px;
+    min-height: auto;
+    gap: .7rem;
+    overflow: visible;
+  }
+  #app:has(.login-wrap) .logo-box {
+    width: 90px;
+    max-width: 90px;
+    margin-bottom: .3rem;
+  }
+  #app:has(.login-wrap) .logo-box .material-symbols-outlined {
+    font-size: 48px;
+  }
+  #app:has(.login-wrap) .login-title {
+    font-size: 1.4rem;
+  }
+  #app:has(.login-wrap) .login-sub {
+    font-size: .88rem;
+    margin-bottom: .5rem;
+  }
+  #app:has(.login-wrap) .input-pin {
+    padding: .85rem 1rem;
+  }
+  #app:has(.login-wrap) .btn-primary {
+    min-height: 46px;
+  }
+  #app:has(.login-wrap) .login-info {
+    margin-top: 1rem;
+  }
+
+  /* ============================================
+   * APP SHELL — grid layout
+   * ============================================ */
+  #app:not(:has(.login-wrap)) {
     max-width: 1400px;
     margin: 24px auto;
     border-radius: 20px;
@@ -384,7 +436,9 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 
   .main { grid-area: main; padding: 1.4rem 1.8rem; padding-bottom: 1.4rem; overflow-y: auto; }
 
-  /* Bottom nav → sidebar */
+  /* ============================================
+   * BOTTOM NAV → SIDEBAR
+   * ============================================ */
   .bottom-nav {
     grid-area: sidebar;
     flex-direction: column;
@@ -424,26 +478,27 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   .nav-item:hover { background: var(--surface-2); }
   .nav-item.active { background: var(--primary-l); color: var(--primary); font-weight: 700; }
 
-  /* Compact section header */
+  /* ============================================
+   * TYPOGRAPHY & CARDS
+   * ============================================ */
   .section-title { font-size: 1.1rem; margin-bottom: .8rem; }
   .section-title .material-symbols-outlined { font-size: 24px; }
 
-  /* Cards compact */
   .card { padding: 1.2rem 1.4rem; border-radius: 16px; margin-bottom: 1rem; }
   .card h3 { font-size: 1rem; margin-bottom: .8rem; }
   .card-title { font-size: 1rem; margin-bottom: .8rem; }
 
-  /* Stats 4 sejajar */
+  /* ============================================
+   * STATS 4 SEJAJAR
+   * ============================================ */
   .stats-grid { grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1rem; }
   .stat { padding: 1rem 1.1rem; }
   .stat .num { font-size: 1.75rem; }
   .stat .lbl { font-size: .7rem; }
 
   /* ============================================
-   * FILTER CARDS COMPACT — GRID 4 KOLOM
+   * INPUT TAB — cardSetup grid 4 kolom
    * ============================================ */
-
-  /* Input tab: #cardSetup jadi 4 kolom grid */
   #cardSetup {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -474,7 +529,9 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding: .6rem 1.2rem;
   }
 
-  /* Semua .filter-grid → 4 kolom */
+  /* ============================================
+   * FILTER GRID — 4 kolom
+   * ============================================ */
   .filter-grid { grid-template-columns: repeat(4, 1fr) !important; gap: .5rem .9rem; }
   .filter-grid .form-group { gap: .2rem; }
   .filter-grid .form-group label { font-size: .72rem; }
@@ -495,7 +552,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding: .5rem 0;
   }
 
-  /* Cetak: filter grid — jenis + filter */
+  /* Cetak: jenis cetak filter layout */
   #grpKelas, #grpSiswa { grid-column: span 2; }
   #grpBatch {
     grid-column: 1 / -1;
@@ -507,45 +564,31 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   #grpBatch label { width: 100%; justify-content: flex-start; }
 
   /* ============================================
-   * DASHBOARD CHARTS & TABLES
+   * DASHBOARD CHARTS
    * ============================================ */
-
-  /* Chart height lebih besar di desktop */
   #dkResult .card > div[style*="height:260px"] { min-height: 340px !important; }
   #dsResult .card > div[style*="height:240px"] { min-height: 320px !important; }
   #dsResult .card > div[style*="height:300px"] { min-height: 340px !important; }
 
-  /* Chart pair — 2 kolom */
   .chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .chart-pair > .card { margin-bottom: 0; }
 
-  /* Table compact di desktop */
+  /* ============================================
+   * TABLES
+   * ============================================ */
   .table-wrap { max-height: 68vh; }
   table.data { min-width: 0; font-size: .85rem; }
   .data td { padding: .65rem .55rem; }
   .data th { padding: .75rem .5rem; font-size: .68rem; }
   .input-cell { width: 50px; height: 40px; font-size: 16px; }
+  .input-cell:focus { transform: scale(1.05); }
 
-  /* Legend lebih compact */
   .legend { padding: .7rem .9rem; }
   .legend table { font-size: .76rem; }
 
-  /* Login desktop — centered card */
-  .login-wrap {
-    background: var(--surface);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px -20px rgba(15,23,42,.15);
-    padding: 2.5rem;
-    margin: 24px auto;
-    max-width: 440px;
-    width: 100%;
-  }
-  .logo-box { width: 110px; max-width: 110px; }
-
-  /* Preview shell */
-  .preview-scroll { padding: 32px 24px; }
-
-  /* Input layer2 header — sticky compact */
+  /* ============================================
+   * INPUT LAYER 2 — sticky header
+   * ============================================ */
   #layer2 > div:first-child {
     position: sticky;
     top: -1.4rem;
@@ -560,7 +603,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     padding-right: 1.8rem;
   }
 
-  /* Tombol batch save — compact right aligned */
+  /* Tombol batch save — right aligned */
   #btnSubmitBatch {
     width: auto;
     min-width: 260px;
@@ -569,16 +612,13 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
     margin-top: .6rem !important;
   }
 
-  /* Dashboard kelas: chart di atas, tabel di bawah */
   #dkResult .stats-grid { margin-bottom: 1rem; }
-
-  /* Cetak: jenis button grid — 3 kolom tetap */
   .jenis-btn .btn { padding: .6rem .8rem; }
 
-  /* Form input cell focus — sedikit lebih kecil */
-  .input-cell:focus { transform: scale(1.05); }
+  /* Preview shell */
+  .preview-scroll { padding: 32px 24px; }
 }
-
+  
 /* ====================================================================
  *                        LARGE DESKTOP (≥1400px)
  * ==================================================================== */
