@@ -18,8 +18,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="7 Kebiasaan" />
-<meta name="application-name" content="7 Kebiasaan" />
-<meta name="msapplication-TileColor" content="#4F46E5" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,19 +25,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 
 <style>
-/* ====================================================================
- *                        DESIGN TOKENS
- * ==================================================================== */
+/* ========== TOKENS ========== */
 :root{
   --primary:#4F46E5; --primary-d:#4338CA; --primary-l:#EEF2FF;
-  --positive:#10B981; --positive-d:#059669;
-  --negative:#F43F5E; --negative-d:#BE123C;
-  --warning:#D97706;
+  --positive:#10B981; --positive-d:#059669; --positive-l:#D1FAE5;
+  --negative:#F43F5E; --negative-d:#BE123C; --negative-l:#FFE4E6;
+  --warning:#D97706; --warning-l:#FEF3C7;
   --bg:#F9FAFB; --surface:#FFF; --surface-2:#F3F4F6;
   --text:#111827; --muted:#6B7280; --border:#E5E7EB;
   --shadow-s:0 1px 2px rgba(0,0,0,.05);
   --shadow-m:0 4px 6px -1px rgba(0,0,0,.1);
-  --shadow-l:0 20px 25px -5px rgba(17,24,39,.12);
   --r:16px; --r-s:10px;
   --t:.18s cubic-bezier(.4,0,.2,1);
   --app-max-w:720px;
@@ -62,16 +57,13 @@ input,select,textarea{font-family:inherit;font-size:16px}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes shakeInput{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 
-/* ====================================================================
- *                        APP SHELL
- * ==================================================================== */
+/* ========== APP SHELL ========== */
 #app{width:100%;height:100%;max-width:var(--app-max-w);background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .spinner{display:inline-block;width:18px;height:18px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 
-/* ====================================================================
- *                        LOGIN
- * ==================================================================== */
+/* ========== LOGIN ========== */
 .login-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;gap:.85rem;background:var(--surface);overflow-y:auto;text-align:center}
 .logo-box{width:min(140px,40vw);aspect-ratio:1;max-width:160px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;box-shadow:0 10px 25px -5px rgba(79,70,229,.35);flex-shrink:0}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.3}
@@ -83,78 +75,144 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .login-info h3{font-size:.8rem;color:var(--primary-d);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-info p{font-size:.75rem;color:var(--muted);line-height:1.5}
 
-/* ====================================================================
- *                        HEADER + NAV
- * ==================================================================== */
-.app-header{background:var(--surface);padding:.75rem 1.1rem;padding-top:calc(.75rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
-.app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem}
-.app-header h1 .material-symbols-outlined{font-size:24px}
-.btn-icon{color:var(--muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--t);min-width:44px;min-height:44px}
-.btn-icon:hover{background:#FFE4E6;color:var(--negative)}
+/* ========== PROFILE MODAL ========== */
+.profile-modal{position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);z-index:10001;display:flex;align-items:center;justify-content:center;padding:1.2rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.profile-modal.show{opacity:1;pointer-events:auto}
+.profile-card{background:var(--surface);border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);padding:1.8rem 1.5rem;width:100%;max-width:420px;animation:popIn .25s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto}
+.profile-icon{width:64px;height:64px;margin:0 auto .8rem;background:var(--primary-l);border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--primary)}
+.profile-icon .material-symbols-outlined{font-size:36px}
+.profile-title{font-size:1.15rem;font-weight:800;text-align:center;margin-bottom:.3rem}
+.profile-sub{font-size:.84rem;color:var(--muted);text-align:center;margin-bottom:1.3rem;line-height:1.45}
+.kelas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-bottom:1rem}
+.kelas-pick{padding:1rem .5rem;border:2px solid var(--border);border-radius:12px;background:var(--surface);font-weight:700;font-size:.95rem;color:var(--text);transition:var(--t);text-align:center;cursor:pointer;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem}
+.kelas-pick:hover{border-color:var(--primary);background:var(--primary-l);color:var(--primary-d)}
+.kelas-pick:active{transform:scale(.97)}
+.kelas-pick .material-symbols-outlined{font-size:22px;color:var(--primary)}
+.profile-actions{display:flex;gap:.5rem;margin-top:.5rem}
+.profile-cancel{background:var(--surface);border:1px solid var(--border);color:var(--text);flex:1;padding:.7rem;border-radius:10px;font-weight:600;font-size:.88rem;min-height:42px}
 
-.main{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+/* ========== HEADER ========== */
+.app-header{background:var(--surface);padding:.7rem 1rem;padding-top:calc(.7rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
+.app-header .hdr-brand{display:flex;align-items:center;gap:.5rem;min-width:0;flex-shrink:0}
+.app-header .hdr-brand .material-symbols-outlined{font-size:24px;color:var(--primary)}
+.app-header .hdr-brand h1{font-size:.98rem;font-weight:800;color:var(--primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-kelas-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .6rem;background:var(--primary-l);color:var(--primary-d);border-radius:8px;font-size:.72rem;font-weight:800;cursor:pointer;transition:var(--t);flex-shrink:0;border:1px solid transparent;min-height:32px}
+.hdr-kelas-badge:hover{background:#DDD6FE;border-color:var(--primary)}
+.hdr-kelas-badge .material-symbols-outlined{font-size:14px}
+.hdr-actions{display:flex;gap:.1rem;align-items:center;flex-shrink:0}
+.btn-icon{color:var(--muted);padding:.45rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--t);min-width:38px;min-height:38px}
+.btn-icon:hover{background:#FFE4E6;color:var(--negative)}
+.btn-icon.btn-icon-sm:hover{background:var(--primary-l);color:var(--primary)}
+@media(max-width:400px){.app-header .hdr-brand h1{font-size:.88rem}.hdr-kelas-badge{font-size:.66rem;padding:.25rem .5rem}}
+
+/* ========== MAIN + NAV ========== */
+.main{flex:1;overflow-y:auto;padding:.9rem;padding-bottom:calc(88px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
 .tab-pane{display:none;animation:fadeIn .25s ease-out}
 .tab-pane.active{display:block}
-.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
-.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--muted);font-size:.68rem;font-weight:500;transition:var(--t);padding:.25rem .6rem;min-width:56px;min-height:48px}
+.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.45rem 0;padding-bottom:calc(.45rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1rem;color:var(--muted);font-size:.66rem;font-weight:600;transition:var(--t);padding:.25rem .5rem;min-width:54px;min-height:46px;text-align:center}
 .nav-item.active{color:var(--primary)}
-.nav-item .material-symbols-outlined{font-size:22px;transition:var(--t)}
+.nav-item .material-symbols-outlined{font-size:22px;display:block}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
-@media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
+@media(max-width:360px){.nav-item{min-width:46px;padding:.2rem .3rem;font-size:.6rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
-/* ====================================================================
- *                        CARDS + FORMS
- * ==================================================================== */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-s);padding:1.1rem;margin-bottom:.9rem}
-.card-title{font-size:1.05rem;font-weight:800;text-align:center;margin-bottom:1rem}
-.section-title{font-size:1rem;font-weight:800;margin:0 0 .8rem;display:flex;align-items:center;gap:.5rem}
+/* ========== CARDS ========== */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-s);padding:1rem;margin-bottom:.75rem}
+.card-title{font-size:1rem;font-weight:800;text-align:left;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.card-title .material-symbols-outlined{font-size:20px;color:var(--primary)}
+.card h3{font-size:.9rem;font-weight:700;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.card h3 .material-symbols-outlined{font-size:19px;color:var(--primary)}
+.section-title{font-size:1rem;font-weight:800;margin:0 0 .7rem;display:flex;align-items:center;gap:.5rem}
 .section-title .material-symbols-outlined{font-size:22px;color:var(--primary)}
-.card h3{font-size:.92rem;font-weight:700;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
-.card h3 .material-symbols-outlined{font-size:20px;color:var(--primary)}
+.card-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.4rem;display:block}
 
-.form-group{margin-bottom:.8rem;display:flex;flex-direction:column;gap:.3rem}
-.form-group label{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-.form-select,.form-input{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--t);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 2l1.4-1.4L6 5.2 10.6.6 12 2z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:12px;padding-right:2.4rem}
-.form-input{background-image:none;padding-right:.9rem}
-.form-select:focus,.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l);background-color:var(--surface)}
-.form-select.highlight{border-color:var(--primary);color:var(--primary);font-weight:700}
-
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:.5rem;padding:.75rem 1rem;border-radius:var(--r-s);font-size:clamp(.88rem,2.5vw,.98rem);font-weight:600;transition:var(--t);min-height:42px;width:100%}
+/* ========== BUTTONS ========== */
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:.45rem;padding:.7rem 1rem;border-radius:var(--r-s);font-size:.92rem;font-weight:600;transition:var(--t);min-height:42px;width:100%}
 .btn:active:not(:disabled){transform:scale(.98)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .btn-primary{background:var(--primary);color:#fff}
 .btn-primary:hover:not(:disabled){background:var(--primary-d)}
 .btn-success{background:var(--positive);color:#fff}
 .btn-success:hover:not(:disabled){background:var(--positive-d)}
+.btn-warning{background:var(--warning);color:#fff}
 .btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text)}
 .btn-ghost:hover{background:var(--surface-2)}
-.btn-sm{padding:.45rem .8rem;font-size:.8rem;min-height:34px;width:auto}
+.btn-sm{padding:.4rem .75rem;font-size:.78rem;min-height:34px;width:auto}
 
-/* ====================================================================
- *                        STATS
- * ==================================================================== */
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:.8rem}
+/* ========== FORM ========== */
+.form-group{margin-bottom:.6rem;display:flex;flex-direction:column;gap:.2rem}
+.form-group label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.form-select,.form-input{width:100%;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:var(--r-s);font-size:16px;background:var(--bg);outline:none;font-weight:500;color:var(--text);transition:var(--t);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236B7280' d='M6 8L0 2l1.4-1.4L6 5.2 10.6.6 12 2z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;background-size:12px;padding-right:2.2rem}
+.form-input{background-image:none;padding-right:.8rem}
+.form-select:focus,.form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l);background-color:var(--surface)}
+
+/* ========== CHIP BULAN GRID (12 bulan) ========== */
+.chip-bulan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
+@media(min-width:500px){.chip-bulan-grid{grid-template-columns:repeat(6,1fr)}}
+.chip-bulan{padding:.55rem .3rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.82rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:center}
+.chip-bulan:hover{border-color:var(--primary);color:var(--primary-d)}
+.chip-bulan.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chip-bulan.today-marker::after{content:'';position:absolute;width:4px;height:4px;background:var(--primary);border-radius:50%;bottom:4px;left:50%;transform:translateX(-50%)}
+.chip-bulan.today-marker{position:relative;padding-bottom:.75rem}
+.chip-bulan.active.today-marker::after{background:#fff}
+
+/* ========== CHIP PEKAN ========== */
+.chip-pekan-row{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem}
+.chip-pekan{padding:.55rem .3rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.8rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;gap:1px}
+.chip-pekan .lbl-now{font-size:.55rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.03em}
+.chip-pekan:hover{border-color:var(--primary);color:var(--primary-d)}
+.chip-pekan.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chip-pekan.active .lbl-now{color:#fff}
+.chip-pekan.is-current:not(.active){border-style:dashed;border-color:var(--primary);background:#F5F3FF}
+
+/* ========== INPUT LAYOUT (2-col desktop) ========== */
+.input-layout{display:grid;gap:.75rem}
+@media(min-width:900px){.input-layout{grid-template-columns:1fr 320px;align-items:start}}
+
+/* ========== STATUS PANEL ========== */
+.status-panel{display:flex;flex-direction:column;gap:.55rem}
+.status-panel .card{padding:.85rem .9rem;margin-bottom:0}
+.status-item{display:flex;align-items:center;gap:.55rem;font-size:.82rem;line-height:1.35}
+.status-item .material-symbols-outlined{font-size:20px;flex-shrink:0}
+.status-item .txt{flex:1;min-width:0}
+.status-item .txt strong{display:block;font-weight:700;color:var(--text)}
+.status-item .txt small{color:var(--muted);font-size:.72rem}
+.status-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.status-icon.info{background:var(--primary-l);color:var(--primary-d)}
+.status-icon.warn{background:var(--warning-l);color:var(--warning)}
+.status-icon.ok{background:var(--positive-l);color:var(--positive-d)}
+.status-icon.empty{background:var(--surface-2);color:var(--muted)}
+.progress-bar{height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-top:.5rem}
+.progress-bar .fill{height:100%;background:var(--primary);border-radius:3px;transition:width .3s}
+.progress-bar .fill.ok{background:var(--positive)}
+.progress-bar .fill.warn{background:var(--warning)}
+
+/* ========== STATS ========== */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-bottom:.75rem}
 @media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-s);padding:.85rem;box-shadow:var(--shadow-s)}
-.stat .num{font-size:1.4rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
-.stat .lbl{font-size:.65rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:.25rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-s);padding:.75rem .8rem;box-shadow:var(--shadow-s);min-width:0}
+.stat .num{font-size:1.35rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat .num.sm{font-size:.9rem;white-space:normal;line-height:1.2}
+.stat .lbl{font-size:.62rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:.2rem}
 .stat.pos .num{color:var(--positive)}
 .stat.neg .num{color:var(--negative)}
 
-/* ====================================================================
- *                        TABLES
- * ==================================================================== */
-.table-wrap{overflow:auto;max-height:60vh;background:var(--surface);border-radius:var(--r-s);border:1px solid var(--border);box-shadow:var(--shadow-s);margin-bottom:.8rem;-webkit-overflow-scrolling:touch}
-table.data{width:100%;border-collapse:collapse;min-width:900px}
-.data th{background:var(--bg);color:var(--muted);font-size:.68rem;text-transform:uppercase;padding:.65rem .4rem;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:2}
-.data td{padding:.55rem .4rem;border-bottom:1px solid var(--border);text-align:center;font-size:.8rem;font-variant-numeric:tabular-nums}
-.data .sticky-l{position:sticky;left:0;background:var(--surface);z-index:2;text-align:left;padding-left:.75rem;font-weight:600;box-shadow:2px 0 5px rgba(0,0,0,.02)}
+/* ========== INFO BAR ========== */
+.info-bar{background:var(--primary-l);border:1px solid #C7D2FE;border-radius:10px;padding:.6rem .85rem;margin-bottom:.75rem;font-size:.75rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;line-height:1.4}
+.info-bar .material-symbols-outlined{font-size:15px;flex-shrink:0}
+
+/* ========== TABLES ========== */
+.table-wrap{overflow:auto;max-height:65vh;background:var(--surface);border-radius:var(--r-s);border:1px solid var(--border);box-shadow:var(--shadow-s);margin-bottom:.75rem;-webkit-overflow-scrolling:touch}
+table.data{width:100%;border-collapse:collapse;min-width:820px}
+.data th{background:var(--bg);color:var(--muted);font-size:.65rem;text-transform:uppercase;padding:.55rem .35rem;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:2;letter-spacing:.03em}
+.data td{padding:.5rem .35rem;border-bottom:1px solid var(--border);text-align:center;font-size:.78rem;font-variant-numeric:tabular-nums}
+.data .sticky-l{position:sticky;left:0;background:var(--surface);z-index:2;text-align:left;padding-left:.65rem;font-weight:600;box-shadow:2px 0 5px rgba(0,0,0,.02);font-size:.75rem}
 .data th.sticky-l{background:var(--bg);z-index:3}
 .skor-baik{color:var(--positive);font-weight:700}
 .skor-cukup{color:var(--warning);font-weight:700}
 .skor-kurang{color:var(--negative);font-weight:700}
 
-.input-cell{width:44px;height:36px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0;line-height:1}
+.input-cell{width:42px;height:36px;text-align:center;border:1.5px solid var(--border);border-radius:6px;font-weight:700;font-size:16px;background:#f1f5f9;outline:none;transition:var(--t);font-variant-numeric:tabular-nums;-webkit-appearance:none;padding:0;line-height:1}
 .input-cell:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-l);transform:scale(1.08);z-index:5;position:relative}
 .input-cell.salat{border-color:#bfdbfe;background:#eff6ff;color:var(--primary)}
 .input-cell.invalid{border-color:var(--negative)!important;background:#FFE4E6!important;animation:shakeInput .3s}
@@ -165,32 +223,60 @@ tr.row-saved{background:#ecfdf5}
 tr.row-saved .sticky-l{background:#ecfdf5}
 tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 
-/* ====================================================================
- *                        FILTER + LEGEND
- * ==================================================================== */
-.filter-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;align-items:end}
-.filter-grid .form-group{margin-bottom:0}
-.filter-grid .full{grid-column:1/-1}
-@media(min-width:600px){.filter-grid{grid-template-columns:repeat(3,1fr)}.filter-grid .span-3{grid-column:span 3}}
+/* ========== LEGEND ========== */
+details.legend{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:10px;margin-bottom:.7rem;padding:0}
+details.legend > summary{list-style:none;cursor:pointer;padding:.7rem .85rem;font-size:.82rem;font-weight:700;color:var(--primary-d);display:flex;align-items:center;gap:.4rem;user-select:none}
+details.legend > summary::-webkit-details-marker{display:none}
+details.legend > summary::after{content:'expand_more';font-family:'Material Symbols Outlined';margin-left:auto;transition:transform .2s;font-size:20px}
+details.legend[open] > summary::after{transform:rotate(180deg)}
+details.legend > summary .material-symbols-outlined{font-size:16px}
+details.legend[open] .legend-body{padding:0 .85rem .75rem}
+.legend-body table{width:100%;border-collapse:collapse;font-size:.72rem;min-width:480px}
+.legend-body th{text-align:left;padding:4px 5px;color:var(--primary-d);border-bottom:1px solid #C7D2FE}
+.legend-body td{padding:4px 5px;border:none;text-align:left;color:var(--muted)}
+.legend-body td:first-child{font-weight:600;color:var(--text)}
 
-.legend{background:var(--primary-l);padding:.75rem .9rem;border-radius:var(--r-s);border-left:4px solid var(--primary);font-size:.78rem;color:var(--primary-d);margin-bottom:.8rem}
-.legend strong{display:flex;align-items:center;gap:.3rem;margin-bottom:.4rem;font-size:.82rem}
-.legend table{width:100%;min-width:520px;border-collapse:collapse;font-size:.72rem}
-.legend th{text-align:left;padding:3px 5px;color:var(--primary-d);border-bottom:1px solid #C7D2FE}
-.legend td{padding:3px 5px;border:none;text-align:left}
+/* ========== COLLAPSE ========== */
+details.collapse{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem;padding:0;box-shadow:var(--shadow-s)}
+details.collapse > summary{list-style:none;cursor:pointer;padding:.85rem 1rem;font-size:.9rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem;user-select:none}
+details.collapse > summary::-webkit-details-marker{display:none}
+details.collapse > summary::after{content:'expand_more';font-family:'Material Symbols Outlined';margin-left:auto;transition:transform .2s;font-size:20px;color:var(--muted)}
+details.collapse[open] > summary::after{transform:rotate(180deg)}
+details.collapse > summary .material-symbols-outlined{font-size:20px;color:var(--primary)}
+details.collapse[open] > summary{border-bottom:1px solid var(--border);margin-bottom:.75rem}
+details.collapse .collapse-body{padding:0 1rem 1rem}
 
-/* ====================================================================
- *                        TOAST
- * ==================================================================== */
-.toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:10000;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--r-s);color:#fff;font-size:.85rem;font-weight:500;box-shadow:var(--shadow-m);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275);pointer-events:auto}
+/* ========== SEGMENTED CONTROL ========== */
+.seg-control{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--surface-2);border-radius:10px;padding:3px;margin-bottom:.85rem}
+.seg-btn{display:flex;align-items:center;justify-content:center;gap:.3rem;padding:.55rem .3rem;font-size:.76rem;font-weight:700;color:var(--muted);border-radius:8px;transition:var(--t);min-width:0;background:transparent;line-height:1.15;min-height:44px;flex-direction:column}
+.seg-btn .material-symbols-outlined{font-size:18px;display:block}
+.seg-btn.active{background:var(--surface);color:var(--primary);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg-btn.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
+@media(min-width:500px){.seg-btn{flex-direction:row;min-height:40px}.seg-btn .material-symbols-outlined{font-size:20px}}
+
+/* ========== PERIODE PRESET (Cetak) ========== */
+.preset-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin-bottom:.6rem}
+@media(min-width:500px){.preset-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){.preset-grid{grid-template-columns:repeat(5,1fr)}}
+.preset-btn{padding:.55rem .4rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:.76rem;font-weight:700;color:var(--text);text-align:center;transition:var(--t);cursor:pointer;min-height:42px;display:flex;align-items:center;justify-content:center;gap:.25rem;line-height:1.15}
+.preset-btn .material-symbols-outlined{font-size:16px}
+.preset-btn:hover{border-color:var(--primary);color:var(--primary-d)}
+.preset-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.preset-info{font-size:.72rem;color:var(--primary-d);background:var(--primary-l);border:1px solid #C7D2FE;border-radius:8px;padding:.5rem .75rem;font-weight:600;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.preset-info .material-symbols-outlined{font-size:14px}
+
+.custom-periode{background:var(--surface-2);border-radius:10px;padding:.7rem;margin-bottom:.7rem;display:grid;gap:.5rem}
+.custom-periode .row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.custom-periode label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:.2rem;display:block}
+
+/* ========== TOAST ========== */
+.toast-wrap{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:10002;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;border-radius:var(--r-s);color:#fff;font-size:.85rem;font-weight:500;box-shadow:var(--shadow-m);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275);pointer-events:auto}
 .toast.success{background:var(--positive)}
 .toast.error{background:var(--negative)}
 .toast.hide{animation:slideUp .3s ease-in forwards}
 
-/* ====================================================================
- *                        EMPTY + SKELETON
- * ==================================================================== */
+/* ========== EMPTY + SKELETON ========== */
 .empty{text-align:center;padding:2rem 1rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.7rem}
 .empty .material-symbols-outlined{font-size:48px;opacity:.4;color:var(--primary)}
 .empty p{max-width:320px;font-size:.82rem;line-height:1.5}
@@ -198,79 +284,53 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 .skel-line{height:12px;border-radius:6px;margin-bottom:.5rem}
 .skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem}
 
-/* ====================================================================
- *                        PRINT PREVIEW SHELL
- * ==================================================================== */
+/* ========== PREVIEW SHELL ========== */
 .preview-shell{position:fixed;inset:0;background:#1e293b;z-index:9998;display:none;flex-direction:column}
 .preview-shell.show{display:flex}
-.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;padding-top:calc(.7rem + env(safe-area-inset-top));background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem}
-.preview-toolbar .title{font-weight:700;font-size:.92rem;display:flex;align-items:center;gap:.5rem;color:var(--text);min-width:0;flex:1}
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;padding-top:calc(.65rem + env(safe-area-inset-top));background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:.5rem}
+.preview-toolbar .title{font-weight:700;font-size:.9rem;display:flex;align-items:center;gap:.5rem;color:var(--text);min-width:0;flex:1}
 .preview-toolbar .title span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.preview-toolbar .actions{display:flex;gap:.5rem;flex-shrink:0}
-.preview-toolbar .btn{width:auto;min-width:auto;padding:.45rem .85rem;font-size:.82rem;min-height:36px}
+.preview-toolbar .actions{display:flex;gap:.4rem;flex-shrink:0}
+.preview-toolbar .btn{width:auto;min-width:auto;padding:.45rem .8rem;font-size:.8rem;min-height:36px}
 .preview-scroll{flex:1;overflow:auto;padding:20px 12px;-webkit-overflow-scrolling:touch;background:#334155}
-.preview-hint{max-width:210mm;margin:0 auto 12px;background:#475569;color:#cbd5e1;font-size:.78rem;padding:.6rem .9rem;border-radius:6px;display:flex;align-items:center;gap:.5rem}
-.preview-hint .material-symbols-outlined{font-size:16px;color:#fbbf24}
+.preview-hint{max-width:210mm;margin:0 auto 12px;background:#475569;color:#cbd5e1;font-size:.76rem;padding:.55rem .85rem;border-radius:6px;display:flex;align-items:center;gap:.5rem}
+.preview-hint .material-symbols-outlined{font-size:15px;color:#fbbf24}
 
-/* ====================================================================
- *                        A4 PAPER (SCREEN PREVIEW)
- * ==================================================================== */
-.cetak-page{
-  width:210mm;
-  min-height:297mm;
-  padding:15mm 12mm;
-  background:#fff;
-  margin:0 auto 20px;
-  box-shadow:0 4px 24px rgba(0,0,0,.35);
-  box-sizing:border-box;
-  color:#1e293b;
-  font-family:'Inter',system-ui,sans-serif;
-  font-size:10pt;
-  line-height:1.5;
-  position:relative;
-}
+/* ========== A4 PAPER ========== */
+.cetak-page{width:210mm;min-height:297mm;padding:15mm 12mm;background:#fff;margin:0 auto 20px;box-shadow:0 4px 24px rgba(0,0,0,.35);box-sizing:border-box;color:#1e293b;font-family:'Inter',system-ui,sans-serif;font-size:10pt;line-height:1.5;position:relative}
 .cetak-page:last-child{margin-bottom:20px}
-
 .cetak-kop{border-bottom:3px double #1e3a8a;padding-bottom:8px;margin-bottom:14px;text-align:center}
 .cetak-kop .dinas{font-size:9.5pt;font-weight:600;color:#334155;letter-spacing:.3px}
 .cetak-kop .dinas-sub{font-size:9pt;font-weight:500;color:#475569}
 .cetak-kop .sekolah{font-size:16pt;font-weight:800;color:#1e3a8a;margin:3px 0 1px;letter-spacing:1px}
 .cetak-kop .alamat{font-size:8.5pt;color:#64748b}
 .cetak-kop .meta{font-size:8pt;color:#94a3b8;margin-top:2px}
-
 .cetak-judul{font-size:13pt;text-align:center;font-weight:800;color:#0f172a;letter-spacing:.4px;margin:10px 0 3px}
 .cetak-sub{text-align:center;font-size:9.5pt;color:#64748b;margin-bottom:12px}
 .cetak-h3{font-size:10.5pt;font-weight:700;color:#1e293b;padding:5px 10px;background:#f1f5f9;border-left:4px solid #4F46E5;margin:14px 0 8px}
-
 .cetak-ident{width:100%;border-collapse:collapse;margin:6px 0 12px;background:#f8fafc;border:1px solid #e2e8f0}
 .cetak-ident td{padding:6px 10px;font-size:10pt;vertical-align:top}
 .cetak-ident td.label{width:130px;font-weight:600;color:#475569;background:#f1f5f9}
-
 .cetak-summary{width:100%;border-collapse:separate;border-spacing:6px 0;margin:0 0 12px}
 .cetak-summary td{background:#EEF2FF;border:1px solid #C7D2FE;border-radius:6px;padding:8px 6px;text-align:center;vertical-align:middle}
 .cetak-summary .lbl{font-size:7.5pt;color:#4338CA;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
 .cetak-summary .val{font-size:15pt;font-weight:800;color:#1e1b4b;line-height:1.1;margin-top:2px}
 .cetak-summary .val.sm{font-size:9.5pt}
-
 .cetak-tbl{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:9.5pt}
 .cetak-tbl thead th{background:#4F46E5;color:#fff;font-weight:600;padding:7px 6px;border:1px solid #4338CA;font-size:9pt;text-align:center}
 .cetak-tbl tbody td{padding:6px;border:1px solid #e2e8f0;text-align:center;vertical-align:middle}
 .cetak-tbl tbody tr:nth-child(even) td{background:#f8fafc}
 .cetak-tbl td.l{text-align:left;font-weight:600;color:#1e293b}
 .cetak-tbl td.c{text-align:center}
-
 .badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:8.5pt;font-weight:700}
 .badge-baik{background:#D1FAE5;color:#065f46}
 .badge-cukup{background:#FEF3C7;color:#92400e}
 .badge-kurang{background:#FFE4E6;color:#9f1239}
-
 .cetak-chart-wrap{margin:6px 0 12px;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:4px;text-align:center}
 .cetak-chart-wrap canvas{display:block;margin:0 auto}
-
 .cetak-catatan{background:#fefce8;border-left:4px solid #eab308;padding:10px 14px;margin:8px 0 12px;font-size:9.5pt;color:#422006}
 .cetak-catatan p{margin:0 0 5px}
 .cetak-catatan p:last-child{margin-bottom:0}
-
 .cetak-ttd{margin-top:26px}
 .cetak-ttd table{width:100%;border-collapse:collapse;table-layout:fixed}
 .cetak-ttd td{border:none;text-align:center;vertical-align:top;width:50%;padding:0 12px;font-size:10pt}
@@ -281,384 +341,123 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 .cetak-ttd .nama{font-weight:700;color:#1e293b;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block;line-height:1.35}
 .cetak-ttd .nama-kosong{font-weight:400;color:#94a3b8;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block;line-height:1.35}
 .cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px;line-height:1.35}
-
-/* FOOTER wrapper: catatan + ttd jadi satu blok */
 .cetak-footer{margin-top:0}
 .cetak-footer .cetak-catatan{margin-bottom:8px}
 .cetak-footer .cetak-ttd{margin-top:0}
 
-/* ====================================================================
- *              PRINT — A4 NORMAL MARGIN + SMART BREAKS
- * ==================================================================== */
+/* ========== PRINT ========== */
 @media print {
   @page { size: A4 portrait; margin: 15mm 12mm; }
-
-  html, body {
-    position: static !important;
-    overflow: visible !important;
-    height: auto !important;
-    width: auto !important;
-    background: #fff !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
+  html, body { position: static !important; overflow: visible !important; height: auto !important; width: auto !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
   body > *:not(.preview-shell) { display: none !important; }
-
-  .preview-shell {
-    display: flex !important;
-    position: static !important;
-    background: #fff !important;
-    inset: auto !important;
-  }
-
-  .preview-toolbar,
-  .preview-hint,
-  .no-print { display: none !important; }
-
-  .preview-scroll {
-    overflow: visible !important;
-    padding: 0 !important;
-    background: #fff !important;
-    flex: none !important;
-    height: auto !important;
-    display: block !important;
-  }
-
+  .preview-shell { display: flex !important; position: static !important; background: #fff !important; inset: auto !important; }
+  .preview-toolbar, .preview-hint, .no-print { display: none !important; }
+  .preview-scroll { overflow: visible !important; padding: 0 !important; background: #fff !important; flex: none !important; height: auto !important; display: block !important; }
   #printArea { display: block !important; }
-
-  .cetak-page {
-    width: auto !important;
-    min-height: auto !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: #fff !important;
-    page-break-after: always;
-    break-after: page;
-  }
+  .cetak-page { width: auto !important; min-height: auto !important; padding: 0 !important; margin: 0 !important; box-shadow: none !important; border: none !important; background: #fff !important; page-break-after: always; break-after: page; transform: none !important; }
   .cetak-page:last-child { page-break-after: auto; break-after: auto; }
-
-  .cetak-kop,
-  .cetak-judul,
-  .cetak-sub,
-  .cetak-ident,
-  .cetak-summary { page-break-inside: avoid; break-inside: avoid; }
-
+  .cetak-kop, .cetak-judul, .cetak-sub, .cetak-ident, .cetak-summary { page-break-inside: avoid; break-inside: avoid; }
   .cetak-h3 { page-break-after: avoid; break-after: avoid; page-break-inside: avoid; break-inside: avoid; }
-
-  .cetak-chart-wrap,
-  .cetak-catatan,
-  .cetak-ttd { page-break-inside: avoid; break-inside: avoid; }
-
-  /* Footer (catatan + ttd) jadi satu blok — tidak boleh terpisah */
+  .cetak-chart-wrap, .cetak-catatan, .cetak-ttd { page-break-inside: avoid; break-inside: avoid; }
   .cetak-footer { page-break-inside: avoid; break-inside: avoid; }
-  .cetak-footer .cetak-catatan { margin-bottom: 8px; }
-  .cetak-footer .cetak-ttd { margin-top: 0; }
-
   .cetak-tbl { page-break-inside: auto; break-inside: auto; }
   .cetak-tbl thead { display: table-header-group; }
   .cetak-tbl tbody tr { page-break-inside: avoid; break-inside: avoid; }
   .cetak-tbl tbody { page-break-inside: auto; }
-
-  *, *::before, *::after {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    color-adjust: exact !important;
-  }
+  *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
 }
 
-/* ====================================================================
- *                        DESKTOP OPTIMIZATION (≥900px)
- * ==================================================================== */
+/* ========== MOBILE PREVIEW A4 ========== */
+@media (max-width: 800px) {
+  .preview-scroll { padding: 16px 0; display: flex; flex-direction: column; align-items: center; }
+  .cetak-page {
+    transform: scale(calc((100vw - 24px) / 794));
+    transform-origin: top center;
+    margin-bottom: calc(-297mm * (1 - (100vw - 24px) / 794) + 16px);
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+  .preview-hint { font-size: .72rem; padding: .5rem .7rem; max-width: calc(100vw - 24px); }
+}
+
+/* ========== DESKTOP ========== */
 @media (min-width: 900px) {
   :root { --app-max-w: 1400px; --nav-w: 200px; }
-
-  /* LOGIN PAGE — centered card */
-  #app:has(.login-wrap) {
-    display: block;
-    max-width: 460px;
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    margin: 0;
-    border-radius: 24px;
-    box-shadow: 0 24px 60px -20px rgba(15,23,42,.2);
-    background: var(--surface);
-    overflow: visible;
-  }
-  #app:has(.login-wrap) .login-wrap {
-    flex: none;
-    padding: 2.5rem 2rem;
-    background: transparent;
-    border-radius: 24px;
-    min-height: auto;
-    gap: .7rem;
-    overflow: visible;
-  }
+  #app:has(.login-wrap) { display: block; max-width: 460px; width: 100%; height: auto; min-height: auto; margin: 0; border-radius: 24px; box-shadow: 0 24px 60px -20px rgba(15,23,42,.2); background: var(--surface); overflow: visible; }
+  #app:has(.login-wrap) .login-wrap { flex: none; padding: 2.5rem 2rem; background: transparent; border-radius: 24px; min-height: auto; gap: .7rem; overflow: visible; }
   #app:has(.login-wrap) .logo-box { width: 90px; max-width: 90px; margin-bottom: .3rem; }
   #app:has(.login-wrap) .logo-box .material-symbols-outlined { font-size: 48px; }
   #app:has(.login-wrap) .login-title { font-size: 1.4rem; }
   #app:has(.login-wrap) .login-sub { font-size: .88rem; margin-bottom: .5rem; }
   #app:has(.login-wrap) .input-pin { padding: .85rem 1rem; }
   #app:has(.login-wrap) .btn-primary { min-height: 46px; }
-  #app:has(.login-wrap) .login-info { margin-top: 1rem; }
 
-  /* APP SHELL — grid layout */
-  #app:not(:has(.login-wrap)) {
-    max-width: 1400px;
-    margin: 24px auto;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px -20px rgba(15,23,42,.15);
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: var(--nav-w) 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "sidebar header"
-      "sidebar main";
-    height: calc(100vh - 48px);
-  }
-
+  #app:not(:has(.login-wrap)) { max-width: 1400px; margin: 24px auto; border-radius: 20px; box-shadow: 0 20px 60px -20px rgba(15,23,42,.15); overflow: hidden; display: grid; grid-template-columns: var(--nav-w) 1fr; grid-template-rows: auto 1fr; grid-template-areas: "sidebar header" "sidebar main"; height: calc(100vh - 48px); }
   .app-header { grid-area: header; padding: 1rem 1.8rem; padding-top: 1rem; }
-  .app-header h1 { font-size: 1.1rem; }
+  .app-header .hdr-brand h1 { font-size: 1.1rem; }
   .main { grid-area: main; padding: 1.4rem 1.8rem; padding-bottom: 1.4rem; overflow-y: auto; }
-
-  /* BOTTOM NAV → SIDEBAR */
-  .bottom-nav {
-    grid-area: sidebar;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1.2rem .8rem;
-    padding-bottom: 1.2rem;
-    border-top: none;
-    border-right: 1px solid var(--border);
-    box-shadow: none;
-    gap: .3rem;
-    overflow-y: auto;
-  }
-  .bottom-nav::before {
-    content: 'MENU';
-    display: block;
-    font-size: .68rem;
-    font-weight: 800;
-    color: var(--muted);
-    letter-spacing: .1em;
-    padding: .3rem .8rem;
-    margin-bottom: .3rem;
-  }
-  .nav-item {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: .75rem;
-    padding: .7rem 1rem;
-    border-radius: 10px;
-    font-size: .88rem;
-    font-weight: 600;
-    min-height: 42px;
-    min-width: 0;
-    width: 100%;
-  }
+  .bottom-nav { grid-area: sidebar; flex-direction: column; justify-content: flex-start; padding: 1.2rem .8rem; padding-bottom: 1.2rem; border-top: none; border-right: 1px solid var(--border); box-shadow: none; gap: .3rem; overflow-y: auto; }
+  .bottom-nav::before { content: 'MENU'; display: block; font-size: .68rem; font-weight: 800; color: var(--muted); letter-spacing: .1em; padding: .3rem .8rem; margin-bottom: .3rem; }
+  .nav-item { flex-direction: row; justify-content: flex-start; gap: .75rem; padding: .7rem 1rem; border-radius: 10px; font-size: .88rem; font-weight: 600; min-height: 42px; min-width: 0; width: 100%; text-align: left; }
   .nav-item .material-symbols-outlined { font-size: 22px; flex-shrink: 0; }
   .nav-item span:last-child { font-size: .88rem; }
   .nav-item:hover { background: var(--surface-2); }
   .nav-item.active { background: var(--primary-l); color: var(--primary); font-weight: 700; }
-
-  /* TYPOGRAPHY & CARDS */
-  .section-title { font-size: 1.1rem; margin-bottom: .8rem; }
+  .section-title { font-size: 1.05rem; margin-bottom: .7rem; }
   .section-title .material-symbols-outlined { font-size: 24px; }
-  .card { padding: 1.2rem 1.4rem; border-radius: 16px; margin-bottom: 1rem; }
-  .card h3 { font-size: 1rem; margin-bottom: .8rem; }
-  .card-title { font-size: 1rem; margin-bottom: .8rem; }
-
-  /* STATS 4 SEJAJAR */
-  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1rem; }
-  .stat { padding: 1rem 1.1rem; }
-  .stat .num { font-size: 1.75rem; }
-  .stat .lbl { font-size: .7rem; }
-
-  /* INPUT TAB — cardSetup grid 4 kolom */
-  #cardSetup {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: .5rem 1rem;
-    padding: 1.1rem 1.4rem;
-    align-items: end;
-  }
-  #cardSetup .card-title {
-    grid-column: 1 / -1;
-    text-align: left;
-    margin-bottom: .3rem;
-    font-size: 1rem;
-  }
-  #cardSetup .form-group { margin-bottom: 0; gap: .2rem; }
-  #cardSetup .form-group label { font-size: .72rem; }
-  #cardSetup #btnLanjut {
-    grid-column: 1 / -1;
-    justify-self: end;
-    margin-top: .3rem !important;
-    width: auto;
-    min-width: 200px;
-    min-height: 40px;
-    padding: .6rem 1.2rem;
-  }
-
-  /* FILTER GRID — 4 kolom */
-  .filter-grid { grid-template-columns: repeat(4, 1fr) !important; gap: .5rem .9rem; }
-  .filter-grid .form-group { gap: .2rem; }
-  .filter-grid .form-group label { font-size: .72rem; }
-  .filter-grid .full {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .filter-grid .full .btn,
-  .filter-grid .full > .btn {
-    width: auto;
-    min-width: 200px;
-    min-height: 40px;
-    padding: .6rem 1.2rem;
-  }
-  .filter-grid .full > label[style*="display:flex"] {
-    width: 100%;
-    padding: .5rem 0;
-  }
-
-  /* Cetak: layout filter */
-  #grpKelas, #grpSiswa { grid-column: span 2; }
-  #grpBatch {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: .3rem 0;
-  }
-  #grpBatch label { width: 100%; justify-content: flex-start; }
-
-  /* DASHBOARD CHARTS */
-  #dkResult .card > div[style*="height:400px"] { min-height: 440px !important; }
-  #dsResult .card > div[style*="height:300px"] { min-height: 340px !important; }
-  #dsResult .card > div[style*="height:380px"] { min-height: 420px !important; }
-  .chart-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .chart-pair > .card { margin-bottom: 0; }
-
-  /* TABLES */
-  .table-wrap { max-height: 68vh; }
-  table.data { min-width: 0; font-size: .85rem; }
-  .data td { padding: .65rem .55rem; }
-  .data th { padding: .75rem .5rem; font-size: .68rem; }
+  .card { padding: 1.1rem 1.3rem; border-radius: 16px; margin-bottom: .9rem; }
+  .card-title { font-size: 1rem; margin-bottom: .7rem; }
+  .card h3 { font-size: .95rem; margin-bottom: .7rem; }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: .9rem; }
+  .stat { padding: .9rem 1rem; }
+  .stat .num { font-size: 1.65rem; }
+  .table-wrap { max-height: 70vh; }
+  table.data { min-width: 0; font-size: .84rem; }
+  .data td { padding: .6rem .5rem; }
+  .data th { padding: .7rem .5rem; font-size: .66rem; }
   .input-cell { width: 50px; height: 40px; font-size: 16px; }
-  .input-cell:focus { transform: scale(1.05); }
-  .legend { padding: .7rem .9rem; }
-  .legend table { font-size: .76rem; }
-
-  /* INPUT LAYER 2 — sticky header */
-  #layer2 > div:first-child {
-    position: sticky;
-    top: -1.4rem;
-    background: var(--bg);
-    padding: .6rem 0;
-    margin-bottom: .8rem;
-    z-index: 5;
-    border-bottom: 1px solid var(--border);
-    margin-left: -1.8rem;
-    margin-right: -1.8rem;
-    padding-left: 1.8rem;
-    padding-right: 1.8rem;
-  }
-
-  #btnSubmitBatch {
-    width: auto;
-    min-width: 260px;
-    margin-left: auto !important;
-    display: flex;
-    margin-top: .6rem !important;
-  }
-
-  #dkResult .stats-grid { margin-bottom: 1rem; }
-  .jenis-btn .btn { padding: .6rem .8rem; }
+  #btnSubmitBatch { width: auto; min-width: 260px; margin-left: auto !important; margin-right: 0 !important; display: flex; }
   .preview-scroll { padding: 32px 24px; }
+  .cetak-page { transform: none !important; margin-bottom: 20px !important; pointer-events: auto; }
+  .chip-bulan-grid { grid-template-columns: repeat(6, 1fr); }
 }
-
-/* LARGE DESKTOP */
 @media (min-width: 1400px) {
   :root { --nav-w: 220px; }
   #app { max-width: 1600px; }
   .main { padding: 1.8rem 2.5rem; }
   .app-header { padding: 1.1rem 2.2rem; }
-  #dkResult .card > div[style*="height:400px"] { min-height: 480px !important; }
-  #dsResult .card > div[style*="height:300px"] { min-height: 420px !important; }
-  #dsResult .card > div[style*="height:380px"] { min-height: 420px !important; }
-  .stat .num { font-size: 2rem; }
+  .stat .num { font-size: 1.9rem; }
 }
-
-/* TABLET */
-@media (min-width: 768px) and (max-width: 899px) {
-  :root { --app-max-w: 820px; }
-  .stats-grid { grid-template-columns: repeat(4, 1fr); }
-  .filter-grid { grid-template-columns: repeat(3, 1fr) !important; }
-  #cardSetup {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: .5rem .8rem;
-    align-items: end;
-  }
-  #cardSetup .card-title { grid-column: 1 / -1; text-align: left; margin-bottom: .2rem; }
-  #cardSetup #btnLanjut {
-    grid-column: 1 / -1;
-    justify-self: end;
-    margin-top: .3rem !important;
-    width: auto;
-    min-width: 180px;
-  }
-}
-
-/* Desktop print override */
 @media print {
-  #app {
-    display: block !important;
-    max-width: none !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    height: auto !important;
-  }
+  #app { display: block !important; max-width: none !important; margin: 0 !important; box-shadow: none !important; border-radius: 0 !important; height: auto !important; }
 }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div id="previewShell" class="preview-shell" role="dialog" aria-modal="true" aria-hidden="true"></div>
+<div id="profileModal" class="profile-modal" role="dialog" aria-modal="true" aria-hidden="true"></div>
 <div id="toastWrap" class="toast-wrap" aria-live="polite"></div>
 
 <script>
 'use strict';
 (() => {
 
-/* ====================================================================
- *                            CONFIG
- * ==================================================================== */
+/* ========== CONFIG ========== */
 const CFG = Object.freeze({
   API: 'https://script.google.com/macros/s/AKfycbzOsHTfGQlozVMr6X5nEfFlqYJqZhdevocMqdKKMp71QnK-sBLQb_fHM3YSgVqAytJyVA/exec',
-  LS_TOKEN: 'k7_token',
-  LS_VER: 'k7_ver',
-  LS_BOOT: 'k7_boot',
-  LS_LOGS: 'k7_logs_',
-  LS_SETUP: 'k7_setup',
-  BOOT_TTL: 6 * 60 * 60 * 1000,
-  LOGS_TTL: 30 * 60 * 1000,
-  MAX_LOGS_KEYS: 40,
-  FETCH_TIMEOUT: 30000,
+  LS_TOKEN: 'k7_token', LS_VER: 'k7_ver', LS_BOOT: 'k7_boot',
+  LS_LOGS: 'k7_logs_', LS_SETUP: 'k7_setup', LS_PROFILE: 'k7_profile',
+  BOOT_TTL: 6 * 60 * 60 * 1000, LOGS_TTL: 30 * 60 * 1000,
+  MAX_LOGS_KEYS: 40, FETCH_TIMEOUT: 30000,
   CHART_CDN: 'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js',
   CHART_FALLBACK: 'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js',
-  TOAST_MAX: 3,
-  TOAST_DURATION: 3200
+  TOAST_MAX: 3, TOAST_DURATION: 3200
 });
 
 const BULAN = Object.freeze(['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']);
+const BULAN_PENDEK = Object.freeze(['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des']);
 const KELAS = Object.freeze(['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6']);
-const TAHUN = Object.freeze(['2025','2026','2027','2028']);
 
 const KATEGORI = Object.freeze([
   { key:'Skor_Bangun',   label:'Bangun Pagi',   max:4 },
@@ -674,7 +473,6 @@ const KATEGORI = Object.freeze([
   { key:'Skor_Sosial',   label:'Bermasyarakat', max:4 },
   { key:'Skor_Tidur',    label:'Cepat Tidur',   max:4 }
 ]);
-
 const CHART_COLORS = Object.freeze(['#4F46E5','#0EA5E9','#06B6D4','#14B8A6','#F59E0B','#EA580C','#A855F7','#10B981','#EAB308','#EC4899','#F43F5E','#64748B']);
 
 const SARAN = Object.freeze({
@@ -691,26 +489,46 @@ const SARAN = Object.freeze({
   Skor_Sosial:'Mendorong ananda untuk lebih aktif berinteraksi dan membantu di lingkungan sekitar.',
   Skor_Tidur:'Membiasakan waktu tidur malam yang lebih awal dan konsisten.'
 });
-
 const THRESHOLD = Object.freeze({ BAIK: 0.875, CUKUP: 0.625 });
 
-/* ====================================================================
- *                              UTIL
- * ==================================================================== */
+/* ========== UTIL ========== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const escAttr = esc;
 const num = v => { const n = Number(v); return Number.isFinite(n) ? n : 0; };
 const str = v => v == null ? '' : String(v);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 const yieldTick = () => new Promise(r => setTimeout(r, 0));
 const fmtBulan = idx => BULAN[idx] || '';
+const fmtBulanPendek = idx => BULAN_PENDEK[idx] || '';
 const todayM = () => new Date().getMonth();
+const todayY = () => new Date().getFullYear();
 
-/* ====================================================================
- *                            TOAST
- * ==================================================================== */
+const detectMinggu = (d = new Date()) => Math.min(5, Math.floor((d.getDate() - 1) / 7) + 1);
+
+/* Tahun ajaran: bulan >= Juli (6) = tahun/tahun+1, bulan < Juli = tahun-1/tahun */
+const getTahunAjaran = (bulanIdx, tahun) => {
+  const y = Number(tahun) || todayY();
+  const b = Number(bulanIdx);
+  if (b >= 6) return { start: y, end: y + 1, label: `${y}/${y + 1}` };
+  return { start: y - 1, end: y, label: `${y - 1}/${y}` };
+};
+
+/* ========== PROFILE ========== */
+const Profile = {
+  read() {
+    try {
+      const p = JSON.parse(localStorage.getItem(CFG.LS_PROFILE));
+      if (p && p.kelas && KELAS.includes(p.kelas)) return p;
+      return null;
+    } catch { return null; }
+  },
+  write(kelas) {
+    try { localStorage.setItem(CFG.LS_PROFILE, JSON.stringify({ kelas, ts: Date.now() })); } catch {}
+  }
+};
+
+/* ========== TOAST ========== */
 const _toastMap = new Map();
 const toast = (msg, type = 'success') => {
   const k = type + ':' + msg;
@@ -718,10 +536,8 @@ const toast = (msg, type = 'success') => {
   if (_toastMap.has(k) && now - _toastMap.get(k) < 3000) return;
   _toastMap.set(k, now);
   setTimeout(() => _toastMap.delete(k), 3000);
-
   const wrap = $('#toastWrap');
   while (wrap.children.length >= CFG.TOAST_MAX) wrap.removeChild(wrap.firstChild);
-
   const el = document.createElement('div');
   el.className = `toast ${type}`;
   el.innerHTML = `<span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'error'}</span><span>${esc(msg)}</span>`;
@@ -729,25 +545,12 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => { el.classList.add('hide'); setTimeout(() => el.remove(), 300); }, CFG.TOAST_DURATION);
 };
 
-/* ====================================================================
- *                    LOCAL STORAGE (quota-safe)
- * ==================================================================== */
+/* ========== LS ========== */
 const LS = {
-  get(k) {
-    try { return JSON.parse(localStorage.getItem(k)); }
-    catch { return null; }
-  },
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
   set(k, v) {
-    try {
-      localStorage.setItem(k, JSON.stringify(v));
-      return true;
-    } catch (e) {
-      if (e && e.name === 'QuotaExceededError') {
-        console.warn('[LS] quota exceeded');
-        return false;
-      }
-      return false;
-    }
+    try { localStorage.setItem(k, JSON.stringify(v)); return true; }
+    catch (e) { if (e && e.name === 'QuotaExceededError') return false; return false; }
   },
   del(k) { try { localStorage.removeItem(k); } catch {} },
   keys(prefix) {
@@ -760,9 +563,6 @@ const LS = {
   }
 };
 
-/* ====================================================================
- *                    BOOT CACHE
- * ==================================================================== */
 const BootCache = {
   read() {
     const b = LS.get(CFG.LS_BOOT);
@@ -770,29 +570,14 @@ const BootCache = {
     if (Date.now() - b.ts > CFG.BOOT_TTL) return null;
     return b;
   },
-  write(data) {
-    LS.set(CFG.LS_BOOT, { ...data, ts: Date.now() });
-    LS.set(CFG.LS_VER, data.v);
-  },
-  invalidate() {
-    LS.del(CFG.LS_BOOT);
-    LS.del(CFG.LS_VER);
-  }
+  write(data) { LS.set(CFG.LS_BOOT, { ...data, ts: Date.now() }); LS.set(CFG.LS_VER, data.v); },
+  invalidate() { LS.del(CFG.LS_BOOT); LS.del(CFG.LS_VER); }
 };
 
-/* ====================================================================
- *                    LOGS CACHE (auto prune)
- * ==================================================================== */
 const LogsCache = {
   key(f) {
     f = f || {};
-    return [
-      't=' + (f.tahun || '*'),
-      'ba=' + (f.bulanAwal || '*'),
-      'bk=' + (f.bulanAkhir || f.bulanAwal || '*'),
-      'k=' + (f.kelas || '*'),
-      'm=' + (f.minggu || '*')
-    ].join('|');
+    return ['ta=' + (f.tahunAwal || '*'), 'tk=' + (f.tahunAkhir || f.tahunAwal || '*'), 'ba=' + (f.bulanAwal || '*'), 'bk=' + (f.bulanAkhir || f.bulanAwal || '*'), 'k=' + (f.kelas || '*'), 'm=' + (f.minggu || '*')].join('|');
   },
   read(f) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
@@ -805,37 +590,26 @@ const LogsCache = {
   write(f, logs) {
     const k = CFG.LS_LOGS + LogsCache.key(f);
     const payload = { v: LS.get(CFG.LS_VER), logs, ts: Date.now() };
-    if (!LS.set(k, payload)) {
-      LogsCache.prune(true);
-      LS.set(k, payload);
-    } else {
-      LogsCache.prune(false);
-    }
+    if (!LS.set(k, payload)) { LogsCache.prune(true); LS.set(k, payload); }
+    else { LogsCache.prune(false); }
   },
   prune(force) {
     const keys = LS.keys(CFG.LS_LOGS);
     if (!force && keys.length < CFG.MAX_LOGS_KEYS) return;
     const entries = keys.map(k => {
-      try {
-        const v = JSON.parse(localStorage.getItem(k));
-        return { key: k, ts: (v && v.ts) || 0 };
-      } catch { return { key: k, ts: 0 }; }
+      try { const v = JSON.parse(localStorage.getItem(k)); return { key: k, ts: (v && v.ts) || 0 }; }
+      catch { return { key: k, ts: 0 }; }
     });
     entries.sort((a, b) => a.ts - b.ts);
     const cut = force ? entries.length : Math.floor(entries.length * 0.3);
     for (let i = 0; i < cut; i++) LS.del(entries[i].key);
   },
-  invalidateAll() {
-    LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k));
-  }
+  invalidateAll() { LS.keys(CFG.LS_LOGS).forEach(k => LS.del(k)); }
 };
 
-/* ====================================================================
- *                            API CLIENT
- * ==================================================================== */
+/* ========== API ========== */
 const Api = {
   _token: () => sessionStorage.getItem(CFG.LS_TOKEN),
-
   async _fetch(url, opts = {}) {
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), CFG.FETCH_TIMEOUT);
@@ -843,11 +617,8 @@ const Api = {
       const res = await fetch(url, { ...opts, signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return await res.json();
-    } finally {
-      clearTimeout(tid);
-    }
+    } finally { clearTimeout(tid); }
   },
-
   async get(action, params = {}) {
     const token = Api._token();
     const q = new URLSearchParams({ action, token: token || '', ...params }).toString();
@@ -855,7 +626,6 @@ const Api = {
     Api._check(data);
     return data;
   },
-
   async post(action, body = {}) {
     const token = Api._token();
     const url = `${CFG.API}?action=${encodeURIComponent(action)}`;
@@ -867,21 +637,16 @@ const Api = {
     Api._check(data);
     return data;
   },
-
   _check(data) {
     if (data && data.error === 'Unauthorized') {
       sessionStorage.removeItem(CFG.LS_TOKEN);
-      BootCache.invalidate();
-      LogsCache.invalidateAll();
+      BootCache.invalidate(); LogsCache.invalidateAll();
       toast('Sesi berakhir, silakan masuk kembali.', 'error');
       setTimeout(() => location.reload(), 800);
       throw new Error('Unauthorized');
     }
-    if (data && data.error === 'server_error') {
-      throw new Error(data.message || 'Server error');
-    }
+    if (data && data.error === 'server_error') throw new Error(data.message || 'Server error');
   },
-
   verify(token) {
     return Api._fetch(`${CFG.API}?action=verify_token`, {
       method: 'POST',
@@ -889,24 +654,21 @@ const Api = {
       body: JSON.stringify({ token })
     }).then(d => d.valid === true).catch(() => false);
   },
-
   bootstrap(since) { return Api.get('bootstrap', since ? { since } : {}); },
-
   logs(f) {
-    const p = { tahun: f.tahun };
+    const p = {};
+    if (f.tahunAwal) p.tahunAwal = f.tahunAwal;
+    if (f.tahunAkhir) p.tahunAkhir = f.tahunAkhir;
     if (f.bulanAwal) p.bulanAwal = f.bulanAwal;
     if (f.bulanAkhir) p.bulanAkhir = f.bulanAkhir;
     if (f.kelas) p.kelas = f.kelas;
     if (f.minggu) p.minggu = f.minggu;
     return Api.get('logs', p);
   },
-
   simpan(rows) { return Api.post('simpan_jurnal', { rows }); }
 };
 
-/* ====================================================================
- *                        CHART LOADER (lazy)
- * ==================================================================== */
+/* ========== CHART LOADER ========== */
 let _chartReady = null;
 const ensureChart = () => {
   if (typeof Chart !== 'undefined') return Promise.resolve(true);
@@ -927,52 +689,38 @@ const ensureChart = () => {
   return _chartReady;
 };
 
-/* ====================================================================
- *                        STATS ENGINE
- * ==================================================================== */
+/* ========== STATS ========== */
 const Stats = {
   dedup(rows) {
     const m = new Map();
     for (const r of rows) m.set(`${r.NIS}_${r.Tahun}_${r.Bulan}_${r.Minggu_Ke}`, r);
     return [...m.values()];
   },
-
   rataPerKategori(rows) {
     const out = {};
     for (const k of KATEGORI) out[k.key] = 0;
     if (!rows.length) return out;
-    for (const r of rows) {
-      for (const k of KATEGORI) out[k.key] += num(r[k.key]);
-    }
+    for (const r of rows) for (const k of KATEGORI) out[k.key] += num(r[k.key]);
     for (const k of KATEGORI) out[k.key] /= rows.length;
     return out;
   },
-
   rataKelas(rows) {
     const perS = Stats.rekapPerSiswa(rows);
     const out = {};
     for (const k of KATEGORI) out[k.key] = 0;
     if (!perS.length) return out;
-    for (const s of perS) {
-      for (const k of KATEGORI) out[k.key] += s.rata[k.key];
-    }
+    for (const s of perS) for (const k of KATEGORI) out[k.key] += s.rata[k.key];
     for (const k of KATEGORI) out[k.key] /= perS.length;
     return out;
   },
-
   norm(val, max) { return max ? (val / max) * 4 : 0; },
-
-  normArr(rataObj) {
-    return KATEGORI.map(k => Stats.norm(rataObj[k.key], k.max));
-  },
-
+  normArr(rataObj) { return KATEGORI.map(k => Stats.norm(rataObj[k.key], k.max)); },
   keseluruhan(normArr) {
     if (!normArr.length) return 0;
     let s = 0;
     for (const v of normArr) s += v;
     return s / normArr.length;
   },
-
   tren(rows) {
     if (rows.length < 2) return null;
     const m = Math.floor(rows.length / 2);
@@ -986,20 +734,12 @@ const Stats = {
     }
     return t;
   },
-
-  deltaTren(tren) {
-    if (!tren) return 0;
-    let s = 0;
-    for (const k of KATEGORI) s += tren[k.key].delta;
-    return s / KATEGORI.length;
-  },
-
+  deltaTren(tren) { if (!tren) return 0; let s = 0; for (const k of KATEGORI) s += tren[k.key].delta; return s / KATEGORI.length; },
   status(ratio) {
     if (ratio >= THRESHOLD.BAIK) return { cls: 'baik', txt: 'Baik' };
     if (ratio >= THRESHOLD.CUKUP) return { cls: 'cukup', txt: 'Cukup' };
     return { cls: 'kurang', txt: 'Perlu Perhatian' };
   },
-
   rekapPerSiswa(rows) {
     const map = new Map();
     for (const r of rows) {
@@ -1010,15 +750,10 @@ const Stats = {
     for (const [nis, v] of map) {
       const rata = Stats.rataPerKategori(v.rows);
       const norm = Stats.normArr(rata);
-      out.push({
-        nis, nama: v.nama, rata, norm,
-        rataKes: Stats.keseluruhan(norm),
-        jumlah: v.rows.length
-      });
+      out.push({ nis, nama: v.nama, rata, norm, rataKes: Stats.keseluruhan(norm), jumlah: v.rows.length });
     }
     return out;
   },
-
   narasiIndividu(nama, normArr, tren) {
     let best = 0, worst = 0;
     for (let i = 0; i < normArr.length; i++) {
@@ -1032,7 +767,6 @@ const Stats = {
     else s += 'Secara umum, kebiasaan ananda relatif stabil.';
     return s;
   },
-
   narasiKelas(kelas, normArr, tren, jumlah) {
     let best = 0, worst = 0;
     for (let i = 0; i < normArr.length; i++) {
@@ -1046,32 +780,23 @@ const Stats = {
     else s += 'Secara umum, kebiasaan siswa relatif stabil.';
     return s;
   },
-
   narasiSekolah(rekap) {
     const t = rekap.filter(r => r.rataKes !== null);
     if (!t.length) return 'Belum ada data yang cukup untuk periode ini.';
     const best = t.reduce((a, b) => b.rataKes > a.rataKes ? b : a);
     const worst = t.reduce((a, b) => b.rataKes < a.rataKes ? b : a);
-    return `${best.kelas} mencatatkan rata-rata tertinggi, sementara ${worst.kelas} memerlukan perhatian tambahan. ` +
-           `Kepala sekolah dan wali kelas disarankan berbagi praktik baik antar kelas.`;
+    return `${best.kelas} mencatatkan rata-rata tertinggi, sementara ${worst.kelas} memerlukan perhatian tambahan. Kepala sekolah dan wali kelas disarankan berbagi praktik baik antar kelas.`;
   },
-
   saran(normArr) {
     let worst = 0;
-    for (let i = 0; i < normArr.length; i++) {
-      if (normArr[i] < normArr[worst]) worst = i;
-    }
+    for (let i = 0; i < normArr.length; i++) if (normArr[i] < normArr[worst]) worst = i;
     return 'Saran: ' + (SARAN[KATEGORI[worst].key] || '');
   }
 };
 
-/* ====================================================================
- *                        PRINT ENGINE (WYSIWYG)
- * ==================================================================== */
+/* ========== PRINT ENGINE ========== */
 const PrintEngine = {
-  _charts: [],
-  _renderSeq: 0,
-
+  _charts: [], _renderSeq: 0,
   kop(ident) {
     return `<div class="cetak-kop">
       <div class="dinas">${esc(ident.dinas)}</div>
@@ -1081,19 +806,12 @@ const PrintEngine = {
       <div class="meta">NPSN: ${esc(ident.npsn)} · Akreditasi ${esc(ident.akreditasi)} · ${esc(ident.website)}</div>
     </div>`;
   },
-
   identTable(pairs) {
-    return `<table class="cetak-ident">${pairs.map(([l, v]) =>
-      `<tr><td class="label">${esc(l)}</td><td>: ${esc(v)}</td></tr>`
-    ).join('')}</table>`;
+    return `<table class="cetak-ident">${pairs.map(([l, v]) => `<tr><td class="label">${esc(l)}</td><td>: ${esc(v)}</td></tr>`).join('')}</table>`;
   },
-
   summary(items) {
-    return `<table class="cetak-summary"><tr>${items.map(it =>
-      `<td><div class="lbl">${esc(it.label)}</div><div class="val${it.small ? ' sm' : ''}">${esc(it.value)}</div></td>`
-    ).join('')}</tr></table>`;
+    return `<table class="cetak-summary"><tr>${items.map(it => `<td><div class="lbl">${esc(it.label)}</div><div class="val${it.small ? ' sm' : ''}">${esc(it.value)}</div></td>`).join('')}</tr></table>`;
   },
-
   skorTable(rata, norm) {
     let rows = '';
     for (let i = 0; i < KATEGORI.length; i++) {
@@ -1101,138 +819,80 @@ const PrintEngine = {
       const val = rata[k.key];
       const disp = k.max === 4 ? val.toFixed(2) : val.toFixed(1);
       const st = Stats.status(norm[i] / 4);
-      rows += `<tr>
-        <td class="l">${esc(k.label)}</td>
-        <td class="c">${disp}</td>
-        <td class="c"><span class="badge badge-${st.cls}">${st.txt}</span></td>
-      </tr>`;
+      rows += `<tr><td class="l">${esc(k.label)}</td><td class="c">${disp}</td><td class="c"><span class="badge badge-${st.cls}">${st.txt}</span></td></tr>`;
     }
-    return `<table class="cetak-tbl">
-      <thead><tr><th style="text-align:left">Kebiasaan</th><th>Rata-rata</th><th>Status</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+    return `<table class="cetak-tbl"><thead><tr><th style="text-align:left">Kebiasaan</th><th>Rata-rata</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
   },
-
   catatan(paras) {
     const html = paras.filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
     return html ? `<div class="cetak-catatan">${html}</div>` : '';
   },
-
   ttd(opts) {
     const now = new Date();
     const tgl = `${now.getDate()} ${fmtBulan(now.getMonth())} ${now.getFullYear()}`;
-    const cell = (label, nama, nip, withTgl) => `
-      ${withTgl
-        ? `<div class="tanggal">Godegan, ${tgl}</div>`
-        : `<div class="tanggal tanggal-kosong">&nbsp;</div>`}
-      ${label ? `<div class="jabatan">${label}</div>` : `<div class="jabatan">&nbsp;</div>`}
-      <div class="space"></div>
-      ${nama ? `<div class="nama">${esc(nama)}</div>` : `<div class="nama-kosong">(_____________________)</div>`}
-      ${nip ? `<div class="nip">NIP. ${esc(nip)}</div>` : ''}`;
-    return `<div class="cetak-ttd"><table><tr>
-      <td>${cell(opts.kiriLabel, opts.kiriNama, opts.kiriNip, false)}</td>
-      <td>${cell(opts.kananLabel, opts.kananNama, opts.kananNip, true)}</td>
-    </tr></table></div>`;
+    const buildCell = (label, nama, nip, withTgl, withSpacer) => {
+      let s = '';
+      if (withTgl) s += `<div class="tanggal">Godegan, ${tgl}</div>`;
+      else if (withSpacer) s += `<div class="tanggal tanggal-kosong">&nbsp;</div>`;
+      s += label ? `<div class="jabatan">${label}</div>` : `<div class="jabatan">&nbsp;</div>`;
+      s += `<div class="space"></div>`;
+      s += nama ? `<div class="nama">${esc(nama)}</div>` : `<div class="nama-kosong">(_____________________)</div>`;
+      if (nip) s += `<div class="nip">NIP. ${esc(nip)}</div>`;
+      return s;
+    };
+    if (opts.single) {
+      return `<div class="cetak-ttd"><table><tr>
+        <td style="width:50%;">&nbsp;</td>
+        <td style="width:50%;">${buildCell(opts.label, opts.nama, opts.nip, true, false)}</td>
+      </tr></table></div>`;
+    }
+    const kiri = buildCell(opts.kiriLabel, opts.kiriNama, opts.kiriNip, false, opts.kiriPakaiSpacer !== false);
+    const kanan = buildCell(opts.kananLabel, opts.kananNama, opts.kananNip, true, false);
+    return `<div class="cetak-ttd"><table><tr><td>${kiri}</td><td>${kanan}</td></tr></table></div>`;
   },
-
-  /* Wrapper catatan + ttd jadi satu blok utuh */
   footer(catatanHtml, ttdOpts) {
-    return `<div class="cetak-footer">
-      ${catatanHtml}
-      ${PrintEngine.ttd(ttdOpts)}
-    </div>`;
+    return `<div class="cetak-footer">${catatanHtml}${PrintEngine.ttd(ttdOpts)}</div>`;
   },
-
   chartWrap(id, w, h) {
     return `<div class="cetak-chart-wrap"><canvas id="${id}" width="${w}" height="${h}"></canvas></div>`;
   },
-
   async _renderChart(canvasId, config, dpr) {
     const cv = document.getElementById(canvasId);
     if (!cv || typeof Chart === 'undefined') return;
-    const c = new Chart(cv, {
-      ...config,
-      options: {
-        ...config.options,
-        responsive: false,
-        animation: false,
-        devicePixelRatio: dpr || 2
-      }
-    });
+    const c = new Chart(cv, { ...config, options: { ...config.options, responsive: false, animation: false, devicePixelRatio: dpr || 2 } });
     PrintEngine._charts.push(c);
   },
-
   async renderChartKategori(canvasId, norm, dpr = 2) {
     const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
     return PrintEngine._renderChart(canvasId, {
       type: 'bar',
-      data: {
-        labels: KATEGORI.map(k => k.label),
-        datasets: [{
-          data: norm.map(v => +v.toFixed(2)),
-          backgroundColor: colors,
-          borderRadius: 4,
-          maxBarThickness: 22
-        }]
-      },
+      data: { labels: KATEGORI.map(k => k.label), datasets: [{ data: norm.map(v => +v.toFixed(2)), backgroundColor: colors, borderRadius: 4, maxBarThickness: 22 }] },
       options: {
         indexAxis: 'y',
         layout: { padding: { top: 4, right: 8, bottom: 4, left: 4 } },
         plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
-          x: {
-            beginAtZero: true,
-            max: 4,
-            ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' },
-            grid: { color: '#e2e8f0' }
-          },
-          y: {
-            grid: { display: false },
-            ticks: {
-              font: { size: 11, weight: '600' },
-              color: '#1e293b',
-              autoSkip: false
-            }
-          }
+          x: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#1e293b', autoSkip: false } }
         }
       }
     }, dpr);
   },
-
   async renderChartTren(canvasId, points, color = '#10B981', dpr = 2) {
     return PrintEngine._renderChart(canvasId, {
       type: 'bar',
-      data: {
-        labels: points.map(p => p.label),
-        datasets: [{
-          data: points.map(p => +p.value.toFixed(2)),
-          backgroundColor: color,
-          borderRadius: 4,
-          maxBarThickness: 60
-        }]
-      },
+      data: { labels: points.map(p => p.label), datasets: [{ data: points.map(p => +p.value.toFixed(2)), backgroundColor: color, borderRadius: 4, maxBarThickness: 60 }] },
       options: {
         layout: { padding: { top: 4, right: 4, bottom: 4, left: 4 } },
         plugins: { legend: { display: false }, tooltip: { enabled: false } },
         scales: {
-          y: {
-            beginAtZero: true,
-            max: 4,
-            ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' },
-            grid: { color: '#e2e8f0' }
-          },
-          x: {
-            grid: { display: false },
-            ticks: { font: { size: 10, weight: '600' }, color: '#1e293b', autoSkip: false }
-          }
+          y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 }, color: '#475569' }, grid: { color: '#e2e8f0' } },
+          x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' }, color: '#1e293b', autoSkip: false } }
         }
       }
     }, dpr);
   },
-
-  async renderChartPerbandingan(canvasId, points, dpr = 2) {
-    return PrintEngine.renderChartTren(canvasId, points, '#4F46E5', dpr);
-  },
+  async renderChartPerbandingan(canvasId, points, dpr = 2) { return PrintEngine.renderChartTren(canvasId, points, '#4F46E5', dpr); },
 
   pointsTrendMingguan(logs) {
     const g = new Map();
@@ -1249,11 +909,7 @@ const PrintEngine = {
         for (const k of KATEGORI) rowT += Stats.norm(num(r[k.key]), k.max);
         total += rowT / KATEGORI.length;
       }
-      pts.push({
-        label: x.bulan.substring(0, 3) + ' M' + x.minggu,
-        tahun: x.tahun, bulan: x.bulan, minggu: x.minggu,
-        value: total / x.rows.length
-      });
+      pts.push({ label: x.bulan.substring(0, 3) + ' M' + x.minggu, tahun: x.tahun, bulan: x.bulan, minggu: x.minggu, value: total / x.rows.length });
     }
     pts.sort((a, b) => {
       const ta = num(a.tahun), tb = num(b.tahun);
@@ -1264,7 +920,6 @@ const PrintEngine = {
     });
     return pts.slice(-8);
   },
-
   pointsTrendIndividu(logs) {
     return logs.map((r, i) => {
       let t = 0;
@@ -1278,30 +933,19 @@ const PrintEngine = {
     const norm = Stats.normArr(rata);
     const rataKes = Stats.keseluruhan(norm);
     const tren = Stats.tren(logPeriode);
-
     let best = 0, worst = 0;
     for (let i = 0; i < norm.length; i++) {
       if (norm[i] > norm[best]) best = i;
       if (norm[i] < norm[worst]) worst = i;
     }
-
     const wali = opts.waliKelas[siswa.Kelas] || { nama: '', nip: '' };
-    const periodeText = opts.bulanAwal === opts.bulanAkhir
-      ? `${opts.bulanAwal} ${opts.tahun}`
-      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
-
+    const periodeText = opts.periodeLabel || `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahunAkhir || opts.tahunAwal}`;
     const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
-
     return `<div class="cetak-page">
       ${PrintEngine.kop(opts.identitas)}
       <h2 class="cetak-judul">LAPORAN KEBIASAAN ANAK</h2>
       <p class="cetak-sub">Periode ${periodeText}</p>
-      ${PrintEngine.identTable([
-        ['Nama Siswa', siswa.Nama_Siswa],
-        ['Kelas', siswa.Kelas],
-        ['NIS', siswa.NIS],
-        ['Periode', periodeText]
-      ])}
+      ${PrintEngine.identTable([['Nama Siswa', siswa.Nama_Siswa], ['Kelas', siswa.Kelas], ['NIS', siswa.NIS], ['Periode', periodeText]])}
       ${PrintEngine.summary([
         { label: 'Rata-rata', value: rataKes.toFixed(2) },
         { label: 'Minggu Tercatat', value: logPeriode.length },
@@ -1312,52 +956,32 @@ const PrintEngine = {
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan</h3>
       ${PrintEngine.chartWrap('c-kat-' + uid, 660, 400)}
-      ${logPeriode.length >= 2 ? `
-        <h3 class="cetak-h3">Tren Mingguan</h3>
-        ${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}
-      ` : ''}
+      ${logPeriode.length >= 2 ? `<h3 class="cetak-h3">Tren Mingguan</h3>${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}` : ''}
       ${PrintEngine.footer(
-        `<h3 class="cetak-h3">Catatan &amp; Saran</h3>
-         ${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}`,
-        {
-          kiriLabel: 'Orang Tua / Wali',
-          kiriNama: siswa.Nama_Ortu || '',
-          kananLabel: 'Wali Kelas',
-          kananNama: wali.nama,
-          kananNip: wali.nip
-        }
+        `<h3 class="cetak-h3">Catatan &amp; Saran</h3>${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}`,
+        { kiriLabel: 'Orang Tua / Wali', kiriNama: siswa.Nama_Ortu || '', kananLabel: 'Wali Kelas', kananNama: wali.nama, kananNip: wali.nip }
       )}
     </div>`;
   },
-
   buildKelasPage(kelas, logPeriode, opts) {
     const perS = Stats.rekapPerSiswa(logPeriode).sort((a, b) => b.rataKes - a.rataKes);
     const rata = Stats.rataKelas(logPeriode);
     const norm = Stats.normArr(rata);
-    const rataKes = Stats.keseuruhan ? Stats.keseluruhan(norm) : Stats.keseluruhan(norm);
+    const rataKes = Stats.keseluruhan(norm);
     const tren = Stats.tren(logPeriode);
-
     let best = 0, worst = 0;
     for (let i = 0; i < norm.length; i++) {
       if (norm[i] > norm[best]) best = i;
       if (norm[i] < norm[worst]) worst = i;
     }
-
     const perlu = perS.filter(s => s.rataKes < 2.5);
     const wali = opts.waliKelas[kelas] || { nama: '', nip: '' };
-    const periodeText = opts.bulanAwal === opts.bulanAkhir
-      ? `${opts.bulanAwal} ${opts.tahun}`
-      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
-
+    const periodeText = opts.periodeLabel || `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahunAkhir || opts.tahunAwal}`;
     return `<div class="cetak-page">
       ${PrintEngine.kop(opts.identitas)}
       <h2 class="cetak-judul">LAPORAN KEBIASAAN KELAS</h2>
       <p class="cetak-sub">Periode ${periodeText}</p>
-      ${PrintEngine.identTable([
-        ['Kelas', kelas],
-        ['Jumlah Siswa', `${perS.length} siswa`],
-        ['Periode', periodeText]
-      ])}
+      ${PrintEngine.identTable([['Kelas', kelas], ['Jumlah Siswa', `${perS.length} siswa`], ['Periode', periodeText]])}
       ${PrintEngine.summary([
         { label: 'Siswa Terdata', value: perS.length },
         { label: 'Rata-rata Kelas', value: rataKes.toFixed(2) },
@@ -1368,32 +992,16 @@ const PrintEngine = {
       ${PrintEngine.skorTable(rata, norm)}
       <h3 class="cetak-h3">Grafik Rata-rata Kebiasaan Kelas</h3>
       ${PrintEngine.chartWrap('c-kls-kat', 660, 400)}
-      ${perlu.length > 0 ? `
-        <h3 class="cetak-h3">Siswa yang Perlu Pendampingan</h3>
-        <table class="cetak-tbl">
-          <thead><tr><th style="text-align:left">Nama Siswa</th><th>Rata-rata</th></tr></thead>
-          <tbody>${perlu.map(s => `<tr><td class="l">${esc(s.nama)}</td><td class="c">${s.rataKes.toFixed(2)}</td></tr>`).join('')}</tbody>
-        </table>
-      ` : ''}
-      ${logPeriode.length >= 4 ? `
-        <h3 class="cetak-h3">Tren Mingguan Kelas</h3>
-        ${PrintEngine.chartWrap('c-kls-tren', 660, 180)}
-      ` : ''}
+      ${perlu.length > 0 ? `<h3 class="cetak-h3">Siswa yang Perlu Pendampingan</h3>
+        <table class="cetak-tbl"><thead><tr><th style="text-align:left">Nama Siswa</th><th>Rata-rata</th></tr></thead>
+        <tbody>${perlu.map(s => `<tr><td class="l">${esc(s.nama)}</td><td class="c">${s.rataKes.toFixed(2)}</td></tr>`).join('')}</tbody></table>` : ''}
+      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Kelas</h3>${PrintEngine.chartWrap('c-kls-tren', 660, 180)}` : ''}
       ${PrintEngine.footer(
-        `<h3 class="cetak-h3">Catatan</h3>
-         ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}`,
-        {
-          kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
-          kiriNama: opts.identitas.kepsek || '',
-          kiriNip: opts.identitas.kepsekNip || '',
-          kananLabel: 'Wali Kelas',
-          kananNama: wali.nama,
-          kananNip: wali.nip
-        }
+        `<h3 class="cetak-h3">Catatan</h3>${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}`,
+        { kiriLabel: 'Mengetahui,<br>Kepala Sekolah', kiriNama: opts.identitas.kepsek || '', kiriNip: opts.identitas.kepsekNip || '', kananLabel: 'Wali Kelas', kananNama: wali.nama, kananNip: wali.nip, kiriPakaiSpacer: false }
       )}
     </div>`;
   },
-
   buildSekolahPage(logPeriode, opts) {
     const rekap = KELAS.map(kelas => {
       const r = logPeriode.filter(x => x.Kelas === kelas);
@@ -1403,26 +1011,17 @@ const PrintEngine = {
       const norm = Stats.normArr(rata);
       return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm) };
     });
-
     const terisi = rekap.filter(r => r.rataKes !== null);
     const rataSek = terisi.length ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length : 0;
     const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
     const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
     const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
-
-    const periodeText = opts.bulanAwal === opts.bulanAkhir
-      ? `${opts.bulanAwal} ${opts.tahun}`
-      : `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahun}`;
-
+    const periodeText = opts.periodeLabel || `${opts.bulanAwal} – ${opts.bulanAkhir} ${opts.tahunAkhir || opts.tahunAwal}`;
     return `<div class="cetak-page">
       ${PrintEngine.kop(opts.identitas)}
       <h2 class="cetak-judul">LAPORAN KEBIASAAN SELURUH SEKOLAH</h2>
       <p class="cetak-sub">Periode ${periodeText}</p>
-      ${PrintEngine.identTable([
-        ['Periode', periodeText],
-        ['Jumlah Kelas', `${terisi.length} dari 6 kelas`],
-        ['Total Siswa Tercatat', `${totalSiswa} siswa`]
-      ])}
+      ${PrintEngine.identTable([['Periode', periodeText], ['Jumlah Kelas', `${terisi.length} dari 6 kelas`], ['Total Siswa Tercatat', `${totalSiswa} siswa`]])}
       ${PrintEngine.summary([
         { label: 'Kelas Tercatat', value: terisi.length + '/6' },
         { label: 'Rata-rata', value: rataSek.toFixed(2) },
@@ -1432,37 +1031,20 @@ const PrintEngine = {
       <h3 class="cetak-h3">Rekapitulasi per Kelas</h3>
       <table class="cetak-tbl">
         <thead><tr><th style="text-align:left">Kelas</th><th>Jml Siswa</th><th>Rata-rata</th></tr></thead>
-        <tbody>${rekap.map(r => `<tr>
-          <td class="l">${esc(r.kelas)}</td>
-          <td class="c">${r.jumlah || '-'}</td>
-          <td class="c">${r.rataKes !== null ? r.rataKes.toFixed(2) : '<i style="color:#94a3b8">Belum ada</i>'}</td>
-        </tr>`).join('')}</tbody>
+        <tbody>${rekap.map(r => `<tr><td class="l">${esc(r.kelas)}</td><td class="c">${r.jumlah || '-'}</td><td class="c">${r.rataKes !== null ? r.rataKes.toFixed(2) : '<i style="color:#94a3b8">Belum ada</i>'}</td></tr>`).join('')}</tbody>
       </table>
       <h3 class="cetak-h3">Grafik Perbandingan Antar Kelas</h3>
       ${PrintEngine.chartWrap('c-sek-perbandingan', 660, 230)}
-      ${logPeriode.length >= 4 ? `
-        <h3 class="cetak-h3">Tren Mingguan Sekolah</h3>
-        ${PrintEngine.chartWrap('c-sek-tren', 660, 180)}
-      ` : ''}
+      ${logPeriode.length >= 4 ? `<h3 class="cetak-h3">Tren Mingguan Sekolah</h3>${PrintEngine.chartWrap('c-sek-tren', 660, 180)}` : ''}
       ${PrintEngine.footer(
-        `<h3 class="cetak-h3">Catatan</h3>
-         ${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}`,
-        {
-          kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
-          kiriNama: opts.identitas.kepsek || '',
-          kiriNip: opts.identitas.kepsekNip || '',
-          kananLabel: 'Guru Kelas',
-          kananNama: '',
-          kananNip: ''
-        }
+        `<h3 class="cetak-h3">Catatan</h3>${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}`,
+        { single: true, label: 'Mengetahui,<br>Kepala Sekolah', nama: opts.identitas.kepsek || '', nip: opts.identitas.kepsekNip || '' }
       )}
     </div>`;
   },
-
   async render(pages, opts) {
     const seq = ++PrintEngine._renderSeq;
     const shell = $('#previewShell');
-
     shell.innerHTML = `
       <div class="preview-toolbar no-print">
         <div class="title">
@@ -1470,59 +1052,39 @@ const PrintEngine = {
           <span>Preview — ${esc(opts.title)}</span>
         </div>
         <div class="actions">
-          <button class="btn btn-ghost btn-sm" id="btnPreviewClose">
-            <span class="material-symbols-outlined" style="font-size:18px">close</span> Tutup
-          </button>
-          <button class="btn btn-primary btn-sm" id="btnPreviewPrint" disabled>
-            <span class="spinner"></span><span>Menyiapkan...</span>
-          </button>
+          <button class="btn btn-ghost btn-sm" id="btnPreviewClose"><span class="material-symbols-outlined" style="font-size:18px">close</span> Tutup</button>
+          <button class="btn btn-primary btn-sm" id="btnPreviewPrint" disabled><span class="spinner"></span><span>Menyiapkan...</span></button>
         </div>
       </div>
       <div class="preview-scroll">
         <div class="preview-hint no-print">
           <span class="material-symbols-outlined">info</span>
-          <span>Untuk PDF terbaik: di dialog cetak pilih <b>A4</b>, margin <b>Default</b>, dan matikan <b>Headers &amp; footers</b>.</span>
+          <span>Untuk PDF terbaik: pilih <b>A4</b>, margin <b>Default</b>, matikan <b>Headers &amp; footers</b>.</span>
         </div>
         <div id="printArea">${pages.join('')}</div>
       </div>`;
-
     shell.classList.add('show');
     shell.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-
     PrintEngine._charts.forEach(c => { try { c.destroy(); } catch {} });
     PrintEngine._charts = [];
-
     await ensureChart();
-
     let i = 0;
     for (const task of (opts.chartTasks || [])) {
       if (PrintEngine._renderSeq !== seq) return;
       try { await task(); } catch (e) { console.warn('Chart fail', e); }
       if (++i % 10 === 0) await yieldTick();
     }
-
     if (PrintEngine._renderSeq !== seq) return;
-
-    if (document.fonts && document.fonts.ready) {
-      try { await document.fonts.ready; } catch {}
-    }
-
+    if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch {} }
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
     if (PrintEngine._renderSeq !== seq) return;
-
     const btnPrint = $('#btnPreviewPrint');
     btnPrint.disabled = false;
     btnPrint.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak / PDF';
-
     $('#btnPreviewClose').onclick = () => PrintEngine.close();
-    btnPrint.onclick = () => {
-      if (PrintEngine._renderSeq !== seq) return;
-      window.print();
-    };
+    btnPrint.onclick = () => { if (PrintEngine._renderSeq !== seq) return; window.print(); };
   },
-
   close() {
     const shell = $('#previewShell');
     PrintEngine._renderSeq++;
@@ -1535,17 +1097,10 @@ const PrintEngine = {
   }
 };
 
-/* ====================================================================
- *                            BASE TAB
- * ==================================================================== */
+/* ========== BASE TAB ========== */
 class BaseTab {
-  constructor(el, app) {
-    this.el = el;
-    this.app = app;
-    this._init = false;
-    this._busy = false;
-  }
-  init() { if (this._init) return; this._init = true; this.render(); }
+  constructor(el, app) { this.el = el; this.app = app; this._init = false; this._busy = false; }
+  init() { if (this._init) { this.onShow && this.onShow(); return; } this._init = true; this.render(); }
   async guarded(fn) {
     if (this._busy) return;
     this._busy = true;
@@ -1553,100 +1108,104 @@ class BaseTab {
     finally { this._busy = false; }
   }
   onBootReady() {}
+  onShow() {}
+  onProfileChange() { this._init = false; this.init(); }
   render() {}
 }
 
-/* ====================================================================
- *                            APP
- * ==================================================================== */
+/* ========== APP ========== */
 class App {
   constructor() {
     this.root = $('#app');
     this.token = sessionStorage.getItem(CFG.LS_TOKEN);
     this.boot = null;
+    this.profile = null;
     this.tabs = {};
     this.current = 'input';
     this._bootPromise = null;
   }
-
   async init() {
     if (this.token) {
+      this.profile = Profile.read();
       this.renderShell();
       this._verifyAndBoot();
-    } else {
-      this.renderLogin();
-    }
+      if (!this.profile) setTimeout(() => this.showProfileModal(), 500);
+    } else { this.renderLogin(); }
   }
-
   async _verifyAndBoot() {
     try {
       const ok = await Api.verify(this.token);
       if (!ok) {
         sessionStorage.removeItem(CFG.LS_TOKEN);
-        BootCache.invalidate();
-        LogsCache.invalidateAll();
-        location.reload();
-        return;
+        BootCache.invalidate(); LogsCache.invalidateAll();
+        location.reload(); return;
       }
       await this.loadBootstrap();
-    } catch (e) {
-      console.warn('Verify/boot error', e);
-    }
+    } catch (e) { console.warn('Verify/boot error', e); }
   }
-
   async loadBootstrap(force = false) {
     if (this.boot && !force) return this.boot;
     if (this._bootPromise && !force) return this._bootPromise;
-
     this._bootPromise = (async () => {
       try {
         const cached = !force ? BootCache.read() : null;
         if (cached && cached.master && cached.identitas) {
-          this.boot = cached;
-          this.onBootstrapReady();
-          this._bgRefresh();
-          return;
+          this.boot = cached; this.onBootstrapReady(); this._bgRefresh(); return;
         }
         const res = await Api.bootstrap();
         if (res.notModified && this.boot) return;
-        this.boot = {
-          v: res.v,
-          identitas: res.identitas,
-          waliKelas: res.waliKelas,
-          master: res.master
-        };
-        BootCache.write(this.boot);
-        this.onBootstrapReady();
+        this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+        BootCache.write(this.boot); this.onBootstrapReady();
       } catch (e) {
-        if (e.message !== 'Unauthorized') {
-          toast('Gagal memuat data awal. Coba refresh.', 'error');
-        }
-      } finally {
-        this._bootPromise = null;
-      }
+        if (e.message !== 'Unauthorized') toast('Gagal memuat data awal. Coba refresh.', 'error');
+      } finally { this._bootPromise = null; }
     })();
     return this._bootPromise;
   }
-
   async _bgRefresh() {
     try {
       const since = LS.get(CFG.LS_VER) || '';
       const res = await Api.bootstrap(since);
       if (res.notModified) return;
-      this.boot = {
-        v: res.v,
-        identitas: res.identitas,
-        waliKelas: res.waliKelas,
-        master: res.master
-      };
-      BootCache.write(this.boot);
-      LogsCache.invalidateAll();
-      this.onBootstrapReady();
+      this.boot = { v: res.v, identitas: res.identitas, waliKelas: res.waliKelas, master: res.master };
+      BootCache.write(this.boot); LogsCache.invalidateAll(); this.onBootstrapReady();
     } catch {}
   }
+  onBootstrapReady() { Object.values(this.tabs).forEach(t => t.onBootReady && t.onBootReady(this.boot)); }
 
-  onBootstrapReady() {
-    Object.values(this.tabs).forEach(t => t.onBootReady && t.onBootReady(this.boot));
+  showProfileModal(isChange = false) {
+    const modal = $('#profileModal');
+    modal.innerHTML = `
+      <div class="profile-card">
+        <div class="profile-icon"><span class="material-symbols-outlined">school</span></div>
+        <h2 class="profile-title">${isChange ? 'Ganti Kelas' : 'Selamat Datang!'}</h2>
+        <p class="profile-sub">${isChange ? 'Pilih kelas baru untuk sesi ini.' : 'Pilih kelas yang Anda ampu. Bisa diubah kapan saja.'}</p>
+        <div class="kelas-grid">
+          ${KELAS.map(k => `<button class="kelas-pick" data-kelas="${escAttr(k)}"><span class="material-symbols-outlined">groups</span><span>${esc(k)}</span></button>`).join('')}
+        </div>
+        ${isChange ? `<div class="profile-actions"><button class="profile-cancel" id="btnProfileCancel">Batal</button></div>` : ''}
+      </div>`;
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    $$('.kelas-pick').forEach(btn => {
+      btn.onclick = () => {
+        const kelas = btn.dataset.kelas;
+        Profile.write(kelas);
+        this.profile = Profile.read();
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        this.updateHeaderKelas();
+        Object.values(this.tabs).forEach(t => t.onProfileChange && t.onProfileChange(this.profile));
+        toast(`Kelas: ${kelas}`, 'success');
+      };
+    });
+    const cancel = $('#btnProfileCancel');
+    if (cancel) cancel.onclick = () => { modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true'); };
+  }
+  updateHeaderKelas() {
+    const badge = $('#hdrKelasBadge');
+    if (!badge) return;
+    badge.innerHTML = `<span class="material-symbols-outlined">school</span><span>${esc(this.profile ? this.profile.kelas : 'Pilih Kelas')}</span>`;
   }
 
   renderLogin() {
@@ -1655,8 +1214,7 @@ class App {
         <div class="logo-box"><span class="material-symbols-outlined">checklist</span></div>
         <h2 class="login-title">7 Kebiasaan Anak</h2>
         <p class="login-sub">Sistem Penilaian Mingguan<br>SD Negeri 1 Godegan</p>
-        <input type="password" id="pinInput" class="input-pin" placeholder="PIN Akses Guru"
-          inputmode="numeric" autocomplete="new-password" readonly />
+        <input type="password" id="pinInput" class="input-pin" placeholder="PIN Akses Guru" inputmode="numeric" autocomplete="new-password" readonly />
         <button class="btn btn-primary" id="btnLogin" style="max-width:340px">
           <span>Masuk Aplikasi</span>
           <span class="material-symbols-outlined" style="font-size:18px">login</span>
@@ -1666,54 +1224,59 @@ class App {
           <p>Sistem pencatatan kebiasaan mingguan siswa — bangun pagi, ibadah, olahraga, makan sehat, belajar, bersosialisasi, dan tidur.</p>
         </div>
       </div>`;
-
     const inp = $('#pinInput');
     const unlock = () => inp.removeAttribute('readonly');
-    ['pointerdown','touchstart','mousedown','keydown'].forEach(ev =>
-      inp.addEventListener(ev, unlock, { once: true }));
+    ['pointerdown','touchstart','mousedown','keydown'].forEach(ev => inp.addEventListener(ev, unlock, { once: true }));
     setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 100);
     setTimeout(() => { if (inp.hasAttribute('readonly') && inp.value) inp.value = ''; }, 500);
-
+    inp.addEventListener('focus', () => setTimeout(() => inp.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300));
     $('#btnLogin').onclick = () => this.handleLogin();
     inp.addEventListener('keypress', e => { if (e.key === 'Enter') this.handleLogin(); });
   }
-
   async handleLogin() {
     const inp = $('#pinInput');
     const pin = inp.value.trim();
     if (!pin) return toast('PIN tidak boleh kosong.', 'error');
-
     const btn = $('#btnLogin');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Memeriksa...</span>';
-
     const ok = await Api.verify(pin);
-
     btn.disabled = false;
     btn.innerHTML = '<span>Masuk Aplikasi</span><span class="material-symbols-outlined" style="font-size:18px">login</span>';
-
     if (ok) {
       sessionStorage.setItem(CFG.LS_TOKEN, pin);
       this.token = pin;
-      BootCache.invalidate();
-      LogsCache.invalidateAll();
+      BootCache.invalidate(); LogsCache.invalidateAll();
+      this.profile = Profile.read();
       this.renderShell();
       this.loadBootstrap(true);
       toast('Berhasil masuk!', 'success');
+      if (!this.profile) setTimeout(() => this.showProfileModal(), 400);
     } else {
       toast('PIN salah atau tidak aktif.', 'error');
-      inp.value = '';
-      inp.focus();
+      inp.value = ''; inp.focus();
     }
   }
 
   renderShell() {
     this.root.innerHTML = `
       <header class="app-header">
-        <h1><span class="material-symbols-outlined">school</span> 7 KEBIASAAN</h1>
-        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
-          <span class="material-symbols-outlined">logout</span>
+        <div class="hdr-brand">
+          <span class="material-symbols-outlined">school</span>
+          <h1>7 KEBIASAAN</h1>
+        </div>
+        <button class="hdr-kelas-badge" id="hdrKelasBadge" title="Ganti kelas">
+          <span class="material-symbols-outlined">school</span>
+          <span>${esc(this.profile ? this.profile.kelas : 'Pilih Kelas')}</span>
         </button>
+        <div class="hdr-actions">
+          <button class="btn-icon btn-icon-sm" id="btnChangeKelas" title="Ganti Kelas" aria-label="Ganti Kelas">
+            <span class="material-symbols-outlined">swap_horiz</span>
+          </button>
+          <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
+            <span class="material-symbols-outlined">logout</span>
+          </button>
+        </div>
       </header>
       <main class="main">
         <div id="tab-input" class="tab-pane active"></div>
@@ -1727,27 +1290,21 @@ class App {
         <button class="nav-item" data-tab="dashsekolah"><span class="material-symbols-outlined">domain</span><span>Sekolah</span></button>
         <button class="nav-item" data-tab="cetak"><span class="material-symbols-outlined">print</span><span>Cetak</span></button>
       </nav>`;
-
-    $$('.nav-item').forEach(btn => {
-      btn.onclick = () => this.switchTab(btn.dataset.tab, btn);
-    });
-
+    $$('.nav-item').forEach(btn => { btn.onclick = () => this.switchTab(btn.dataset.tab, btn); });
+    $('#btnChangeKelas').onclick = () => this.showProfileModal(true);
+    $('#hdrKelasBadge').onclick = () => this.showProfileModal(true);
     $('#btnLogout').onclick = () => {
       sessionStorage.removeItem(CFG.LS_TOKEN);
-      BootCache.invalidate();
-      LogsCache.invalidateAll();
+      BootCache.invalidate(); LogsCache.invalidateAll();
       location.reload();
     };
-
     this.tabs.input = new InputTab($('#tab-input'), this);
     this.tabs.dashkelas = new DashKelasTab($('#tab-dashkelas'), this);
     this.tabs.dashsekolah = new DashSekolahTab($('#tab-dashsekolah'), this);
     this.tabs.cetak = new CetakTab($('#tab-cetak'), this);
-
     this.tabs.input.init();
     if (this.boot) this.onBootstrapReady();
   }
-
   switchTab(name, btn) {
     if (name === this.current) return;
     this.current = name;
@@ -1758,73 +1315,227 @@ class App {
   }
 }
 
-/* ====================================================================
- *                            INPUT TAB
- * ==================================================================== */
+/* ========== INPUT TAB ========== */
 class InputTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
     this.riwayat = [];
-    this.setup = { tahun: '2026', bulan: fmtBulan(todayM()), minggu: 1, kelas: '' };
+    this.selBulan = todayM();
+    this.selTahun = todayY();
+    this.selMinggu = detectMinggu();
     this._saving = false;
+    this._statusData = null;
   }
 
   render() {
-    const lastSetup = LS.get(CFG.LS_SETUP) || {};
-    const s = { ...this.setup, ...lastSetup };
-    this.setup = s;
-
+    const profile = this.app.profile;
+    if (!profile) {
+      this.el.innerHTML = `
+        <div class="empty">
+          <span class="material-symbols-outlined">school</span>
+          <p>Pilih kelas dulu untuk mulai input.</p>
+          <button class="btn btn-primary" style="max-width:240px" id="btnPickKelas">Pilih Kelas</button>
+        </div>`;
+      $('#btnPickKelas').onclick = () => this.app.showProfileModal(true);
+      return;
+    }
+    const autoW = detectMinggu();
     this.el.innerHTML = `
-      <h2 class="section-title"><span class="material-symbols-outlined">edit_note</span> Input Jurnal Mingguan</h2>
-      <div class="card" id="cardSetup">
-        <div class="card-title">Pengaturan Jurnal</div>
-        <div class="form-group">
-          <label>Tahun</label>
-          <select id="selTahun" class="form-select">${TAHUN.map(t => `<option value="${t}"${t === s.tahun ? ' selected' : ''}>${t}</option>`).join('')}</select>
+      <h2 class="section-title"><span class="material-symbols-outlined">edit_note</span> Input Jurnal — ${esc(profile.kelas)}</h2>
+      <div class="input-layout">
+        <div class="input-main">
+          <div class="card">
+            <label class="card-label">Pilih Bulan</label>
+            <div class="chip-bulan-grid" id="chipBulanGrid">
+              ${BULAN.map((b, i) => `
+                <button class="chip-bulan${i === this.selBulan ? ' active' : ''}${i === todayM() ? ' today-marker' : ''}" data-bulan="${i}">
+                  ${esc(fmtBulanPendek(i))}
+                </button>`).join('')}
+            </div>
+
+            <label class="card-label" style="margin-top:1rem">Pekan</label>
+            <div class="chip-pekan-row" id="chipPekanRow">
+              ${[1,2,3,4,5].map(n => `
+                <button class="chip-pekan${n === this.selMinggu ? ' active' : ''}${n === autoW ? ' is-current' : ''}" data-minggu="${n}">
+                  <span>M${n}</span>
+                  ${n === autoW ? '<span class="lbl-now">Minggu ini</span>' : ''}
+                </button>`).join('')}
+            </div>
+
+            <button id="btnBukaInput" class="btn btn-primary" style="margin-top:1rem">
+              <span class="material-symbols-outlined">edit_square</span> Buka Tabel Input
+            </button>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Bulan</label>
-          <select id="selBulan" class="form-select">${BULAN.map(b => `<option value="${b}"${b === s.bulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
-        </div>
-        <div class="form-group">
-          <label>Minggu Ke-</label>
-          <select id="selMinggu" class="form-select">
-            ${[1,2,3,4,5].map(n => `<option value="${n}"${String(s.minggu) === String(n) ? ' selected' : ''}>Minggu ${n}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-group">
-          <label style="color:var(--primary)">Pilih Kelas</label>
-          <select id="selKelas" class="form-select highlight">
-            <option value="" disabled ${s.kelas ? '' : 'selected'}>-- Tentukan Kelas --</option>
-            ${KELAS.map(k => `<option value="${k}"${s.kelas === k ? ' selected' : ''}>${k}</option>`).join('')}
-          </select>
-        </div>
-        <button id="btnLanjut" class="btn btn-primary" ${s.kelas ? '' : 'disabled'}>
-          Buka Tabel Input <span class="material-symbols-outlined">arrow_forward</span>
-        </button>
+
+        <aside class="input-side status-panel" id="statusPanel">
+          <div class="card">
+            <div class="status-item">
+              <div class="status-icon info"><span class="material-symbols-outlined">groups</span></div>
+              <div class="txt">
+                <strong id="statJumlahSiswa">— siswa</strong>
+                <small>Terdaftar di ${esc(profile.kelas)}</small>
+              </div>
+            </div>
+          </div>
+          <div class="card" id="statStatusCard">
+            <div class="status-item">
+              <div class="status-icon empty"><span class="material-symbols-outlined">hourglass_empty</span></div>
+              <div class="txt">
+                <strong>Memuat status…</strong>
+                <small>Bulan ${esc(fmtBulan(this.selBulan))}</small>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
       <div id="layer2"></div>`;
 
-    $('#selKelas').addEventListener('change', () => { $('#btnLanjut').disabled = false; });
-    $('#btnLanjut').addEventListener('click', e => {
-      this.guarded(() => this._lanjut(e.currentTarget));
+    this._bindChips();
+    $('#btnBukaInput').onclick = e => this.guarded(() => this._buka(e.currentTarget));
+
+    // Auto-load status
+    this._refreshStatus();
+  }
+
+  _bindChips() {
+    $$('#chipBulanGrid .chip-bulan').forEach(btn => {
+      btn.onclick = () => {
+        this.selBulan = parseInt(btn.dataset.bulan, 10);
+        $$('#chipBulanGrid .chip-bulan').forEach(b => b.classList.toggle('active', b === btn));
+        this._refreshStatus();
+      };
+    });
+    $$('#chipPekanRow .chip-pekan').forEach(btn => {
+      btn.onclick = () => {
+        this.selMinggu = parseInt(btn.dataset.minggu, 10);
+        $$('#chipPekanRow .chip-pekan').forEach(b => b.classList.toggle('active', b === btn));
+        this._refreshStatus();
+      };
     });
   }
 
-  async _lanjut(btn) {
-    const tahun = $('#selTahun').value;
-    const bulan = $('#selBulan').value;
-    const minggu = $('#selMinggu').value;
-    const kelas = $('#selKelas').value;
+  async _refreshStatus() {
+    const profile = this.app.profile;
+    if (!profile) return;
+    const master = (this.app.boot && this.app.boot.master) || [];
+    const totalSiswa = master.filter(s => s.Kelas === profile.kelas).length;
+    const statJ = $('#statJumlahSiswa');
+    if (statJ) statJ.textContent = `${totalSiswa} siswa`;
 
-    LS.set(CFG.LS_SETUP, { tahun, bulan, minggu, kelas });
+    // Skeleton
+    const card = $('#statStatusCard');
+    if (card) {
+      card.innerHTML = `
+        <div class="status-item">
+          <div class="status-icon empty"><span class="material-symbols-outlined">hourglass_empty</span></div>
+          <div class="txt"><strong>Memuat status…</strong><small>Bulan ${esc(fmtBulan(this.selBulan))}</small></div>
+        </div>`;
+    }
 
+    try {
+      const filter = {
+        tahunAwal: String(this.selTahun),
+        bulanAwal: fmtBulan(this.selBulan),
+        bulanAkhir: fmtBulan(this.selBulan),
+        kelas: profile.kelas
+      };
+      let logs = LogsCache.read(filter);
+      if (!logs) {
+        const res = await Api.logs(filter);
+        logs = res.logs || [];
+        LogsCache.write(filter, logs);
+      }
+      logs = Stats.dedup(logs);
+      this._renderStatus(logs, totalSiswa);
+    } catch (e) {
+      if (e.message !== 'Unauthorized') {
+        const c = $('#statStatusCard');
+        if (c) c.innerHTML = `<div class="status-item"><div class="status-icon empty"><span class="material-symbols-outlined">cloud_off</span></div><div class="txt"><strong>Gagal memuat</strong><small>Coba ganti bulan atau refresh</small></div></div>`;
+      }
+    }
+  }
+
+  _renderStatus(logs, totalSiswa) {
+    const card = $('#statStatusCard');
+    if (!card) return;
+    const nisUnik = new Set(logs.map(r => String(r.NIS)));
+    const terisi = nisUnik.size;
+    const pct = totalSiswa > 0 ? Math.round((terisi / totalSiswa) * 100) : 0;
+
+    let iconCls = 'empty', iconName = 'event_busy', title = 'Belum ada data', sub = 'Bulan belum diisi';
+    let fillCls = '', showProgress = true;
+
+    if (terisi === 0) {
+      iconCls = 'warn'; iconName = 'hourglass_empty';
+      title = 'Belum diisi'; sub = `0 dari ${totalSiswa} siswa`;
+    } else if (terisi >= totalSiswa) {
+      iconCls = 'ok'; iconName = 'check_circle';
+      title = 'Sudah lengkap'; sub = `${terisi} dari ${totalSiswa} siswa`;
+      fillCls = 'ok';
+    } else {
+      iconCls = 'info'; iconName = 'pending';
+      title = 'Sebagian terisi'; sub = `${terisi} dari ${totalSiswa} siswa`;
+      fillCls = 'warn';
+    }
+
+    // Cek minggu ini apakah ada data
+    const mingguIni = this.selMinggu;
+    const mingguData = logs.filter(r => String(r.Minggu_Ke) === String(mingguIni));
+    const nisMingguIni = new Set(mingguData.map(r => String(r.NIS)));
+    const mingguTerisi = nisMingguIni.size;
+    const mingguLengkap = totalSiswa > 0 && mingguTerisi >= totalSiswa;
+
+    card.innerHTML = `
+      <div class="status-item" style="margin-bottom:.5rem">
+        <div class="status-icon ${iconCls}"><span class="material-symbols-outlined">${iconName}</span></div>
+        <div class="txt"><strong>${title}</strong><small>${sub}</small></div>
+      </div>
+      ${showProgress ? `<div class="progress-bar"><div class="fill ${fillCls}" style="width:${pct}%"></div></div>` : ''}
+      <div class="status-item" style="margin-top:.7rem">
+        <div class="status-icon ${mingguLengkap ? 'ok' : 'info'}"><span class="material-symbols-outlined">${mingguLengkap ? 'check_circle' : 'calendar_today'}</span></div>
+        <div class="txt">
+          <strong>Minggu ${mingguIni}</strong>
+          <small>${mingguLengkap ? 'Sudah lengkap' : `${mingguTerisi} dari ${totalSiswa} siswa`}</small>
+        </div>
+      </div>`;
+
+    // Update tombol state
+    this._updateButtonState(terisi, totalSiswa);
+  }
+
+  _updateButtonState(terisi, totalSiswa) {
+    const btn = $('#btnBukaInput');
+    if (!btn) return;
+    if (terisi === 0) {
+      btn.className = 'btn btn-primary';
+      btn.innerHTML = '<span class="material-symbols-outlined">edit_square</span> Mulai Input';
+      btn.style = 'margin-top:1rem';
+    } else if (terisi >= totalSiswa) {
+      btn.className = 'btn btn-ghost';
+      btn.innerHTML = '<span class="material-symbols-outlined">visibility</span> Lihat / Edit Data';
+      btn.style = 'margin-top:1rem';
+    } else {
+      btn.className = 'btn btn-warning';
+      btn.innerHTML = '<span class="material-symbols-outlined">play_arrow</span> Lanjutkan Input';
+      btn.style = 'margin-top:1rem';
+    }
+  }
+
+  async _buka(btn) {
+    const profile = this.app.profile;
+    if (!profile) return toast('Pilih kelas dulu.', 'error');
+    const filter = {
+      tahunAwal: String(this.selTahun),
+      bulanAwal: fmtBulan(this.selBulan),
+      bulanAkhir: fmtBulan(this.selBulan),
+      kelas: profile.kelas,
+      minggu: String(this.selMinggu)
+    };
     const orig = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span><span>Memeriksa riwayat...</span>';
-
     try {
-      const filter = { tahun, bulanAwal: bulan, bulanAkhir: bulan, kelas, minggu };
       let logs = LogsCache.read(filter);
       if (!logs) {
         const res = await Api.logs(filter);
@@ -1832,12 +1543,14 @@ class InputTab extends BaseTab {
         LogsCache.write(filter, logs);
       }
       this.riwayat = Stats.dedup(logs);
-      this._renderTable({ tahun, bulan, minggu, kelas });
+      this._renderTable({
+        tahun: String(this.selTahun), bulan: fmtBulan(this.selBulan),
+        minggu: String(this.selMinggu), kelas: profile.kelas
+      });
     } catch (e) {
       if (e.message !== 'Unauthorized') toast(e.message || 'Gagal memuat riwayat.', 'error');
     } finally {
-      btn.innerHTML = orig;
-      btn.disabled = false;
+      btn.innerHTML = orig; btn.disabled = false;
     }
   }
 
@@ -1845,9 +1558,6 @@ class InputTab extends BaseTab {
     const master = (this.app.boot && this.app.boot.master) || [];
     const siswaKelas = master.filter(s => s.Kelas === kelas);
     if (!siswaKelas.length) return toast(`Belum ada siswa di ${kelas}.`, 'error');
-
-    const card = $('#cardSetup');
-    if (card) card.style.display = 'none';
 
     const riwayatMap = new Map();
     for (const r of this.riwayat) riwayatMap.set(String(r.NIS), r);
@@ -1861,8 +1571,8 @@ class InputTab extends BaseTab {
       };
       return `<tr data-nis="${escAttr(siswa.NIS)}">
         <td class="sticky-l">
-          <div style="font-weight:700;font-size:.82rem">${esc(siswa.Nama_Siswa)}</div>
-          <div style="font-size:.65rem;color:var(--muted)">NIS: ${esc(siswa.NIS)}</div>
+          <div style="font-weight:700;font-size:.78rem">${esc(siswa.Nama_Siswa)}</div>
+          <div style="font-size:.62rem;color:var(--muted)">NIS: ${esc(siswa.NIS)}</div>
         </td>
         <td><input class="input-cell" data-key="Skor_Bangun" value="${cv('Skor_Bangun')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
         <td><input class="input-cell salat" data-key="Skor_Subuh" value="${cv('Skor_Subuh')}" type="text" inputmode="numeric" maxlength="1" autocomplete="off"></td>
@@ -1880,34 +1590,35 @@ class InputTab extends BaseTab {
       </tr>`;
     };
 
-    const layer2 = $('#layer2');
-    layer2.innerHTML = `
-      <div id="layer2Header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;gap:.5rem">
+    this.el.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.4rem">
         <button class="btn btn-ghost btn-sm" id="btnKembali"><span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> Kembali</button>
         <div style="text-align:right;min-width:0">
-          <div style="font-size:.92rem;font-weight:800;color:var(--primary);white-space:nowrap">${esc(kelas)}</div>
-          <div style="font-size:.7rem;color:var(--muted)">${esc(bulan)} ${esc(tahun)} • Pekan ${esc(minggu)}</div>
+          <div style="font-size:.85rem;font-weight:800;color:var(--primary);white-space:nowrap">${esc(kelas)}</div>
+          <div style="font-size:.68rem;color:var(--muted)">${esc(bulan)} ${esc(tahun)} • Pekan ${esc(minggu)}</div>
         </div>
       </div>
-      <div class="legend">
-        <strong><span class="material-symbols-outlined" style="font-size:16px">info</span> Keterangan Skor</strong>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Aspek</th><th style="text-align:center">4</th><th style="text-align:center">3</th><th style="text-align:center">2</th><th style="text-align:center">1</th></tr></thead>
-            <tbody style="color:var(--muted)">
-              <tr><td style="font-weight:600;color:var(--text)">Bangun Pagi</td><td>Sebelum 05.00</td><td>05.00-05.30</td><td>05.30-06.00</td><td>Setelah 06.00</td></tr>
-              <tr><td style="font-weight:600;color:var(--text)">Cepat Tidur</td><td>Sebelum 21.00</td><td>21.00-21.30</td><td>21.30-22.00</td><td>Setelah 22.00</td></tr>
-              <tr><td style="font-weight:600;color:var(--text)">Aktivitas Lainnya</td><td>Setiap Hari</td><td>4-6×/pekan</td><td>1-3×/pekan</td><td>Tidak Pernah</td></tr>
-              <tr><td style="font-weight:600;color:var(--text)">Salat 5 Waktu</td><td colspan="4" style="text-align:center">Angka 0-7 = jumlah hari terlaksana dalam seminggu</td></tr>
-            </tbody>
-          </table>
+      <details class="legend">
+        <summary><span class="material-symbols-outlined">info</span> Keterangan Skor</summary>
+        <div class="legend-body">
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Aspek</th><th style="text-align:center">4</th><th style="text-align:center">3</th><th style="text-align:center">2</th><th style="text-align:center">1</th></tr></thead>
+              <tbody>
+                <tr><td>Bangun Pagi</td><td>Sebelum 05.00</td><td>05.00-05.30</td><td>05.30-06.00</td><td>Setelah 06.00</td></tr>
+                <tr><td>Cepat Tidur</td><td>Sebelum 21.00</td><td>21.00-21.30</td><td>21.30-22.00</td><td>Setelah 22.00</td></tr>
+                <tr><td>Aktivitas Lainnya</td><td>Setiap Hari</td><td>4-6×/pekan</td><td>1-3×/pekan</td><td>Tidak Pernah</td></tr>
+                <tr><td>Salat 5 Waktu</td><td colspan="4" style="text-align:center">Angka 0-7 = jumlah hari terlaksana minggu ini</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </details>
       <div class="table-wrap">
         <table class="data">
           <thead>
             <tr>
-              <th class="sticky-l" style="min-width:170px">Nama Siswa</th>
+              <th class="sticky-l" style="min-width:150px">Nama Siswa</th>
               <th>Bangun</th>
               <th style="color:var(--primary)">Subuh</th>
               <th style="color:var(--primary)">Dzuhur</th>
@@ -1930,30 +1641,22 @@ class InputTab extends BaseTab {
         <span class="material-symbols-outlined">cloud_upload</span> SIMPAN SEMUA DATA
       </button>`;
 
-    $('#btnKembali').onclick = () => {
-      layer2.innerHTML = '';
-      if (card) card.style.display = '';
-    };
-
+    $('#btnKembali').onclick = () => { this._init = false; this.init(); };
     this._attachInput(tahun, bulan, minggu, kelas);
   }
 
   _attachInput(tahun, bulan, minggu, kelas) {
-    const tbody = $('#layer2 tbody');
+    const tbody = this.el.querySelector('tbody');
     if (!tbody) return;
-
     tbody.addEventListener('input', e => {
       const inp = e.target;
       if (!inp.classList || !inp.classList.contains('input-cell')) return;
-
       const tr = inp.closest('tr');
       if (tr && tr.classList.contains('row-saved')) tr.classList.remove('row-saved');
-
       let v = String(inp.value).replace(/[^0-9]/g, '');
       if (v.length > 1) v = v.slice(-1);
       inp.value = v;
       inp.classList.remove('invalid');
-
       if (v !== '') {
         const isSalat = inp.classList.contains('salat');
         const max = isSalat ? 7 : 4;
@@ -1963,29 +1666,25 @@ class InputTab extends BaseTab {
         else if (n < min && !isSalat) inp.value = String(min);
       }
     });
-
     tbody.addEventListener('keydown', e => {
       const inp = e.target;
       if (!inp.classList || !inp.classList.contains('input-cell')) return;
       if (e.key === 'Backspace' && inp.value === '') { e.preventDefault(); this._focusPrev(inp); }
       else if (e.key === 'Enter') { e.preventDefault(); this._focusNext(inp); }
     });
-
     tbody.addEventListener('blur', e => {
       if (e.target.classList && e.target.classList.contains('input-cell') && e.target.value === '') {
         e.target.classList.add('invalid');
       }
     }, true);
-
-    $$('#layer2 .btn-save-row').forEach(btn => {
+    $$('.btn-save-row', this.el).forEach(btn => {
       btn.onclick = e => {
         const tr = e.currentTarget.closest('tr');
         this._save([tr], e.currentTarget, false, { tahun, bulan, minggu, kelas });
       };
     });
-
     $('#btnSubmitBatch').onclick = e => {
-      const rows = $$('#layer2 tbody tr');
+      const rows = $$('tbody tr', this.el);
       if (!rows.length) return toast('Tidak ada data.', 'error');
       if (rows.length > 5 && !confirm(`Simpan data ${rows.length} siswa?\n\nData dengan kelas & minggu yang sama akan diperbarui.`)) return;
       this._save(rows, e.currentTarget, true, { tahun, bulan, minggu, kelas });
@@ -1993,16 +1692,15 @@ class InputTab extends BaseTab {
   }
 
   _focusNext(inp) {
-    const all = $$('#layer2 .input-cell');
+    const all = $$('.input-cell', this.el);
     const i = all.indexOf(inp);
     if (i >= 0 && i < all.length - 1) {
       const n = all[i + 1];
       try { n.focus(); if (n.select) n.select(); n.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { n.focus(); }
     } else inp.blur();
   }
-
   _focusPrev(inp) {
-    const all = $$('#layer2 .input-cell');
+    const all = $$('.input-cell', this.el);
     const i = all.indexOf(inp);
     if (i > 0) {
       const p = all[i - 1];
@@ -2013,25 +1711,18 @@ class InputTab extends BaseTab {
   async _save(rowEls, btnEl, isBatch, ctx) {
     if (this._saving) return;
     this._saving = true;
-
     try {
       const { tahun, bulan, minggu, kelas } = ctx;
       const master = (this.app.boot && this.app.boot.master) || [];
       const masterMap = new Map();
       for (const s of master) masterMap.set(String(s.NIS), s);
-
       const payload = [];
       let valid = true;
-
       for (const tr of rowEls) {
         const nis = tr.getAttribute('data-nis');
         const siswa = masterMap.get(String(nis));
         if (!siswa) { valid = false; continue; }
-
-        const row = {
-          Tahun: tahun, Bulan: bulan, Minggu_Ke: minggu, Kelas: kelas,
-          NIS: nis, Nama_Siswa: siswa.Nama_Siswa
-        };
+        const row = { Tahun: tahun, Bulan: bulan, Minggu_Ke: minggu, Kelas: kelas, NIS: nis, Nama_Siswa: siswa.Nama_Siswa };
         const inputs = tr.querySelectorAll('.input-cell');
         for (const inp of inputs) {
           const k = inp.dataset.key;
@@ -2040,122 +1731,89 @@ class InputTab extends BaseTab {
         }
         payload.push(row);
       }
-
-      if (!valid) {
-        this._saving = false;
-        return toast('Masih ada kolom kosong / tidak valid.', 'error');
-      }
-
+      if (!valid) { this._saving = false; return toast('Masih ada kolom kosong / tidak valid.', 'error'); }
       const orig = btnEl.innerHTML;
       btnEl.disabled = true;
       btnEl.innerHTML = '<span class="spinner"></span>';
-
       try {
         const res = await Api.simpan(payload);
         if (res.status !== 'success') throw new Error(res.message || 'Gagal menyimpan');
-
         for (const tr of rowEls) tr.classList.add('row-saved');
         LogsCache.invalidateAll();
         BootCache.invalidate();
-
         toast(isBatch ? res.message : 'Data tersimpan.', 'success');
-
-        if (isBatch) {
-          setTimeout(() => {
-            const bk = $('#btnKembali');
-            if (bk) bk.click();
-          }, 900);
-        } else {
+        if (isBatch) { setTimeout(() => { const bk = $('#btnKembali'); if (bk) bk.click(); }, 900); }
+        else {
           btnEl.innerHTML = '<span class="material-symbols-outlined">check</span>';
-          setTimeout(() => {
-            btnEl.innerHTML = orig;
-            btnEl.disabled = false;
-          }, 900);
+          setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900);
         }
       } catch (e) {
         if (e.message !== 'Unauthorized') toast(e.message || 'Gagal menyimpan.', 'error');
-        btnEl.innerHTML = orig;
-        btnEl.disabled = false;
+        btnEl.innerHTML = orig; btnEl.disabled = false;
       }
-    } finally {
-      this._saving = false;
-    }
+    } finally { this._saving = false; }
   }
 }
 
-/* ====================================================================
- *                        DASH KELAS TAB
- * ==================================================================== */
+/* ========== DASH KELAS TAB ========== */
 class DashKelasTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
     this._charts = [];
+    this.selBulan = todayM();
+    this.selMinggu = 'Semua';
+    this._hasData = false;
   }
-
   render() {
-    const defaultBulan = fmtBulan(todayM());
+    const profile = this.app.profile;
+    if (!profile) {
+      this.el.innerHTML = `<div class="empty"><span class="material-symbols-outlined">bar_chart</span><p>Pilih kelas dulu.</p><button class="btn btn-primary" style="max-width:200px" id="btnPickKelas">Pilih Kelas</button></div>`;
+      $('#btnPickKelas').onclick = () => this.app.showProfileModal(true);
+      return;
+    }
+    const tahunAjaran = getTahunAjaran(this.selBulan, todayY());
     this.el.innerHTML = `
-      <h2 class="section-title"><span class="material-symbols-outlined">bar_chart</span> Dashboard Kelas</h2>
-      <div class="card">
-        <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
-        <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label>
-            <select id="dkTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
+      <h2 class="section-title"><span class="material-symbols-outlined">bar_chart</span> Dashboard — ${esc(profile.kelas)}</h2>
+      <div class="card" style="padding:.85rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:.5rem;align-items:end">
+          <div class="form-group" style="margin:0">
+            <label>Bulan</label>
+            <select id="dkBulan" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.selBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
           </div>
-          <div class="form-group"><label>Bulan Awal</label>
-            <select id="dkBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
-          </div>
-          <div class="form-group"><label>Bulan Akhir</label>
-            <select id="dkBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
-          </div>
-          <div class="form-group"><label>Pekan</label>
+          <div class="form-group" style="margin:0">
+            <label>Pekan</label>
             <select id="dkMinggu" class="form-select">
-              <option value="Semua">Semua Pekan</option>
-              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
+              <option value="Semua">Semua</option>
+              ${[1,2,3,4,5].map(n => `<option value="${n}"${String(this.selMinggu) === String(n) ? ' selected' : ''}>M${n}</option>`).join('')}
             </select>
           </div>
-          <div class="form-group"><label style="color:var(--primary)">Kelas</label>
-            <select id="dkKelas" class="form-select highlight">${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
-          </div>
-          <div class="form-group full">
-            <button id="btnLoadDk" class="btn btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
-          </div>
+          <button id="btnLoadDk" class="btn btn-primary" style="min-width:52px;padding:.6rem">
+            <span class="material-symbols-outlined">search</span>
+          </button>
         </div>
       </div>
-      <div id="dkResult">
-        <div class="empty">
-          <span class="material-symbols-outlined">insights</span>
-          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat analisis kelas.</p>
-        </div>
-      </div>`;
-
+      <div id="dkResult"></div>`;
     $('#btnLoadDk').onclick = () => this.guarded(() => this._load());
+    if (!this._hasData) this.guarded(() => this._load());
   }
-
   async _load() {
+    const profile = this.app.profile;
+    if (!profile) return;
     const btn = $('#btnLoadDk');
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span>Memuat...</span>';
-
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; }
+    const bulan = parseInt($('#dkBulan').value, 10);
+    const minggu = $('#dkMinggu').value;
+    this.selBulan = bulan;
+    this.selMinggu = minggu;
     const f = {
-      tahun: $('#dkTahun').value,
-      bulanAwal: $('#dkBulanAwal').value,
-      bulanAkhir: $('#dkBulanAkhir').value,
-      kelas: $('#dkKelas').value
+      tahunAwal: String(todayY()),
+      bulanAwal: fmtBulan(bulan),
+      bulanAkhir: fmtBulan(bulan),
+      kelas: profile.kelas
     };
-    const m = $('#dkMinggu').value;
-    if (m !== 'Semua') f.minggu = m;
-
-    if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
-      btn.disabled = false;
-      btn.innerHTML = orig;
-      return toast('Bulan akhir harus setelah bulan awal.', 'error');
-    }
-
+    if (minggu !== 'Semua') f.minggu = minggu;
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
-
     try {
       let logs = LogsCache.read(f);
       if (!logs) {
@@ -2165,115 +1823,97 @@ class DashKelasTab extends BaseTab {
       }
       logs = Stats.dedup(logs);
       if (!logs.length) {
-        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data jurnal untuk filter yang dipilih.</p></div>`;
+        this._hasData = false;
+        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">inbox</span><p>Belum ada data untuk filter ini.</p></div>`;
         return;
       }
+      this._hasData = true;
       await this._render(logs, f);
     } catch (e) {
-      if (e.message !== 'Unauthorized') {
-        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
-      }
+      if (e.message !== 'Unauthorized') resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
     } finally {
-      btn.innerHTML = orig;
-      btn.disabled = false;
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">search</span>'; }
     }
   }
-
   async _render(rows, filter) {
     const perS = Stats.rekapPerSiswa(rows).sort((a, b) => b.rataKes - a.rataKes);
     const rataKelas = Stats.rataKelas(rows);
     const normKelas = Stats.normArr(rataKelas);
     const rataKes = Stats.keseluruhan(normKelas);
     const jumlahMinggu = new Set(rows.map(r => `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`)).size;
-
     let best = 0, worst = 0;
     for (let i = 0; i < normKelas.length; i++) {
       if (normKelas[i] > normKelas[best]) best = i;
       if (normKelas[i] < normKelas[worst]) worst = i;
     }
-
-    const periodeText = filter.bulanAwal === filter.bulanAkhir
-      ? `${filter.bulanAwal} ${filter.tahun}`
-      : `${filter.bulanAwal} – ${filter.bulanAkhir} ${filter.tahun}`;
+    const kategoriRank = KATEGORI.map((k, i) => ({ label: k.label, val: rataKelas[k.key], max: k.max, norm: normKelas[i] }));
+    const top3 = kategoriRank.slice().sort((a, b) => b.norm - a.norm).slice(0, 3);
+    const bot3 = kategoriRank.slice().sort((a, b) => a.norm - b.norm).slice(0, 3);
+    const periodeText = `${filter.bulanAwal} ${filter.tahunAwal}`;
 
     const resultEl = $('#dkResult');
     resultEl.innerHTML = `
       <div class="stats-grid">
-        <div class="stat"><div class="num">${perS.length}</div><div class="lbl">Siswa Terdata</div></div>
-        <div class="stat pos"><div class="num">${rataKes.toFixed(2)}</div><div class="lbl">Rata-rata Kelas</div></div>
-        <div class="stat"><div class="num" style="font-size:.88rem;color:var(--positive);white-space:normal;line-height:1.2">${esc(KATEGORI[best].label)}</div><div class="lbl">Kebiasaan Terbaik</div></div>
-        <div class="stat"><div class="num" style="font-size:.88rem;color:var(--negative);white-space:normal;line-height:1.2">${esc(KATEGORI[worst].label)}</div><div class="lbl">Perlu Perhatian</div></div>
+        <div class="stat"><div class="num">${perS.length}</div><div class="lbl">Siswa</div></div>
+        <div class="stat pos"><div class="num">${rataKes.toFixed(2)}</div><div class="lbl">Rata-rata</div></div>
+        <div class="stat"><div class="num sm" style="color:var(--positive)">${esc(KATEGORI[best].label)}</div><div class="lbl">Terbaik</div></div>
+        <div class="stat"><div class="num sm" style="color:var(--negative)">${esc(KATEGORI[worst].label)}</div><div class="lbl">Perlu Perhatian</div></div>
       </div>
-      <div class="card" style="padding:.7rem 1rem;background:var(--primary-l);border-color:#C7D2FE;margin-bottom:.8rem">
-        <div style="font-size:.76rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
-          <span class="material-symbols-outlined" style="font-size:15px">info</span>
-          <span>${esc(filter.kelas)} · ${esc(periodeText)} · ${jumlahMinggu} minggu · ${perS.length} siswa</span>
-        </div>
+      <div class="info-bar"><span class="material-symbols-outlined">info</span><span>${esc(periodeText)} · ${jumlahMinggu} minggu · ${perS.length} siswa</span></div>
+      <details class="collapse">
+        <summary><span class="material-symbols-outlined">bar_chart</span> Grafik Rata-rata (12 Kebiasaan)</summary>
+        <div class="collapse-body"><div style="position:relative;height:380px"><canvas id="dkChart"></canvas></div></div>
+      </details>
+      <div class="card">
+        <h3><span class="material-symbols-outlined">thumb_up</span> Top 3 Terbaik</h3>
+        <table class="data" style="min-width:0;width:100%">
+          <tbody>${top3.map(r => `<tr><td class="sticky-l" style="position:static;box-shadow:none;background:transparent">${esc(r.label)}</td><td style="font-weight:700;color:var(--positive)">${r.val.toFixed(2)}</td></tr>`).join('')}</tbody>
+        </table>
       </div>
       <div class="card">
-        <h3><span class="material-symbols-outlined">bar_chart</span> Rata-rata per Kebiasaan (Skala 1-4)</h3>
-        <div style="position:relative;height:400px"><canvas id="dkChart"></canvas></div>
-      </div>
-      <h3 class="section-title" style="font-size:.9rem;margin:1rem 0 .7rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Detail Nilai per Siswa</h3>
-      <div class="table-wrap">
-        <table class="data">
-          <thead><tr>
-            <th class="sticky-l" style="min-width:160px">Nama Siswa</th>
-            ${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}
-            <th>Rata-rata</th>
-          </tr></thead>
-          <tbody>${perS.map(s => `<tr>
-            <td class="sticky-l">${esc(s.nama)}</td>
-            ${KATEGORI.map((k, i) => {
-              const v = s.rata[k.key];
-              const r = v / k.max;
-              const cls = r >= THRESHOLD.BAIK ? 'skor-baik' : (r >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang');
-              const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
-              return `<td class="${cls}">${d}</td>`;
-            }).join('')}
-            <td style="font-weight:700;color:var(--primary)">${s.rataKes.toFixed(2)}</td>
-          </tr>`).join('')}</tbody>
+        <h3><span class="material-symbols-outlined">warning</span> Top 3 Perlu Perhatian</h3>
+        <table class="data" style="min-width:0;width:100%">
+          <tbody>${bot3.map(r => `<tr><td class="sticky-l" style="position:static;box-shadow:none;background:transparent">${esc(r.label)}</td><td style="font-weight:700;color:var(--negative)">${r.val.toFixed(2)}</td></tr>`).join('')}</tbody>
         </table>
-      </div>`;
-
+      </div>
+      <details class="collapse">
+        <summary><span class="material-symbols-outlined">table_rows</span> Detail per Siswa (${perS.length})</summary>
+        <div class="collapse-body">
+          <div class="table-wrap" style="max-height:60vh">
+            <table class="data">
+              <thead><tr><th class="sticky-l" style="min-width:150px">Nama</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata</th></tr></thead>
+              <tbody>${perS.map(s => `<tr>
+                <td class="sticky-l">${esc(s.nama)}</td>
+                ${KATEGORI.map(k => {
+                  const v = s.rata[k.key];
+                  const r = v / k.max;
+                  const cls = r >= THRESHOLD.BAIK ? 'skor-baik' : (r >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang');
+                  const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
+                  return `<td class="${cls}">${d}</td>`;
+                }).join('')}
+                <td style="font-weight:700;color:var(--primary)">${s.rataKes.toFixed(2)}</td>
+              </tr>`).join('')}</tbody>
+            </table>
+          </div>
+        </div>
+      </details>`;
     await ensureChart();
     this._charts.forEach(c => { try { c.destroy(); } catch {} });
     this._charts = [];
-
     const cv = $('#dkChart');
     if (cv && typeof Chart !== 'undefined') {
       this._charts.push(new Chart(cv, {
         type: 'bar',
         data: {
           labels: KATEGORI.map(k => k.label),
-          datasets: [{
-            data: normKelas.map(v => Number(v.toFixed(2))),
-            backgroundColor: normKelas.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E')),
-            borderRadius: 6,
-            maxBarThickness: 40
-          }]
+          datasets: [{ data: normKelas.map(v => Number(v.toFixed(2))), backgroundColor: normKelas.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E')), borderRadius: 6, maxBarThickness: 40 }]
         },
         options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: false,
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false, animation: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: {
-              beginAtZero: true,
-              max: 4,
-              ticks: { stepSize: 1, font: { size: 10 } },
-              grid: { color: '#e2e8f0' }
-            },
-            y: {
-              grid: { display: false },
-              ticks: {
-                font: { size: 11, weight: '600' },
-                color: '#1e293b',
-                autoSkip: false
-              }
-            }
+            x: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#e2e8f0' } },
+            y: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#1e293b', autoSkip: false } }
           }
         }
       }));
@@ -2281,75 +1921,45 @@ class DashKelasTab extends BaseTab {
   }
 }
 
-/* ====================================================================
- *                        DASH SEKOLAH TAB
- * ==================================================================== */
+/* ========== DASH SEKOLAH TAB ========== */
 class DashSekolahTab extends BaseTab {
-  constructor(el, app) {
-    super(el, app);
-    this._charts = [];
-  }
-
+  constructor(el, app) { super(el, app); this._charts = []; }
   render() {
     const defaultBulan = fmtBulan(todayM());
     this.el.innerHTML = `
       <h2 class="section-title"><span class="material-symbols-outlined">domain</span> Dashboard Sekolah</h2>
-      <div class="card">
-        <h3><span class="material-symbols-outlined">tune</span> Filter Data</h3>
-        <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label>
-            <select id="dsTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
+      <div class="card" style="padding:.85rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.5rem;align-items:end">
+          <div class="form-group" style="margin:0">
+            <label>Tahun</label>
+            <select id="dsTahun" class="form-select">${[todayY()-1, todayY(), todayY()+1].map(y => `<option value="${y}"${y === todayY() ? ' selected' : ''}>${y}</option>`).join('')}</select>
           </div>
-          <div class="form-group"><label>Bulan Awal</label>
-            <select id="dsBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          <div class="form-group" style="margin:0">
+            <label>Bln Awal</label>
+            <select id="dsBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
           </div>
-          <div class="form-group"><label>Bulan Akhir</label>
-            <select id="dsBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
+          <div class="form-group" style="margin:0">
+            <label>Bln Akhir</label>
+            <select id="dsBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
           </div>
-          <div class="form-group"><label>Pekan</label>
-            <select id="dsMinggu" class="form-select">
-              <option value="Semua">Semua Pekan</option>
-              ${[1,2,3,4,5].map(n => `<option value="${n}">Minggu ${n}</option>`).join('')}
-            </select>
-          </div>
-          <div class="form-group full">
-            <button id="btnLoadDs" class="btn btn-primary"><span class="material-symbols-outlined">search</span> Tampilkan</button>
-          </div>
+          <button id="btnLoadDs" class="btn btn-primary" style="min-width:52px;padding:.6rem"><span class="material-symbols-outlined">search</span></button>
         </div>
       </div>
-      <div id="dsResult">
-        <div class="empty">
-          <span class="material-symbols-outlined">apartment</span>
-          <p>Pilih filter di atas lalu ketuk <b>Tampilkan</b> untuk melihat rekapitulasi seluruh sekolah.</p>
-        </div>
-      </div>`;
-
+      <div id="dsResult"></div>`;
     $('#btnLoadDs').onclick = () => this.guarded(() => this._load());
+    this.guarded(() => this._load());
   }
-
   async _load() {
     const btn = $('#btnLoadDs');
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span>Memuat...</span>';
-
-    const f = {
-      tahun: $('#dsTahun').value,
-      bulanAwal: $('#dsBulanAwal').value,
-      bulanAkhir: $('#dsBulanAkhir').value
-    };
-    const m = $('#dsMinggu').value;
-    if (m !== 'Semua') f.minggu = m;
-
+    if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; }
+    const tahun = $('#dsTahun').value;
+    const f = { tahunAwal: tahun, tahunAkhir: tahun, bulanAwal: $('#dsBulanAwal').value, bulanAkhir: $('#dsBulanAkhir').value };
     if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
-      btn.disabled = false;
-      btn.innerHTML = orig;
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">search</span>'; }
       return toast('Bulan akhir harus setelah bulan awal.', 'error');
     }
-
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `<div class="skel-card"><div class="skel skel-line" style="width:50%"></div><div class="skel" style="height:200px;border-radius:10px;margin-top:.6rem"></div></div>`;
-
     try {
       let logs = LogsCache.read(f);
       if (!logs) {
@@ -2364,15 +1974,11 @@ class DashSekolahTab extends BaseTab {
       }
       await this._render(logs, f);
     } catch (e) {
-      if (e.message !== 'Unauthorized') {
-        resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
-      }
+      if (e.message !== 'Unauthorized') resultEl.innerHTML = `<div class="empty"><span class="material-symbols-outlined">cloud_off</span><p>Gagal: ${esc(e.message)}</p></div>`;
     } finally {
-      btn.innerHTML = orig;
-      btn.disabled = false;
+      if (btn) { btn.disabled = false; btn.innerHTML = '<span class="material-symbols-outlined">search</span>'; }
     }
   }
-
   async _render(rows, filter) {
     const rekap = KELAS.map(kelas => {
       const r = rows.filter(x => x.Kelas === kelas);
@@ -2383,227 +1989,150 @@ class DashSekolahTab extends BaseTab {
       const minggu = new Set(r.map(x => `${x.Tahun}|${x.Bulan}|${x.Minggu_Ke}`)).size;
       return { kelas, jumlah: perS.length, rata, norm, rataKes: Stats.keseluruhan(norm), minggu };
     });
-
     const terisi = rekap.filter(r => r.rataKes !== null);
     const rataSek = terisi.length ? terisi.reduce((s, r) => s + r.rataKes, 0) / terisi.length : 0;
     const best = terisi.length ? terisi.reduce((a, b) => b.rataKes > a.rataKes ? b : a) : null;
     const worst = terisi.length ? terisi.reduce((a, b) => b.rataKes < a.rataKes ? b : a) : null;
     const totalSiswa = rekap.reduce((s, r) => s + (r.jumlah || 0), 0);
     const totalMinggu = new Set(rows.map(r => `${r.Tahun}|${r.Bulan}|${r.Minggu_Ke}`)).size;
-
-    const periodeText = filter.bulanAwal === filter.bulanAkhir
-      ? `${filter.bulanAwal} ${filter.tahun}`
-      : `${filter.bulanAwal} – ${filter.bulanAkhir} ${filter.tahun}`;
-
+    const periodeText = filter.bulanAwal === filter.bulanAkhir ? `${filter.bulanAwal} ${filter.tahunAwal}` : `${filter.bulanAwal} – ${filter.bulanAkhir} ${filter.tahunAwal}`;
     const resultEl = $('#dsResult');
     resultEl.innerHTML = `
       <div class="stats-grid">
-        <div class="stat"><div class="num">${terisi.length}/6</div><div class="lbl">Kelas Tercatat</div></div>
-        <div class="stat pos"><div class="num">${rataSek.toFixed(2)}</div><div class="lbl">Rata-rata Sekolah</div></div>
-        <div class="stat"><div class="num" style="font-size:.88rem;color:var(--positive);white-space:normal;line-height:1.2">${esc(best ? best.kelas : '-')}</div><div class="lbl">Kelas Terbaik</div></div>
-        <div class="stat"><div class="num" style="font-size:.88rem;color:var(--negative);white-space:normal;line-height:1.2">${esc(worst ? worst.kelas : '-')}</div><div class="lbl">Perlu Perhatian</div></div>
+        <div class="stat"><div class="num">${terisi.length}/6</div><div class="lbl">Kelas</div></div>
+        <div class="stat pos"><div class="num">${rataSek.toFixed(2)}</div><div class="lbl">Rata-rata</div></div>
+        <div class="stat"><div class="num sm" style="color:var(--positive)">${esc(best ? best.kelas : '-')}</div><div class="lbl">Terbaik</div></div>
+        <div class="stat"><div class="num sm" style="color:var(--negative)">${esc(worst ? worst.kelas : '-')}</div><div class="lbl">Perhatian</div></div>
       </div>
-      <div class="card" style="padding:.7rem 1rem;background:var(--primary-l);border-color:#C7D2FE;margin-bottom:.8rem">
-        <div style="font-size:.76rem;color:var(--primary-d);font-weight:600;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
-          <span class="material-symbols-outlined" style="font-size:15px">info</span>
-          <span>${esc(periodeText)} · ${totalMinggu} minggu · ${totalSiswa} siswa · ${terisi.length} kelas</span>
+      <div class="info-bar"><span class="material-symbols-outlined">info</span><span>${esc(periodeText)} · ${totalMinggu} minggu · ${totalSiswa} siswa</span></div>
+      <details class="collapse"><summary><span class="material-symbols-outlined">bar_chart</span> Rata-rata Antar Kelas</summary>
+        <div class="collapse-body"><div style="position:relative;height:300px"><canvas id="dsChart1"></canvas></div></div>
+      </details>
+      <details class="collapse"><summary><span class="material-symbols-outlined">insights</span> Per Kategori</summary>
+        <div class="collapse-body"><div style="position:relative;height:380px"><canvas id="dsChart2"></canvas></div></div>
+      </details>
+      <details class="collapse"><summary><span class="material-symbols-outlined">table_rows</span> Rekap Kelas</summary>
+        <div class="collapse-body">
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th class="sticky-l" style="min-width:80px">Kelas</th><th>Jml</th><th>Mgg</th>${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}<th>Rata</th></tr></thead>
+              <tbody>${rekap.map(r => {
+                if (!r.jumlah) return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td colspan="${KATEGORI.length + 3}" style="color:var(--muted);font-style:italic">Belum ada</td></tr>`;
+                return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td>${r.jumlah}</td><td>${r.minggu}</td>
+                  ${KATEGORI.map(k => { const v = r.rata[k.key]; const ratio = v / k.max; const cls = ratio >= THRESHOLD.BAIK ? 'skor-baik' : (ratio >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang'); const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1); return `<td class="${cls}">${d}</td>`; }).join('')}
+                  <td style="font-weight:700;color:var(--positive)">${r.rataKes.toFixed(2)}</td></tr>`;
+              }).join('')}</tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="chart-pair">
-        <div class="card">
-          <h3><span class="material-symbols-outlined">bar_chart</span> Perbandingan Rata-rata Antar Kelas</h3>
-          <div style="position:relative;height:300px"><canvas id="dsChart1"></canvas></div>
-        </div>
-        <div class="card">
-          <h3><span class="material-symbols-outlined">insights</span> Perbandingan per Kategori</h3>
-          <div style="position:relative;height:380px"><canvas id="dsChart2"></canvas></div>
-        </div>
-      </div>
-      <h3 class="section-title" style="font-size:.9rem;margin:1rem 0 .7rem"><span class="material-symbols-outlined" style="font-size:20px">table_rows</span> Rekapitulasi Sekolah</h3>
-      <div class="table-wrap">
-        <table class="data">
-          <thead><tr>
-            <th class="sticky-l" style="min-width:90px">Kelas</th>
-            <th>Jml</th>
-            <th>Mgg</th>
-            ${KATEGORI.map(k => `<th>${esc(k.label)}</th>`).join('')}
-            <th>Rata-rata</th>
-          </tr></thead>
-          <tbody>${rekap.map(r => {
-            if (!r.jumlah) return `<tr><td class="sticky-l">${esc(r.kelas)}</td><td colspan="${KATEGORI.length + 3}" style="color:var(--muted);font-style:italic">Belum ada data</td></tr>`;
-            return `<tr>
-              <td class="sticky-l">${esc(r.kelas)}</td>
-              <td>${r.jumlah}</td>
-              <td>${r.minggu}</td>
-              ${KATEGORI.map(k => {
-                const v = r.rata[k.key];
-                const ratio = v / k.max;
-                const cls = ratio >= THRESHOLD.BAIK ? 'skor-baik' : (ratio >= THRESHOLD.CUKUP ? 'skor-cukup' : 'skor-kurang');
-                const d = k.max === 4 ? v.toFixed(2) : v.toFixed(1);
-                return `<td class="${cls}">${d}</td>`;
-              }).join('')}
-              <td style="font-weight:700;color:var(--positive)">${r.rataKes.toFixed(2)}</td>
-            </tr>`;
-          }).join('')}</tbody>
-        </table>
-      </div>`;
-
+      </details>`;
     await ensureChart();
     this._charts.forEach(c => { try { c.destroy(); } catch {} });
     this._charts = [];
-
     const c1 = $('#dsChart1');
     if (c1 && typeof Chart !== 'undefined') {
       this._charts.push(new Chart(c1, {
         type: 'bar',
-        data: {
-          labels: rekap.map(r => r.kelas),
-          datasets: [{
-            data: rekap.map(r => r.rataKes !== null ? Number(r.rataKes.toFixed(2)) : 0),
-            backgroundColor: rekap.map(r => r.rataKes === null ? '#CBD5E1' : (r.rataKes >= 3.5 ? '#10B981' : (r.rataKes >= 2.5 ? '#F59E0B' : '#F43F5E'))),
-            borderRadius: 6, maxBarThickness: 40
-          }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false, animation: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
-            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
-          }
-        }
+        data: { labels: rekap.map(r => r.kelas), datasets: [{ data: rekap.map(r => r.rataKes !== null ? Number(r.rataKes.toFixed(2)) : 0), backgroundColor: rekap.map(r => r.rataKes === null ? '#CBD5E1' : (r.rataKes >= 3.5 ? '#10B981' : (r.rataKes >= 2.5 ? '#F59E0B' : '#F43F5E'))), borderRadius: 6, maxBarThickness: 40 }] },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
       }));
     }
-
     const c2 = $('#dsChart2');
     if (c2 && typeof Chart !== 'undefined') {
       this._charts.push(new Chart(c2, {
         type: 'bar',
-        data: {
-          labels: rekap.map(r => r.kelas),
-          datasets: KATEGORI.map((k, i) => ({
-            label: k.label,
-            data: rekap.map(r => r.norm ? Number(r.norm[i].toFixed(2)) : 0),
-            backgroundColor: CHART_COLORS[i]
-          }))
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false, animation: false,
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } } },
-          scales: {
-            y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } },
-            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
-          }
-        }
+        data: { labels: rekap.map(r => r.kelas), datasets: KATEGORI.map((k, i) => ({ label: k.label, data: rekap.map(r => r.norm ? Number(r.norm[i].toFixed(2)) : 0), backgroundColor: CHART_COLORS[i] })) },
+        options: { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 9 } } } }, scales: { y: { beginAtZero: true, max: 4, ticks: { stepSize: 1, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
       }));
     }
   }
 }
 
-/* ====================================================================
- *                            CETAK TAB
- * ==================================================================== */
+/* ========== CETAK TAB ========== */
 class CetakTab extends BaseTab {
   constructor(el, app) {
     super(el, app);
     this.jenis = 'rapor';
+    this.preset = 'bulan'; // bulan | sem1 | sem2 | tahun | custom
+    this.customAwalBulan = todayM();
+    this.customAwalTahun = todayY();
+    this.customAkhirBulan = todayM();
+    this.customAkhirTahun = todayY();
   }
 
   render() {
-    const defaultBulan = fmtBulan(todayM());
+    const profile = this.app.profile;
     this.el.innerHTML = `
-      <h2 class="section-title"><span class="material-symbols-outlined">print</span> Cetak & Preview Laporan</h2>
+      <h2 class="section-title"><span class="material-symbols-outlined">print</span> Cetak & Preview</h2>
       <div class="card">
-        <h3><span class="material-symbols-outlined">category</span> Jenis Cetak</h3>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.9rem">
-          <label class="jenis-btn" data-jenis="rapor" style="cursor:pointer">
-            <input type="radio" name="jenis" value="rapor" checked style="display:none">
-            <div class="btn btn-primary" style="flex-direction:column;gap:.2rem;padding:.6rem .4rem;height:100%">
-              <span class="material-symbols-outlined">person</span>
-              <span style="font-size:.76rem">Rapor Siswa</span>
-            </div>
-          </label>
-          <label class="jenis-btn" data-jenis="kelas" style="cursor:pointer">
-            <input type="radio" name="jenis" value="kelas" style="display:none">
-            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.6rem .4rem;height:100%">
-              <span class="material-symbols-outlined">groups</span>
-              <span style="font-size:.76rem">Laporan Kelas</span>
-            </div>
-          </label>
-          <label class="jenis-btn" data-jenis="sekolah" style="cursor:pointer">
-            <input type="radio" name="jenis" value="sekolah" style="display:none">
-            <div class="btn btn-ghost" style="flex-direction:column;gap:.2rem;padding:.6rem .4rem;height:100%">
-              <span class="material-symbols-outlined">apartment</span>
-              <span style="font-size:.76rem">Laporan Sekolah</span>
-            </div>
+        <div class="seg-control">
+          <button class="seg-btn${this.jenis === 'rapor' ? ' active' : ''}" data-jenis="rapor"><span class="material-symbols-outlined">person</span><span>Rapor</span></button>
+          <button class="seg-btn${this.jenis === 'kelas' ? ' active' : ''}" data-jenis="kelas"><span class="material-symbols-outlined">groups</span><span>Kelas</span></button>
+          <button class="seg-btn${this.jenis === 'sekolah' ? ' active' : ''}" data-jenis="sekolah"><span class="material-symbols-outlined">apartment</span><span>Sekolah</span></button>
+        </div>
+
+        ${profile ? `<div class="info-bar" id="infoKelas" style="margin-bottom:.6rem"><span class="material-symbols-outlined">school</span><span>${esc(profile.kelas)}</span></div>` :
+        `<button class="btn btn-ghost" id="btnPickKelas" style="margin-bottom:.6rem"><span class="material-symbols-outlined">school</span> Pilih Kelas Dulu</button>`}
+
+        <label class="card-label">Periode</label>
+        <div class="preset-grid" id="presetGrid">
+          <button class="preset-btn${this.preset === 'bulan' ? ' active' : ''}" data-preset="bulan"><span class="material-symbols-outlined">calendar_today</span>Bln Ini</button>
+          <button class="preset-btn${this.preset === 'sem1' ? ' active' : ''}" data-preset="sem1">Sem 1</button>
+          <button class="preset-btn${this.preset === 'sem2' ? ' active' : ''}" data-preset="sem2">Sem 2</button>
+          <button class="preset-btn${this.preset === 'tahun' ? ' active' : ''}" data-preset="tahun">1 Tahun</button>
+          <button class="preset-btn${this.preset === 'custom' ? ' active' : ''}" data-preset="custom"><span class="material-symbols-outlined">tune</span>Custom</button>
+        </div>
+
+        <div class="preset-info" id="presetInfo">
+          <span class="material-symbols-outlined">event</span>
+          <span id="presetInfoText"></span>
+        </div>
+
+        <div id="customPeriode"></div>
+
+        <div id="grpRapor" style="margin-top:.2rem">
+          <div class="form-group" style="margin-bottom:.5rem">
+            <label>Siswa</label>
+            <select id="cSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select>
+          </div>
+          <label style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;cursor:pointer;padding:.5rem .1rem;font-weight:600;color:var(--text)">
+            <input type="checkbox" id="cBatch" style="width:18px;height:18px;accent-color:var(--primary);flex-shrink:0">
+            <span>Cetak semua siswa (batch, 1 PDF)</span>
           </label>
         </div>
 
-        <div class="filter-grid">
-          <div class="form-group"><label>Tahun</label>
-            <select id="cTahun" class="form-select">${TAHUN.map(t => `<option${t === '2026' ? ' selected' : ''}>${t}</option>`).join('')}</select>
-          </div>
-          <div class="form-group"><label>Bulan Awal</label>
-            <select id="cBulanAwal" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
-          </div>
-          <div class="form-group"><label>Bulan Akhir</label>
-            <select id="cBulanAkhir" class="form-select">${BULAN.map(b => `<option${b === defaultBulan ? ' selected' : ''}>${b}</option>`).join('')}</select>
-          </div>
-          <div class="form-group" id="grpKelas"><label>Kelas</label>
-            <select id="cKelas" class="form-select">${KELAS.map(k => `<option>${k}</option>`).join('')}</select>
-          </div>
-          <div class="form-group" id="grpSiswa"><label>Siswa</label>
-            <select id="cSiswa" class="form-select"><option value="">-- Pilih Siswa --</option></select>
-          </div>
-          <div class="form-group full" id="grpBatch" style="display:none">
-            <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.88rem;cursor:pointer">
-              <input type="checkbox" id="cBatch" style="width:auto;accent-color:var(--primary);width:18px;height:18px">
-              <span>Cetak <b>semua siswa</b> dalam 1 kelas (batch, 1 file PDF)</span>
-            </label>
-          </div>
-          <div class="form-group full">
-            <button id="btnPreview" class="btn btn-primary">
-              <span class="material-symbols-outlined">visibility</span> Tampilkan Preview
-            </button>
-          </div>
-        </div>
+        <button id="btnPreview" class="btn btn-primary" style="margin-top:.7rem">
+          <span class="material-symbols-outlined">visibility</span> Tampilkan Preview
+        </button>
       </div>
-      <div class="empty" style="padding:1.2rem">
-        <span class="material-symbols-outlined">info</span>
-        <p style="max-width:420px;font-size:.8rem">Pilih jenis cetak & filter, lalu ketuk <b>Tampilkan Preview</b>. Preview WYSIWYG — persis seperti hasil cetak.</p>
+      <div class="empty" style="padding:1rem">
+        <p style="font-size:.78rem;max-width:420px">Preview WYSIWYG — persis seperti hasil cetak. Setelah preview muncul, klik <b>Cetak / PDF</b>.</p>
       </div>`;
 
     this._bind();
   }
 
   _bind() {
-    const upd = () => {
-      const j = this.jenis;
-      $('#grpKelas').style.display = j === 'sekolah' ? 'none' : '';
-      $('#grpSiswa').style.display = j === 'rapor' ? '' : 'none';
-      $('#grpBatch').style.display = j === 'rapor' ? '' : 'none';
-      if (j === 'rapor') this._fillSiswa();
-      else {
-        $('#cBatch').checked = false;
-        $('#cSiswa').disabled = false;
-      }
-    };
+    const pickBtn = $('#btnPickKelas');
+    if (pickBtn) pickBtn.onclick = () => this.app.showProfileModal(true);
 
-    $$('.jenis-btn').forEach(btn => {
+    $$('.seg-btn', this.el).forEach(btn => {
       btn.onclick = () => {
         this.jenis = btn.dataset.jenis;
-        $$('.jenis-btn .btn').forEach(b => {
-          b.classList.remove('btn-primary');
-          b.classList.add('btn-ghost');
-        });
-        const inner = btn.querySelector('.btn');
-        inner.classList.remove('btn-ghost');
-        inner.classList.add('btn-primary');
-        upd();
+        $$('.seg-btn', this.el).forEach(b => b.classList.toggle('active', b === btn));
+        this._updJenis();
       };
     });
 
-    $('#cKelas').onchange = () => { if (this.jenis === 'rapor') this._fillSiswa(); };
+    $$('.preset-btn', this.el).forEach(btn => {
+      btn.onclick = () => {
+        this.preset = btn.dataset.preset;
+        $$('.preset-btn', this.el).forEach(b => b.classList.toggle('active', b === btn));
+        this._updPreset();
+      };
+    });
+
+    $('#cSiswa').onchange = () => { if ($('#cSiswa').value) $('#cBatch').checked = false; };
     $('#cBatch').onchange = () => {
       const dis = $('#cBatch').checked;
       $('#cSiswa').disabled = dis;
@@ -2611,33 +2140,154 @@ class CetakTab extends BaseTab {
     };
 
     $('#btnPreview').onclick = () => this.guarded(() => this._preview());
-    upd();
+
+    this._updJenis();
+    this._updPreset();
+  }
+
+  _updJenis() {
+    const j = this.jenis;
+    const infoKelas = $('#infoKelas');
+    if (infoKelas) infoKelas.style.display = j === 'sekolah' ? 'none' : '';
+    const pick = $('#btnPickKelas');
+    if (pick) pick.style.display = j === 'sekolah' ? 'none' : '';
+    const grpRapor = $('#grpRapor');
+    if (grpRapor) grpRapor.style.display = j === 'rapor' ? '' : 'none';
+    if (j === 'rapor') this._fillSiswa();
+  }
+
+  _getPeriode() {
+    const today = new Date();
+    const bNow = today.getMonth();
+    const yNow = today.getFullYear();
+    const ta = getTahunAjaran(bNow, yNow);
+
+    if (this.preset === 'bulan') {
+      return {
+        bulanAwal: fmtBulan(bNow),
+        bulanAkhir: fmtBulan(bNow),
+        tahunAwal: yNow,
+        tahunAkhir: yNow,
+        label: `${fmtBulan(bNow)} ${yNow}`
+      };
+    }
+    if (this.preset === 'sem1') {
+      return {
+        bulanAwal: 'Juli',
+        bulanAkhir: 'Desember',
+        tahunAwal: ta.start,
+        tahunAkhir: ta.start,
+        label: `Semester 1 · ${ta.label}`
+      };
+    }
+    if (this.preset === 'sem2') {
+      return {
+        bulanAwal: 'Januari',
+        bulanAkhir: 'Juni',
+        tahunAwal: ta.end,
+        tahunAkhir: ta.end,
+        label: `Semester 2 · ${ta.label}`
+      };
+    }
+    if (this.preset === 'tahun') {
+      return {
+        bulanAwal: 'Juli',
+        bulanAkhir: 'Juni',
+        tahunAwal: ta.start,
+        tahunAkhir: ta.end,
+        label: `Tahun Ajaran ${ta.label}`
+      };
+    }
+    // custom
+    return {
+      bulanAwal: fmtBulan(this.customAwalBulan),
+      bulanAkhir: fmtBulan(this.customAkhirBulan),
+      tahunAwal: this.customAwalTahun,
+      tahunAkhir: this.customAkhirTahun,
+      label: `${fmtBulan(this.customAwalBulan)} ${this.customAwalTahun} – ${fmtBulan(this.customAkhirBulan)} ${this.customAkhirTahun}`
+    };
+  }
+
+  _updPreset() {
+    const info = $('#presetInfoText');
+    const custom = $('#customPeriode');
+    if (this.preset === 'custom') {
+      if (info) info.textContent = 'Atur periode kustom:';
+      if (custom) {
+        custom.innerHTML = `
+          <div class="custom-periode">
+            <div style="font-size:.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.03em">Dari</div>
+            <div class="row">
+              <div>
+                <label>Bulan</label>
+                <select id="custAwalB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAwalBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
+              </div>
+              <div>
+                <label>Tahun</label>
+                <select id="custAwalT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAwalTahun ? ' selected' : ''}>${y}</option>`).join('')}</select>
+              </div>
+            </div>
+            <div style="font-size:.72rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-top:.3rem">Sampai</div>
+            <div class="row">
+              <div>
+                <label>Bulan</label>
+                <select id="custAkhirB" class="form-select">${BULAN.map((b, i) => `<option value="${i}"${i === this.customAkhirBulan ? ' selected' : ''}>${esc(b)}</option>`).join('')}</select>
+              </div>
+              <div>
+                <label>Tahun</label>
+                <select id="custAkhirT" class="form-select">${[todayY()-2,todayY()-1,todayY(),todayY()+1,todayY()+2].map(y => `<option value="${y}"${y === this.customAkhirTahun ? ' selected' : ''}>${y}</option>`).join('')}</select>
+              </div>
+            </div>
+          </div>`;
+        const upd = () => {
+          this.customAwalBulan = parseInt($('#custAwalB').value, 10);
+          this.customAwalTahun = parseInt($('#custAwalT').value, 10);
+          this.customAkhirBulan = parseInt($('#custAkhirB').value, 10);
+          this.customAkhirTahun = parseInt($('#custAkhirT').value, 10);
+          const p = this._getPeriode();
+          if (info) info.textContent = p.label;
+        };
+        ['#custAwalB','#custAwalT','#custAkhirB','#custAkhirT'].forEach(sel => {
+          const el = $(sel);
+          if (el) el.onchange = upd;
+        });
+      }
+    } else {
+      const p = this._getPeriode();
+      if (info) info.textContent = p.label;
+      if (custom) custom.innerHTML = '';
+    }
   }
 
   _fillSiswa() {
     const master = (this.app.boot && this.app.boot.master) || [];
-    const kelas = $('#cKelas').value;
-    const siswa = master
-      .filter(s => s.Kelas === kelas)
-      .sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
-    $('#cSiswa').innerHTML = '<option value="">-- Pilih Siswa --</option>' +
-      siswa.map(s => `<option value="${escAttr(s.NIS)}">${esc(s.Nama_Siswa)}</option>`).join('');
+    const profile = this.app.profile;
+    if (!profile) return;
+    const siswa = master.filter(s => s.Kelas === profile.kelas).sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
+    const sel = $('#cSiswa');
+    if (!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">-- Pilih Siswa --</option>' + siswa.map(s => `<option value="${escAttr(s.NIS)}"${String(s.NIS) === String(cur) ? ' selected' : ''}>${esc(s.Nama_Siswa)}</option>`).join('');
   }
 
   async _preview() {
     const boot = this.app.boot;
-    if (!boot || !boot.master || !boot.master.length) {
-      return toast('Data master belum siap. Tunggu sebentar lalu coba lagi.', 'error');
-    }
+    if (!boot || !boot.master || !boot.master.length) return toast('Data master belum siap.', 'error');
+    const profile = this.app.profile;
+    if (this.jenis !== 'sekolah' && !profile) return toast('Pilih kelas dulu.', 'error');
 
+    const periode = this._getPeriode();
     const f = {
-      tahun: $('#cTahun').value,
-      bulanAwal: $('#cBulanAwal').value,
-      bulanAkhir: $('#cBulanAkhir').value
+      tahunAwal: String(periode.tahunAwal),
+      tahunAkhir: String(periode.tahunAkhir),
+      bulanAwal: periode.bulanAwal,
+      bulanAkhir: periode.bulanAkhir
     };
-    if (BULAN.indexOf(f.bulanAwal) > BULAN.indexOf(f.bulanAkhir)) {
-      return toast('Bulan akhir harus setelah bulan awal.', 'error');
-    }
+    // Validate range
+    const idxA = BULAN.indexOf(periode.bulanAwal), idxB = BULAN.indexOf(periode.bulanAkhir);
+    const urutA = periode.tahunAwal * 100 + idxA;
+    const urutB = periode.tahunAkhir * 100 + idxB;
+    if (urutA > urutB) return toast('Bulan awal harus sebelum bulan akhir.', 'error');
 
     const btn = $('#btnPreview');
     const orig = btn.innerHTML;
@@ -2645,9 +2295,8 @@ class CetakTab extends BaseTab {
     btn.innerHTML = '<span class="spinner"></span><span>Menyiapkan...</span>';
 
     try {
-      const query = { tahun: f.tahun, bulanAwal: f.bulanAwal, bulanAkhir: f.bulanAkhir };
-      if (this.jenis !== 'sekolah') query.kelas = $('#cKelas').value;
-
+      const query = { ...f };
+      if (this.jenis !== 'sekolah') query.kelas = profile.kelas;
       let logs = LogsCache.read(query);
       if (!logs) {
         const res = await Api.logs(query);
@@ -2658,111 +2307,76 @@ class CetakTab extends BaseTab {
       if (!logs.length) {
         btn.disabled = false;
         btn.innerHTML = orig;
-        return toast('Belum ada data untuk filter ini.', 'error');
+        return toast('Belum ada data untuk periode ini.', 'error');
       }
 
       const opts = {
         identitas: boot.identitas,
         waliKelas: boot.waliKelas,
-        tahun: f.tahun,
-        bulanAwal: f.bulanAwal,
-        bulanAkhir: f.bulanAkhir
+        tahunAwal: periode.tahunAwal,
+        tahunAkhir: periode.tahunAkhir,
+        bulanAwal: periode.bulanAwal,
+        bulanAkhir: periode.bulanAkhir,
+        periodeLabel: periode.label
       };
-
       const chartTasks = [];
       const pages = [];
 
       if (this.jenis === 'rapor') {
         const isBatch = $('#cBatch').checked;
-        const kelas = $('#cKelas').value;
-        const siswaKelas = boot.master
-          .filter(s => s.Kelas === kelas)
-          .sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
-
+        const kelas = profile.kelas;
+        const siswaKelas = boot.master.filter(s => s.Kelas === kelas).sort((a, b) => String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa)));
         if (isBatch) {
-          if (siswaKelas.length > 50) {
-            btn.disabled = false; btn.innerHTML = orig;
-            return toast('Batch maksimal 50 siswa. Pilih filter lain.', 'error');
-          }
-          if (siswaKelas.length > 15) {
-            toast(`Menyiapkan ${siswaKelas.length} halaman. Mohon tunggu...`, 'success');
-          }
+          if (siswaKelas.length > 50) { btn.disabled = false; btn.innerHTML = orig; return toast('Batch maksimal 50 siswa.', 'error'); }
+          if (siswaKelas.length > 15) toast(`Menyiapkan ${siswaKelas.length} halaman...`, 'success');
           for (const siswa of siswaKelas) {
             const rows = logs.filter(r => String(r.NIS) === String(siswa.NIS));
             if (!rows.length) continue;
             pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
             const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
-            const norm = Stats.normArr(Stats.rataPerKategori(rows));
-            chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
-            if (rows.length >= 2) {
-              chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
-            }
+            chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, Stats.normArr(Stats.rataPerKategori(rows))));
+            if (rows.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
           }
-          if (!pages.length) {
-            btn.disabled = false; btn.innerHTML = orig;
-            return toast('Tidak ada siswa dengan data pada periode ini.', 'error');
-          }
-          opts.title = `Rapor ${kelas} (${pages.length} siswa)`;
+          if (!pages.length) { btn.disabled = false; btn.innerHTML = orig; return toast('Tidak ada siswa dengan data.', 'error'); }
+          opts.title = `Rapor ${kelas} (${pages.length})`;
         } else {
           const nis = $('#cSiswa').value;
-          if (!nis) {
-            btn.disabled = false; btn.innerHTML = orig;
-            return toast('Pilih siswa terlebih dahulu.', 'error');
-          }
+          if (!nis) { btn.disabled = false; btn.innerHTML = orig; return toast('Pilih siswa dulu.', 'error'); }
           const siswa = boot.master.find(s => String(s.NIS) === String(nis));
-          if (!siswa) {
-            btn.disabled = false; btn.innerHTML = orig;
-            return toast('Siswa tidak ditemukan.', 'error');
-          }
+          if (!siswa) { btn.disabled = false; btn.innerHTML = orig; return toast('Siswa tidak ditemukan.', 'error'); }
           const rows = logs.filter(r => String(r.NIS) === String(nis));
-          if (!rows.length) {
-            btn.disabled = false; btn.innerHTML = orig;
-            return toast('Siswa ini belum punya data pada periode ini.', 'error');
-          }
+          if (!rows.length) { btn.disabled = false; btn.innerHTML = orig; return toast('Siswa belum punya data.', 'error'); }
           pages.push(PrintEngine.buildRaporPage(siswa, rows, opts));
           const uid = 'r' + String(siswa.NIS).replace(/[^a-z0-9]/gi, '');
-          const norm = Stats.normArr(Stats.rataPerKategori(rows));
-          chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, norm));
-          if (rows.length >= 2) {
-            chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
-          }
+          chartTasks.push(() => PrintEngine.renderChartKategori('c-kat-' + uid, Stats.normArr(Stats.rataPerKategori(rows))));
+          if (rows.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-tren-' + uid, PrintEngine.pointsTrendIndividu(rows)));
           opts.title = 'Rapor ' + siswa.Nama_Siswa;
         }
-      }
-
-      else if (this.jenis === 'kelas') {
-        const kelas = $('#cKelas').value;
+      } else if (this.jenis === 'kelas') {
+        const kelas = profile.kelas;
         pages.push(PrintEngine.buildKelasPage(kelas, logs, opts));
-        const norm = Stats.normArr(Stats.rataKelas(logs));
-        chartTasks.push(() => PrintEngine.renderChartKategori('c-kls-kat', norm));
+        chartTasks.push(() => PrintEngine.renderChartKategori('c-kls-kat', Stats.normArr(Stats.rataKelas(logs))));
         if (logs.length >= 4) {
           const pts = PrintEngine.pointsTrendMingguan(logs);
           if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-kls-tren', pts));
         }
         opts.title = 'Laporan ' + kelas;
-      }
-
-      else if (this.jenis === 'sekolah') {
+      } else if (this.jenis === 'sekolah') {
         pages.push(PrintEngine.buildSekolahPage(logs, opts));
         const rekap = KELAS.map(k => {
           const r = logs.filter(x => x.Kelas === k);
           if (!r.length) return null;
           const rata = Stats.rataKelas(r);
-          const norm = Stats.normArr(rata);
-          return { label: k.replace('Kelas ', 'Kls '), value: Stats.keseluruhan(norm) };
+          return { label: k.replace('Kelas ', 'Kls '), value: Stats.keseluruhan(Stats.normArr(rata)) };
         }).filter(Boolean);
-        if (rekap.length >= 2) {
-          chartTasks.push(() => PrintEngine.renderChartPerbandingan('c-sek-perbandingan', rekap));
-        }
+        if (rekap.length >= 2) chartTasks.push(() => PrintEngine.renderChartPerbandingan('c-sek-perbandingan', rekap));
         if (logs.length >= 4) {
           const pts = PrintEngine.pointsTrendMingguan(logs);
           if (pts.length >= 2) chartTasks.push(() => PrintEngine.renderChartTren('c-sek-tren', pts));
         }
         opts.title = 'Laporan Sekolah';
       }
-
       await PrintEngine.render(pages, { ...opts, chartTasks });
-
     } catch (e) {
       if (e.message !== 'Unauthorized') toast(e.message || 'Gagal membuat preview.', 'error');
     } finally {
@@ -2772,15 +2386,12 @@ class CetakTab extends BaseTab {
   }
 }
 
-/* ====================================================================
- *                              BOOT
- * ==================================================================== */
+/* ========== BOOT ========== */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
 } else {
   new App().init();
 }
-
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
