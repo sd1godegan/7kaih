@@ -282,6 +282,11 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
 .cetak-ttd .nama-kosong{font-weight:400;color:#94a3b8;border-top:1px solid #cbd5e1;padding-top:4px;margin:0 8px;display:block;line-height:1.35}
 .cetak-ttd .nip{font-size:8.5pt;color:#64748b;margin-top:2px;line-height:1.35}
 
+/* FOOTER wrapper: catatan + ttd jadi satu blok */
+.cetak-footer{margin-top:0}
+.cetak-footer .cetak-catatan{margin-bottom:8px}
+.cetak-footer .cetak-ttd{margin-top:0}
+
 /* ====================================================================
  *              PRINT — A4 NORMAL MARGIN + SMART BREAKS
  * ==================================================================== */
@@ -346,6 +351,11 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   .cetak-chart-wrap,
   .cetak-catatan,
   .cetak-ttd { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Footer (catatan + ttd) jadi satu blok — tidak boleh terpisah */
+  .cetak-footer { page-break-inside: avoid; break-inside: avoid; }
+  .cetak-footer .cetak-catatan { margin-bottom: 8px; }
+  .cetak-footer .cetak-ttd { margin-top: 0; }
 
   .cetak-tbl { page-break-inside: auto; break-inside: auto; }
   .cetak-tbl thead { display: table-header-group; }
@@ -526,7 +536,7 @@ tr.row-saved .input-cell{background:#f0fdf4;color:#065f46;border-color:#86efac}
   }
   #grpBatch label { width: 100%; justify-content: flex-start; }
 
-  /* DASHBOARD CHARTS — tinggi diperbesar untuk 12 kategori */
+  /* DASHBOARD CHARTS */
   #dkResult .card > div[style*="height:400px"] { min-height: 440px !important; }
   #dsResult .card > div[style*="height:300px"] { min-height: 340px !important; }
   #dsResult .card > div[style*="height:380px"] { min-height: 420px !important; }
@@ -1125,6 +1135,14 @@ const PrintEngine = {
     </tr></table></div>`;
   },
 
+  /* Wrapper catatan + ttd jadi satu blok utuh */
+  footer(catatanHtml, ttdOpts) {
+    return `<div class="cetak-footer">
+      ${catatanHtml}
+      ${PrintEngine.ttd(ttdOpts)}
+    </div>`;
+  },
+
   chartWrap(id, w, h) {
     return `<div class="cetak-chart-wrap"><canvas id="${id}" width="${w}" height="${h}"></canvas></div>`;
   },
@@ -1144,7 +1162,6 @@ const PrintEngine = {
     PrintEngine._charts.push(c);
   },
 
-  /* Chart horizontal per kategori — autoSkip: false supaya label tidak di-skip */
   async renderChartKategori(canvasId, norm, dpr = 2) {
     const colors = norm.map(v => v >= 3.5 ? '#10B981' : (v >= 2.5 ? '#F59E0B' : '#F43F5E'));
     return PrintEngine._renderChart(canvasId, {
@@ -1299,15 +1316,17 @@ const PrintEngine = {
         <h3 class="cetak-h3">Tren Mingguan</h3>
         ${PrintEngine.chartWrap('c-tren-' + uid, 660, 180)}
       ` : ''}
-      <h3 class="cetak-h3">Catatan &amp; Saran</h3>
-      ${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}
-      ${PrintEngine.ttd({
-        kiriLabel: 'Orang Tua / Wali',
-        kiriNama: siswa.Nama_Ortu || '',
-        kananLabel: 'Wali Kelas',
-        kananNama: wali.nama,
-        kananNip: wali.nip
-      })}
+      ${PrintEngine.footer(
+        `<h3 class="cetak-h3">Catatan &amp; Saran</h3>
+         ${PrintEngine.catatan([Stats.narasiIndividu(siswa.Nama_Siswa, norm, tren), Stats.saran(norm)])}`,
+        {
+          kiriLabel: 'Orang Tua / Wali',
+          kiriNama: siswa.Nama_Ortu || '',
+          kananLabel: 'Wali Kelas',
+          kananNama: wali.nama,
+          kananNip: wali.nip
+        }
+      )}
     </div>`;
   },
 
@@ -1315,7 +1334,7 @@ const PrintEngine = {
     const perS = Stats.rekapPerSiswa(logPeriode).sort((a, b) => b.rataKes - a.rataKes);
     const rata = Stats.rataKelas(logPeriode);
     const norm = Stats.normArr(rata);
-    const rataKes = Stats.keseluruhan(norm);
+    const rataKes = Stats.keseuruhan ? Stats.keseluruhan(norm) : Stats.keseluruhan(norm);
     const tren = Stats.tren(logPeriode);
 
     let best = 0, worst = 0;
@@ -1360,16 +1379,18 @@ const PrintEngine = {
         <h3 class="cetak-h3">Tren Mingguan Kelas</h3>
         ${PrintEngine.chartWrap('c-kls-tren', 660, 180)}
       ` : ''}
-      <h3 class="cetak-h3">Catatan</h3>
-      ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}
-      ${PrintEngine.ttd({
-        kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
-        kiriNama: opts.identitas.kepsek || '',
-        kiriNip: opts.identitas.kepsekNip || '',
-        kananLabel: 'Wali Kelas',
-        kananNama: wali.nama,
-        kananNip: wali.nip
-      })}
+      ${PrintEngine.footer(
+        `<h3 class="cetak-h3">Catatan</h3>
+         ${PrintEngine.catatan([Stats.narasiKelas(kelas, norm, tren, perS.length)])}`,
+        {
+          kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
+          kiriNama: opts.identitas.kepsek || '',
+          kiriNip: opts.identitas.kepsekNip || '',
+          kananLabel: 'Wali Kelas',
+          kananNama: wali.nama,
+          kananNip: wali.nip
+        }
+      )}
     </div>`;
   },
 
@@ -1423,16 +1444,18 @@ const PrintEngine = {
         <h3 class="cetak-h3">Tren Mingguan Sekolah</h3>
         ${PrintEngine.chartWrap('c-sek-tren', 660, 180)}
       ` : ''}
-      <h3 class="cetak-h3">Catatan</h3>
-      ${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}
-      ${PrintEngine.ttd({
-        kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
-        kiriNama: opts.identitas.kepsek || '',
-        kiriNip: opts.identitas.kepsekNip || '',
-        kananLabel: 'Guru Kelas',
-        kananNama: '',
-        kananNip: ''
-      })}
+      ${PrintEngine.footer(
+        `<h3 class="cetak-h3">Catatan</h3>
+         ${PrintEngine.catatan([Stats.narasiSekolah(rekap)])}`,
+        {
+          kiriLabel: 'Mengetahui,<br>Kepala Sekolah',
+          kiriNama: opts.identitas.kepsek || '',
+          kiriNip: opts.identitas.kepsekNip || '',
+          kananLabel: 'Guru Kelas',
+          kananNama: '',
+          kananNip: ''
+        }
+      )}
     </div>`;
   },
 
