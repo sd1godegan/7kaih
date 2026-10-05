@@ -216,6 +216,126 @@ input,select,textarea{font-family:inherit;font-size:16px}
 .progress-bar .fill.ok{background:var(--positive)}
 .progress-bar .fill.warn{background:var(--warning)}
 
+/* ========== SISWA BELUM DIISI ========== */
+.missing-list{margin-top:.7rem;border-top:1px solid var(--border);padding-top:.55rem}
+.missing-list > summary{
+  list-style:none;
+  cursor:pointer;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--negative);
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  user-select:none;
+  padding:.15rem 0;
+}
+.missing-list > summary::-webkit-details-marker{display:none}
+.missing-list > summary::after{
+  content:'expand_more';
+  font-family:'Material Symbols Outlined';
+  margin-left:auto;
+  font-size:18px;
+  transition:transform .2s;
+  color:var(--muted);
+}
+.missing-list[open] > summary::after{transform:rotate(180deg)}
+.missing-list .missing-count{
+  background:var(--negative-l);
+  color:var(--negative-d);
+  border-radius:8px;
+  padding:1px 7px;
+  font-size:.68rem;
+  font-weight:800;
+  min-width:22px;
+  text-align:center;
+}
+.missing-actions{display:flex;justify-content:flex-end;margin-top:.45rem}
+.missing-copy{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  padding:.35rem .65rem;
+  border-radius:7px;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  font-size:.68rem;
+  font-weight:700;
+  color:var(--muted);
+  cursor:pointer;
+  transition:var(--t);
+  min-height:30px;
+}
+.missing-copy:hover{background:var(--primary-l);color:var(--primary-d);border-color:#C7D2FE}
+.missing-copy:active{transform:scale(.97)}
+.missing-copy .material-symbols-outlined{font-size:14px}
+.missing-items{
+  margin-top:.45rem;
+  max-height:220px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.missing-item{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.5rem .6rem;
+  border-radius:8px;
+  background:var(--surface-2);
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--text);
+  text-align:left;
+  transition:var(--t);
+  cursor:pointer;
+  width:100%;
+  min-height:36px;
+}
+.missing-item:hover{background:var(--negative-l);color:var(--negative-d)}
+.missing-item:active{transform:scale(.98)}
+.missing-item:disabled{opacity:.5;cursor:wait}
+.missing-item .num{
+  flex-shrink:0;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--negative-l);
+  color:var(--negative-d);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.68rem;
+  font-weight:800;
+}
+.missing-item .nm{
+  flex:1;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.missing-item .go{
+  font-size:16px;
+  color:var(--muted);
+  flex-shrink:0;
+  opacity:.6;
+}
+.missing-item:hover .go{color:var(--negative-d);opacity:1}
+
+/* Row highlight sementara saat auto-focus dari daftar missing */
+tr.row-highlight,
+tr.row-highlight .sticky-l{
+  background:#FEF3C7 !important;
+  transition:background-color .5s ease-out;
+}
+tr.row-highlight .input-cell{
+  border-color:#F59E0B;
+}
+
 /* ========== STATS ========== */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-bottom:.75rem}
 @media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
@@ -1408,7 +1528,6 @@ const PrintEngine = {
       _isPrinting = true;
       PrintEngine.resetScale();
 
-      // Set title → default filename di dialog "Save as PDF"
       const originalTitle = document.title;
       if (opts.filename) document.title = opts.filename;
 
@@ -1673,12 +1792,20 @@ class InputTab extends BaseTab {
     this._saving = false;
     this._guard = new SeqGuard();
     this._cellList = null;
+    this._bukaBusy = false;
+    this._focusSeq = 0;
   }
   onProfileChange() { this._init = false; this.init(); }
   onBootReady(boot) {
     if (!this._init) return;
     if (!this.el.querySelector('#statStatusCard')) return;
     this._refreshStatus();
+  }
+  onShow() {
+    if (this._bukaBusy || this._saving) return;
+    if (this.el.querySelector('#statStatusCard')) {
+      this._refreshStatus();
+    }
   }
   render() {
     const profile = this.app.profile;
@@ -1738,7 +1865,7 @@ class InputTab extends BaseTab {
       </div>
       <div id="layer2"></div>`;
     this._bindChips();
-    $('#btnBukaInput').onclick = e => this.guarded(() => this._buka(e.currentTarget));
+    $('#btnBukaInput').onclick = e => this._buka(e.currentTarget);
     const btnRestore = $('#btnRestoreDraft');
     if (btnRestore) btnRestore.onclick = () => this._restoreLatestDraft();
     this._refreshStatus();
@@ -1803,12 +1930,19 @@ class InputTab extends BaseTab {
       }
     }
   }
+
   _renderStatus(logs, totalSiswa) {
     const card = $('#statStatusCard');
     if (!card) return;
+
+    const profile = this.app.profile;
+    const master = (this.app.boot && this.app.boot.master) || [];
+    const siswaKelas = profile ? master.filter(s => s.Kelas === profile.kelas) : [];
+
     const nisUnik = new Set(logs.map(r => String(r.NIS)));
     const terisi = nisUnik.size;
     const pct = totalSiswa > 0 ? Math.round((terisi / totalSiswa) * 100) : 0;
+
     let iconCls = 'empty', iconName = 'event_busy', title = 'Belum ada data', sub = 'Bulan belum diisi', fillCls = '';
     if (terisi === 0) {
       iconCls = 'warn'; iconName = 'hourglass_empty';
@@ -1822,11 +1956,50 @@ class InputTab extends BaseTab {
       title = 'Sebagian terisi'; sub = `${terisi} dari ${totalSiswa} siswa`;
       fillCls = 'warn';
     }
+
     const mingguIni = this.selMinggu;
     const mingguData = logs.filter(r => String(r.Minggu_Ke) === String(mingguIni));
     const nisMingguIni = new Set(mingguData.map(r => String(r.NIS)));
     const mingguTerisi = nisMingguIni.size;
     const mingguLengkap = totalSiswa > 0 && mingguTerisi >= totalSiswa;
+
+    // Daftar siswa yang belum diisi minggu ini
+    const missingMingguIni = siswaKelas
+      .filter(s => !nisMingguIni.has(String(s.NIS)))
+      .sort((a, b) => {
+        const na = num(a.No_Absen);
+        const nb = num(b.No_Absen);
+        if (na > 0 && nb > 0 && na !== nb) return na - nb;
+        return String(a.Nama_Siswa).localeCompare(String(b.Nama_Siswa));
+      });
+
+    let missingHtml = '';
+    if (missingMingguIni.length > 0) {
+      missingHtml = `
+        <details class="missing-list">
+          <summary>
+            <span class="material-symbols-outlined" style="font-size:14px">person_alert</span>
+            Belum diisi minggu ini
+            <span class="missing-count">${missingMingguIni.length}</span>
+          </summary>
+          <div class="missing-actions">
+            <button type="button" class="missing-copy" id="btnCopyMissing">
+              <span class="material-symbols-outlined">content_copy</span>
+              Salin daftar
+            </button>
+          </div>
+          <div class="missing-items">
+            ${missingMingguIni.map((s, i) => `
+              <button type="button" class="missing-item" data-nis="${escAttr(s.NIS)}">
+                <span class="num">${i + 1}</span>
+                <span class="nm">${esc(s.Nama_Siswa)}</span>
+                <span class="material-symbols-outlined go">arrow_forward</span>
+              </button>
+            `).join('')}
+          </div>
+        </details>`;
+    }
+
     card.innerHTML = `
       <div class="status-item" style="margin-bottom:.5rem">
         <div class="status-icon ${iconCls}"><span class="material-symbols-outlined">${iconName}</span></div>
@@ -1839,9 +2012,88 @@ class InputTab extends BaseTab {
           <strong>Minggu ${mingguIni}</strong>
           <small>${mingguLengkap ? 'Sudah lengkap' : `${mingguTerisi} dari ${totalSiswa} siswa`}</small>
         </div>
-      </div>`;
+      </div>
+      ${missingHtml}`;
+
+    card.querySelectorAll('.missing-item').forEach(btn => {
+      btn.onclick = () => {
+        const nis = btn.dataset.nis;
+        this._openAndFocus(nis, btn);
+      };
+    });
+    const btnCopy = card.querySelector('#btnCopyMissing');
+    if (btnCopy) {
+      btnCopy.onclick = () => {
+        const kelas = profile ? profile.kelas : '';
+        this._copyMissing(missingMingguIni.map(s => s.Nama_Siswa), kelas, mingguIni);
+      };
+    }
+
     this._updateButtonState(terisi, totalSiswa);
   }
+
+  async _copyMissing(names, kelas, minggu) {
+    const header = `Siswa belum diisi ${kelas} - Minggu ${minggu}:`;
+    const text = header + '\n' + names.map((n, i) => `${i + 1}. ${n}`).join('\n');
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      toast('Daftar disalin ke clipboard.', 'success');
+    } catch {
+      toast('Gagal menyalin ke clipboard.', 'error');
+    }
+  }
+
+  /**
+   * Buka tabel input (kalau belum) → scroll ke siswa → fokus kolom pertama.
+   */
+  async _openAndFocus(nis, btnEl) {
+    const mySeq = ++this._focusSeq;
+    try {
+      const hasTable = !!this.el.querySelector('.table-wrap tbody');
+      if (!hasTable) {
+        const btn = $('#btnBukaInput');
+        if (!btn) return;
+        if (btnEl) btnEl.disabled = true;
+        const ok = await this._buka(btn);
+        if (btnEl) btnEl.disabled = false;
+        if (!ok || this._focusSeq !== mySeq) return;
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      }
+      if (this._focusSeq !== mySeq) return;
+      const tr = this.el.querySelector(`.table-wrap tbody tr[data-nis="${escAttr(nis)}"]`);
+      if (!tr) {
+        toast('Siswa tidak ditemukan di tabel.', 'error');
+        return;
+      }
+      tr.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      tr.classList.add('row-highlight');
+      setTimeout(() => { try { tr.classList.remove('row-highlight'); } catch {} }, 1400);
+      const inp = tr.querySelector('.input-cell');
+      if (inp) {
+        setTimeout(() => {
+          if (this._focusSeq !== mySeq) return;
+          try {
+            inp.focus();
+            if (inp.select) inp.select();
+          } catch {}
+        }, 300);
+      }
+    } catch (e) {
+      if (e.message !== 'Unauthorized') console.warn('openAndFocus error', e);
+    }
+  }
+
   _updateButtonState(terisi, totalSiswa) {
     const btn = $('#btnBukaInput');
     if (!btn) return;
@@ -1889,21 +2141,26 @@ class InputTab extends BaseTab {
     toast('Draft dipulihkan. Silakan simpan ulang.', 'success');
   }
   async _buka(btn) {
+    if (this._bukaBusy) return false;
     const profile = this.app.profile;
-    if (!profile) return toast('Pilih kelas dulu.', 'error');
-    const filter = {
-      tahunAwal: String(this.selTahun),
-      tahunAkhir: String(this.selTahun),
-      bulanAwal: fmtBulan(this.selBulan),
-      bulanAkhir: fmtBulan(this.selBulan),
-      kelas: profile.kelas,
-      minggu: String(this.selMinggu)
-    };
-    const orig = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span><span>Memeriksa riwayat...</span>';
+    if (!profile) { toast('Pilih kelas dulu.', 'error'); return false; }
+
+    this._bukaBusy = true;
+    const orig = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span><span>Memeriksa riwayat...</span>';
+    }
     let rendered = false;
     try {
+      const filter = {
+        tahunAwal: String(this.selTahun),
+        tahunAkhir: String(this.selTahun),
+        bulanAwal: fmtBulan(this.selBulan),
+        bulanAkhir: fmtBulan(this.selBulan),
+        kelas: profile.kelas,
+        minggu: String(this.selMinggu)
+      };
       let logs = LogsCache.read(filter);
       if (!logs) {
         const res = await Api.logs(filter);
@@ -1919,11 +2176,13 @@ class InputTab extends BaseTab {
     } catch (e) {
       if (e.message !== 'Unauthorized') toast(e.message || 'Gagal memuat riwayat.', 'error');
     } finally {
-      if (!rendered && document.contains(btn)) {
+      this._bukaBusy = false;
+      if (!rendered && btn && document.contains(btn)) {
         btn.innerHTML = orig;
         btn.disabled = false;
       }
     }
+    return rendered;
   }
   _renderTable({ tahun, bulan, minggu, kelas }) {
     const master = (this.app.boot && this.app.boot.master) || [];
@@ -2132,10 +2391,18 @@ class InputTab extends BaseTab {
         Draft.remove(draftKey);
         draftKey = null;
         toast(isBatch ? res.message : 'Data tersimpan.', 'success');
-        if (isBatch) { setTimeout(() => { const bk = $('#btnKembali'); if (bk) bk.click(); }, 900); }
-        else {
+        if (isBatch) {
+          setTimeout(() => { const bk = $('#btnKembali'); if (bk) bk.click(); }, 900);
+        } else {
           btnEl.innerHTML = '<span class="material-symbols-outlined">check</span>';
-          setTimeout(() => { btnEl.innerHTML = orig; btnEl.disabled = false; }, 900);
+          setTimeout(() => {
+            if (document.contains(btnEl)) {
+              btnEl.innerHTML = orig;
+              btnEl.disabled = false;
+            }
+          }, 900);
+          // Refresh status agar daftar "belum diisi" update
+          setTimeout(() => { this._refreshStatus(); }, 500);
         }
       } catch (e) {
         if (e.message !== 'Unauthorized') toast('Gagal menyimpan. Draft disimpan untuk dikirim ulang.', 'error');
